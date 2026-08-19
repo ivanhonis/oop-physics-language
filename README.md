@@ -38,6 +38,7 @@ oop-physics-language/
 ├── .github/                 ← PR template (the gate checklist)
 ├── tools/assemble.py        ← builds the per-language dump
 ├── shared/                  ← language-independent attachments (computation code), per proof
+│   └── environment-check.py ← run this first (checks np.longdouble precision)
 ├── hu/                      ← the source language of the research
 │   ├── CHANGELOG_hu.md      ← the history of the versions
 │   ├── 00-introduction_hu.md
@@ -86,6 +87,7 @@ oop-physics-language/
 ├── .github/                 ← PR-sablon (a kapu-ellenőrzőlista)
 ├── tools/assemble.py        ← nyelvi dump előállítása
 ├── shared/                  ← nyelvfüggetlen mellékletek (számoló kódok), próbánként
+│   └── environment-check.py ← futtasd elsőként (a np.longdouble pontosságát nézi)
 ├── hu/                      ← a kutatás forrásnyelve
 │   ├── CHANGELOG_hu.md      ← a változatok története
 │   ├── 00-introduction_hu.md
