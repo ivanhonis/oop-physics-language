@@ -94,6 +94,14 @@ td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums}
 .btns a:hover{border-color:var(--steel);color:var(--ink)}
 .btns a.primary:hover{color:var(--bg);opacity:.9}
 
+/* ---------- personal note ---------- */
+.note{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--steel);
+  border-radius:0 14px 14px 0;padding:1.5rem 1.6rem;margin:1.25rem 0}
+.note h2{margin-top:0}
+.note p:last-of-type{margin-bottom:0}
+.note .mail{display:inline-block;margin-top:.4rem;font-size:1.02rem;font-weight:600;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:-0.01em}
+
 footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);font-size:.9rem}
 footer p{margin:.3rem 0}
 </style>
@@ -209,6 +217,44 @@ footer p{margin:.3rem 0}
   <div class="card"><code>pip install -r requirements.txt</code><br>
   <code>python shared/environment-check.py</code></div>
 
+  <div class="note">
+  <h2>A personal note</h2>
+  <p>I am not a physicist — I work in AI development. What I contributed to this work is
+  not the physics but the <strong>method</strong>: the fixed order in which a claim may
+  enter the language at all — the rulebook fixed <em>before</em> the computation,
+  package-by-package approval, the import ledger, and the rule that a failure stays in the
+  repository with its verdict written out.</p>
+
+  <p>That order has a side effect I did not plan for. Because the procedure is fairly
+  strictly fixed, today's advanced language models <strong>can follow it on their
+  own</strong>: they pick up the thread, fix the rulebook in advance, form packages, and
+  carry out the computation. For machine verification their built-in Python runner is
+  usually enough; where more capacity is needed, that can be agreed on, and the
+  verification code can be written and run locally.</p>
+
+  <p>The human's part in this is not the derivation. It is <strong>setting the
+  direction</strong>, sharpening the question, and deciding whether a result really holds.</p>
+
+  <p><strong>If you would like to try it:</strong> give the complete language dump —
+  <code>dist/dump_hu.md</code> or <code>dist/dump_en.md</code> — to an advanced model
+  (Claude Fable 5, for instance), pick a topic, and start a conversation. The dump is built
+  so that it is enough on its own to continue from: the headers, the import ledgers and the
+  package trail together say where the work stands and what the next step is.</p>
+
+  <p>An honest warning. Secondary-school physics and mathematics will probably not be
+  enough here — not because the text is hard, but because <strong>without your own
+  judgement you will not be able to tell whether what you get back is true</strong>. The
+  method is worth something only because someone holds it to the number; if nobody fills
+  that role, all that comes out is well-formatted text.</p>
+
+  <p>Even so, I am <strong>glad to share it with anyone</strong> — professional physicist
+  and enthusiastic amateur alike. Criticism especially is welcome: if you find an error
+  somewhere, or know a sharper test, that is worth more to me than agreement. Advice,
+  questions and refutations are all equally welcome.</p>
+
+  <p><a class="mail" href="mailto:ivan.honis@ndot.io">ivan.honis@ndot.io</a></p>
+  </div>
+
   <h2>Licence and citation</h2>
   <p>Text: CC BY-SA 4.0 · Code: MIT. For citation use
   <a href="https://github.com/ivanhonis/oop-physics-language/blob/master/CITATION.cff">CITATION.cff</a>.</p>
@@ -304,6 +350,45 @@ footer p{margin:.3rem 0}
   kiterjesztett pontosságú utat, amire több csomag épül:</p>
   <div class="card"><code>pip install -r requirements.txt</code><br>
   <code>python shared/environment-check.py</code></div>
+
+  <div class="note">
+  <h2>Egy személyes megjegyzés</h2>
+  <p>Nem fizikus vagyok, hanem AI-fejlesztő. Amit ehhez a munkához hozzátettem, az nem a
+  fizika, hanem a <strong>módszertan</strong>: az a rögzített rend, ahogyan egy állítás
+  egyáltalán bekerülhet a nyelvbe — a szabálykönyv a számolás <em>előtt</em>, a
+  csomagonkénti jóváhagyás, az import-számla, és az, hogy a bukás is bent marad, kiírt
+  ítélettel.</p>
+
+  <p>Ennek a rendnek van egy mellékhatása, amit magam sem terveztem előre. Mivel a menet
+  elég szigorúan rögzített, a mai fejlett nyelvi modellek <strong>maguktól tudják
+  követni</strong>: felveszik a fonalat, előre rögzítik a szabálykönyvet, csomagokat
+  képeznek, és elvégzik a számolást. A gépi ellenőrzéshez az esetek többségében a belső
+  Python-futtatójuk is elegendő; ahol nagyobb kapacitás kell, arról meg lehet állapodni, és
+  az ellenőrző kódot helyben megírva, lokálisan is le lehet futtatni.</p>
+
+  <p>Az ember dolga ilyenkor nem a levezetés. Az <strong>irány kijelölése</strong>, a kérdés
+  élesítése, és annak eldöntése, hogy egy eredmény tényleg megáll-e.</p>
+
+  <p><strong>Ha ki szeretnéd próbálni:</strong> add be a teljes nyelvi dumpot —
+  <code>dist/dump_hu.md</code> vagy <code>dist/dump_en.md</code> — egy fejlett modellnek
+  (például Claude Fable 5), jelölj ki egy témát, és kezdj el beszélgetni. A dump
+  szándékosan úgy készül, hogy önmagában elég legyen a folytatáshoz: a fejlécek, az
+  import-számlák és a csomag-nyomvonal együtt megmondják, hol tart a munka és mi a
+  következő lépés.</p>
+
+  <p>Egy őszinte figyelmeztetés. Ehhez a középiskolai fizika és matematika valószínűleg nem
+  lesz elég — nem azért, mert a szöveg nehéz, hanem mert a <strong>saját ítéleted nélkül
+  nem fogod tudni megmondani, hogy amit kapsz, az igaz-e</strong>. A módszertan attól ér
+  valamit, hogy valaki számon kéri rajta a számot; ha ezt a szerepet nem tölti be senki,
+  csak egy jól formázott szöveg keletkezik.</p>
+
+  <p>Ezzel együtt <strong>örömmel megosztom bárkivel</strong> — hivatásos fizikussal és
+  lelkes amatőrrel egyaránt. A kritikát külön várom: ha valahol hibát találsz, vagy tudsz
+  egy élesebb próbát, az többet ér nekem, mint az egyetértés. Tanácsot, kérdést, cáfolatot
+  egyformán szívesen fogadok.</p>
+
+  <p><a class="mail" href="mailto:ivan.honis@ndot.io">ivan.honis@ndot.io</a></p>
+  </div>
 
   <h2>Licenc és idézés</h2>
   <p>Szöveg: CC BY-SA 4.0 · Kód: MIT. Idézéshez:
