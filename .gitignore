@@ -4,9 +4,6 @@ __pycache__/
 .venv/
 venv/
 
-# Generalt kiadas / generated output
-dist/
-
 # Rendszer-szemet / OS junk
 .DS_Store
 Thumbs.db
