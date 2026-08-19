@@ -1,105 +1,87 @@
 ---
-id: PKG-14-1
+id: PKG-14-4
 type: package
 part_of: II-14
 lang: hu
-pair: PKG-14-1-rulebook_en.md
-pair_status: missing
+pair: PKG-14-4-readout_en.md
+pair_status: in-sync
 doc_version: "1.3"
 status: jovahagyva
-builds_on: [II-13, II-12, II-11, I-06]
+builds_on: [PKG-14-1, PKG-14-3, II-11]
 imports: nulla
 ---
 
-# PKG-14-1 — A kiterjedés-lépcső szabálykönyve (levezetés-csomag)
+# PKG-14-4 — A hurok zárása: kiolvasás a győztesen (levezetés-csomag)
 
-**Számolást nem tartalmaz** — ez a csomag a szabályokat rögzíti, mielőtt bármi kiszámolódna, hogy utólagos szabálymódosítás ne legyen lehetséges.
+> **Helyreállítási jegyzet — olvasd el, mielőtt hivatkozol rá.** E fájl eredeti, jóváhagyott szövege elveszett: a helyén a [PKG-14-1](PKG-14-1-rulebook_hu.md) szabálykönyv másolata állt (a `!archive` mind a négy pillanatképében is), és a git-történetben sem őrződött meg. A jelen szöveg **helyreállítás**, három forrásból: a fennmaradt számoló kód (`shared/II-14-dimension-staircase/PKG-14-4-readout.py`), a rögzített jegyzőkönyv ([PKG-14-1](PKG-14-1-rulebook_hu.md), 8. pont) és a [PKG-14-3](PKG-14-3-race_hu.md) C4 bemenete. **Minden alább közölt szám újramérve** — nem másolat a próbafájlból —, és egyezik a [II/14](proof_hu.md) és a [PKG-14-5](PKG-14-5-readout-repeat_hu.md) által hivatkozott értékekkel. Amit a helyreállítás nem tud pótolni: az eredeti megfogalmazás. Ha az eredeti előkerül, ez a fájl cserélendő.
+
+**Épít:** [PKG-14-3](PKG-14-3-race_hu.md) (C4), [PKG-14-1](PKG-14-1-rulebook_hu.md) (8. pont, A6), [II/11 visszarakó](../II-11-locality-readout/proof_hu.md) · **Számoló kód:** `PKG-14-4-readout.py`
 
 ---
 
-## 1. Kérdés (egy mondat, előre rögzítve)
+## 1. Kérdés
 
-Lépcsőzik-e a kiterjedés a sűrűséggel: azonos helyenkénti szerződésszám (hat) mellett van-e olyan felső sűrűségsáv, ahol a tér-szövés egyszerre veri a síkot és a vonalat — és alatta olyan, ahol a sík veri a másik kettőt?
+A rögzített kiolvasási jegyzőkönyvvel visszaolvasható-e a győztesből (tér, 8×8×8, $N = 290$) a szövés, és a golyó a három hivatkozási sor közül a térét adja-e?
 
-## 2. Bemenetek
+## 2. Bemenetek és gépezet-megjegyzés
 
-- **[II/12 versenyszabály-konvenció](../II-12-network-race/proof_hu.md):** rögzített szerződés-költségvetést kötelező elhelyezni; az egyensúly a legkisebb összköltségű elrendezés.
-- **[III/1, 5. (helyek egyenrangúsága)](../../III-frontier/III-01-candidate-laws_hu.md):** szövés-építéssel megvalósítva, mint a II/13-ban.
-- **[I/6, a kizárás tétele](../../I-language/I-06-identity_hu.md):** az ütem-létra alulról, ütemenként egy példánnyal töltendő.
-- **II/12 nyom-döntetlen tétele:** teljes töltésnél minden háló ára a költségvetés kétszerese.
-- **[II/11 visszarakó és golyónövekedés](../II-11-locality-readout/proof_hu.md):** a győztes kiolvasásához.
-- **[II/13](../II-13-dimension-race/proof_hu.md) három öröksége:** az összeesési lemma tanulsága (a jelöltek különbözőségét ellenőrizni kell, nem feltételezni); a körbeérési rezonancia méret-diagnózisa (a 8-as oldalhossz alsó korlát); a héj-logika és a tükör-hatás mint ellenőrzendő megfigyelések.
-- **[III/2, 8. javított golyótörvényei](../../III-frontier/III-02-open-questions_hu.md):** a tér héja négyzetes ($4r^2+2$), nem lineáris.
+A futás a PKG-14-1 8. pontja szerint: páros közelség a kész állapotból; a szomszédszámot a közelség-lista ugrása jelöli ki; zárt fokú töltés a tér-sávból ([PKG-14-3](PKG-14-3-race_hu.md), C4: $N = 290$, a középső 6-os polc betelése). Szabad kizáró példányoknál a nézetek a példány-korrelációkból egzaktul számolhatók — a [4. eszköz](../../appendix/B-machinery_hu.md) gyorsított alakja, új import nélkül: a közelség a kész állapot páronkénti egytest-térképe.
 
-## 3. A rögzített rendszer
+**Zárt fok ellenőrzés:** a 290. ütem 6,000000, a 291. 6,585786 — a rés **egzaktul $2 - \sqrt{2}$**; az állapot egyértelmű, vetítő nem kell.
 
-- **512 hely**; simasági szerződések, egységnyi erővel.
-- **Helyenként pontosan 6 szerződés** — a teljes költségvetés így 1536 szerződés, minden jelöltnél azonosan.
-- Minden jelölt **szövés-háló** (a helyek egyenrangúsága építési elv, mint a II/13-ban), és minden körbezárt irány oldalhossza **legalább 8** — a II/13 rezonancia-diagnózisának öröksége.
-- Költség $N$ példánynál: a háló ütem-létrájának alulról töltése, $N = 1$-től 512-ig végigpásztázva.
+## 3. A rögzített futás eredménye
 
-## 4. A jelöltek
+**Közelség-osztályok** (a szövés minden helyéről azonosan, osztályon belüli szórás $10^{-12}$ alatt):
 
-| Jelölt | Szövés | Szerkezet |
+| Eltolás-osztály | Közelség | Eltolások |
 |---|---|---|
-| **J1 — vonal** | 512-es kör, 1-2-3 lépésű bekötéssel | vastagított vonal |
-| **J2 — sík** | 16×32-es körbezárt rács, bekötés: ±(1,0), ±(0,1), ±(1,1) | háromszög-szövés (a hatos koordináció síkbeli szövése) |
-| **J3 — tér** | 8×8×8-as körbezárt kockarács, bekötés: ±(1,0,0), ±(0,1,0), ±(0,0,1) | valódi háromkiterjedésű szövés |
+| szomszéd (a 32 valódi irány, 1536 szerződés) | **+0,164895** | ×6 |
+| **átellenes tükörpont (4,4,4)** | **+0,066406** | ×1 |
+| testátló (1,1,1) | −0,054965 | ×8 |
+| (1,2,2) | +0,020479 | ×24 |
+| (0,0,2), (2,2,2), (2,4,4) | −0,019531 | ×6, ×8, ×6 |
 
-**Rögzített változat-lista (kötelező kontroll):** a sík nyújtás-érzékenységére a 8×64-es háromszög-szövés is kiszámolandó és a mezőnyben indul.
+- **Rezonancia-őrszem (a jegyzőkönyv előírt alakja):** a szomszéd-osztállyal **egzaktul** egyező másik osztály: **0 db** — az őrszem **nem jelzett**.
+- **Az ugrás — és itt jegyzőkönyv-hézag nyílt.** A PKG-14-1 8. pontja az ugrást a közelség-listán kereste, de nem mondta ki, hogy az **előjeles** vagy az **abszolút értékes** listán. A kettő e szöveten **szétválik**:
 
-**Becsületességi pásztázás (kötelező, kimondott korláttal):** a vonal-család $(a, b, c)$ hármas-bekötései a $a < b < c \le 12$ tartományban mind kiszámolandók és a mezőnyben indulnak (a szövések zárt képletével olcsó). A korlát maga is rögzített szabály: a $c > 12$ családtagok nem pásztázottak — ez a próba kimondott határa, nem utólagos döntés.
+| Ugrás-szabály | Ugrás | k* | Beemelt osztályok | Élek | Valódi | Fantom | Hiányzó |
+|---|---|---|---|---|---|---|---|
+| **előjeles** | a 7. hely után, 3,24-szeres | 7 | szomszéd + átellenes | 1792 | **1536/1536** | **256** | 0 |
+| abszolút | a 15. hely után, 2,68-szeres | 15 | szomszéd + átellenes + testátló | 3840 | **1536/1536** | 2304 | 0 |
 
-## 5. Levezetett előzetes tények — különbözőség és golyótörvények
+- **Golyónövekedés** (a visszarakott hálón, $r \le 3$): előjeles úton **1, 8, 32, 88**; abszolút úton 1, 16, 92, 296. A jegyzett hivatkozási sorok: vonal 1, 7, 13, 19 | sík 1, 7, 19, 37 | **tér 1, 7, 25, 63**.
 
-**Különbözőség (a II/13 összeesési lemmájának tanulsága — itt ellenőrzés, nem feltevés).** Előzetes érv, számolással megerősítendő (PKG-14-2): a J1-ben és a J2-ben van hármas kör (a J1-ben az 1+2=3 lépések zárnak hármat, a J2-ben a ±(1,0), ±(0,1), ±(1,1) hármas), a J3 viszont **páros háló** — hármas köre nincs, és a létrája ezért a 6-os fok körül szimmetrikus. A három jelölt tehát páronként különböző; a szimmetria-jegy a PKG-14-2 kötelező önellenőrzése.
+## 4. Ítélet a jegyzőkönyv szerint: részleges bukás
 
-**Golyótörvények (levezetett, a kiolvasás hivatkozási sorai).** Hatos koordinációnál minden jelölt golyója 6-tal indul; a megkülönböztető jegy a növekmény **rendje**:
+A szövés **hiánytalanul visszaolvasható** — mind az 1536 valódi szerződés megvan, hiányzó nulla, mindkét ugrás-szabályon. De a győztes **nem választható el a saját átellenes visszhangjától**: a páros-jegyű szövés tükörpontja (4,4,4) a közelség-listán a valódi szomszédok mögé, de minden más osztály elé ül, és ezzel megnyeri az ugrás-versenyt — 256 fantom-él, teljes átellenes párosítás. A mért golyó ezért **1, 8, 32, 88**, nem a jegyzett tér-sor.
 
-| Jelölt | Növekmény | A golyó sora |
-|---|---|---|
-| vonal | állandó ($+6$) | 1, 7, 13, 19, 25 |
-| sík | lineáris ($6r$) | 1, 7, 19, 37, 61 |
-| tér | négyzetes ($4r^2+2$) | 1, 7, 25, 63, 129 |
+A bukás **nem romboló** és a [II/13](../II-13-dimension-race/proof_hu.md)-tól **eltérő fajtájú**: ott a visszhang a szomszéddal *egzaktul egyezett*, itt nem (0,066406 kontra 0,164895 — a szomszéd 40,3%-a). A hurok-zárás e méreten tehát **részlegesen bukott**, két külön rögzítendő tanulsággal:
 
-A sorok $r = 2$-től válnak szét (13 / 19 / 25); az olvasathoz $r \le 3$ elegendő és kötelező is a határa (8. pont).
+1. **Az őrszem alakja szűk volt.** A jegyzőkönyv az „egzakt egyezés" alakjára írta elő a rezonancia-őrszemet; itt egzakt egyezés nincs, ezért az őrszem hallgatott — miközben a visszhang a rangsort mégis elrontotta. A helyes alak nem egyezés-próba, hanem **sáv-próba**: a leggyengébb elfogadott és a legerősebb elutasított közelség hányadosa.
+2. **Előjel-hézag a jegyzőkönyvben.** Az ugrás-szabály nem mondta ki, előjeles vagy abszolút listán fut. E szöveten a kettő különböző k*-ot ad; a fenti fő számsor az előjeles olvasaté.
 
-## 6. Előre regisztrált, tételekből következő tények (nem jóslatok)
+Mindkét tanulság **jegyzőkönyv-hiba, nem eredmény-hiba** — a szabálykönyv nem módosul, a helyesbítés a következő csomag dolga.
 
-1. $N = 1$-nél minden jelölt 0-t fizet (minden hálónak van egy közös nulla-módusa).
-2. Minden induló összefüggő, pontosan 1 nulla-módussal — a $N = 2$-es széteső-előny (II/13) itt nem játszik.
-3. $N = 512$-nél kötelező döntetlen **3072**-n (nyom-döntetlen tétel: a teljes létra összege a költségvetés kétszerese).
+## 5. Diagnózis — az ítéleten kívül, külön címkével
 
-**Jóslat a $2 \le N \le 511$ érdemi tartományra: tudatosan nincs.** Egyetlen várakozás rögzül, kérdésként: ha a héj-illeszkedési jelölt szabály ([III/1, 6.](../../III-frontier/III-01-candidate-laws_hu.md)) általános, a győzelmeknek a győztes saját fokhatárain kell sűrűsödniük — ez ellenőrzendő, nem jósolt.
+A bukás okának ellenőrzése nagyobb szövésen (12×12×12, zárt fok a fél-töltéshez legközelebb felülről). Ez a rögzített 512-helyes hatókörön **kívül** esik, ezért nem az ítélet része, hanem annak magyarázata:
 
-## 7. Ítélet-szabály (rögzítve)
+- zárt fok $N = 934$ (fél-töltés 864), a rés fölötte egzaktul $2 - \sqrt{3}$;
+- a szomszéd-közelség +0,166146, az átellenes visszhang **−0,026620** — előjelet vált, és a szomszéd **16,0%-ára** esik;
+- az ugrás élesen hatot jelöl: a 6. hely után, **8,9-szeres**;
+- a visszarakás **5184/5184, fantom nulla, hiányzó nulla**;
+- a golyó 1, 7, 25, 63, 129, 231 — a növekmény 6, 18, 38, 66, 102, **egzaktul $4r^2 + 2$, $r = 5$-ig**: a három kiterjedés mért növekedési törvénye.
 
-- Minden $N$-re a szigorúan legkisebb költségű induló nyer; a holtverseny holtversenyként jelentendő.
-- **A fő kérdés eldöntése — a lépcső két foka:** a próba akkor mond **igent** a lépcsőre, ha létezik két összefüggő, érdemi sáv úgy, hogy az alacsonyabb sűrűségűn a J2 egyszerre veri a J1-et és a J3-at, a magasabb sűrűségűn pedig a J3 egyszerre veri a J1-et és a J2-t. Ha csak az egyik sáv létezik: **részleges** eredmény, a meglévő sáv megnevezésével. Ha egyik sem: **nem.** Foltos kimenet foltokkal együtt rögzítendő.
-- A fő kérdés a deklarált J1–J2–J3 hármason dől el; a pásztázók és a változatok győzelmei a teljes-mezőny olvasatban jelentendők (mint a II/13-ban).
-- Utólag új jelölt, új töltésszűrés vagy új költségdefiníció nem vezethető be; bővítés csak új csomagban, e csomag módosítása nélkül.
+**Jelölt következtetés:** a 8-as körbeérés átellenes visszhangja **méret-műtermék**; a mechanizmus a páros-jegy tükör-párosítása — ugyanaz a szimmetria, amely a versenyt a térnek megnyerte ([PKG-14-3](PKG-14-3-race_hu.md), C3), kis méreten a kiolvasását rontja. Nagyobb szövésen a hurok zárul, és a kiterjedés-olvasat éles.
 
-## 8. A kiolvasási jegyzőkönyv (a PKG-14-4 számára rögzítve)
+## 6. Import-számla és ítélet a csomagról
 
-- A kiolvasás a fő olvasat győztesén fut, a tér-sáv egy **zárt fokú** töltésén (egyértelmű állapot); ha minden nyerő töltés elfajult, a nulla-költségű altér egyenletes keveréke számolandó, egzakt vetítővel (II/11 kontroll-módszere).
-- A II/11 visszarakója: páros közelség a kész állapotból; a szomszédszámot nem kapja meg — a közelség-lista ugrása jelöli ki.
-- **Kiterjedés-olvasat a golyónövekedésből, az 5. pont három hivatkozási sora ellen, legfeljebb $r = 3$-ig** — a 8-as oldalhosszon a golyó $r = 4$-nél éri el a körbeérés felezőjét, onnan az olvasat elvből érvénytelen.
-- **Rezonancia-őrszem (a II/13 tanulsága):** az átellenes eltolás-osztályok korrelációja külön jelentendő; ha bármelyik a szomszéd-osztállyal egzaktul egyezik, az olvasat részlegesnek minősítendő, az egyezés helyével együtt.
+Új import: **nulla.** A rögzített futás az előírt jegyzőkönyvvel, módosítás nélkül futott le; a bukás a szabály szerint, pontosan van rögzítve; a diagnózis külön címkével áll; a két jegyzőkönyv-tanulság kimondva. **A csomag áll.**
 
-## 9. Import-számla
+## 7. Kimenő állítások (a PKG-14-5 és a szintézis csak ezekre építhet)
 
-Új import: **nulla.** A versenyszabály, a helyek egyenrangúsága és a szövés-építés a II/12–II/13-ból örökölt, deklarált konvenciók; a golyótörvények levezetett kombinatorikai tények; a pásztázás-korlát ($c \le 12$) és az oldalhossz-korlát (≥ 8) rögzített, kimondott határok.
-
-## 10. Ítélet erről a csomagról
-
-**Áll.** A szabálykönyv zárt; érdemi előzetes eredménye a jelölt-különbözőség páros-jegye (a II/13 összeesési csapdája itt bizonyítottan nem áll fenn) és a javított, rendre épülő golyó-jegyzőkönyv.
-
-## 11. Kimenő állítások (a PKG-14-2 csak ezekre építhet)
-
-- **A1:** rendszer = 512 hely, 1536 egységnyi simasági szerződés, helyenként 6, szövés-építéssel, minden oldalhossz ≥ 8.
-- **A2:** mezőny = J1 (vonal), J2 (háromszög-sík, 16×32), J3 (kocka-tér, 8×8×8), a 8×64-es sík-kontroll, és a vonal-család pásztázása $c \le 12$-ig.
-- **A3:** költség = ütem-létra alulról töltése, $N = 1..512$.
-- **A4:** előre regisztrált tények: $N=1$ mind 0; minden induló 1 nulla-módusú; $N=512$ döntetlen 3072-n.
-- **A5:** ítélet-szabály a 7. pont szerint — kétsávos lépcső-definíció; jóslat nincs.
-- **A6:** kiolvasási jegyzőkönyv a 8. pont szerint — golyó-olvasat $r \le 3$, rezonancia-őrszemmel.
-- **A7:** a PKG-14-2 kötelező önellenőrzése a különbözőség: a J3 létrája a 6 körül szimmetrikus (páros háló), a J1-é és a J2-é nem.
+- **D1:** a rögzített futás részlegesen bukott: 1536/1536 valódi él, hiányzó nulla, de 256 fantom-él (teljes átellenes párosítás); a mért golyó 1, 8, 32, 88 a jegyzett 1, 7, 25, 63 helyett.
+- **D2:** a bukás oka azonosítva: az átellenes tükör-visszhang a páros-jegy kis-méretű ára — a II/13-as rezonanciától eltérően **nem** egzakt egyezés, hanem rangsor-elsőbbség.
+- **D3:** két jegyzőkönyv-tanulság rögzítve: (i) az őrszem egyezés-alakja szűk, sáv-alak kell; (ii) az ugrás-szabály előjel-hézagos.
+- **D4:** diagnózis (hatókörön kívül, jelölt): a 12-es szövésen tiszta visszarakás (5184/5184, fantom nulla) és egzakt $4r^2+2$ golyótörvény $r = 5$-ig.
+- **D5:** a folytatás megnevezve: a diagnózis rögzített hatókörű ismétlése, a D3 két tanulságának beépítésével — a név **PKG-14-5**-re foglalva.
