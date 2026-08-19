@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use or cite this work, please use the metadata below. / Ha erre a munkára hivatkozol, az alábbi adatokat használd."
+title: "OOP-alapú fizikai leírónyelv / OOP-based physical descriptive language"
+type: dataset
+authors:
+  - family-names: "Hőnis"
+    given-names: "Iván"
+version: "1.3"
+date-released: "2026-08-17"
+abstract: >
+  Leírónyelv, amely a fizikai világot objektumorientált mintákkal írja le;
+  minden minta számolható állításig pontosítva és a kvantumfizika mért
+  eredményein ellenőrizve. / A descriptive language modelling the physical
+  world with object-oriented patterns; every pattern is sharpened to a
+  computable claim and checked against measured quantum-physics results.
+license: "CC-BY-SA-4.0"
+keywords:
+  - physics
+  - quantum-mechanics
+  - object-oriented
+  - descriptive-language
+  - emergent-geometry

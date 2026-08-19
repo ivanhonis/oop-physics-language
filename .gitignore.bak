@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Generalt kiadas / generated output
+dist/
+
+# Rendszer-szemet / OS junk
+.DS_Store
+Thumbs.db
+
+
+# munka könyvtárak
+!archive/
+!work/

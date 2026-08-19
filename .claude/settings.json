@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./!archive/**)",
+      "Read(./!work/**)",
+      "Edit(./!archive/**)",
+      "Edit(./!work/**)"
+    ]
+  }
+}
