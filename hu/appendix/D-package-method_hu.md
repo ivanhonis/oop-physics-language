@@ -3,14 +3,14 @@ id: APP-D
 type: appendix
 lang: hu
 pair: D-package-method_en.md
-pair_status: missing
+pair_status: in-sync
 doc_version: "1.4"
 status: ervenyes
 ---
 
 # D) A csomag-nyomvonal
 
-A csomag-módszer elve a nyelv saját módszertani szabálya: [I/1](../I-language/I-01-concept_hu.md); a technikai leképezése (csomag-sablon, kapu-szabály, branch- és PR-rend) a [szabálykönyvben](../CONTRIBUTING_hu.md) áll. Ez a fájl a lefutott csomagsorozatok **nyomvonalát** őrzi: próbánként egy szakasz, csomagonként egy sor — mi volt a csomag dolga, és mi lett a hozadéka. Új próba nyomvonala mindig új szakaszként kerül a végére.
+A csomag-módszer elve a nyelv saját módszertani szabálya: [I/1](../I-language/I-01-concept_hu.md); a technikai leképezése (csomag-sablon, kapu-szabály, branch- és PR-rend) a [szabálykönyvben](../../CONTRIBUTING.md) áll. Ez a fájl a lefutott csomagsorozatok **nyomvonalát** őrzi: próbánként egy szakasz, csomagonként egy sor — mi volt a csomag dolga, és mi lett a hozadéka. Új próba nyomvonala mindig új szakaszként kerül a végére.
 
 ## A II/13 nyomvonala
 

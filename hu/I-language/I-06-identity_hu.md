@@ -3,7 +3,7 @@ id: I-06
 type: chapter
 lang: hu
 pair: I-06-identity_en.md
-pair_status: missing
+pair_status: in-sync
 doc_version: "1.3"
 status: ervenyes
 ---

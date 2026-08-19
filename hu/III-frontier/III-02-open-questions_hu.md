@@ -3,7 +3,7 @@ id: III-02
 type: chapter
 lang: hu
 pair: III-02-open-questions_en.md
-pair_status: missing
+pair_status: in-sync
 doc_version: "1.4"
 status: jelolt
 ---

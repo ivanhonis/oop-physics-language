@@ -3,7 +3,7 @@ id: II-15
 type: proof
 lang: hu
 pair: proof_en.md
-pair_status: missing
+pair_status: in-sync
 doc_version: "1.3"
 status: reszleges
 builds_on: [II-14, II-13, II-12, II-11, I-06]

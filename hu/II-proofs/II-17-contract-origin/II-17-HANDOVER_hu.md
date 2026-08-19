@@ -3,8 +3,8 @@ id: II-17-handover
 type: note
 part_of: II-17
 lang: hu
-pair: HANDOVER_en.md
-pair_status: missing
+pair: II-17-HANDOVER_en.md
+pair_status: in-sync
 doc_version: "1.0"
 status: ervenyes
 builds_on: [PKG-17-1]

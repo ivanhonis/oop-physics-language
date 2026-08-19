@@ -4,7 +4,7 @@ type: package
 part_of: II-14
 lang: hu
 pair: PKG-14-1-rulebook_en.md
-pair_status: missing
+pair_status: in-sync
 doc_version: "1.3"
 status: jovahagyva
 builds_on: [II-13, II-12, II-11, I-06]
@@ -27,7 +27,7 @@ Lépcsőzik-e a kiterjedés a sűrűséggel: azonos helyenkénti szerződésszá
 - **[III/1, 5. (helyek egyenrangúsága)](../../III-frontier/III-01-candidate-laws_hu.md):** szövés-építéssel megvalósítva, mint a II/13-ban.
 - **[I/6, a kizárás tétele](../../I-language/I-06-identity_hu.md):** az ütem-létra alulról, ütemenként egy példánnyal töltendő.
 - **II/12 nyom-döntetlen tétele:** teljes töltésnél minden háló ára a költségvetés kétszerese.
-- **[II/11 visszarakó és golyónövekedés](../../II-11-locality-readout/proof_hu.md):** a győztes kiolvasásához.
+- **[II/11 visszarakó és golyónövekedés](../II-11-locality-readout/proof_hu.md):** a győztes kiolvasásához.
 - **[II/13](../II-13-dimension-race/proof_hu.md) három öröksége:** az összeesési lemma tanulsága (a jelöltek különbözőségét ellenőrizni kell, nem feltételezni); a körbeérési rezonancia méret-diagnózisa (a 8-as oldalhossz alsó korlát); a héj-logika és a tükör-hatás mint ellenőrzendő megfigyelések.
 - **[III/2, 8. javított golyótörvényei](../../III-frontier/III-02-open-questions_hu.md):** a tér héja négyzetes ($4r^2+2$), nem lineáris.
 

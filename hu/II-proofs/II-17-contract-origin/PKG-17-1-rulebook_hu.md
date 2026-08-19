@@ -4,7 +4,7 @@ type: package
 part_of: II-17
 lang: hu
 pair: PKG-17-1-rulebook_en.md
-pair_status: missing
+pair_status: in-sync
 doc_version: "1.4"
 status: jovahagyva
 builds_on: [II-12, II-11, II-05, II-01, I-06, I-04]

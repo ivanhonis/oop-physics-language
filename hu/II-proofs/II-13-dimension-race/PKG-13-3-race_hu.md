@@ -4,7 +4,7 @@ type: package
 part_of: II-13
 lang: hu
 pair: PKG-13-3-race_en.md
-pair_status: missing
+pair_status: in-sync
 doc_version: "1.3"
 status: jovahagyva
 builds_on: [PKG-13-1, PKG-13-2]

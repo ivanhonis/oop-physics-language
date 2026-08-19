@@ -3,7 +3,7 @@ id: I-02
 type: chapter
 lang: hu
 pair: I-02-object-state_en.md
-pair_status: missing
+pair_status: in-sync
 doc_version: "1.3"
 status: ervenyes
 ---

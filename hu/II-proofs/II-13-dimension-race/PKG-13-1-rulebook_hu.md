@@ -4,7 +4,7 @@ type: package
 part_of: II-13
 lang: hu
 pair: PKG-13-1-rulebook_en.md
-pair_status: missing
+pair_status: in-sync
 doc_version: "1.3"
 status: jovahagyva
 builds_on: [II-12, II-11, I-06]
@@ -27,8 +27,8 @@ Azonos helyenkénti szerződésszám mellett kedveli-e a költségszerkezet a ma
 - **[III/1, 5. (helyek egyenrangúsága)](../../III-frontier/III-01-candidate-laws_hu.md):** nincs kitüntetett hely — e nélkül a II/12 összeomlási tétele érvényes, a verseny értelmetlen.
 - **[I/6, a kizárás tétele](../../I-language/I-06-identity_hu.md):** az ütem-létrát alulról, ütemenként egy példánnyal kell tölteni.
 - **II/12 nyom-döntetlen tétele:** teljes töltésnél minden háló ára a költségvetés kétszerese.
-- **[II/11 visszarakó és golyónövekedés](../../II-11-locality-readout/proof_hu.md):** a győztes kiolvasásához.
-- **II/12 gépezet:** hálózati ütem-létra sajátfeladatként ([B függelék](../../../appendix/B-machinery_hu.md)).
+- **[II/11 visszarakó és golyónövekedés](../II-11-locality-readout/proof_hu.md):** a győztes kiolvasásához.
+- **II/12 gépezet:** hálózati ütem-létra sajátfeladatként ([B függelék](../../appendix/B-machinery_hu.md)).
 
 ## 3. A rögzített rendszer
 

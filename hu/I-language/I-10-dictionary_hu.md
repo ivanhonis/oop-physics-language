@@ -3,7 +3,7 @@ id: I-10
 type: chapter
 lang: hu
 pair: I-10-dictionary_en.md
-pair_status: missing
+pair_status: in-sync
 doc_version: "1.3"
 status: ervenyes
 ---

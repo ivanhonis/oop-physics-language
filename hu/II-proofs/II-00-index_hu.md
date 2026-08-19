@@ -3,7 +3,7 @@ id: II-00
 type: index
 lang: hu
 pair: II-00-index_en.md
-pair_status: missing
+pair_status: in-sync
 doc_version: "1.4"
 status: ervenyes
 ---

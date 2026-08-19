@@ -4,7 +4,7 @@ type: package
 part_of: II-14
 lang: hu
 pair: PKG-14-2-ladders_en.md
-pair_status: missing
+pair_status: in-sync
 doc_version: "1.3"
 status: jovahagyva
 builds_on: [PKG-14-1]

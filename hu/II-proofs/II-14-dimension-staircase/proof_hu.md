@@ -3,7 +3,7 @@ id: II-14
 type: proof
 lang: hu
 pair: proof_en.md
-pair_status: missing
+pair_status: in-sync
 doc_version: "1.4"
 status: ervenyes
 builds_on: [II-13, II-12, II-11, I-06]

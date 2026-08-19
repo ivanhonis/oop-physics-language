@@ -3,7 +3,7 @@ id: III-01
 type: chapter
 lang: hu
 pair: III-01-candidate-laws_en.md
-pair_status: missing
+pair_status: in-sync
 doc_version: "1.4"
 status: jelolt
 ---

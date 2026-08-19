@@ -3,7 +3,7 @@ id: I-03
 type: chapter
 lang: hu
 pair: I-03-operations_en.md
-pair_status: missing
+pair_status: in-sync
 doc_version: "1.3"
 status: ervenyes
 ---

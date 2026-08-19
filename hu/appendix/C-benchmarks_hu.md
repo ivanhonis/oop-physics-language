@@ -3,7 +3,7 @@ id: APP-C
 type: appendix
 lang: hu
 pair: C-benchmarks_en.md
-pair_status: missing
+pair_status: in-sync
 doc_version: "1.4"
 status: ervenyes
 ---

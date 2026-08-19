@@ -6,9 +6,9 @@ doc_version: "1.3"
 status: ervenyes
 ---
 
-# OOP-alapú fizikai leírónyelv · OOP-based physical descriptive language
+# OOP-based physical descriptive language · OOP-alapú fizikai leírónyelv
 
-**[Magyar](#magyar)** · **[English](#english)**
+**[English](#english)** · **[Magyar](#magyar)**
 
 ---
 
@@ -18,7 +18,45 @@ A descriptive language that models the physical world with object-oriented patte
 
 > **Language status:** the research is conducted in **Hungarian** (`hu/`). We aim to keep the English mirror (`en/`) up to date, but new results appear in Hungarian first. Terminology for translations is fixed in the dictionary chapter (`I-10-dictionary`).
 
-Start here: `hu/00-introduction_hu.md` (English mirror coming as `en/00-introduction_en.md`).
+### Reading order
+
+1. **`en/00-introduction_en.md`** — the idea and how it is built up
+2. **`en/I-language/`** — the language: concepts, laws, theorems, contracts (only what is proven)
+3. **`en/II-proofs/`** — the computed proofs; every claim receives its evidence here
+4. **`en/III-frontier/`** — the frontier: candidate laws and open questions
+5. **`en/appendix/`** — machinery, benchmarks, package trail
+
+Quick entry: `en/I-language/I-00-index_en.md` and `en/II-proofs/II-00-index_en.md`.
+
+### Repository layout
+
+```
+descriptive-language/
+├── README.md                ← this file (multilingual entry point)
+├── LICENSE · CITATION.cff · .gitignore
+├── CONTRIBUTING.md          ← the editing rulebook (language-independent)
+├── .github/                 ← PR template (the gate checklist)
+├── tools/assemble.py        ← builds the per-language dump
+├── shared/                  ← language-independent attachments (computation code), per proof
+├── hu/                      ← the source language of the research
+│   ├── CHANGELOG_hu.md      ← the history of the versions
+│   ├── 00-introduction_hu.md
+│   ├── I-language/ · II-proofs/ · III-frontier/ · appendix/
+├── en/                      ← English mirror tree, identical structure
+└── (further languages later: de/ · fr/ · …)
+```
+
+### Ground rules (the full rulebook: `CONTRIBUTING.md`)
+
+- **Append-only numbering:** a new proof is always appended to the end of the sequence; an existing identifier never changes.
+- **One claim — one file:** the source of truth is the chapter file; indexes only link, duplication is forbidden.
+- **Package method:** a larger derivation is produced in packages whose rulebook is fixed in advance and which are approved one by one; a chapter may build only on accepted packages.
+- **Language pairs:** the pair always lives on the mirror path (`hu/X/…_hu.md` ↔ `en/X/…_en.md`); synchronization is tracked by the `pair_status` field of the headers.
+- **Formulas:** LaTeX in Markdown (`$...$`, and `$$...$$`).
+
+### License and citation
+
+Text: CC BY-SA 4.0 · Code: MIT (details: `LICENSE`). For citation: `CITATION.cff`.
 
 ---
 
@@ -44,19 +82,19 @@ Gyors belépés: `hu/I-language/I-00-index_hu.md` és `hu/II-proofs/II-00-index_
 descriptive-language/
 ├── README.md                ← ez a fájl (többnyelvű belépési pont)
 ├── LICENSE · CITATION.cff · .gitignore
+├── CONTRIBUTING.md          ← szerkesztési szabálykönyv (nyelvfüggetlen)
 ├── .github/                 ← PR-sablon (a kapu-ellenőrzőlista)
 ├── tools/assemble.py        ← nyelvi dump előállítása
 ├── shared/                  ← nyelvfüggetlen mellékletek (számoló kódok), próbánként
 ├── hu/                      ← a kutatás forrásnyelve
-│   ├── CONTRIBUTING_hu.md   ← szerkesztési szabálykönyv
 │   ├── CHANGELOG_hu.md      ← a változatok története
 │   ├── 00-introduction_hu.md
 │   ├── I-language/ · II-proofs/ · III-frontier/ · appendix/
-├── en/                      ← angol tükör-fa, azonos szerkezettel (készül)
+├── en/                      ← angol tükör-fa, azonos szerkezettel
 └── (később további nyelvek: de/ · fr/ · …)
 ```
 
-### Alapszabályok (a teljes szabálykönyv: `hu/CONTRIBUTING_hu.md`)
+### Alapszabályok (a teljes szabálykönyv: `CONTRIBUTING.md`)
 
 - **Bővítésálló számozás:** új próba mindig a sor végére kerül; meglévő azonosító soha nem változik.
 - **Egy állítás — egy fájl:** az igazság forrása a fejezetfájl; az indexek csak linkelnek, duplikáció tilos.

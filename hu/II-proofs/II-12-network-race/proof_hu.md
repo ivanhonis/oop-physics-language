@@ -3,7 +3,7 @@ id: II-12
 type: proof
 lang: hu
 pair: proof_en.md
-pair_status: missing
+pair_status: in-sync
 doc_version: "1.3"
 status: bukott
 builds_on: [II-11, II-01, I-06]
