@@ -33,6 +33,9 @@ EXCLUDE_FILE_PREFIXES = (
     "CITATION",
 )
 EXCLUDE_DIRS = {".git", ".github", "tools", "dist", "__pycache__", "!work", "!archive"}
+# Binaris mellekletek: a tartalmuk nem masolhato a dumpba (nem szoveg),
+# de a konyvtarlistaban szerepelniuk kell, mert a repo reszei.
+BINARY_SUFFIXES = {".npy", ".npz", ".png", ".jpg", ".jpeg", ".gif", ".pdf", ".zip", ".gz"}
 # ---------------------------------------------------------------------------
 
 
@@ -96,7 +99,11 @@ def main() -> int:
     # a fajlok, egyenkent file-tagek kozt, valtozatlan tartalommal;
     # a shared a lista vegen all
     for rel in all_files:
-        content = (ROOT / rel).read_text(encoding="utf-8").rstrip("\n")
+        if rel.suffix.lower() in BINARY_SUFFIXES:
+            meret = (ROOT / rel).stat().st_size
+            content = f"[binaris melleklet, {meret} bajt - a tartalma nem kerul a dumpba]"
+        else:
+            content = (ROOT / rel).read_text(encoding="utf-8").rstrip("\n")
         parts.append(f'<file path="{rel}">')
         parts.append(content)
         parts.append("</file>")
