@@ -5,7 +5,7 @@ part_of: II-16
 lang: en
 pair: PKG-16-1-rulebook_hu.md
 pair_status: in-sync
-doc_version: "1.3"
+doc_version: "1.4"
 status: jovahagyva
 builds_on: [II-15, II-14, II-12, II-11, I-06]
 imports: "the selection rule (a stated convention, section 9)"

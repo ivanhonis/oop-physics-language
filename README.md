@@ -2,7 +2,7 @@
 id: README
 type: entry-point
 lang: multi
-doc_version: "1.3"
+doc_version: "1.4"
 status: ervenyes
 ---
 
@@ -31,7 +31,7 @@ Quick entry: `en/I-language/I-00-index_en.md` and `en/II-proofs/II-00-index_en.m
 ### Repository layout
 
 ```
-descriptive-language/
+oop-physics-language/
 ├── README.md                ← this file (multilingual entry point)
 ├── LICENSE · CITATION.cff · .gitignore
 ├── CONTRIBUTING.md          ← the editing rulebook (language-independent)
@@ -79,7 +79,7 @@ Gyors belépés: `hu/I-language/I-00-index_hu.md` és `hu/II-proofs/II-00-index_
 ### A repó szerkezete
 
 ```
-descriptive-language/
+oop-physics-language/
 ├── README.md                ← ez a fájl (többnyelvű belépési pont)
 ├── LICENSE · CITATION.cff · .gitignore
 ├── CONTRIBUTING.md          ← szerkesztési szabálykönyv (nyelvfüggetlen)

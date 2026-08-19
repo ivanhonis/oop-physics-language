@@ -5,7 +5,7 @@ part_of: II-16
 lang: en
 pair: PKG-16-5-transfer_hu.md
 pair_status: in-sync
-doc_version: "1.3"
+doc_version: "1.4"
 status: jovahagyva
 builds_on: [PKG-16-3, PKG-15-5, PKG-15-6, PKG-15-7]
 imports: zero

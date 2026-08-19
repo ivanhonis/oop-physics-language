@@ -23,7 +23,7 @@ A [II/13 — kiterjedés-verseny](../II-proofs/II-13-dimension-race/proof_hu.md)
 
 ## A II/14 nyomvonala
 
-A [II/14 — kiterjedés-lépcső](../II-proofs/II-14-dimension-staircase/proof_hu.md) négy csomagból épült; a szabálykönyv rögzítése *előtt* egy előkészítő javítás történt (a III/2, 8. tér-golyótörvénye lineárisról négyzetesre — a jegyzőkönyv erre épül):
+A [II/14 — kiterjedés-lépcső](../II-proofs/II-14-dimension-staircase/proof_hu.md) öt csomagból épült; a szabálykönyv rögzítése *előtt* egy előkészítő javítás történt (a III/2, 8. tér-golyótörvénye lineárisról négyzetesre — a jegyzőkönyv erre épül):
 
 - **[PKG-14-1 — szabálykönyv](../II-proofs/II-14-dimension-staircase/PKG-14-1-rulebook_hu.md):** a hatos koordinációjú vonal–sík–tér mezőny, a kétsávos lépcső-ítélet és a golyó-jegyzőkönyv rögzítve; hozadéka a páros-jegy mint különbözőség-bizonyíték (a II/13-as összeesési csapda kizárva) és a rendre épülő golyó-olvasat (állandó/lineáris/négyzetes).
 - **[PKG-14-2 — ütem-létrák](../II-proofs/II-14-dimension-staircase/PKG-14-2-ladders_hu.md):** mind a 224 háló két független úton; hozadéka a pásztázás fogása (20 széteső családtag — a szabálykönyv egy levezetési tévedésének helyesbítése) és a tér 25 polcos, egzaktul szimmetrikus létrája.

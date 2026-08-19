@@ -5,7 +5,7 @@ part_of: II-15
 lang: hu
 pair: PKG-15-5-hole-mirror_en.md
 pair_status: in-sync
-doc_version: "1.3"
+doc_version: "1.4"
 status: jovahagyva
 builds_on: [PKG-15-3, II-12, I-06]
 imports: nulla

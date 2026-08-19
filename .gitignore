@@ -17,3 +17,4 @@ Thumbs.db
 # munka konyvtarak / work dirs (a \! escape kell, mert a sor eleji ! tagadas)
 \!archive/
 \!work/
+\.claude/

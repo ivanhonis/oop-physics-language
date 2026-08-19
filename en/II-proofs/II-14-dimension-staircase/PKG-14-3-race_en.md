@@ -5,7 +5,7 @@ part_of: II-14
 lang: en
 pair: PKG-14-3-race_hu.md
 pair_status: in-sync
-doc_version: "1.3"
+doc_version: "1.4"
 status: jovahagyva
 builds_on: [PKG-14-1, PKG-14-2]
 imports: zero

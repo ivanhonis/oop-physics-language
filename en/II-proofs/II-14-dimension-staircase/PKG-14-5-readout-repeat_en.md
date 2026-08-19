@@ -5,7 +5,7 @@ part_of: II-14
 lang: en
 pair: PKG-14-5-readout-repeat_hu.md
 pair_status: in-sync
-doc_version: "1.3"
+doc_version: "1.4"
 status: jovahagyva
 builds_on: [PKG-14-4, PKG-14-1, II-11]
 imports: "zero new item (the sentinel threshold — a factor of two — is a declared convention)"

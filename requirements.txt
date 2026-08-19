@@ -1,0 +1,14 @@
+# A II. resz szamolo kodjainak futtatasahoz / to run the computation code of Part II
+#
+#   python -m venv .venv
+#   .venv\Scripts\activate      (Windows)   |   source .venv/bin/activate   (POSIX)
+#   pip install -r requirements.txt
+#
+# A szkriptek a sajat konyvtarukbol futtatandok (relativ gyorsitotar-utvonalak):
+# The scripts are to be run from their own directory (relative cache paths):
+#   cd shared/II-15-dimension-fourth-rung && python PKG-15-2-ladders.py
+#
+# A kod csak a numpy-t hasznalja; a tobbi import a Python szabvanykonyvtarabol jon.
+# The code uses only numpy; every other import comes from the Python standard library.
+
+numpy>=1.24,<3

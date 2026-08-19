@@ -4,7 +4,7 @@ type: appendix
 lang: hu
 pair: B-machinery_en.md
 pair_status: in-sync
-doc_version: "1.3"
+doc_version: "1.4"
 status: ervenyes
 ---
 

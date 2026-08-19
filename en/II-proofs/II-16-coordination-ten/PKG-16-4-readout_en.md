@@ -5,7 +5,7 @@ part_of: II-16
 lang: en
 pair: PKG-16-4-readout_hu.md
 pair_status: in-sync
-doc_version: "1.3"
+doc_version: "1.4"
 status: jovahagyva
 builds_on: [PKG-16-3, PKG-15-4, II-11]
 imports: zero

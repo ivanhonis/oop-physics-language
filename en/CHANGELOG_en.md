@@ -4,7 +4,7 @@ type: entry-point
 lang: en
 pair: CHANGELOG_hu.md
 pair_status: in-sync
-doc_version: "1.3"
+doc_version: "1.4"
 status: ervenyes
 ---
 
@@ -12,9 +12,16 @@ status: ervenyes
 
 The language was built layer by layer; this file records the turning points, from the most recent backwards. (In the unified releases this was Appendix A — its content moved here and was retired from the appendices.)
 
-## [Unreleased]
+## [1.4]
 
-- The document moved to a **modular structure**: a separate file per chapter, per proof and per package, with stable identifiers, prepared for a bilingual mirror structure. The content is unchanged — it matches the unified release 1.3.
+- The document moved to a **modular structure**: a separate file per chapter, per proof and per package, with stable identifiers.
+- **It became bilingual:** the complete **English mirror tree** (`en/`) is in place, with a file-by-file pair on the mirror paths. The English pair of the dictionary chapter ([I/10](I-language/I-10-dictionary_en.md)) fixes the correspondence of the language's technical terms as a third column — the source for every further translation.
+- Ran the **extension staircase** ([II/14](II-proofs/II-14-dimension-staircase/proof_en.md)): a complete staircase verdict — sparsely the line, in the middle the plane, from half filling onwards space. The plane–space boundary is decided not by degree filling but by the **bipartite mark**; the **mirror rule** is a new candidate (III/1, 7.). The advantage is real, but thin, and can be produced on a line as well.
+- Ran the **fourth rung** ([II/15](II-proofs/II-15-dimension-fourth-rung/proof_en.md)): at coordination eight the staircase climbs to four — the fourth rung has the widest band, with half filling inside it — but at the top it turns back. Three new theorems: the **hole-mirror theorem**, the **direction theorem**, and the **top theorem** assembled from the two.
+- Ran **coordination ten** ([II/16](II-proofs/II-16-coordination-ten/proof_en.md)): the staircase skips three, and the top is taken by the only main candidate carrying the mirror mark, the native five. The **unified top law** (III/1, 8.) was born — the top is taken by the lowest-extension member of the field carrying the mirror mark — with one theorem leg and one measured leg.
+- Opened **II/17** (the origin of the contract): the rulebook is frozen and the B3 precondition has run. This is the first package on the trail whose inputs do not include a network.
+- The **"why three" question changed shape:** at coordination six and eight the lowest mirror carrier *happens* to be three. The 1/r attraction import remains untouched.
+- A field finding confirmed across three proofs: selection cannot be decided among hand-enumerated networks, because the tuned members of the line family imitate everything — the weight of the root signal (III/2, 7.) grows.
 
 ## [1.3]
 

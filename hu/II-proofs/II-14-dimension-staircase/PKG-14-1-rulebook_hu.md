@@ -5,7 +5,7 @@ part_of: II-14
 lang: hu
 pair: PKG-14-1-rulebook_en.md
 pair_status: in-sync
-doc_version: "1.3"
+doc_version: "1.4"
 status: jovahagyva
 builds_on: [II-13, II-12, II-11, I-06]
 imports: nulla

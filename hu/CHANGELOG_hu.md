@@ -4,7 +4,7 @@ type: entry-point
 lang: hu
 pair: CHANGELOG_en.md
 pair_status: in-sync
-doc_version: "1.3"
+doc_version: "1.4"
 status: ervenyes
 ---
 
@@ -12,9 +12,16 @@ status: ervenyes
 
 A nyelv rétegenként épült; ez a fájl a fordulópontokat rögzíti, a legfrissebbtől visszafelé. (Az egységes kiadásokban ez volt az A függelék — a tartalma ide költözött, a függelékből kivezetve.)
 
-## [Kiadatlan]
+## [1.4]
 
-- A dokumentum **moduláris szerkezetre** állt át: fejezetenként, próbánként és csomagonként külön fájl, stabil azonosítókkal, kétnyelvű tükör-struktúrára készítve. A tartalom változatlan — megegyezik az 1.3-as egységes kiadással.
+- A dokumentum **moduláris szerkezetre** állt át: fejezetenként, próbánként és csomagonként külön fájl, stabil azonosítókkal.
+- **Kétnyelvűvé vált:** elkészült a teljes **angol tükör-fa** (`en/`), fájlonkénti párral a tükör-útvonalakon. A szótár-fejezet angol párja ([I/10](I-language/I-10-dictionary_hu.md)) harmadik oszlopként rögzíti a nyelv szakszavainak megfeleltetését — minden további fordítás forrása.
+- Lefuttatta a **kiterjedés-lépcsőt** ([II/14](II-proofs/II-14-dimension-staircase/proof_hu.md)): teljes lépcső-ítélet — ritkán vonal, közepén sík, fél-töltéstől tér. A sík–tér határt nem a fokbetelés dönti, hanem a **tükör-jegy**; új jelölt a **tükör-szabály** (III/1, 7.). Az előny valódi, de vékony, és vonalon is előállítható.
+- Lefuttatta a **negyedik fokot** ([II/15](II-proofs/II-15-dimension-fourth-rung/proof_hu.md)): nyolcas koordináción a lépcső felmegy négyig — a negyedik foké a legnagyobb sáv, benne a fél-töltés —, de a tetején visszafordul. Három új tétel: a **lyuk-tükör tétel**, az **irány-tétel**, és a kettőből összerakott **tető-tétel**.
+- Lefuttatta a **tízes koordinációt** ([II/16](II-proofs/II-16-coordination-ten/proof_hu.md)): a lépcső kihagyja a hármat, és a tetőt az egyetlen tükör-jegyű fő jelölt, a honos öt viszi. Megszületett az **egyesített tető-törvény** (III/1, 8.) — a tetőt a mezőny legalacsonyabb kiterjedésű tükör-jegyű tagja viszi —, tételi és mért lábbal.
+- Megnyitotta a **II/17-et** (a szerződés eredete): a szabálykönyv fagyasztva, a B3-előfeltétel lefutott. Ez az első csomag a nyomvonalon, amelynek a bemenetei közt háló nem szerepel.
+- A **„miért három" kérdés alakot váltott:** a hatos és nyolcas koordináción a legalacsonyabb tükör-hordozó *történetesen* a három. Az 1/r-vonzás-import változatlanul érintetlen.
+- Mezőny-lelet, három próbán megerősítve: a kiválasztás kézzel felsorolt hálók közt nem dől el, mert a hangolt vonal-családtagok mindent imitálnak — a gyökér-jelzés (III/2, 7.) súlya nő.
 
 ## [1.3]
 
