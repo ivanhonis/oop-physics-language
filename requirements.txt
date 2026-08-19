@@ -4,6 +4,32 @@
 #   .venv\Scripts\activate      (Windows)   |   source .venv/bin/activate   (POSIX)
 #   pip install -r requirements.txt
 #
+# ELSO LEPES A TELEPITES UTAN / FIRST STEP AFTER INSTALLING:
+#
+#   python shared/environment-check.py
+#
+# Ez megnezi, hogy a gepen a np.longdouble valoban kiterjesztett pontossagu-e.
+# A II/15 H3-helyesbitese ota tobb csomag elsodleges szamolasi utja hosszu-
+# lebegos, mert a float64 halmozasi hibaja a teli veg kozeleben nagyobb, mint
+# a rogzitett 1e-8 azonossag-tures. A np.longdouble viszont NEM mindenutt
+# ugyanolyan szeles: Linux/glibc alatt (gcc/clang) a 80 bites kiterjesztett
+# tipus, Windowson az MSVC-s numpy viszont a float64-re kepezi le. Ott a H3
+# helyesbites csendben hatastalan, es a szkriptek BUKIK-ot irhatnak ott, ahol
+# a csomagok ALL-t rogzitenek. Az ellenorzo ezt megmeri, es 1-es kilepesi
+# koddal jelez. Az erintett csomagok: PKG-15-3, PKG-15-5, PKG-15-6, PKG-15-7,
+# PKG-16-2, PKG-16-3, PKG-16-5.
+#
+# It checks whether np.longdouble really is an extended-precision type on this
+# machine. Since correction H3 of II/15 the primary computation route of
+# several packages is extended precision, because the float64 accumulation
+# error near the full end exceeds the fixed identity tolerance of 1e-8. But
+# np.longdouble is not the same width everywhere: on Linux/glibc (gcc/clang)
+# it is the 80-bit extended type, while on Windows the MSVC build of numpy
+# maps it onto float64. There the H3 correction is silently ineffective, and
+# the scripts may report FAILS where the packages record HOLDS. The check
+# measures this and signals with exit code 1. Affected packages: PKG-15-3,
+# PKG-15-5, PKG-15-6, PKG-15-7, PKG-16-2, PKG-16-3, PKG-16-5.
+#
 # A szkriptek a sajat konyvtarukbol futtatandok (relativ gyorsitotar-utvonalak):
 # The scripts are to be run from their own directory (relative cache paths):
 #   cd shared/II-15-dimension-fourth-rung && python PKG-15-2-ladders.py
