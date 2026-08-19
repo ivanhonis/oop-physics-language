@@ -16,6 +16,20 @@
 # Verdict conditions (in advance): A1 the closed degree holds; A2 5184/5184, 0 phantom,
 # 0 missing; A3 the ball is exact; A4 sentinel >= 2. All hold -> "holds"; any fails -> partial.
 
+# Identifier glossary — the identifiers were renamed from Hungarian
+# to English; the original Hungarian name stands on the right:
+#   antipodal = atellenes           ball = golyo
+#   best_ratio = legjobb            d_strongest = d_erosebb
+#   found = megvan                  G_machine = G_gepi
+#   gap = res                       half = fel
+#   increments = novek              ladder_dev = elteres_letra
+#   missing = hianyzo               N_INST = NINST
+#   neighbour = szomszed            phantom = fantom
+#   projector_dev = elteres_vetito  ranked = rend
+#   reference = hivatkozas          remainder = maradek
+#   SHELF6 = D6                     strongest_val = erosebb_ert
+#   window = ablak
+
 import numpy as np
 from collections import deque
 
@@ -43,38 +57,38 @@ for x in range(L):
                 Lap[a, b] -= 1.0
                 Lap[b, a] -= 1.0
 w, V = np.linalg.eigh(Lap)                                            # machine route
-elteres_letra = float(np.max(np.abs(np.sort(w) - lam_sorted)))
-print("ladder by two routes: largest deviation = %.2e" % elteres_letra)
-assert elteres_letra < 1e-10
+ladder_dev = float(np.max(np.abs(np.sort(w) - lam_sorted)))
+print("ladder by two routes: largest deviation = %.2e" % ladder_dev)
+assert ladder_dev < 1e-10
 
 # --- 2) Singling out the closed degree (fixed rule) --------------------------
-fel = NSITE // 2                                   # 864
+half = NSITE // 2                                   # 864
 B = int(np.sum(lam_flat < 6.0 - TOL))              # the beats below 6
-D6 = int(np.sum(np.abs(lam_flat - 6.0) < TOL))     # the width of the shelf at 6
-NINST = B + D6                                     # the first closed degree above half filling
-res = lam_sorted[NINST] - lam_sorted[NINST - 1]
+SHELF6 = int(np.sum(np.abs(lam_flat - 6.0) < TOL))     # the width of the shelf at 6
+N_INST = B + SHELF6                                     # the first closed degree above half filling
+gap = lam_sorted[N_INST] - lam_sorted[N_INST - 1]
 print("closed degree: N* = %d (= %d + %d); half filling %d; gap above the degree %.6f"
-      % (NINST, B, D6, fel, res))
-assert B < fel <= NINST and res > 1e-6
+      % (N_INST, B, SHELF6, half, gap))
+assert B < half <= N_INST and gap > 1e-6
 
 # --- 3) Closeness map by two routes ------------------------------------------
 occ = lam <= 6.0 + TOL
-assert int(occ.sum()) == NINST
+assert int(occ.sum()) == N_INST
 G = np.fft.ifftn(occ.astype(float))                # closed route: G(delta)
 assert np.max(np.abs(G.imag)) < 1e-12
 G = G.real
 
 occ_cols = w <= 6.0 + TOL                          # machine route: projector from the eigenvectors
-assert int(occ_cols.sum()) == NINST
+assert int(occ_cols.sum()) == N_INST
 P0 = (V[:, occ_cols] @ V[0, occ_cols])             # row 0 of the projector
-G_gepi = np.empty(NSITE)
+G_machine = np.empty(NSITE)
 for x in range(L):
     for y in range(L):
         for z in range(L):
-            G_gepi[idx(x, y, z)] = G[x, y, z]
-elteres_vetito = float(np.max(np.abs(P0 - G_gepi)))
-print("projector by two routes: largest deviation = %.2e" % elteres_vetito)
-assert elteres_vetito < 1e-10
+            G_machine[idx(x, y, z)] = G[x, y, z]
+projector_dev = float(np.max(np.abs(P0 - G_machine)))
+print("projector by two routes: largest deviation = %.2e" % projector_dev)
+assert projector_dev < 1e-10
 
 # --- 4) Displacement classes and the antipodal echo --------------------------
 def canon(d):
@@ -90,49 +104,49 @@ for dx in range(L):
 for c, vals in classes.items():
     assert np.std(vals) < 1e-12                    # weave: exact within a class
 
-szomszed = G[1, 0, 0]
-atellenes = G[L // 2, L // 2, L // 2]
-print("neighbour closeness G(1,0,0) = %+.6f" % szomszed)
+neighbour = G[1, 0, 0]
+antipodal = G[L // 2, L // 2, L // 2]
+print("neighbour closeness G(1,0,0) = %+.6f" % neighbour)
 print("antipodal echo G(6,6,6) = %+.6f  (sign: %s; |ratio to the neighbour| = %.4f)"
-      % (atellenes, "negative" if atellenes < 0 else "positive",
-         abs(atellenes) / szomszed))
+      % (antipodal, "negative" if antipodal < 0 else "positive",
+         abs(antipodal) / neighbour))
 
 # --- 5) The jump on the SIGNED list (the corrected rule) ---------------------
 g = G.ravel().copy()
 g[0] = -np.inf                                     # own site excluded
-rend = np.argsort(g)[::-1]                         # signed, decreasing
-v = g[rend]
-ablak = 30                                         # fixed search window
-legjobb, kstar = -1.0, None
-for m in range(1, ablak + 1):
+ranked = np.argsort(g)[::-1]                         # signed, decreasing
+v = g[ranked]
+window = 30                                         # fixed search window
+best_ratio, kstar = -1.0, None
+for m in range(1, window + 1):
     if v[m] > 0:
         r = v[m - 1] / v[m]
-        if r > legjobb:
-            legjobb, kstar = r, m
+        if r > best_ratio:
+            best_ratio, kstar = r, m
 print("start of the signed list:", np.round(v[:10], 5))
 print("jump after place %d: %.5f -> %.5f (%.1f-fold)"
-      % (kstar, v[kstar - 1], v[kstar], legjobb))
+      % (kstar, v[kstar - 1], v[kstar], best_ratio))
 
 # band sentinel: weakest accepted / strongest rejected (by magnitude);
 # the placeholder of the own site (-inf) is not a member of the field
-maradek = v[kstar:]
-maradek = maradek[np.isfinite(maradek)]
-j = int(np.argmax(np.abs(maradek)))
-erosebb_ert = float(maradek[j])
-d_erosebb = tuple(np.unravel_index(int(rend[kstar + j]), (L, L, L)))
-S = v[kstar - 1] / abs(erosebb_ert)
+remainder = v[kstar:]
+remainder = remainder[np.isfinite(remainder)]
+j = int(np.argmax(np.abs(remainder)))
+strongest_val = float(remainder[j])
+d_strongest = tuple(np.unravel_index(int(ranked[kstar + j]), (L, L, L)))
+S = v[kstar - 1] / abs(strongest_val)
 print("band sentinel: S = %.4f  (threshold: 2); strongest rejected: class %s, G = %+.6f"
-      % (S, canon(d_erosebb), erosebb_ert))
+      % (S, canon(d_strongest), strongest_val))
 
 # comparison with the old, absolute-value rule (diagnostics, not the verdict)
 va = np.sort(np.abs(np.where(np.isfinite(g), g, 0)))[::-1]
-r_abs = va[:ablak] / np.maximum(va[1:ablak + 1], 1e-300)
+r_abs = va[:window] / np.maximum(va[1:window + 1], 1e-300)
 k_abs = int(np.argmax(r_abs)) + 1
 print("old absolute rule (for comparison): jump after place %d (%.1f-fold)"
       % (k_abs, r_abs[k_abs - 1]))
 
 # --- 6) Rebuilding and the completeness ledger -------------------------------
-top = [tuple(np.unravel_index(int(i), (L, L, L))) for i in rend[:kstar]]
+top = [tuple(np.unravel_index(int(i), (L, L, L))) for i in ranked[:kstar]]
 rec_edges = set()
 for x in range(L):
     for y in range(L):
@@ -149,11 +163,11 @@ for x in range(L):
             for d in [(1, 0, 0), (0, 1, 0), (0, 0, 1)]:
                 b = idx(x + d[0], y + d[1], z + d[2])
                 true_edges.add((min(a, b), max(a, b)))
-megvan = len(rec_edges & true_edges)
-fantom = len(rec_edges - true_edges)
-hianyzo = len(true_edges - rec_edges)
+found = len(rec_edges & true_edges)
+phantom = len(rec_edges - true_edges)
+missing = len(true_edges - rec_edges)
 print("completeness ledger: found %d/%d; phantom %d; missing %d"
-      % (megvan, NCONTRACT, fantom, hianyzo))
+      % (found, NCONTRACT, phantom, missing))
 
 # --- 7) Ball reading up to r <= 5 --------------------------------------------
 adj = [[] for _ in range(NSITE)]
@@ -169,16 +183,16 @@ while q:
         if dist[x2] < 0:
             dist[x2] = dist[u] + 1
             q.append(x2)
-golyo = [sum(1 for d in dist if 0 <= d <= r) for r in range(6)]
-novek = [golyo[i + 1] - golyo[i] for i in range(5)]
-hivatkozas = [1, 7, 25, 63, 129, 231]              # with increment 4r^2+2
-print("ball (r=0..5):", golyo, " increments:", novek)
-print("reference sequence (space, quadratic):", hivatkozas)
+ball = [sum(1 for d in dist if 0 <= d <= r) for r in range(6)]
+increments = [ball[i + 1] - ball[i] for i in range(5)]
+reference = [1, 7, 25, 63, 129, 231]              # with increment 4r^2+2
+print("ball (r=0..5):", ball, " increments:", increments)
+print("reference sequence (space, quadratic):", reference)
 
 # --- 8) Verdict according to the fixed conditions ----------------------------
-A1 = res > 1e-6
-A2 = (megvan == NCONTRACT and fantom == 0 and hianyzo == 0)
-A3 = (golyo == hivatkozas)
+A1 = gap > 1e-6
+A2 = (found == NCONTRACT and phantom == 0 and missing == 0)
+A3 = (ball == reference)
 A4 = (S >= 2.0)
 print("\nconditions: A1 closed degree %s | A2 completeness %s | A3 ball %s | A4 sentinel %s"
       % tuple("holds" if a else "FAILS" for a in (A1, A2, A3, A4)))

@@ -8,6 +8,11 @@
 #   - ball reading up to at most r = 3, against the three reference sequences
 #   - resonance sentinel: the antipodal classes reported separately
 
+# Identifier glossary — the identifiers were renamed from Hungarian
+# to English; the original Hungarian name stands on the right:
+#   key = kulcs        mode = mod         ranked = rend
+#   readout = olvasat
+
 import numpy as np
 from collections import deque
 
@@ -98,15 +103,15 @@ flat_off = [(dx, dy, dz) for dx in range(L) for dy in range(L) for dz in range(L
             if not dx == dy == dz == 0]
 
 
-def olvasat(mod):
+def readout(mode):
     """One readout under the given jump rule: 'signed' or 'absolute'."""
-    kulcs = (lambda d: G[d]) if mod == "signed" else (lambda d: abs(G[d]))
-    rend = sorted(flat_off, key=lambda d: -kulcs(d))
-    vals = np.array([kulcs(d) for d in rend[:30]])
+    key = (lambda d: G[d]) if mode == "signed" else (lambda d: abs(G[d]))
+    ranked = sorted(flat_off, key=lambda d: -key(d))
+    vals = np.array([key(d) for d in ranked[:30]])
     ratios = vals[:-1] / np.maximum(np.abs(vals[1:]), 1e-300)
     kstar = int(np.argmax(ratios[:20])) + 1
 
-    top = rend[:kstar]
+    top = ranked[:kstar]
     rec_edges = set()
     for x in range(L):
         for y in range(L):
@@ -132,7 +137,7 @@ def olvasat(mod):
     ball = [sum(1 for d in dist if 0 <= d <= r) for r in range(4)]
 
     print()
-    print("== %s jump rule ==" % mod)
+    print("== %s jump rule ==" % mode)
     print("  start of the ordered list:", np.round(vals[:10], 5))
     print("  the largest jump after place %d: %.6f -> %.6f (%.2f-fold)"
           % (kstar, vals[kstar - 1], vals[kstar],
@@ -146,7 +151,7 @@ def olvasat(mod):
     return kstar, ball
 
 
-olvasat("signed")     # the published main figures: k*=7, 256 phantom, ball 1,8,32,88
-olvasat("absolute")   # the second reading: k*=15, 2304 phantom, ball 1,16,92,296
+readout("signed")     # the published main figures: k*=7, 256 phantom, ball 1,8,32,88
+readout("absolute")   # the second reading: k*=15, 2304 phantom, ball 1,16,92,296
 print()
 print("reference sequences: line 1,7,13,19 | plane 1,7,19,37 | space 1,7,25,63")

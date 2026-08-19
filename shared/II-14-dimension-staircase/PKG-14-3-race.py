@@ -4,6 +4,12 @@
 # agree with the reference values.
 # Race: filling from below — cost(N) = the sum of the N smallest beats of the ladder.
 
+# Identifier glossary — the identifiers were renamed from Hungarian
+# to English; the original Hungarian name stands on the right:
+#   degree_boundaries = fokhatarok  is_connected = osszefuggo
+#   j2_beats_control = j2_veri_K    plane_band = sik_sav
+#   space_band = ter_sav
+
 import numpy as np
 from itertools import combinations
 from math import gcd
@@ -126,14 +132,14 @@ for w, a, b in bands(trio_w):
     print("  J%s: %d..%d" % (w, a, b))
 
 # plane band and space band by the rule (J2 beats both / J3 beats both)
-sik_sav = [n for n in range(1, N) if trio_w[n - 1] == "2"]
-ter_sav = [n for n in range(1, N) if trio_w[n - 1] == "3"]
-def osszefuggo(xs):
+plane_band = [n for n in range(1, N) if trio_w[n - 1] == "2"]
+space_band = [n for n in range(1, N) if trio_w[n - 1] == "3"]
+def is_connected(xs):
     return bool(xs) and xs[-1] - xs[0] + 1 == len(xs)
 print("plane band: %s (connected: %s)" %
-      (("%d..%d" % (sik_sav[0], sik_sav[-1])) if sik_sav else "none", osszefuggo(sik_sav)))
+      (("%d..%d" % (plane_band[0], plane_band[-1])) if plane_band else "none", is_connected(plane_band)))
 print("space band: %s (connected: %s)" %
-      (("%d..%d" % (ter_sav[0], ter_sav[-1])) if ter_sav else "none", osszefuggo(ter_sav)))
+      (("%d..%d" % (space_band[0], space_band[-1])) if space_band else "none", is_connected(space_band)))
 
 # --- the full field ---
 print("\n== Full field: regimes of the strict winners ==")
@@ -157,16 +163,16 @@ print("N=512: tie at 3072:", max(v512) - min(v512) < 1e-8,
       " (min %.8f, max %.8f)" % (min(v512), max(v512)))
 
 # shell logic: the band boundary of J3 vs its degree boundaries
-fokhatarok = [1, 7, 19, 27, 33, 57, 81, 87, 126, 186, 198, 222, 290, 314,
+degree_boundaries = [1, 7, 19, 27, 33, 57, 81, 87, 126, 186, 198, 222, 290, 314,
               326, 386, 425, 431, 455, 479, 485, 493, 505, 511, 512]
-if ter_sav:
+if space_band:
     print("lower boundary of the space band: %d; degree boundaries of J3 nearby: %s"
-          % (ter_sav[0], [f for f in fokhatarok if abs(f - ter_sav[0]) <= 6]))
+          % (space_band[0], [f for f in degree_boundaries if abs(f - space_band[0]) <= 6]))
 
 # mirror effect: is the winner of the full end the network with the highest top?
 tops = sorted(((field[k][-1], k) for k in names), reverse=True)
 print("highest top: %.4f (%s) — the expected winner of the full end" % (tops[0][0], tops[0][1]))
 
 # J2 versus the control: the effect of stretching
-j2_veri_K = [n for n in range(1, N) if cost[J2][n] < cost["control plane 8x64"][n] - TOL]
-print("the 16x32 plane beats the 8x64 control at %d fillings" % len(j2_veri_K))
+j2_beats_control = [n for n in range(1, N) if cost[J2][n] < cost["control plane 8x64"][n] - TOL]
+print("the 16x32 plane beats the 8x64 control at %d fillings" % len(j2_beats_control))

@@ -12,52 +12,62 @@
 #   E4  coverage: the share of the certified stretch in the measured pairwise
 #       upper range (15997..20734)
 
+# Identifier glossary — the identifiers were renamed from Hungarian
+# to English; the original Hungarian name stands on the right:
+#   certified = tanusitott        grids = racsok
+#   half_steps = fel              ladder = letra
+#   LOWER = ALSO                  measured = mert
+#   MEASURED_START = MERT_KEZDET  mirror = tukor
+#   N_STAR = NCSILLAG             shape = alak
+#   smallest = legkisebb          stretch = szakasz
+#   UPPER = FELSO
+
 import numpy as np
 
 N = 20736
-NCSILLAG = 2087                    # PKG-15-6, I2
-ALSO, FELSO = N - NCSILLAG, N - 2  # 18649 .. 20734
-MERT_KEZDET = 15997                # PKG-15-3 / PKG-15-6
+N_STAR = 2087                    # PKG-15-6, I2
+LOWER, UPPER = N - N_STAR, N - 2  # 18649 .. 20734
+MEASURED_START = 15997                # PKG-15-3 / PKG-15-6
 
-def letra(alak, fel):
+def ladder(shape, half_steps):
     dt = np.longdouble
-    racsok = np.meshgrid(*[(2*np.pi*np.arange(L)).astype(dt)/L for L in alak],
+    grids = np.meshgrid(*[(2*np.pi*np.arange(L)).astype(dt)/L for L in shape],
                          indexing="ij")
-    lam = np.zeros(alak, dtype=dt)
-    for s in fel:
-        lam += 2.0 - 2.0*np.cos(sum(si*gi for si, gi in zip(s, racsok)))
+    lam = np.zeros(shape, dtype=dt)
+    for s in half_steps:
+        lam += 2.0 - 2.0*np.cos(sum(si*gi for si, gi in zip(s, grids)))
     return np.sort(lam.ravel())
 
 print("== PKG-15-7 — checks of the top theorem ==")
-c3 = np.cumsum(letra((24,24,36), [(1,0,0),(0,1,0),(0,0,1),(1,-1,-1)]))
-c4 = np.cumsum(letra((12,12,12,12),
+c3 = np.cumsum(ladder((24,24,36), [(1,0,0),(0,1,0),(0,0,1),(1,-1,-1)]))
+c4 = np.cumsum(ladder((12,12,12,12),
                      [(1,0,0,0),(0,1,0,0),(0,0,1,0),(0,0,0,1)]))
 d = c4 - c3                        # positive if space is the cheaper one
 
 # E1 — strict dominance on the theorem stretch
-szakasz = d[ALSO-1:FELSO]          # N = 18649 .. 20734
-legkisebb = float(np.min(szakasz))
+stretch = d[LOWER-1:UPPER]          # N = 18649 .. 20734
+smallest = float(np.min(stretch))
 print("E1 on the theorem stretch (N = %d..%d) space is strictly cheaper: "
       "smallest advantage %.6f — %s"
-      % (ALSO, FELSO, legkisebb, "HOLDS" if legkisebb > 1e-9 else "FAILS"))
+      % (LOWER, UPPER, smallest, "HOLDS" if smallest > 1e-9 else "FAILS"))
 
 # E2 — single-hole tie
 print("E2 single-hole tie: |dPrice(20735)| = %.2e — %s"
       % (abs(float(d[N-2])), "HOLDS" if abs(float(d[N-2])) < 1e-9 else "FAILS"))
 
 # E3 — exactness of the mirror transfer on the stretch
-tukor = d[np.arange(ALSO, FELSO+1)-1] - d[N - np.arange(ALSO, FELSO+1) - 1]
-e3 = float(np.max(np.abs(tukor)))
+mirror = d[np.arange(LOWER, UPPER+1)-1] - d[N - np.arange(LOWER, UPPER+1) - 1]
+e3 = float(np.max(np.abs(mirror)))
 print("E3 mirror transfer on the stretch: largest deviation %.2e — %s"
       % (e3, "HOLDS" if e3 < 1e-9 else "FAILS"))
 
 # E4 — coverage in the measured pairwise upper range
-tanusitott = FELSO - ALSO + 1
-mert = FELSO - MERT_KEZDET + 1
+certified = UPPER - LOWER + 1
+measured = UPPER - MEASURED_START + 1
 print("E4 coverage: %d certified fillings out of the measured %d = %.1f%%; "
       "the remainder of the measured range (%d..%d) stays measured"
-      % (tanusitott, mert, 100.0*tanusitott/mert, MERT_KEZDET, ALSO-1))
+      % (certified, measured, 100.0*certified/measured, MEASURED_START, LOWER-1))
 
 # bonus: the theorem stretch sits entirely inside the measured winning band of space
 print("consistency: the certified stretch is part of the measured space band "
-      "(15997..20734): %s" % ("HOLDS" if ALSO >= MERT_KEZDET else "FAILS"))
+      "(15997..20734): %s" % ("HOLDS" if LOWER >= MEASURED_START else "FAILS"))

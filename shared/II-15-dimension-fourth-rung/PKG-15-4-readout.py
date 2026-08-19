@@ -17,40 +17,59 @@
 #   python3 PKG-15-4-readout.py            # everything (closed route + machine check)
 #   python3 PKG-15-4-readout.py --gep 0    # closed route only (fast)
 
+# Identifier glossary — the identifiers were renamed from Hungarian
+# to English; the original Hungarian name stands on the right:
+#   accepted = elfogadott    antipodal = atellenes
+#   ball = golyo             best_ratio = legjobb
+#   classes = osztaly        cols = oszlop
+#   coords = koord           d_strongest = d_er
+#   dev = elt                dlist = dlista
+#   edge_set = elek          found = megvan
+#   G_machine = G_gepi       gap = res
+#   GAP_EXPECTED = RES_VART  machine = gep
+#   missing = hianyzo        N_FILL = NTOLT
+#   neighbour = szomszed     new_front = ujf
+#   one = egy                pairs = parok
+#   phantom = fantom         ranked = rend
+#   reference = hiv          remainder = maradek
+#   seen = lat               target = cel
+#   threshold = kuszob       truth = igaz
+#   WINDOW = ABLAK           worst = rossz
+
 import numpy as np
 import sys, time
 from itertools import product
 
 L, DIM = 12, 4
 NSITE = L**DIM              # 20736
-NTOLT = 11075               # closed degree (PKG-15-3, V6)
+N_FILL = 11075               # closed degree (PKG-15-3, V6)
 NCONTRACT = 4 * NSITE       # 82944
-RES_VART = 2.0 - np.sqrt(3.0)
-ABLAK = 30                  # fixed search window (PKG-15-1 §8)
+GAP_EXPECTED = 2.0 - np.sqrt(3.0)
+WINDOW = 30                  # fixed search window (PKG-15-1 §8)
 
 def canon(d):
     return tuple(sorted(int(min(x % L, (-x) % L)) for x in d))
 
 def main():
-    gep = 1
+    machine = 1
     if "--gep" in sys.argv:
-        gep = int(sys.argv[sys.argv.index("--gep")+1])
-    print("== PKG-15-4 — the readout (J4, N = %d) ==" % NTOLT)
+        machine = int(sys.argv[sys.argv.index("--gep")+1])
+    print("== PKG-15-4 — the readout (J4, N = %d) ==" % N_FILL)
 
     # --- 1) ladder and closed degree ---
     k = 2*np.pi*np.arange(L)/L
-    egy = 2.0 - 2.0*np.cos(k)
-    lam = (egy[:,None,None,None] + egy[None,:,None,None]
-           + egy[None,None,:,None] + egy[None,None,None,:])
+    one = 2.0 - 2.0*np.cos(k)
+    lam = (one[:,None,None,None] + one[None,:,None,None]
+           + one[None,None,:,None] + one[None,None,None,:])
     lam_flat = np.sort(lam.ravel())
-    res = lam_flat[NTOLT] - lam_flat[NTOLT-1]
-    A1 = abs(res - RES_VART) < 1e-9
+    gap = lam_flat[N_FILL] - lam_flat[N_FILL-1]
+    A1 = abs(gap - GAP_EXPECTED) < 1e-9
     print("closed degree: gap above degree %d is %.9f (expected 2-sqrt3 = %.9f) — %s"
-          % (NTOLT, res, RES_VART, "holds" if A1 else "FAILS"))
+          % (N_FILL, gap, GAP_EXPECTED, "holds" if A1 else "FAILS"))
 
-    kuszob = lam_flat[NTOLT-1] + 1e-9
-    occ = lam <= kuszob
-    assert int(occ.sum()) == NTOLT
+    threshold = lam_flat[N_FILL-1] + 1e-9
+    occ = lam <= threshold
+    assert int(occ.sum()) == N_FILL
 
     # --- 2) closeness map on the closed route ---
     G = np.fft.ifftn(occ.astype(float))
@@ -58,93 +77,93 @@ def main():
     G = G.real
 
     # displacement classes: a weave — exact agreement within a class
-    osztaly = {}
+    classes = {}
     for d in np.ndindex(L, L, L, L):
         if d == (0,0,0,0):
             continue
-        osztaly.setdefault(canon(d), []).append(G[d])
-    rossz = max(np.std(v) for v in osztaly.values())
-    assert rossz < 1e-12
+        classes.setdefault(canon(d), []).append(G[d])
+    worst = max(np.std(v) for v in classes.values())
+    assert worst < 1e-12
 
-    szomszed = G[1,0,0,0]
-    atellenes = G[L//2, L//2, L//2, L//2]
-    print("neighbour closeness G(1,0,0,0) = %+.6f" % szomszed)
+    neighbour = G[1,0,0,0]
+    antipodal = G[L//2, L//2, L//2, L//2]
+    print("neighbour closeness G(1,0,0,0) = %+.6f" % neighbour)
     print("ANTIPODAL ECHO G(6,6,6,6) = %+.6f  (sign: %s; "
           "|ratio to the neighbour| = %.4f)  [obligatory separate row]"
-          % (atellenes, "negative" if atellenes < 0 else "positive",
-             abs(atellenes)/szomszed))
+          % (antipodal, "negative" if antipodal < 0 else "positive",
+             abs(antipodal)/neighbour))
 
     # --- 3) signed jump (fixed window of 30) ---
     g = G.ravel().copy()
     g[0] = -np.inf
-    rend = np.argsort(g)[::-1]
-    v = g[rend]
-    legjobb, kstar = -1.0, None
-    for m in range(1, ABLAK+1):
+    ranked = np.argsort(g)[::-1]
+    v = g[ranked]
+    best_ratio, kstar = -1.0, None
+    for m in range(1, WINDOW+1):
         if v[m] > 0:
             r = v[m-1]/v[m]
-            if r > legjobb:
-                legjobb, kstar = r, m
+            if r > best_ratio:
+                best_ratio, kstar = r, m
     print("start of the signed list:", np.round(v[:12], 5))
     print("jump after place %d: %.5f -> %.5f (%.1f-fold)"
-          % (kstar, v[kstar-1], v[kstar], legjobb))
+          % (kstar, v[kstar-1], v[kstar], best_ratio))
 
-    maradek = v[kstar:]
-    maradek = maradek[np.isfinite(maradek)]
-    j = int(np.argmax(np.abs(maradek)))
-    d_er = tuple(np.unravel_index(int(rend[kstar+j]), (L,L,L,L)))
-    S = v[kstar-1]/abs(float(maradek[j]))
+    remainder = v[kstar:]
+    remainder = remainder[np.isfinite(remainder)]
+    j = int(np.argmax(np.abs(remainder)))
+    d_strongest = tuple(np.unravel_index(int(ranked[kstar+j]), (L,L,L,L)))
+    S = v[kstar-1]/abs(float(remainder[j]))
     A4 = S >= 2.0
     print("band sentinel: S = %.4f (threshold 2) — %s; strongest rejected: class %s"
           ", G = %+.6f" % (S, "holds" if A4 else "FAILS",
-                           canon(d_er), float(maradek[j])))
+                           canon(d_strongest), float(remainder[j])))
 
     va = np.sort(np.abs(np.where(np.isfinite(g), g, 0)))[::-1]
-    r_abs = va[:ABLAK]/np.maximum(va[1:ABLAK+1], 1e-300)
+    r_abs = va[:WINDOW]/np.maximum(va[1:WINDOW+1], 1e-300)
     k_abs = int(np.argmax(r_abs)) + 1
     print("old absolute rule (for comparison): jump after place %d "
           "(%.1f-fold)" % (k_abs, r_abs[k_abs-1]))
 
     # --- 4) rebuilding and completeness ledger ---
-    elfogadott = [tuple(np.unravel_index(int(i), (L,L,L,L))) for i in rend[:kstar]]
+    accepted = [tuple(np.unravel_index(int(i), (L,L,L,L))) for i in ranked[:kstar]]
     rc = np.arange(NSITE)
-    koord = np.array(np.unravel_index(rc, (L,L,L,L))).T
-    def elek(dlista):
-        parok = set()
-        for d in dlista:
-            cel = (koord + d) % L
-            b = np.ravel_multi_index(cel.T, (L,L,L,L))
+    coords = np.array(np.unravel_index(rc, (L,L,L,L))).T
+    def edge_set(dlist):
+        pairs = set()
+        for d in dlist:
+            target = (coords + d) % L
+            b = np.ravel_multi_index(target.T, (L,L,L,L))
             a2 = np.minimum(rc, b); b2 = np.maximum(rc, b)
-            parok |= set(map(int, a2*NSITE + b2))
-        return parok
-    rec = elek(elfogadott)
-    igaz = elek([(1,0,0,0),(0,1,0,0),(0,0,1,0),(0,0,0,1),
+            pairs |= set(map(int, a2*NSITE + b2))
+        return pairs
+    rec = edge_set(accepted)
+    truth = edge_set([(1,0,0,0),(0,1,0,0),(0,0,1,0),(0,0,0,1),
                  (L-1,0,0,0),(0,L-1,0,0),(0,0,L-1,0),(0,0,0,L-1)])
-    megvan, fantom, hianyzo = len(rec & igaz), len(rec-igaz), len(igaz-rec)
-    A2 = (megvan == NCONTRACT and fantom == 0 and hianyzo == 0)
+    found, phantom, missing = len(rec & truth), len(rec-truth), len(truth-rec)
+    A2 = (found == NCONTRACT and phantom == 0 and missing == 0)
     print("completeness ledger: found %d/%d; phantom %d; missing %d — %s"
-          % (megvan, NCONTRACT, fantom, hianyzo, "holds" if A2 else "FAILS"))
+          % (found, NCONTRACT, phantom, missing, "holds" if A2 else "FAILS"))
 
     # --- 5) ball reading on the rebuilt network (r <= 5) ---
-    lat = {(0,)*DIM}
+    seen = {(0,)*DIM}
     front = [(0,)*DIM]
-    golyo = [1]
+    ball = [1]
     for r in range(1, 6):
-        ujf = []
+        new_front = []
         for p in front:
-            for d in elfogadott:
+            for d in accepted:
                 q = tuple((x+y) % L for x, y in zip(p, d))
-                if q not in lat:
-                    lat.add(q)
-                    ujf.append(q)
-        golyo.append(golyo[-1] + len(ujf))
-        front = ujf
-    hiv = [1, 9, 41, 129, 321, 681]
-    A3 = golyo[:4] == hiv[:4]
+                if q not in seen:
+                    seen.add(q)
+                    new_front.append(q)
+        ball.append(ball[-1] + len(new_front))
+        front = new_front
+    reference = [1, 9, 41, 129, 321, 681]
+    A3 = ball[:4] == reference[:4]
     print("ball (r=0..5): %s — reference (cubic): %s — r<=3 verdict: %s; "
           "r<=5 report: %s"
-          % (golyo, hiv, "holds" if A3 else "FAILS",
-             "agrees" if golyo == hiv else "differs"))
+          % (ball, reference, "holds" if A3 else "FAILS",
+             "agrees" if ball == reference else "differs"))
 
     # --- 6) verdict ---
     print("\nconditions: A1 closed degree %s | A2 completeness %s | A3 ball %s | "
@@ -159,7 +178,7 @@ def main():
               " the continuation is the business of PKG-15-5.")
 
     # --- 7) machine projector check (two-route seal) ---
-    if gep:
+    if machine:
         print("\nmachine projector check: dense eigenproblem with vectors "
               "(~10-11 GB, ~20-40 minutes)...")
         t0 = time.time()
@@ -175,17 +194,17 @@ def main():
                     Lap[a, b] -= 1.0
         w, V = np.linalg.eigh(Lap)
         del Lap
-        oszlop = w <= kuszob
-        assert int(oszlop.sum()) == NTOLT
-        P0 = V[:, oszlop] @ V[0, oszlop]
-        G_gepi = np.empty(NSITE)
+        cols = w <= threshold
+        assert int(cols.sum()) == N_FILL
+        P0 = V[:, cols] @ V[0, cols]
+        G_machine = np.empty(NSITE)
         for h in np.ndindex(*(L,)*DIM):
-            G_gepi[idx(h)] = G[h]
-        elt = float(np.max(np.abs(P0 - G_gepi)))
+            G_machine[idx(h)] = G[h]
+        dev = float(np.max(np.abs(P0 - G_machine)))
         print("projector by two routes: largest deviation = %.2e (%.0f min) — %s"
-              % (elt, (time.time()-t0)/60, "HOLDS" if elt < 1e-10 else "FAILS"))
+              % (dev, (time.time()-t0)/60, "HOLDS" if dev < 1e-10 else "FAILS"))
         print("== PKG-15-4 TWO-ROUTE SEAL: %s =="
-              % ("HOLDS" if elt < 1e-10 else "FAILS"))
+              % ("HOLDS" if dev < 1e-10 else "FAILS"))
 
 if __name__ == "__main__":
     main()
