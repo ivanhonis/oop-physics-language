@@ -97,6 +97,35 @@ td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums}
 .btns a:hover{border-color:var(--steel);color:var(--ink)}
 .btns a.primary:hover{color:var(--bg);opacity:.9}
 
+/* ---------- use-case cards ---------- */
+.grouplabel{font-size:.76rem;text-transform:uppercase;letter-spacing:.09em;font-weight:600;
+  color:var(--muted);margin:1.7rem 0 .75rem}
+.cards{display:grid;gap:.85rem;grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:880px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:580px){.cards{grid-template-columns:1fr}}
+.uc{position:relative;overflow:hidden;border-radius:14px;padding:1.1rem 1.15rem;
+  border:1px solid var(--uc-line);background:var(--uc-bg)}
+.uc h4{margin:0 0 .45rem;font-size:1rem;font-weight:600;letter-spacing:-0.015em;
+  color:var(--uc-ink);position:relative;z-index:1}
+.uc p{margin:0;font-size:.875rem;line-height:1.55;color:var(--muted);position:relative;z-index:1}
+.uc .ico{position:absolute;right:-1.35rem;bottom:-1.75rem;width:8.6rem;height:8.6rem;
+  transform:rotate(-18deg);color:var(--uc-ink);opacity:.13;pointer-events:none}
+.uc1{--uc-bg:#e9f2ef;--uc-line:#cfe2dc;--uc-ink:#2f5e53}
+.uc2{--uc-bg:#eaeef7;--uc-line:#d3dcee;--uc-ink:#3c4a76}
+.uc3{--uc-bg:#f6efe4;--uc-line:#e8dcc7;--uc-ink:#6d5626}
+.uc4{--uc-bg:#f7ecec;--uc-line:#ecd7d7;--uc-ink:#74403f}
+.uc5{--uc-bg:#f1ecf6;--uc-line:#e0d5ec;--uc-ink:#56417a}
+.uc6{--uc-bg:#e7f1f6;--uc-line:#cfe2ec;--uc-ink:#2b5468}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme=light]) .uc1{--uc-bg:#16211f;--uc-line:#24352f;--uc-ink:#8fc9b9}
+  :root:not([data-theme=light]) .uc2{--uc-bg:#171a24;--uc-line:#262c3d;--uc-ink:#a3b3e0}
+  :root:not([data-theme=light]) .uc3{--uc-bg:#211d16;--uc-line:#352e22;--uc-ink:#d8bd86}
+  :root:not([data-theme=light]) .uc4{--uc-bg:#221819;--uc-line:#372628;--uc-ink:#dfa3a2}
+  :root:not([data-theme=light]) .uc5{--uc-bg:#1c1823;--uc-line:#2d2639;--uc-ink:#bda6df}
+  :root:not([data-theme=light]) .uc6{--uc-bg:#151f25;--uc-line:#233139;--uc-ink:#94c2da}
+  :root:not([data-theme=light]) .uc .ico{opacity:.17}
+}
+
 /* ---------- personal note ---------- */
 .note{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--steel);
   border-radius:0 14px 14px 0;padding:1.35rem 1.5rem;margin:1.5rem 0 2.25rem;
@@ -116,6 +145,30 @@ footer p{margin:.3rem 0}
 </head>
 
 <body class="no-js">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+ <defs>
+  <g id="ic-filter" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+   <path d="M3 4h18l-7.2 8.4v6.1l-3.6 2.1v-8.2z"/></g>
+  <g id="ic-audit" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+   <path d="M12 2.6l7.5 3.2v5.7c0 4.4-3.1 7.6-7.5 8.9-4.4-1.3-7.5-4.5-7.5-8.9V5.8z"/>
+   <path d="M8.7 11.8l2.4 2.4 4.4-4.6"/></g>
+  <g id="ic-key" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+   <circle cx="8.2" cy="8.2" r="3.9"/><path d="M11 11l8.4 8.4M16.6 16.6l2-2M14.2 14.2l2-2"/></g>
+  <g id="ic-lattice" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+   <path d="M6 6v12M18 6v12M6 6h12M6 18h12M7.4 7.4l3.2 3.2M17 7l-4.4 4.4M7.4 16.6l3.2-3.2M17 17l-4.4-4.4"/>
+   <circle cx="6" cy="6" r="1.5"/><circle cx="18" cy="6" r="1.5"/><circle cx="6" cy="18" r="1.5"/>
+   <circle cx="18" cy="18" r="1.5"/><circle cx="12" cy="12" r="1.7"/></g>
+  <g id="ic-molecule" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+   <path d="M7.6 13.4l3-4.3M13.4 9.1l3 4.3M8.4 15.6h7.2"/>
+   <circle cx="6" cy="15.6" r="2.4"/><circle cx="12" cy="7.4" r="2.4"/><circle cx="18" cy="15.6" r="2.4"/></g>
+  <g id="ic-orbit" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+   <ellipse cx="12" cy="12" rx="9.6" ry="4"/>
+   <ellipse cx="12" cy="12" rx="9.6" ry="4" transform="rotate(60 12 12)"/>
+   <ellipse cx="12" cy="12" rx="9.6" ry="4" transform="rotate(-60 12 12)"/>
+   <circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/></g>
+ </defs>
+</svg>
+
 <div class="wrap">
 
 
@@ -197,6 +250,46 @@ footer p{margin:.3rem 0}
   recorded. Each proof closes with this <strong>import ledger</strong>. The total import
   of the language so far is three items — locality, the form of attraction, and two type
   declarations for the electron. Everything else was born inside.</p>
+
+  <h2>What could this be good for?</h2>
+
+  <p class="grouplabel">Tangible today</p>
+  <div class="cards">
+  <article class="uc uc1">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-filter"/></svg>
+    <h4>A cheap filter ahead of expensive simulation</h4>
+    <p>Supercomputer time spent on materials and molecules is costly, and much of it goes on candidates that fail in the end. This language derives bounds from structure <em>before</em> any computation, ruling candidates out before they reach the cluster — which has already happened once here, on a real case.</p>
+  </article>
+  <article class="uc uc2">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-audit"/></svg>
+    <h4>An auditable frame for AI-assisted research</h4>
+    <p>Once an organisation lets AI into research, the question is not whether it is fast but whether it can be held to account afterwards. Here the rulebook is fixed before the computation, every borrowed assumption is logged, and failed attempts stay on record with their verdict. That is a governance frame, not physics — it carries to any field.</p>
+  </article>
+  <article class="uc uc3">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-key"/></svg>
+    <h4>A way in for engineers</h4>
+    <p>The dictionary ties the concepts of quantum physics to concepts a software engineer already owns. Where a quantum-technology team has to be built, letting existing engineers into the subject is cheaper than hiring physicists — and this is a route in, in two languages.</p>
+  </article>
+  </div>
+
+  <p class="grouplabel">Where it could lead</p>
+  <div class="cards">
+  <article class="uc uc4">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-lattice"/></svg>
+    <h4>Materials science</h4>
+    <p>The language already asks which lattice structure is cheapest at a given density — the small version of the question of what structure a material takes under pressure. If the method scales, it could sit ahead of expensive simulation when screening battery materials, magnets and superconductor candidates.</p>
+  </article>
+  <article class="uc uc5">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-molecule"/></svg>
+    <h4>Drug and molecule research</h4>
+    <p>Here quantum-chemical computation is the bottleneck today, and the same principle applies: narrow down by cheap structural reasoning what is worth computing in full. <strong>This is the longest leap of the six</strong> — the language currently stands on far simpler systems, and the connection is one of principle for now.</p>
+  </article>
+  <article class="uc uc6">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-orbit"/></svg>
+    <h4>Quantum computing and quantum AI</h4>
+    <p>On two threads: systems could be specified not by an equation but by listing the <em>contracts</em> between objects — a design language rather than a description. The other thread is alive already: physics searches for ground states with neural networks, and this language describes exactly that process in its own terms.</p>
+  </article>
+  </div>
 
   <h2>Reading order</h2>
   <div class="card">
@@ -327,6 +420,46 @@ footer p{margin:.3rem 0}
   Minden próba <strong>import-számlával</strong> zárul. A nyelv eddigi teljes importja
   három tétel — a helyiség, a vonzás alakja, és két típusdeklaráció az elektronra.
   Minden más belül született.</p>
+
+  <h2>Mire lehet ez jó?</h2>
+
+  <p class="grouplabel">Ma is kézzelfogható</p>
+  <div class="cards">
+  <article class="uc uc1">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-filter"/></svg>
+    <h4>Olcsó előszűrő drága szimulációk elé</h4>
+    <p>A szuperszámítógépes anyag- és molekulaszimuláció gépidőben mérve drága, és az idő nagy része olyan jelöltekre megy el, amelyek végül elbuknak. Ez a nyelv a szerkezetből — a számolás <em>előtt</em> — korlátokat vezet le, és jelölteket zár ki, mielőtt bármi a klaszterre kerülne. A repóban ez már megtörtént egy valós esetben.</p>
+  </article>
+  <article class="uc uc2">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-audit"/></svg>
+    <h4>Ellenőrizhető keret az AI-val végzett kutatáshoz</h4>
+    <p>Ha egy szervezet AI-t enged a kutatásba, a kérdés nem az, hogy gyors-e, hanem hogy utólag számon kérhető-e. Itt a szabálykönyv a számolás előtt rögzül, minden kölcsönvett feltevés nyilvántartásba kerül, és a sikertelen kísérlet is bent marad, kiírt ítélettel. Ez irányítási keret, nem fizika — bármely területen átvehető.</p>
+  </article>
+  <article class="uc uc3">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-key"/></svg>
+    <h4>Belépő mérnököknek a kvantumfizikába</h4>
+    <p>A szótár a kvantumfizika fogalmait olyan fogalmakhoz köti, amelyek egy szoftvermérnöknek már a birtokában vannak. Ahol kvantumtechnológiai csapatot kell építeni, ott olcsóbb a meglévő mérnököket beengedni a témába, mint fizikust keresni — ez a nyelv ehhez ad utat, két nyelven.</p>
+  </article>
+  </div>
+
+  <p class="grouplabel">Hova mutathat</p>
+  <div class="cards">
+  <article class="uc uc4">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-lattice"/></svg>
+    <h4>Anyagtudomány</h4>
+    <p>A nyelv már ma is azt vizsgálja, hogy adott sűrűségnél melyik rácsszerkezet a legolcsóbb — ez kicsiben ugyanaz a kérdés, mint hogy egy anyag nyomás alatt milyen szerkezetet vesz fel. Ha a módszer skálázódik, akkumulátor-anyagok, mágnesek és szupravezető jelöltek előszűrésénél ülhetne a drága szimulációk előtt.</p>
+  </article>
+  <article class="uc uc5">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-molecule"/></svg>
+    <h4>Gyógyszer- és molekulakutatás</h4>
+    <p>Itt ma a kvantumkémiai számítás a szűk keresztmetszet, és ugyanaz az elv alkalmazható: olcsó szerkezeti érveléssel leszűkíteni, mit érdemes egyáltalán végigszámolni. <strong>Ez a leghosszabb ugrás a hatból</strong> — a nyelv jelenleg jóval egyszerűbb rendszereken áll, a kapcsolódás egyelőre elvi.</p>
+  </article>
+  <article class="uc uc6">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-orbit"/></svg>
+    <h4>Kvantumszámítás és kvantum-AI</h4>
+    <p>Két szálon: a rendszereket nem egyenlettel, hanem az objektumok közti <em>szerződések</em> felsorolásával lehetne megadni — ez tervezési nyelv lenne, nem leírás. A másik szál már ma is él: a fizika neurális hálókkal keresi az alapállapotokat, és ez a nyelv pontosan ezt a folyamatot írja le a saját fogalmaival.</p>
+  </article>
+  </div>
 
   <h2>Olvasási sorrend</h2>
   <div class="card">
