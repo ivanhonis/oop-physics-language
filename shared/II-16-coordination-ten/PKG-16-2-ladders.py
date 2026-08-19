@@ -1,12 +1,12 @@
-# PKG-16-2 — Utem-letrak (II/16)
-# A PKG-16-1 A1–A8 allitasaira epul. 805 indulo (5 fo + 8 kontroll + 792 csalad),
-# aramoltatott feldolgozas (a teljes letra-matrix nem fer memoriaba).
-# Onellenorzesek (A7): jegy-tabla ket uton | letra-osztalyozas (kivonatokkal) |
-#   gepi korbeeres minden indulon | nyomosszeg 2488320 | komponensszam |
-#   bekotes-egyediseg-allitas.
-# Ketutas forma (A8): (i) ritka maradek-proba (64/16 modus, mag 248832)
-#   (ii) momentum-fedezet rend<=4 mindenutt (iii) kis-peldanyos suru hitelesites
-#   (iv) a vetito-pecset a PKG-16-4-ben fut.
+# PKG-16-2 — Beat ladders (II/16)
+# Builds on claims A1-A8 of PKG-16-1. 805 entrants (5 main + 8 controls +
+# 792 family), streamed processing (the full ladder matrix does not fit in memory).
+# Self-checks (A7): mark table by two routes | ladder classification (by digests) |
+#   machine wrap-around on every entrant | trace sum 2488320 | component count |
+#   wiring-uniqueness assertion.
+# Two-route form (A8): (i) sparse residual check (64/16 modes, seed 248832)
+#   (ii) moment cover of order<=4 everywhere (iii) dense certification on small
+#   instances (iv) the projector seal runs in PKG-16-4.
 
 import numpy as np, hashlib, time
 from itertools import combinations, product
@@ -14,7 +14,7 @@ from math import gcd
 from functools import reduce
 
 NH = 12**5
-NYOM = 2 * 5 * NH          # 2 488 320
+NYOM = 2 * 5 * NH          # 2,488,320
 TURES = 1e-8
 MAG = 248832
 
@@ -41,7 +41,7 @@ KIS = {"J1": (60,), "J2": (12,12), "J3": (12,12,12), "J4": (6,6,6,6),
 
 def pm(fel):
     g = list(fel) + [tuple(-x for x in s) for s in fel]
-    assert len(set(g)) == 10, "duplazott bekotes"      # H1-szabaly
+    assert len(set(g)) == 10, "duplicated wiring"      # rule H1
     return g
 
 def zart_letra(alak, fel, dt=np.longdouble):
@@ -67,8 +67,8 @@ def setak_1d(lepesek, h):
     return int(round(p[len(p)//2]))
 
 def korbeeres_kor(lepesek, cel):
-    """min szohossz a cel eloallitasara; a nem-maximalis egyutthatok
-    csereervvel < 12-re korlatozva."""
+    """Minimum word length producing the target; the non-maximal coefficients
+    are bounded by an exchange argument to < 12."""
     e = lepesek[-1]
     tobbi = np.array(lepesek[:-1])
     racs = np.array(np.meshgrid(*[np.arange(-11, 12)]*len(tobbi),
@@ -113,7 +113,7 @@ def korbeeres_torus(alak, fel, plafon):
 
 def main():
     t0 = time.time()
-    print("== PKG-16-2 — letrak (805 indulo, aramoltatva) ==")
+    print("== PKG-16-2 — ladders (805 entrants, streamed) ==")
     kivonat, nyomhiba, nullak = {}, 0.0, {}
     mom_hiba = 0.0
     for nev, (alak, fel) in FO.items():
@@ -139,25 +139,25 @@ def main():
         kul = hashlib.md5(np.round(lam.astype(np.float64)/TURES)
                           .astype(np.int64).tobytes()).hexdigest()
         kivonat.setdefault(kul, []).append(str(tag))
-    print("letrak + momentum-fedezet (rend<=4, mind a 805-on): legnagyobb "
-          "elteres %.2e; nyomosszeg-hiba %.2e  (%.0f s)"
+    print("ladders + moment cover (order<=4, on all 805): largest "
+          "deviation %.2e; trace-sum error %.2e  (%.0f s)"
           % (mom_hiba, nyomhiba, time.time()-t0))
 
-    # komponensszam a szetesés-tabla ellen
+    # component count against the disconnection table
     hiba = [n for n in FO if nullak[n] != 1]
     for tag in CSALAD:
         g = gcd(reduce(gcd, tag), NH)
         if nullak[str(tag)] != g:
             hiba.append(str(tag))
-    print("komponensszam: %s" % ("ALL" if not hiba else "BUKIK: %s" % hiba[:5]))
+    print("component count: %s" % ("HOLDS" if not hiba else "FAILS: %s" % hiba[:5]))
 
     tobbes = [o for o in kivonat.values() if len(o) > 1]
-    print("letra-osztalyok: %d osztaly %d indulon; egybeesesek: %s"
-          % (len(kivonat), 13+len(CSALAD), tobbes if tobbes else "nincs"))
+    print("ladder classes: %d classes on %d entrants; coincidences: %s"
+          % (len(kivonat), 13+len(CSALAD), tobbes if tobbes else "none"))
 
-    # gepi korbeeres
+    # machine wrap-around
     t1 = time.time()
-    print("korbeeres — nevesitett halok (iranyonkent | globalis):")
+    print("wrap-around — the named networks (per direction | global):")
     for nev, (alak, fel) in FO.items():
         if len(alak) == 1:
             g = korbeeres_kor([1,2,3,4,5], NH)
@@ -165,15 +165,15 @@ def main():
         else:
             ir, gl = korbeeres_torus(alak, fel, max(alak)+4)
             print("   %-4s %s | %d — %s" % (nev, sorted(ir.values()), gl,
-                  "all" if gl >= 8 else "BUKIK"))
+                  "holds" if gl >= 8 else "FAILS"))
     cs_min = min(korbeeres_kor(list(t), NH) if gcd(reduce(gcd,t),NH) == 1
                  else korbeeres_kor([s//2 for s in t], NH//2)
                  for t in CSALAD)
-    print("korbeeres — csalad: a legrovidebb %d (szetesoknel a peldanyon) — %s"
-          " (%.0f s)" % (cs_min, "all" if cs_min >= 8 else "BUKIK",
-                         time.time()-t1))
+    print("wrap-around — family: the shortest is %d (measured on the copy for the "
+          "disconnected ones) — %s (%.0f s)"
+          % (cs_min, "holds" if cs_min >= 8 else "FAILS", time.time()-t1))
 
-    # (i) ritka maradek-proba
+    # (i) sparse residual check
     t2 = time.time()
     rng = np.random.default_rng(MAG)
     minta = [CSALAD[i] for i in sorted(rng.choice(len(CSALAD), 24, replace=False))]
@@ -181,19 +181,19 @@ def main():
     for nev, (alak, fel) in FO.items():
         Nn = int(np.prod(alak))
         koord = np.array(np.unravel_index(np.arange(Nn), alak)).T
-        # a szomszed-indexek modusonkent azonosak — egyszer epulnek
+        # the neighbour indices are the same for every mode — built once
         idxek = [np.ravel_multi_index(((koord + s) % np.array(alak)).T, alak)
                  for s in pm(fel)]
         for _ in range(64):
             n = np.array([rng.integers(0, L) for L in alak])
-            # egzakt fazis: tengelyenkent egesz-maradek, csak utana lebegos
+            # exact phase: integer remainder per axis, only then floating point
             ph = sum(((n[j]*koord[:, j]) % alak[j]) / alak[j]
                      for j in range(len(alak)))
             v = np.exp(2j*np.pi*ph)
             Av = np.zeros(Nn, dtype=complex)
             for ix in idxek:
                 Av += v[ix]
-            # a helyes utem-keplet: a fazis a bekotes-vektorral vett szorzat
+            # the correct beat formula: the phase is the product with the wiring vector
             lj = float(sum(2-2*np.cos(2*np.pi*sum(ni*si/L for ni, si, L
                        in zip(n, s, alak))) for s in fel))
             legmaradek = max(legmaradek,
@@ -210,11 +210,11 @@ def main():
             lj = float(sum(2-2*np.cos(2*np.pi*n*s/NH) for s in tag))
             legmaradek = max(legmaradek,
                              float(np.max(np.abs(10*v - Av - lj*v))))
-    print("(i) ritka maradek-proba (13x64 + 24x16 modus, mag %d): "
-          "legnagyobb maradek %.2e  (%.0f s)"
+    print("(i) sparse residual check (13x64 + 24x16 modes, seed %d): "
+          "largest residual %.2e  (%.0f s)"
           % (MAG, legmaradek, time.time()-t2))
 
-    # (iii) kis-peldanyos suru hitelesites
+    # (iii) dense certification on small instances
     t3 = time.time()
     legkis = 0.0
     for nev, alak in KIS.items():
@@ -229,9 +229,9 @@ def main():
         w = np.linalg.eigvalsh(Lap)
         legkis = max(legkis, float(np.max(np.abs(
             np.sort(w) - zart_letra(alak, fel, np.float64)))))
-    print("(iii) kis-peldanyos suru hitelesites (13 minta): legnagyobb "
-          "elteres %.2e  (%.0f s)" % (legkis, time.time()-t3))
-    print("OSSZKEP: %.0f s" % (time.time()-t0))
+    print("(iii) dense certification on small instances (13 patterns): largest "
+          "deviation %.2e  (%.0f s)" % (legkis, time.time()-t3))
+    print("TOTAL: %.0f s" % (time.time()-t0))
 
 if __name__ == "__main__":
     main()

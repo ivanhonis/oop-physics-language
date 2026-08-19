@@ -1,12 +1,12 @@
-# PKG-14-4 — A hurok zárása: kiolvasás a győztesen (II/14)
-# A rögzített jegyzőkönyv (PKG-14-1, 8. pont; PKG-14-3, C4):
-#   - győztes: J3 tér (8x8x8), N = 290 (a tér-sáv első zárt foka)
-#   - szabad kizáró példányok: a nézetek a példány-korrelációkból egzaktul
-#     (a 4. eszköz gyorsított alakja) — közelség = a kész állapot
-#     páronkénti egytest-térképe G(δ)
-#   - a szomszédszámot a közelség-lista ugrása jelöli ki
-#   - golyó-olvasat legfeljebb r = 3-ig, a három hivatkozási sor ellen
-#   - rezonancia-őrszem: átellenes osztályok külön jelentve
+# PKG-14-4 — Closing the loop: readout on the winner (II/14)
+# The fixed protocol (PKG-14-1, point 8; PKG-14-3, C4):
+#   - winner: J3 space (8x8x8), N = 290 (the first closed degree of the space band)
+#   - free excluding instances: the views exactly from the instance correlations
+#     (the accelerated form of tool 4) — closeness = the pairwise one-body
+#     map G(delta) of the finished state
+#   - the neighbour count is singled out by the jump of the closeness list
+#   - ball reading up to at most r = 3, against the three reference sequences
+#   - resonance sentinel: the antipodal classes reported separately
 
 import numpy as np
 from collections import deque
@@ -15,35 +15,36 @@ L = 8
 Nsite = L ** 3
 Ninst = 290
 
-# --- a letra es a betoltes (zart alak) ---
+# --- the ladder and the filling (closed form) ---
 k = 2.0 * np.pi * np.arange(L) / L
 one = 2.0 * (1.0 - np.cos(k))
 lam = one[:, None, None] + one[None, :, None] + one[None, None, :]
 order = np.argsort(lam.ravel(), kind="stable")
 occ_flat = order[:Ninst]
 lam_sorted = np.sort(lam.ravel())
-print("zart fok ellenorzes: a 290. utem %.6f, a 291. utem %.6f (res %.4f)"
+print("closed-degree check: beat 290 is %.6f, beat 291 is %.6f (gap %.4f)"
       % (lam_sorted[289], lam_sorted[290], lam_sorted[290] - lam_sorted[289]))
 assert lam_sorted[290] - lam_sorted[289] > 0.5
 
-# a betoltes a teljes lambda<=6 keszlet? (egyertelmuseg)
+# is the filling the complete lambda<=6 set? (unambiguity)
 assert abs(lam_sorted[289] - 6.0) < 1e-9 and lam_sorted[290] > 6.0
 
-# --- kozelseg-terkep: G(delta) = (1/512) sum_occ e^{i k.delta} ---
+# --- closeness map: G(delta) = (1/512) sum_occ e^{i k.delta} ---
 occ = np.zeros((L, L, L), dtype=bool)
 occ.ravel()[occ_flat] = True
-# G(delta) az elfoglaltsag-indikator inverz Fourier-transzformaltja
+# G(delta) is the inverse Fourier transform of the occupancy indicator
 G = np.fft.ifftn(occ.astype(float))  # G[dx,dy,dz], G[0,0,0] = 290/512
 assert np.max(np.abs(G.imag)) < 1e-12
 G = G.real
 
-# homogenitas: a szoves miatt G csak az eltolastol fugg — ez konstrukcio,
-# a jegyzokonyv szerint a szorast a peldany-szintu terkepen kellene merni;
-# szabad kizaro peldanyoknal a ketto egzaktul azonos (4. eszkoz).
+# homogeneity: because of the weave G depends only on the displacement — this is
+# construction; the protocol asks for the spread to be measured on the
+# instance-level map, and for free excluding instances the two are exactly
+# identical (tool 4).
 
-# --- eltolas-osztalyok ---
+# --- displacement classes ---
 def canon(d):
-    # az oktaeder-szimmetria: elojel es tengelycsere erejeig
+    # the octahedral symmetry: up to sign and axis permutation
     v = sorted(min(x % L, (-x) % L) for x in d)
     return tuple(v)
 
@@ -60,28 +61,28 @@ rows = []
 for c, vals in classes.items():
     vals = np.array(vals)
     rows.append((c, float(vals.mean()), float(vals.std()), len(vals)))
-    assert vals.std() < 1e-12  # osztalyon belul egzaktul azonos
+    assert vals.std() < 1e-12  # exactly identical within a class
 
 rows.sort(key=lambda r: -abs(r[1]))
 print()
-print("== kozelseg-osztalyok (|G| szerint csokkenoen, eleje) ==")
+print("== closeness classes (decreasing by |G|, the start) ==")
 for c, m, s, n in rows[:10]:
-    print("  osztaly %-10s  G = %+.6f   (x%d eltolas)" % (str(c), m, n))
+    print("  class %-10s  G = %+.6f   (x%d displacements)" % (str(c), m, n))
 
-# --- rezonancia-orszem: egyezik-e nem-szomszed osztaly a szomszeddal ---
+# --- resonance sentinel: does a non-neighbour class agree with the neighbour? ---
 nb = rows[0]
 echo = [r for r in rows[1:] if abs(abs(r[1]) - abs(nb[1])) < 1e-12]
 print()
-print("rezonancia-orszem: a szomszed-osztallyal egzaktul egyezo mas osztaly: %d db"
+print("resonance sentinel: other classes agreeing exactly with the neighbour: %d"
       % len(echo))
-print("atellenes visszhang (4,4,4): G = %+.6f, a szomszed %.1f%%-a"
+print("antipodal echo (4,4,4): G = %+.6f, %.1f%% of the neighbour"
       % (G[4, 4, 4], 100 * abs(G[4, 4, 4] / G[0, 0, 1])))
 
-# --- az ugras es a szomszedszam kijelolese, KET SZABALY SZERINT ---
-# A PKG-14-1 8. pontja nem mondta ki, hogy az ugrast az elojeles vagy az
-# abszolut ertekes kozelseg-listan kell keresni. E szoveten a ketto
-# szetvalik, ezert a csomag mindkettot jelenti; a fo szamsor az elojeles
-# olvasate. (Az elojeles alakot a PKG-14-5 emelte szabalyya.)
+# --- singling out the jump and the neighbour count, BY TWO RULES ---
+# Point 8 of PKG-14-1 did not state whether the jump is to be sought on the
+# signed or on the absolute-value closeness list. On this weave the two
+# diverge, so the package reports both; the main figures are those of the
+# signed reading. (The signed form was raised to a rule by PKG-14-5.)
 
 idx = lambda x, y, z: ((x % L) * L + (y % L)) * L + (z % L)
 true_edges = set()
@@ -98,8 +99,8 @@ flat_off = [(dx, dy, dz) for dx in range(L) for dy in range(L) for dz in range(L
 
 
 def olvasat(mod):
-    """Egy kiolvasas a megadott ugras-szabaly szerint: 'elojeles' vagy 'abszolut'."""
-    kulcs = (lambda d: G[d]) if mod == "elojeles" else (lambda d: abs(G[d]))
+    """One readout under the given jump rule: 'signed' or 'absolute'."""
+    kulcs = (lambda d: G[d]) if mod == "signed" else (lambda d: abs(G[d]))
     rend = sorted(flat_off, key=lambda d: -kulcs(d))
     vals = np.array([kulcs(d) for d in rend[:30]])
     ratios = vals[:-1] / np.maximum(np.abs(vals[1:]), 1e-300)
@@ -131,21 +132,21 @@ def olvasat(mod):
     ball = [sum(1 for d in dist if 0 <= d <= r) for r in range(4)]
 
     print()
-    print("== %s ugras-szabaly ==" % mod)
-    print("  rendezett lista eleje:", np.round(vals[:10], 5))
-    print("  a legnagyobb ugras a(z) %d. hely utan: %.6f -> %.6f (%.2f-szeres)"
+    print("== %s jump rule ==" % mod)
+    print("  start of the ordered list:", np.round(vals[:10], 5))
+    print("  the largest jump after place %d: %.6f -> %.6f (%.2f-fold)"
           % (kstar, vals[kstar - 1], vals[kstar],
              vals[kstar - 1] / abs(vals[kstar])))
-    print("  beemelt eltolas-osztalyok:", sorted({canon(d) for d in top}))
-    print("  visszarakas: %d el; valodi megvan %d/%d; fantom %d; hianyzo %d"
+    print("  displacement classes drawn in:", sorted({canon(d) for d in top}))
+    print("  rebuilding: %d edges; real found %d/%d; phantom %d; missing %d"
           % (len(rec_edges), len(rec_edges & true_edges), len(true_edges),
              len(rec_edges - true_edges), len(true_edges - rec_edges)))
-    print("  golyo (r=0..3):", ball,
-          " novekmenyek:", [ball[i + 1] - ball[i] for i in range(3)])
+    print("  ball (r=0..3):", ball,
+          " increments:", [ball[i + 1] - ball[i] for i in range(3)])
     return kstar, ball
 
 
-olvasat("elojeles")   # a publikalt fo szamsor: k*=7, 256 fantom, golyo 1,8,32,88
-olvasat("abszolut")   # a masodik olvasat: k*=15, 2304 fantom, golyo 1,16,92,296
+olvasat("signed")     # the published main figures: k*=7, 256 phantom, ball 1,8,32,88
+olvasat("absolute")   # the second reading: k*=15, 2304 phantom, ball 1,16,92,296
 print()
-print("hivatkozasi sorok: vonal 1,7,13,19 | sik 1,7,19,37 | ter 1,7,25,63")
+print("reference sequences: line 1,7,13,19 | plane 1,7,19,37 | space 1,7,25,63")

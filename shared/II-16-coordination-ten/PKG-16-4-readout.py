@@ -1,14 +1,14 @@
-# PKG-16-4 — A kiolvasas (II/16)
-# Rendszer (PKG-16-3, V5): J5 hiperkocka-szoves 12^5, 1 244 160 szerzodes;
-# toltes: N = 130 902 zart fok (a res folotte vart erteke 2 - sqrt(3)).
-# Jegyzokonyv a PKG-16-1 §8 szerint; itelet-feltetelek elore:
-#   A1 zart fok all; A2 teljesseg 1244160/1244160, 0 fantom, 0 hianyzo;
-#   A3 golyo r<=3 egzakt a negyedrendu soron (jelentes r<=5, 2r<12);
-#   A4 sav-orszem >= 2. Kotelezo sor: atellenes osztaly (paros gyoztes).
-# Vetito-pecset (A8/iv, mintaveteles ritka alak): 64 betoltott + 64 ures
-# sorsolt modus (mag 248832) — (a) ritka maradek-proba a graf-epitesu
-# szomszedsaggal; (b) a G-tabla kozvetlen (nem-FFT) osszegzesu transzformja
-# a mintamodusoknal pontosan a betoltottseg-jelzot adja.
+# PKG-16-4 — The readout (II/16)
+# System (PKG-16-3, V5): J5 hypercube weave 12^5, 1,244,160 contracts;
+# filling: N = 130,902, a closed degree (the expected gap above it is 2 - sqrt(3)).
+# Protocol per PKG-16-1 §8; verdict conditions in advance:
+#   A1 the closed degree holds; A2 completeness 1244160/1244160, 0 phantom, 0 missing;
+#   A3 the ball is exact up to r<=3 on the fourth-order sequence (reporting r<=5, 2r<12);
+#   A4 band sentinel >= 2. Obligatory row: the antipodal class (bipartite winner).
+# Projector seal (A8/iv, sampling sparse form): 64 filled + 64 empty drawn
+# modes (seed 248832) — (a) sparse residual check with the graph-built
+# adjacency; (b) the direct (non-FFT) summation transform of the G table
+# gives exactly the occupancy indicator at the sample modes.
 
 import numpy as np
 import time
@@ -17,7 +17,7 @@ from collections import deque
 L, DIM = 12, 5
 NSITE = L**DIM              # 248832
 NTOLT = 130902
-NCONTRACT = 5 * NSITE       # 1 244 160
+NCONTRACT = 5 * NSITE       # 1,244,160
 RES_VART = 2.0 - np.sqrt(3.0)
 ABLAK = 30
 MAG = 248832
@@ -27,7 +27,7 @@ def canon(d):
 
 def main():
     t0 = time.time()
-    print("== PKG-16-4 — a kiolvasas (J5, N = %d) ==" % NTOLT)
+    print("== PKG-16-4 — the readout (J5, N = %d) ==" % NTOLT)
     k = 2*np.pi*np.arange(L)/L
     egy = 2.0 - 2.0*np.cos(k)
     lam = egy.reshape(-1,1,1,1,1)+egy.reshape(1,-1,1,1,1)+egy.reshape(1,1,-1,1,1)\
@@ -35,8 +35,8 @@ def main():
     lam_flat = np.sort(lam.ravel())
     res = lam_flat[NTOLT] - lam_flat[NTOLT-1]
     A1 = abs(res - RES_VART) < 1e-9
-    print("zart fok: res a %d. fok folott %.9f (vart %.9f) — %s"
-          % (NTOLT, res, RES_VART, "all" if A1 else "BUKIK"))
+    print("closed degree: gap above degree %d is %.9f (expected %.9f) — %s"
+          % (NTOLT, res, RES_VART, "holds" if A1 else "FAILS"))
     kuszob = lam_flat[NTOLT-1] + 1e-9
     occ = lam <= kuszob
     assert int(occ.sum()) == NTOLT
@@ -45,7 +45,7 @@ def main():
     assert np.max(np.abs(G.imag)) < 1e-12
     G = G.real
 
-    # osztaly-egzaktsag (szoves)
+    # class exactness (a weave)
     oszt = {}
     Gf = G.ravel()
     koordok = np.array(np.unravel_index(np.arange(NSITE), (L,)*DIM)).T
@@ -57,10 +57,10 @@ def main():
 
     szomszed = G[1,0,0,0,0]
     atellenes = G[(L//2,)*DIM]
-    print("szomszed-kozelseg G(1,0,0,0,0) = %+.6f" % szomszed)
-    print("ATELLENES VISSZHANG G(6,6,6,6,6) = %+.6f (elojel: %s; "
-          "|arany| = %.4f) [kotelezo sor]"
-          % (atellenes, "negativ" if atellenes < 0 else "pozitiv",
+    print("neighbour closeness G(1,0,0,0,0) = %+.6f" % szomszed)
+    print("ANTIPODAL ECHO G(6,6,6,6,6) = %+.6f (sign: %s; "
+          "|ratio| = %.4f) [obligatory row]"
+          % (atellenes, "negative" if atellenes < 0 else "positive",
              abs(atellenes)/szomszed))
 
     g = Gf.copy(); g[0] = -np.inf
@@ -72,24 +72,24 @@ def main():
             r = v[m-1]/v[m]
             if r > legjobb:
                 legjobb, kstar = r, m
-    print("elojeles lista eleje:", np.round(v[:14], 5))
-    print("ugras a(z) %d. hely utan: %.5f -> %.5f (%.1f-szeres)"
+    print("start of the signed list:", np.round(v[:14], 5))
+    print("jump after place %d: %.5f -> %.5f (%.1f-fold)"
           % (kstar, v[kstar-1], v[kstar], legjobb))
     maradek = v[kstar:]; maradek = maradek[np.isfinite(maradek)]
     j = int(np.argmax(np.abs(maradek)))
     d_er = tuple(koordok[rend[kstar+j]])
     S = v[kstar-1]/abs(float(maradek[j]))
     A4 = S >= 2.0
-    print("sav-orszem: S = %.4f (kuszob 2) — %s; legerosebb elutasitott: "
-          "%s osztaly, G = %+.6f"
-          % (S, "all" if A4 else "BUKIK", canon(d_er), float(maradek[j])))
+    print("band sentinel: S = %.4f (threshold 2) — %s; strongest rejected: "
+          "class %s, G = %+.6f"
+          % (S, "holds" if A4 else "FAILS", canon(d_er), float(maradek[j])))
     va = np.sort(np.abs(np.where(np.isfinite(g), g, 0)))[::-1]
     r_abs = va[:ABLAK]/np.maximum(va[1:ABLAK+1], 1e-300)
     k_abs = int(np.argmax(r_abs)) + 1
-    print("regi abszolut szabaly: ugras a(z) %d. hely utan (%.1f-szeres)"
+    print("old absolute rule: jump after place %d (%.1f-fold)"
           % (k_abs, r_abs[k_abs-1]))
 
-    # visszarakas + teljesseg
+    # rebuilding + completeness
     elf = [tuple(koordok[i]) for i in rend[:kstar]]
     rc = np.arange(NSITE)
     def elek(dl):
@@ -108,10 +108,10 @@ def main():
     igaz = elek(igazd)
     megvan, fantom, hianyzo = len(rec & igaz), len(rec-igaz), len(igaz-rec)
     A2 = (megvan == NCONTRACT and fantom == 0 and hianyzo == 0)
-    print("teljesseg-szamla: megtalalt %d/%d; fantom %d; hianyzo %d — %s"
-          % (megvan, NCONTRACT, fantom, hianyzo, "all" if A2 else "BUKIK"))
+    print("completeness ledger: found %d/%d; phantom %d; missing %d — %s"
+          % (megvan, NCONTRACT, fantom, hianyzo, "holds" if A2 else "FAILS"))
 
-    # golyo r<=5
+    # ball r<=5
     lat = {(0,)*DIM}; front = [(0,)*DIM]; golyo = [1]
     for r in range(1, 6):
         ujf = []
@@ -123,11 +123,11 @@ def main():
         golyo.append(golyo[-1]+len(ujf)); front = ujf
     hiv = [1, 11, 61, 231, 681, 1683]
     A3 = golyo[:4] == hiv[:4]
-    print("golyo (r=0..5): %s — hivatkozas (negyedrendu): %s — r<=3: %s; "
-          "r<=5: %s" % (golyo, hiv, "all" if A3 else "BUKIK",
-                        "egyezik" if golyo == hiv else "elter"))
+    print("ball (r=0..5): %s — reference (fourth order): %s — r<=3: %s; "
+          "r<=5: %s" % (golyo, hiv, "holds" if A3 else "FAILS",
+                        "agrees" if golyo == hiv else "differs"))
 
-    # vetito-pecset: mintaveteles ritka alak
+    # projector seal: sampling sparse form
     rng = np.random.default_rng(MAG)
     idxek = [np.ravel_multi_index(((koordok + d) % L).T, (L,)*DIM)
              for d in igazd]
@@ -146,20 +146,20 @@ def main():
             Av += vv[ix]
         lj = float(sum(2-2*np.cos(2*np.pi*ni/L) for ni in n))
         pecset_a = max(pecset_a, float(np.max(np.abs(10*vv - Av - lj*vv))))
-        # a G-tabla kozvetlen osszegzesu transzformja e modusnal
+        # the direct-summation transform of the G table at this mode
         val = complex(np.sum(Gf * np.conj(vv)))
         pecset_b = max(pecset_b, abs(val - (1.0 if occ_f[mi] else 0.0)))
-    print("vetito-pecset (64+64 modus, mag %d): maradek-ag %.2e; "
-          "transzform-ag %.2e — %s"
+    print("projector seal (64+64 modes, seed %d): residual branch %.2e; "
+          "transform branch %.2e — %s"
           % (MAG, pecset_a, pecset_b,
-             "ALL" if max(pecset_a, pecset_b) < 1e-9 else "BUKIK"))
+             "HOLDS" if max(pecset_a, pecset_b) < 1e-9 else "FAILS"))
 
-    print("\nfeltetelek: A1 %s | A2 %s | A3 %s | A4 %s"
-          % tuple("all" if a else "BUKIK" for a in (A1, A2, A3, A4)))
-    print("ITELET: %s  (%.0f s)"
-          % ("ALL — a honos gyoztes belulrol otkiterjedesunek olvassa magat,"
-             " a pecset all" if all((A1, A2, A3, A4)) else
-             "RESZLEGES — a bukott feltetel fent", time.time()-t0))
+    print("\nconditions: A1 %s | A2 %s | A3 %s | A4 %s"
+          % tuple("holds" if a else "FAILS" for a in (A1, A2, A3, A4)))
+    print("VERDICT: %s  (%.0f s)"
+          % ("HOLDS — the native winner reads itself as five-extensional from"
+             " the inside, and the seal holds" if all((A1, A2, A3, A4)) else
+             "PARTIAL — the failed condition is above", time.time()-t0))
 
 if __name__ == "__main__":
     main()

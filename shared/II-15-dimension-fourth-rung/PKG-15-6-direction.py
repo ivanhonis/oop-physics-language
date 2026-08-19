@@ -1,17 +1,18 @@
-# PKG-15-6 — Az irany-tetel (II/15)
-# Cel-allitas (1. pont): minden kisebb-nagyobb kiterjedesu jelolt-parra
-# explicit N* kuszob, ameddig az utemenkenti dominancia all, es igy a kisebb
-# kiterjedesu szigoruan olcsobb a 2..N* szakaszon.
-# Ket reteg (H2):
-#   ANALITIKUS: az 5-7. lemmak lancolata — rendezesi lemma + atforditasi
-#     lemma + szendvics-lemma [(4/pi^2)·Q(k) <= lambda(k) <= Q(k), ahol Q a
-#     visszahajtott fazisu merevseg-alak] — ebbol tanusitvany:
-#     ha Q_X(i) <= (4/pi^2)·Q_Y(i), akkor lambda_X(i) <= lambda_Y(i).
-#     N*-analitikus = az elso serules elotti index.
-#   GEPI: N*-gepi = a leghosszabb szakasz, amelyen lambda_X(i) <= lambda_Y(i)
-#     egzaktul all a rogzitett rendszeren; a rendezesi lemma innen ad
-#     ar-dominanciat a teljes 2..N*-gepi szakaszon.
-# Jelentendo: a dominancia-hezag (H4) — N*-gepi tavolsaga a mert ar-atbillenestol.
+# PKG-15-6 — The direction theorem (II/15)
+# Target claim (point 1): for every lower-vs-higher extension candidate pair an
+# explicit N* threshold up to which the beat-by-beat dominance holds, and thus
+# the lower extension is strictly cheaper over the stretch 2..N*.
+# Two layers (H2):
+#   ANALYTIC: the chain of lemmas 5-7 — ordering lemma + inversion lemma +
+#     sandwich lemma [(4/pi^2)*Q(k) <= lambda(k) <= Q(k), where Q is the
+#     stiffness form with folded-back phases] — hence the certificate:
+#     if Q_X(i) <= (4/pi^2)*Q_Y(i), then lambda_X(i) <= lambda_Y(i).
+#     N*-analytic = the index before the first violation.
+#   MACHINE: N*-machine = the longest stretch on which lambda_X(i) <= lambda_Y(i)
+#     holds exactly on the fixed system; from there the ordering lemma gives
+#     price dominance over the whole stretch 2..N*-machine.
+# To be reported: the dominance gap (H4) — the distance of N*-machine from the
+# measured price tipping.
 
 import numpy as np
 
@@ -38,15 +39,15 @@ def letrak(nev):
         q += vissza**2
     return np.sort(lam.ravel()), np.sort(q.ravel())
 
-print("== PKG-15-6 — az irany-tetel ket retege ==")
+print("== PKG-15-6 — the two layers of the direction theorem ==")
 L_, Q_ = {}, {}
 for nev in FO:
     L_[nev], Q_[nev] = letrak(nev)
 
-# szendvics-lemma gepi hitelesitese (a 7. lemma ellenorzese)
+# machine certification of the sandwich lemma (checking lemma 7)
 rossz = 0.0
 for nev in FO:
-    lam, q = letrak(nev)  # rendezetlen parositas nem kell: pontonkent kell
+    lam, q = letrak(nev)  # no sorted pairing needed: it must hold pointwise
 for nev in FO:
     alak, fel = FO[nev]
     dt = np.longdouble
@@ -60,33 +61,33 @@ for nev in FO:
     m = q.ravel() > 1e-15
     ar = (lam.ravel()[m]/q.ravel()[m]).astype(float)
     rossz = max(rossz, float(max(np.max(ar) - 1.0, SANDW - np.min(ar))))
-print("szendvics-lemma a teljes racson: legnagyobb sertes %.2e — %s"
-      % (rossz, "ALL" if rossz < 1e-12 else "BUKIK"))
+print("sandwich lemma on the full lattice: largest violation %.2e — %s"
+      % (rossz, "HOLDS" if rossz < 1e-12 else "FAILS"))
 
 parok = [(x, y) for x in FO for y in FO if KIT[x] < KIT[y]]
-print("\npar        N*-analitikus  N*-gepi   ar-atbillenes  lefedettseg  szigoru")
+print("\npair       N*-analytic    N*-machine  price tipping   coverage   strict")
 eredm = {}
 for x, y in parok:
-    # analitikus tanusitvany
+    # analytic certificate
     j = np.where(Q_[x][1:] > SANDW*Q_[y][1:])[0]
     na = int(j[0]) + 1 if len(j) else N
-    # gepi kuszob
+    # machine threshold
     j = np.where(L_[x][1:] > L_[y][1:] + 1e-12)[0]
     ng = int(j[0]) + 1 if len(j) else N
-    # szigorusag a 2..ng szakaszon
+    # strictness over the stretch 2..ng
     szig = bool(np.any(L_[x][1:ng] < L_[y][1:ng] - 1e-9))
-    # ar-atbillenes
+    # price tipping
     cx, cy = np.cumsum(L_[x]), np.cumsum(L_[y])
     j = np.where(cx[1:] > cy[1:] + 1e-8)[0]
     at = int(j[0]) + 2 if len(j) else None
     fed = (100.0*ng/at) if at else 100.0
     eredm[(x, y)] = (na, ng, at, fed, szig)
     print("%s-%s      %8d   %8d   %10s   %8.1f%%   %s"
-          % (x, y, na, ng, at if at else "nincs", fed, "all" if szig else "NEM"))
+          % (x, y, na, ng, at if at else "none", fed, "holds" if szig else "NO"))
 
-# a rendezesi lemma kovetkezmenyenek direkt proba ja: ar-sorrend a 2..N*-gepi-n
-print("\nellenproba (rendezesi lemma): ar-dominancia a tanusitott szakaszon:")
+# direct check of the consequence of the ordering lemma: price order on 2..N*-machine
+print("\ncounter-check (ordering lemma): price dominance on the certified stretch:")
 for (x, y), (na, ng, at, fed, szig) in eredm.items():
     cx, cy = np.cumsum(L_[x]), np.cumsum(L_[y])
     ok = bool(np.all(cx[1:ng] <= cy[1:ng] + 1e-9))
-    print("   %s-%s: 2..%d — %s" % (x, y, ng, "all" if ok else "BUKIK"))
+    print("   %s-%s: 2..%d — %s" % (x, y, ng, "holds" if ok else "FAILS"))

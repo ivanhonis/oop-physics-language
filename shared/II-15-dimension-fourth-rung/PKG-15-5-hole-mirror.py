@@ -1,14 +1,14 @@
-# PKG-15-5 — A lyuk-tukor tetel gepi megerositese (II/15)
-# A tetel: ket paros-jegyu szoves kozt (azonos helyszam, helyenkent azonos
-# szerzodesszam) barmely N toltesen a koltsegkulonbseg egyenlo az
-# N' = Nsite - N tukortoltesen vett koltsegkulonbseggel.
-# Ellenorzesek:
-#   E1  a tukor-azonossag a J3-J4 paron (es a J4-K3 paron) gepi pontossagon
-#   E2  kovetkezmeny: N = 20735-nel egzakt paros holtverseny
-#   E3  kovetkezmeny: a csucs-utem minden paros-jegyu indulon pontosan 16
-#   E4  a J3-J4 elojelvaltasi helyei tukorparok
-#   E5  negativ kontroll: nem-paros paron (J1-J2) az azonossag NEM all
-#       (a paros feltetel szukseges)
+# PKG-15-5 — Machine confirmation of the hole-mirror theorem (II/15)
+# The theorem: between two weaves carrying the bipartite mark (same site count,
+# same number of contracts per site) the cost difference at any filling N equals
+# the cost difference at the mirror filling N' = Nsite - N.
+# Checks:
+#   E1  the mirror identity on the J3-J4 pair (and on the J4-K3 pair) at machine precision
+#   E2  consequence: an exact bipartite tie at N = 20735
+#   E3  consequence: the peak beat is exactly 16 on every entrant carrying the bipartite mark
+#   E4  the sign-change positions of J3-J4 form mirror pairs
+#   E5  negative control: on a non-bipartite pair (J1-J2) the identity does NOT hold
+#       (the bipartite condition is necessary)
 
 import numpy as np
 
@@ -36,41 +36,41 @@ def letra(nev, dt=np.longdouble):
     return np.sort(lam.ravel())
 
 def tukor_hiba(a, b):
-    """max |dAr(N) - dAr(N')| az N = 1..20735 tartomanyon."""
+    """max |dPrice(N) - dPrice(N')| over the range N = 1..20735."""
     R = (np.cumsum(letra(a)) - np.cumsum(letra(b)))[:N-1]
     return float(np.max(np.abs(R - R[::-1]))), R
 
-print("== PKG-15-5 — a lyuk-tukor tetel gepi megerositese ==")
+print("== PKG-15-5 — machine confirmation of the hole-mirror theorem ==")
 
-# E1 — tukor-azonossag paros parokon
+# E1 — mirror identity on bipartite pairs
 e_j34, R34 = tukor_hiba("J4", "J3")
 e_j4k3, _ = tukor_hiba("J4", "K3")
-print("E1 tukor-azonossag: |dAr(N)-dAr(N')| legfeljebb %.2e (J3-J4), "
+print("E1 mirror identity: |dPrice(N)-dPrice(N')| at most %.2e (J3-J4), "
       "%.2e (J4-K3) — %s" % (e_j34, e_j4k3,
-      "ALL" if max(e_j34, e_j4k3) < 1e-9 else "BUKIK"))
+      "HOLDS" if max(e_j34, e_j4k3) < 1e-9 else "FAILS"))
 
-# E2 — egzakt holtverseny egy lyuknal
+# E2 — exact tie at a single hole
 kolt = {nev: np.cumsum(letra(nev)) for nev in ("J3", "J4")}
 d = float(abs(kolt["J3"][N-2] - kolt["J4"][N-2]))
-print("E2 egy-lyukas holtverseny: |Ar_J3 - Ar_J4| az N = %d toltesen = %.2e — %s"
-      % (N-1, d, "ALL" if d < 1e-9 else "BUKIK"))
+print("E2 single-hole tie: |Price_J3 - Price_J4| at the filling N = %d = %.2e — %s"
+      % (N-1, d, "HOLDS" if d < 1e-9 else "FAILS"))
 
-# E3 — a csucs-utem a paros indulokon pontosan 16 (a nulla-modus tukre)
-print("E3 csucs-utem a paros indulokon:")
+# E3 — the peak beat is exactly 16 on the bipartite entrants (the mirror of the zero mode)
+print("E3 peak beat on the bipartite entrants:")
 for nev in ("J3", "J4", "K1", "K2", "K3"):
     m = float(letra(nev)[-1])
-    print("   %s: %.12f — %s" % (nev, m, "ALL" if abs(m-16) < 1e-9 else "BUKIK"))
+    print("   %s: %.12f — %s" % (nev, m, "HOLDS" if abs(m-16) < 1e-9 else "FAILS"))
 
-# E4 — a J3-J4 elojelvaltasok tukorparok-e
+# E4 — do the J3-J4 sign changes form mirror pairs
 elojel = np.sign(np.where(np.abs(R34) > 1e-8, R34, 0))
 valt = [int(n+1) for n in range(1, N-1)
         if elojel[n] != 0 and elojel[n-1] != 0 and elojel[n] != elojel[n-1]]
 parok = all(valt[i] + valt[len(valt)-1-i] == N + 1 for i in range(len(valt)))
-print("E4 elojelvaltasi helyek (J4 ara - J3 ara): %s — tukorparok: %s"
-      % (valt, "ALL" if parok else "ellenorizd"))
+print("E4 sign-change positions (price of J4 - price of J3): %s — mirror pairs: %s"
+      % (valt, "HOLDS" if parok else "check it"))
 
-# E5 — negativ kontroll: nem-paros paron az azonossag nem all
+# E5 — negative control: on a non-bipartite pair the identity does not hold
 e_j12, _ = tukor_hiba("J1", "J2")
-print("E5 negativ kontroll (J1-J2, nem-paros): a tukor-elteres legfeljebb "
-      "%.3f — a paros feltetel szukseges: %s"
-      % (e_j12, "ALL" if e_j12 > 1.0 else "BUKIK"))
+print("E5 negative control (J1-J2, non-bipartite): the mirror deviation is at most "
+      "%.3f — the bipartite condition is necessary: %s"
+      % (e_j12, "HOLDS" if e_j12 > 1.0 else "FAILS"))

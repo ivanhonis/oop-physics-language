@@ -1,10 +1,13 @@
-# PKG-16-3 — A verseny (II/16)
-# A PKG-16-2 letraira epul, aramoltatott top-2 kovetessel (a teljes
-# koltsegmatrix nem fer memoriaba). Elsodleges ut: hosszu-lebegos (H3-szabaly).
-# Dolga: negyfoku lepcso-itelet a J1–J5 otoson (a nevesitett visszafordulas-
-# esettel); K-a a teto hovatartozasa; teljes-mezony olvasat; K-b fesu;
-# K-c dominancia-kuszobok es hezag-aranyok; K-d hej-illeszkedes;
-# kiolvasas-elokeszites.
+# PKG-16-3 — The race (II/16)
+# Builds on the ladders of PKG-16-2, with streamed top-2 tracking (the full
+# cost matrix does not fit in memory). Primary route: extended precision (rule H3).
+# Its business: the four-rung staircase verdict on the quintuple J1-J5 (with the
+# named turn-back case); Q-a where the top belongs; the full-field reading;
+# Q-b the comb; Q-c dominance thresholds and gap ratios; Q-d shell fit;
+# preparation of the readout.
+#
+# Note: the script is sectioned and restartable — it saves its state into
+# verseny16_allapot.npz and must be run again until it reports the analysis.
 
 import numpy as np, time
 from itertools import combinations
@@ -56,7 +59,7 @@ def main():
     t0 = time.time()
     import os
     if not os.path.exists(ALLAPOT):
-        print("== PKG-16-3 — a verseny: nevesitett halok ==")
+        print("== PKG-16-3 — the race: the named networks ==")
         kolt = {}
         for nev in NEVEK:
             kolt[nev] = np.cumsum(zart_letra(*FO[nev]))
@@ -71,7 +74,7 @@ def main():
             bid[jobb] = i
         np.savez(ALLAPOT, best1=best1, best2=best2, bid=bid, kesz=0,
                  **{"k_"+n: kolt[n] for n in NEVEK})
-        print("nevesitett resz kesz (%.0f s) — inditsd ujra a csaladhoz"
+        print("the named part is done (%.0f s) — run again for the family"
               % (time.time()-t0))
         return
     A = np.load(ALLAPOT)
@@ -92,20 +95,20 @@ def main():
             bid[jobb] = 13 + j
         np.savez(ALLAPOT, best1=best1, best2=best2, bid=bid, kesz=veg,
                  **{"k_"+n: kolt[n] for n in NEVEK})
-        print("csalad: %d / %d kesz (%.0f s) — %s"
+        print("family: %d / %d done (%.0f s) — %s"
               % (veg, len(CSALAD), time.time()-t0,
-                 "inditsd ujra" if veg < len(CSALAD) else "jon az elemzes"))
+                 "run again" if veg < len(CSALAD) else "the analysis follows"))
         return
     letrak5 = {n: zart_letra(*FO[n]) for n in ("J1","J2","J3","J4","J5")}
-    print("== PKG-16-3 — elemzes ==")
+    print("== PKG-16-3 — analysis ==")
 
-    # regisztralt tenyek
-    print("tenyek: N=1 also ket ar: %.2e / %.2e | N=3 legjobb ar: %.6f (>0) | "
-          "teli: |elteres| = %.2e"
+    # registered facts
+    print("facts: N=1 lowest two prices: %.2e / %.2e | N=3 best price: %.6f (>0) | "
+          "full end: |deviation| = %.2e"
           % (float(best1[0]), float(best2[0]), float(best1[2]),
              abs(float(best1[-1]) - 2488320.0)))
 
-    # fo otos: gyoztes-futamok
+    # main quintuple: winner runs
     J = np.stack([kolt[n] for n in ("J1","J2","J3","J4","J5")])
     cimkek = []
     for n in range(NH):
@@ -116,39 +119,39 @@ def main():
         else:
             kik = sorted("J%d" % (i+1) for i in range(5)
                          if o[i] - o[r[0]] <= TURES)
-            cimkek.append("H:" + "+".join(kik))
+            cimkek.append("T:" + "+".join(kik))
     fut5 = futamok(cimkek)
-    print("\ngyoztes-futamok a fo otoson:")
+    print("\nwinner runs on the main quintuple:")
     for f in fut5:
-        if f[2]-f[1]+1 >= 3 or f[0].startswith("H"):
+        if f[2]-f[1]+1 >= 3 or f[0].startswith("T"):
             print("   %-18s %7d .. %7d  (%d)" % (f[0], f[1], f[2], f[2]-f[1]+1))
 
-    # K-a: a felso fel es a teto
+    # Q-a: the upper half and the top
     felso = cimkek[NH//2:]
     megoszlas = {}
     for c in felso:
         megoszlas[c] = megoszlas.get(c, 0) + 1
-    print("\nK-a: a felso fel megoszlasa az otoson: %s"
+    print("\nQ-a: split of the upper half on the quintuple: %s"
           % dict(sorted(megoszlas.items(), key=lambda x: -x[1])[:6]))
 
-    # teljes mezony
+    # full field
     szigoru = best2 - best1 > TURES
     gyoz = {}
     for i in np.unique(bid[szigoru]):
         nev = NEVEK[i] if i < 13 else str(CSALAD[i-13])
         gyoz[nev] = int(np.sum((bid == i) & szigoru))
     fo_nyer = sum(gyoz.get(n, 0) for n in ("J1","J2","J3","J4","J5"))
-    print("teljes mezony: a fo otos szigoruan nyert toltesei %d / %d; "
-          "holtversenyes toltes %d" % (fo_nyer, NH, int(np.sum(~szigoru))))
-    print("   legtobbet nyerok: %s"
+    print("full field: the main quintuple wins strictly at %d / %d fillings; "
+          "tied fillings %d" % (fo_nyer, NH, int(np.sum(~szigoru))))
+    print("   winning the most: %s"
           % sorted(gyoz.items(), key=lambda x: -x[1])[:6])
-    print("K-b fesu (elso 24): %s"
+    print("Q-b comb (first 24): %s"
           % " | ".join("%d:%s" % (n+1,
              (NEVEK[bid[n]] if bid[n] < 13 else str(CSALAD[bid[n]-13]))
-             if szigoru[n] else "H") for n in range(24)))
+             if szigoru[n] else "T") for n in range(24)))
 
-    # K-c: paronkenti atbillenesek es dominancia-kuszobok az otoson
-    print("\nK-c: par | N*-gepi | ar-atbillenes | arany")
+    # Q-c: pairwise tippings and dominance thresholds on the quintuple
+    print("\nQ-c: pair | N*-machine | price tipping | ratio")
     otos = ("J1","J2","J3","J4","J5")
     for a in range(5):
         for b in range(a+1, 5):
@@ -159,11 +162,11 @@ def main():
             j = np.where(ca[1:] > cb[1:] + TURES)[0]
             at = int(j[0]) + 2 if len(j) else None
             print("   %s-%s  %7d  %10s  %s"
-                  % (otos[a], otos[b], ng, at if at else "nincs",
+                  % (otos[a], otos[b], ng, at if at else "none",
                      "%.1f%%" % (100.0*ng/at) if at else "—"))
 
-    # K-d: hej-illeszkedes a fo savhatarokon
-    print("\nK-d: savhatar kontra a bejovo gyoztes polc-hatarai:")
+    # Q-d: shell fit at the main band boundaries
+    print("\nQ-d: band boundary versus the shelf boundaries of the incoming winner:")
     for ix in range(1, len(fut5)):
         c, kezd = fut5[ix][0], fut5[ix][1]
         if c not in otos or fut5[ix][2]-kezd < 3:
@@ -171,10 +174,10 @@ def main():
         l = letrak5[c]
         resek = np.where(np.diff(l) > RES_KUSZOB)[0] + 1
         legk = int(resek[np.argmin(np.abs(resek - kezd))])
-        print("   %8d (%s): legkozelebbi zart fok %8d, tavolsag %d"
+        print("   %8d (%s): nearest closed degree %8d, distance %d"
               % (kezd, c, legk, abs(legk - kezd)))
 
-    # kiolvasas-elokeszites: a legmagasabb kiterjedesu allo sav
+    # readout preparation: the standing band of highest extension
     savok = {}
     for f in fut5:
         if f[0] in otos and f[2]-f[1]+1 >= 3:
@@ -194,8 +197,8 @@ def main():
         jel = sorted(nf for nf, r in benn if r > legszel - 1e-9)
         felett = [nf for nf in jel if nf >= NH//2]
         val = min(felett) if felett else jel[-1]
-        print("\nkiolvasas: a legmagasabb kiterjedesu allo sav %s (%d..%d); "
-              "legszelesebb res %.6f; valasztott zart fok N = %d"
+        print("\nreadout: the standing band of highest extension is %s (%d..%d); "
+              "widest gap %.6f; chosen closed degree N = %d"
               % (gy, sav[0], sav[1], legszel, val))
 
 if __name__ == "__main__":

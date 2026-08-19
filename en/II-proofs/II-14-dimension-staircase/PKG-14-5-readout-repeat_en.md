@@ -24,7 +24,7 @@ imports: "zero new item (the sentinel threshold — a factor of two — is a dec
 - **Completeness ledger:** found / missing / phantom, all three with numbers.
 - **Ball reading:** up to r ≤ 5 (validity: 2r < 12), against the quadratic reference sequence of space: 1, 7, 25, 63, 129, 231 (increment 4r² + 2).
 - **Two-route rule:** the ladder and the projector in closed form and by machine eigenproblem as well.
-- **Verdict conditions in advance:** V1 — the closed degree holds; V2 — 5184/5184, zero phantom, zero missing; V3 — the ball is exact; V4 — sentinel ≥ 2. If all hold → **stands**; if any fails → partial, naming the failed condition.
+- **Verdict conditions in advance:** A1 — the closed degree holds; A2 — 5184/5184, zero phantom, zero missing; A3 — the ball is exact; A4 — sentinel ≥ 2. If all hold → **stands**; if any fails → partial, naming the failed condition.
 
 ## 2. Results
 

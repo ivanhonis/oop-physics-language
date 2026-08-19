@@ -1,7 +1,7 @@
-# PKG-13-4 — A kiolvasas es a meret-diagnozis szamolo kodja
-# Csomag-dokumentum: PKG-13-4-readout_hu.md (a kod nyelvfuggetlen)
-# 1. resz: a rogzitett futas (4x4 torusz, N=11, zart fok) — az itelet alapja
-# 2. resz: diagnozis (8x8 torusz, N=43) — a rogzitett hatokoron kivul
+# PKG-13-4 — Computation code for the readout and the size diagnosis
+# Package document: PKG-13-4-readout_hu.md / _en.md (the code is language-independent)
+# Part 1: the fixed run (4x4 torus, N=11, a closed degree) — the basis of the verdict
+# Part 2: diagnosis (8x8 torus, N=43) — outside the fixed scope
 
 import numpy as np
 
@@ -28,25 +28,25 @@ def h(p):
     return -(p * np.log(p) + (1 - p) * np.log(1 - p))
 
 def readout(n, Nf, label):
-    """A rogzitett jegyzokonyv: kozelseg-terkep, ugras, visszarakas, golyo."""
+    """The fixed protocol: closeness map, jump, rebuilding, ball."""
     M = n * n
     L = torus_L(n)
     w, V = np.linalg.eigh(L)
     gap = w[Nf] - w[Nf - 1]
-    print(f"\n=== {label}: {n}x{n}, N={Nf}, fokkoz={gap:.4f} ===")
+    print(f"\n=== {label}: {n}x{n}, N={Nf}, degree gap={gap:.4f} ===")
     C = V[:, :Nf] @ V[:, :Nf].T
 
-    # kozelseg-osztalyok
+    # closeness classes
     cls = {}
     for i in range(M):
         for j in range(i + 1, M):
             cls.setdefault(offset(i, j, n), []).append(C[i, j])
     rank = sorted(((abs(np.mean(v)), k) for k, v in cls.items()), reverse=True)
-    print("kozelseg-osztalyok teteje (|C|):")
+    print("top of the closeness classes (|C|):")
     for val, k in rank[:4]:
-        print(f"  eltolas {k}: |C| = {val:.5f}")
+        print(f"  displacement {k}: |C| = {val:.5f}")
 
-    # paros kozelseg (nezet-alapu) es ugras
+    # pairwise closeness (view-based) and the jump
     def S(idx):
         return float(h(np.linalg.eigvalsh(C[np.ix_(idx, idx)])).sum())
     S1 = [S([i]) for i in range(M)]
@@ -56,9 +56,9 @@ def readout(n, Nf, label):
             MI[i, j] = MI[j, i] = S1[i] + S1[j] - S([i, j])
     row = np.sort(MI[0][np.arange(M) != 0])[::-1]
     k = int(np.argmax(row[:-1] - row[1:])) + 1
-    print("ugras utan k =", k, " a lista teteje:", np.round(row[:6], 5))
+    print("after the jump k =", k, " top of the list:", np.round(row[:6], 5))
 
-    # visszarakas
+    # rebuilding
     edges = set()
     for i in range(M):
         for t in [j for j in np.argsort(-MI[i]) if j != i][:k]:
@@ -70,12 +70,12 @@ def readout(n, Nf, label):
             for j in (n * ((x + 1) % n) + y, n * x + (y + 1) % n):
                 true.add(frozenset((i, j)))
     extra = edges - true
-    print(f"visszarakas: elek={len(edges)}, valodi megvan={len(true & edges)}/{len(true)}, "
-          f"fantom={len(extra)}, hianyzo={len(true - edges)}")
+    print(f"rebuilding: edges={len(edges)}, real found={len(true & edges)}/{len(true)}, "
+          f"phantom={len(extra)}, missing={len(true - edges)}")
     if extra:
-        print("  fantom-osztalyok:", {offset(a, b, n) for a, b in (tuple(e) for e in extra)})
+        print("  phantom classes:", {offset(a, b, n) for a, b in (tuple(e) for e in extra)})
 
-    # golyonovekedes
+    # ball growth
     adj = {i: set() for i in range(M)}
     for e in edges:
         a, b = tuple(e)
@@ -88,10 +88,10 @@ def readout(n, Nf, label):
             break
         seen |= frontier
         sizes.append(len(seen))
-    print("golyo:", sizes)
+    print("ball:", sizes)
 
-# 1. resz — a rogzitett futas (az itelet alapja)
-readout(4, 11, "ROGZITETT FUTAS")
+# Part 1 — the fixed run (the basis of the verdict)
+readout(4, 11, "FIXED RUN")
 
-# 2. resz — diagnozis, a rogzitett hatokoron kivul
-readout(8, 43, "DIAGNOZIS")
+# Part 2 — diagnosis, outside the fixed scope
+readout(8, 43, "DIAGNOSIS")

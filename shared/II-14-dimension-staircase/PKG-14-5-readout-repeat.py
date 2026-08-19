@@ -1,33 +1,33 @@
-# PKG-14-5 — Az ujrakiolvasas rogzitett hatokorrel (II/14)
-# A jegyzokonyv (a futtatas elott rogzitve):
-#   - rendszer: J3 ter (12x12x12), hatos koordinacio, 5184 szerzodes
-#   - toltes: a fel-tolteshez legkozelebbi zart fok felulrol (determinisztikus szabaly)
-#   - kozelseg: a kesz allapot paronkenti egytest-terkepe G(delta) (II/11, 4. eszkoz)
-#   - UJRAKIOLVASASI JAVITAS 1 (elojeles ugras): az ugras az ELOJELES listan
-#     keresendo, nem az abszolut erteken; az atellenes osztaly elojelevel
-#     egyutt kulon jelentendo (a II/14 elojel-hezagjanak zarasa)
-#   - UJRAKIOLVASASI JAVITAS 2 (sav-orszem): a leggyengebb elfogadott es a
-#     legerosebb elutasitott kozelseg hanyadosa; 2-es tenyezo alatt az olvasat
-#     reszleges (a II/14 szuk "egzakt egyezes" orszemenek tagitasa)
-#   - teljesseg-szamla: megtalalt / hianyzo / fantom, mindharom szammal
-#   - golyo-olvasat r <= 5-ig (ervenyesseg: 2r < 12 korbeeres), a hivatkozasi
-#     sor a ter negyzetes torvenye: 1, 7, 25, 63, 129, 231 (novekmeny 4r^2+2)
-#   - ketutas szabaly: a letra es a vetito zart alakban ES gepi sajatfeladattal
-# Itelet-feltetelek (elore): A1 zart fok all; A2 5184/5184, 0 fantom, 0 hianyzo;
-# A3 golyo egzakt; A4 orszem >= 2. Mind all -> "all"; barmelyik bukik -> reszleges.
+# PKG-14-5 — The re-readout with a fixed scope (II/14)
+# The protocol (fixed before the run):
+#   - system: J3 space (12x12x12), coordination six, 5184 contracts
+#   - filling: the closed degree nearest half filling from above (a deterministic rule)
+#   - closeness: the pairwise one-body map G(delta) of the finished state (II/11, tool 4)
+#   - RE-READOUT CORRECTION 1 (signed jump): the jump is to be sought on the
+#     SIGNED list, not on the absolute value; the antipodal class is to be
+#     reported separately together with its sign (closing the sign gap of II/14)
+#   - RE-READOUT CORRECTION 2 (band sentinel): the ratio of the weakest accepted
+#     and the strongest rejected closeness; below a factor of 2 the reading is
+#     partial (widening the narrow "exact agreement" sentinel of II/14)
+#   - completeness ledger: found / missing / phantom, all three with numbers
+#   - ball reading up to r <= 5 (validity: 2r < 12 wrap-around); the reference
+#     sequence is the quadratic law of space: 1, 7, 25, 63, 129, 231 (increment 4r^2+2)
+#   - two-route rule: the ladder and the projector in closed form AND by machine eigenproblem
+# Verdict conditions (in advance): A1 the closed degree holds; A2 5184/5184, 0 phantom,
+# 0 missing; A3 the ball is exact; A4 sentinel >= 2. All hold -> "holds"; any fails -> partial.
 
 import numpy as np
 from collections import deque
 
 L = 12
-NSITE = L ** 3            # 1728 hely
-NCONTRACT = 3 * NSITE     # 5184 szerzodes (helyenkent hat)
+NSITE = L ** 3            # 1728 sites
+NCONTRACT = 3 * NSITE     # 5184 contracts (six per site)
 TOL = 1e-9
 
-# --- 1) A letra ket fuggetlen uton -------------------------------------------
+# --- 1) The ladder by two independent routes ---------------------------------
 k = 2.0 * np.pi * np.arange(L) / L
 one = 2.0 * (1.0 - np.cos(k))
-lam = one[:, None, None] + one[None, :, None] + one[None, None, :]   # zart alak
+lam = one[:, None, None] + one[None, :, None] + one[None, None, :]   # closed form
 lam_flat = lam.ravel()
 lam_sorted = np.sort(lam_flat)
 
@@ -42,41 +42,41 @@ for x in range(L):
                 b = idx(x + d[0], y + d[1], z + d[2])
                 Lap[a, b] -= 1.0
                 Lap[b, a] -= 1.0
-w, V = np.linalg.eigh(Lap)                                            # gepi ut
+w, V = np.linalg.eigh(Lap)                                            # machine route
 elteres_letra = float(np.max(np.abs(np.sort(w) - lam_sorted)))
-print("letra ket uton: legnagyobb elteres = %.2e" % elteres_letra)
+print("ladder by two routes: largest deviation = %.2e" % elteres_letra)
 assert elteres_letra < 1e-10
 
-# --- 2) A zart fok kijelolese (rogzitett szabaly) ----------------------------
+# --- 2) Singling out the closed degree (fixed rule) --------------------------
 fel = NSITE // 2                                   # 864
-B = int(np.sum(lam_flat < 6.0 - TOL))              # a 6 alatti utemek
-D6 = int(np.sum(np.abs(lam_flat - 6.0) < TOL))     # a 6-os polc szelessege
-NINST = B + D6                                     # az elso zart fok a fel-toltes folott
+B = int(np.sum(lam_flat < 6.0 - TOL))              # the beats below 6
+D6 = int(np.sum(np.abs(lam_flat - 6.0) < TOL))     # the width of the shelf at 6
+NINST = B + D6                                     # the first closed degree above half filling
 res = lam_sorted[NINST] - lam_sorted[NINST - 1]
-print("zart fok: N* = %d (= %d + %d); fel-toltes %d; res a fok folott %.6f"
+print("closed degree: N* = %d (= %d + %d); half filling %d; gap above the degree %.6f"
       % (NINST, B, D6, fel, res))
 assert B < fel <= NINST and res > 1e-6
 
-# --- 3) Kozelseg-terkep ket uton ---------------------------------------------
+# --- 3) Closeness map by two routes ------------------------------------------
 occ = lam <= 6.0 + TOL
 assert int(occ.sum()) == NINST
-G = np.fft.ifftn(occ.astype(float))                # zart ut: G(delta)
+G = np.fft.ifftn(occ.astype(float))                # closed route: G(delta)
 assert np.max(np.abs(G.imag)) < 1e-12
 G = G.real
 
-occ_cols = w <= 6.0 + TOL                          # gepi ut: vetito a sajatvektorokbol
+occ_cols = w <= 6.0 + TOL                          # machine route: projector from the eigenvectors
 assert int(occ_cols.sum()) == NINST
-P0 = (V[:, occ_cols] @ V[0, occ_cols])             # a vetito 0. sora
+P0 = (V[:, occ_cols] @ V[0, occ_cols])             # row 0 of the projector
 G_gepi = np.empty(NSITE)
 for x in range(L):
     for y in range(L):
         for z in range(L):
             G_gepi[idx(x, y, z)] = G[x, y, z]
 elteres_vetito = float(np.max(np.abs(P0 - G_gepi)))
-print("vetito ket uton: legnagyobb elteres = %.2e" % elteres_vetito)
+print("projector by two routes: largest deviation = %.2e" % elteres_vetito)
 assert elteres_vetito < 1e-10
 
-# --- 4) Eltolas-osztalyok es az atellenes visszhang --------------------------
+# --- 4) Displacement classes and the antipodal echo --------------------------
 def canon(d):
     return tuple(sorted(int(min(x % L, (-x) % L)) for x in d))
 
@@ -88,50 +88,50 @@ for dx in range(L):
                 continue
             classes.setdefault(canon((dx, dy, dz)), []).append(G[dx, dy, dz])
 for c, vals in classes.items():
-    assert np.std(vals) < 1e-12                    # szoves: osztalyon belul egzakt
+    assert np.std(vals) < 1e-12                    # weave: exact within a class
 
 szomszed = G[1, 0, 0]
 atellenes = G[L // 2, L // 2, L // 2]
-print("szomszed-kozelseg G(1,0,0) = %+.6f" % szomszed)
-print("atellenes visszhang G(6,6,6) = %+.6f  (elojel: %s; |arany a szomszedhoz| = %.4f)"
-      % (atellenes, "negativ" if atellenes < 0 else "pozitiv",
+print("neighbour closeness G(1,0,0) = %+.6f" % szomszed)
+print("antipodal echo G(6,6,6) = %+.6f  (sign: %s; |ratio to the neighbour| = %.4f)"
+      % (atellenes, "negative" if atellenes < 0 else "positive",
          abs(atellenes) / szomszed))
 
-# --- 5) Az ugras az ELOJELES listan (javitott szabaly) -----------------------
+# --- 5) The jump on the SIGNED list (the corrected rule) ---------------------
 g = G.ravel().copy()
-g[0] = -np.inf                                     # sajat hely kizarva
-rend = np.argsort(g)[::-1]                         # elojeles, csokkeno
+g[0] = -np.inf                                     # own site excluded
+rend = np.argsort(g)[::-1]                         # signed, decreasing
 v = g[rend]
-ablak = 30                                         # rogzitett keresesi ablak
+ablak = 30                                         # fixed search window
 legjobb, kstar = -1.0, None
 for m in range(1, ablak + 1):
     if v[m] > 0:
         r = v[m - 1] / v[m]
         if r > legjobb:
             legjobb, kstar = r, m
-print("elojeles lista eleje:", np.round(v[:10], 5))
-print("ugras a(z) %d. hely utan: %.5f -> %.5f (%.1f-szeres)"
+print("start of the signed list:", np.round(v[:10], 5))
+print("jump after place %d: %.5f -> %.5f (%.1f-fold)"
       % (kstar, v[kstar - 1], v[kstar], legjobb))
 
-# sav-orszem: leggyengebb elfogadott / legerosebb elutasitott (nagysag szerint);
-# a sajat hely helyorzoje (-inf) nem tagja a mezonynek
+# band sentinel: weakest accepted / strongest rejected (by magnitude);
+# the placeholder of the own site (-inf) is not a member of the field
 maradek = v[kstar:]
 maradek = maradek[np.isfinite(maradek)]
 j = int(np.argmax(np.abs(maradek)))
 erosebb_ert = float(maradek[j])
 d_erosebb = tuple(np.unravel_index(int(rend[kstar + j]), (L, L, L)))
 S = v[kstar - 1] / abs(erosebb_ert)
-print("sav-orszem: S = %.4f  (kuszob: 2); legerosebb elutasitott: %s osztaly, G = %+.6f"
+print("band sentinel: S = %.4f  (threshold: 2); strongest rejected: class %s, G = %+.6f"
       % (S, canon(d_erosebb), erosebb_ert))
 
-# osszevetes a regi, abszolut-ertekes szaballyal (diagnosztika, nem itelet)
+# comparison with the old, absolute-value rule (diagnostics, not the verdict)
 va = np.sort(np.abs(np.where(np.isfinite(g), g, 0)))[::-1]
 r_abs = va[:ablak] / np.maximum(va[1:ablak + 1], 1e-300)
 k_abs = int(np.argmax(r_abs)) + 1
-print("regi abszolut szabaly (osszevetesul): ugras a(z) %d. hely utan (%.1f-szeres)"
+print("old absolute rule (for comparison): jump after place %d (%.1f-fold)"
       % (k_abs, r_abs[k_abs - 1]))
 
-# --- 6) Visszarakas es teljesseg-szamla --------------------------------------
+# --- 6) Rebuilding and the completeness ledger -------------------------------
 top = [tuple(np.unravel_index(int(i), (L, L, L))) for i in rend[:kstar]]
 rec_edges = set()
 for x in range(L):
@@ -152,10 +152,10 @@ for x in range(L):
 megvan = len(rec_edges & true_edges)
 fantom = len(rec_edges - true_edges)
 hianyzo = len(true_edges - rec_edges)
-print("teljesseg-szamla: megtalalt %d/%d; fantom %d; hianyzo %d"
+print("completeness ledger: found %d/%d; phantom %d; missing %d"
       % (megvan, NCONTRACT, fantom, hianyzo))
 
-# --- 7) Golyo-olvasat r <= 5 -------------------------------------------------
+# --- 7) Ball reading up to r <= 5 --------------------------------------------
 adj = [[] for _ in range(NSITE)]
 for a, b in rec_edges:
     adj[a].append(b)
@@ -171,16 +171,16 @@ while q:
             q.append(x2)
 golyo = [sum(1 for d in dist if 0 <= d <= r) for r in range(6)]
 novek = [golyo[i + 1] - golyo[i] for i in range(5)]
-hivatkozas = [1, 7, 25, 63, 129, 231]              # 4r^2+2 novekmennyel
-print("golyo (r=0..5):", golyo, " novekmenyek:", novek)
-print("hivatkozasi sor (ter, negyzetes):", hivatkozas)
+hivatkozas = [1, 7, 25, 63, 129, 231]              # with increment 4r^2+2
+print("ball (r=0..5):", golyo, " increments:", novek)
+print("reference sequence (space, quadratic):", hivatkozas)
 
-# --- 8) Itelet a rogzitett feltetelek szerint --------------------------------
+# --- 8) Verdict according to the fixed conditions ----------------------------
 A1 = res > 1e-6
 A2 = (megvan == NCONTRACT and fantom == 0 and hianyzo == 0)
 A3 = (golyo == hivatkozas)
 A4 = (S >= 2.0)
-print("\nfeltetelek: A1 zart fok %s | A2 teljesseg %s | A3 golyo %s | A4 orszem %s"
-      % tuple("all" if a else "BUKIK" for a in (A1, A2, A3, A4)))
-print("ITELET:", "ALL — a 12-es meret-diagnozis hatokoron belul igazolva"
-      if all((A1, A2, A3, A4)) else "RESZLEGES — a bukott feltetel megnevezve fent")
+print("\nconditions: A1 closed degree %s | A2 completeness %s | A3 ball %s | A4 sentinel %s"
+      % tuple("holds" if a else "FAILS" for a in (A1, A2, A3, A4)))
+print("VERDICT:", "HOLDS — the 12-weave size diagnosis is confirmed within scope"
+      if all((A1, A2, A3, A4)) else "PARTIAL — the failed condition is named above")
