@@ -96,10 +96,15 @@ td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums}
 
 /* ---------- personal note ---------- */
 .note{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--steel);
-  border-radius:0 14px 14px 0;padding:1.5rem 1.6rem;margin:1.25rem 0}
-.note h2{margin-top:0}
+  border-radius:0 14px 14px 0;padding:1.35rem 1.5rem;margin:1.5rem 0 2.25rem;
+  font-size:.94rem;font-style:italic;line-height:1.7;color:var(--muted)}
+.note h2{margin:0 0 .7rem;font-size:1.12rem;font-style:italic;color:var(--ink)}
+.note strong,.note em{color:var(--ink)}
+.note em{font-style:normal}
 .note p:last-of-type{margin-bottom:0}
-.note .mail{display:inline-block;margin-top:.4rem;font-size:1.02rem;font-weight:600;
+.note code{font-style:normal;font-size:.88em}
+.note .mail{display:inline-block;margin-top:.35rem;font-size:.95rem;font-weight:600;
+  font-style:normal;color:var(--ink);
   font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:-0.01em}
 
 footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);font-size:.9rem}
@@ -144,6 +149,39 @@ footer p{margin:.3rem 0}
     <a class="primary" href="https://github.com/ivanhonis/oop-physics-language">Repository on GitHub</a>
     <a href="https://github.com/ivanhonis/oop-physics-language/blob/master/en/00-introduction_en.md">Start reading</a>
     <a href="https://github.com/ivanhonis/oop-physics-language/blob/master/en/II-proofs/II-00-index_en.md">Index of the proofs</a>
+  </div>
+
+  <div class="note">
+  <h2>A personal note</h2>
+  <p>I am not a physicist — I work in AI development. What I contributed to this work is
+  not the physics but the <strong>method</strong>: the fixed order in which a claim may
+  enter the language at all — the rulebook fixed <em>before</em> the computation,
+  package-by-package approval, the import ledger, and the rule that a failure stays in the
+  repository with its verdict written out.</p>
+
+  <p>That order has a side effect I did not plan for. Because the procedure is fairly
+  strictly fixed, today's advanced language models <strong>can follow it on their
+  own</strong>: they pick up the thread, fix the rulebook in advance, form packages, and
+  carry out the computation. For machine verification their built-in Python runner is
+  usually enough; where more capacity is needed, that can be agreed on, and the
+  verification code can be written and run locally.</p>
+
+  <p>The human's part in this is not the derivation. It is <strong>setting the
+  direction</strong>, sharpening the question, and deciding whether a result really holds.</p>
+
+  <p><strong>If you would like to try it:</strong> give the complete language dump —
+  <code>dist/dump_hu.md</code> or <code>dist/dump_en.md</code> — to an advanced model
+  (Claude Fable 5, for instance), pick a topic, and start a conversation. The dump is built
+  so that it is enough on its own to continue from: the headers, the import ledgers and the
+  package trail together say where the work stands and what the next step is.</p>
+
+
+  <p>I am <strong>glad to share it with anyone</strong> — professional physicist
+  and enthusiastic amateur alike. Criticism especially is welcome: if you find an error
+  somewhere, or know a sharper test, that is worth more to me than agreement. Advice,
+  questions and refutations are all equally welcome.</p>
+
+  <p><a class="mail" href="mailto:ivan.honis@ndot.io">ivan.honis@ndot.io</a></p>
   </div>
 
   <h2>The method, and its yardstick</h2>
@@ -217,44 +255,6 @@ footer p{margin:.3rem 0}
   <div class="card"><code>pip install -r requirements.txt</code><br>
   <code>python shared/environment-check.py</code></div>
 
-  <div class="note">
-  <h2>A personal note</h2>
-  <p>I am not a physicist — I work in AI development. What I contributed to this work is
-  not the physics but the <strong>method</strong>: the fixed order in which a claim may
-  enter the language at all — the rulebook fixed <em>before</em> the computation,
-  package-by-package approval, the import ledger, and the rule that a failure stays in the
-  repository with its verdict written out.</p>
-
-  <p>That order has a side effect I did not plan for. Because the procedure is fairly
-  strictly fixed, today's advanced language models <strong>can follow it on their
-  own</strong>: they pick up the thread, fix the rulebook in advance, form packages, and
-  carry out the computation. For machine verification their built-in Python runner is
-  usually enough; where more capacity is needed, that can be agreed on, and the
-  verification code can be written and run locally.</p>
-
-  <p>The human's part in this is not the derivation. It is <strong>setting the
-  direction</strong>, sharpening the question, and deciding whether a result really holds.</p>
-
-  <p><strong>If you would like to try it:</strong> give the complete language dump —
-  <code>dist/dump_hu.md</code> or <code>dist/dump_en.md</code> — to an advanced model
-  (Claude Fable 5, for instance), pick a topic, and start a conversation. The dump is built
-  so that it is enough on its own to continue from: the headers, the import ledgers and the
-  package trail together say where the work stands and what the next step is.</p>
-
-  <p>An honest warning. Secondary-school physics and mathematics will probably not be
-  enough here — not because the text is hard, but because <strong>without your own
-  judgement you will not be able to tell whether what you get back is true</strong>. The
-  method is worth something only because someone holds it to the number; if nobody fills
-  that role, all that comes out is well-formatted text.</p>
-
-  <p>Even so, I am <strong>glad to share it with anyone</strong> — professional physicist
-  and enthusiastic amateur alike. Criticism especially is welcome: if you find an error
-  somewhere, or know a sharper test, that is worth more to me than agreement. Advice,
-  questions and refutations are all equally welcome.</p>
-
-  <p><a class="mail" href="mailto:ivan.honis@ndot.io">ivan.honis@ndot.io</a></p>
-  </div>
-
   <h2>Licence and citation</h2>
   <p>Text: CC BY-SA 4.0 · Code: MIT. For citation use
   <a href="https://github.com/ivanhonis/oop-physics-language/blob/master/CITATION.cff">CITATION.cff</a>.</p>
@@ -279,6 +279,40 @@ footer p{margin:.3rem 0}
     <a class="primary" href="https://github.com/ivanhonis/oop-physics-language">A repó a GitHubon</a>
     <a href="https://github.com/ivanhonis/oop-physics-language/blob/master/hu/00-introduction_hu.md">Olvasás indítása</a>
     <a href="https://github.com/ivanhonis/oop-physics-language/blob/master/hu/II-proofs/II-00-index_hu.md">A próbák indexe</a>
+  </div>
+
+  <div class="note">
+  <h2>Egy személyes megjegyzés</h2>
+  <p>Nem fizikus vagyok, hanem AI-fejlesztő. Amit ehhez a munkához hozzátettem, az nem a
+  fizika, hanem a <strong>módszertan</strong>: az a rögzített rend, ahogyan egy állítás
+  egyáltalán bekerülhet a nyelvbe — a szabálykönyv a számolás <em>előtt</em>, a
+  csomagonkénti jóváhagyás, az import-számla, és az, hogy a bukás is bent marad, kiírt
+  ítélettel.</p>
+
+  <p>Ennek a rendnek van egy mellékhatása, amit magam sem terveztem előre. Mivel a menet
+  elég szigorúan rögzített, a mai fejlett nyelvi modellek <strong>maguktól tudják
+  követni</strong>: felveszik a fonalat, előre rögzítik a szabálykönyvet, csomagokat
+  képeznek, és elvégzik a számolást. A gépi ellenőrzéshez az esetek többségében a belső
+  Python-futtatójuk is elegendő; ahol nagyobb kapacitás kell, arról meg lehet állapodni, és
+  az ellenőrző kódot helyben megírva, lokálisan is le lehet futtatni.</p>
+
+  <p>Az ember dolga ilyenkor nem a levezetés. Az <strong>irány kijelölése</strong>, a kérdés
+  élesítése, és annak eldöntése, hogy egy eredmény tényleg megáll-e.</p>
+
+  <p><strong>Ha ki szeretnéd próbálni:</strong> add be a teljes nyelvi dumpot —
+  <code>dist/dump_hu.md</code> vagy <code>dist/dump_en.md</code> — egy fejlett modellnek
+  (például Claude Fable 5), jelölj ki egy témát, és kezdj el beszélgetni. A dump
+  szándékosan úgy készül, hogy önmagában elég legyen a folytatáshoz: a fejlécek, az
+  import-számlák és a csomag-nyomvonal együtt megmondják, hol tart a munka és mi a
+  következő lépés.</p>
+
+
+  <p><strong>Örömmel megosztom bárkivel</strong> — hivatásos fizikussal és
+  lelkes amatőrrel egyaránt. A kritikát külön várom: ha valahol hibát találsz, vagy tudsz
+  egy élesebb próbát, az többet ér nekem, mint az egyetértés. Tanácsot, kérdést, cáfolatot
+  egyformán szívesen fogadok.</p>
+
+  <p><a class="mail" href="mailto:ivan.honis@ndot.io">ivan.honis@ndot.io</a></p>
   </div>
 
   <h2>A módszer és a mérce</h2>
@@ -351,45 +385,6 @@ footer p{margin:.3rem 0}
   <div class="card"><code>pip install -r requirements.txt</code><br>
   <code>python shared/environment-check.py</code></div>
 
-  <div class="note">
-  <h2>Egy személyes megjegyzés</h2>
-  <p>Nem fizikus vagyok, hanem AI-fejlesztő. Amit ehhez a munkához hozzátettem, az nem a
-  fizika, hanem a <strong>módszertan</strong>: az a rögzített rend, ahogyan egy állítás
-  egyáltalán bekerülhet a nyelvbe — a szabálykönyv a számolás <em>előtt</em>, a
-  csomagonkénti jóváhagyás, az import-számla, és az, hogy a bukás is bent marad, kiírt
-  ítélettel.</p>
-
-  <p>Ennek a rendnek van egy mellékhatása, amit magam sem terveztem előre. Mivel a menet
-  elég szigorúan rögzített, a mai fejlett nyelvi modellek <strong>maguktól tudják
-  követni</strong>: felveszik a fonalat, előre rögzítik a szabálykönyvet, csomagokat
-  képeznek, és elvégzik a számolást. A gépi ellenőrzéshez az esetek többségében a belső
-  Python-futtatójuk is elegendő; ahol nagyobb kapacitás kell, arról meg lehet állapodni, és
-  az ellenőrző kódot helyben megírva, lokálisan is le lehet futtatni.</p>
-
-  <p>Az ember dolga ilyenkor nem a levezetés. Az <strong>irány kijelölése</strong>, a kérdés
-  élesítése, és annak eldöntése, hogy egy eredmény tényleg megáll-e.</p>
-
-  <p><strong>Ha ki szeretnéd próbálni:</strong> add be a teljes nyelvi dumpot —
-  <code>dist/dump_hu.md</code> vagy <code>dist/dump_en.md</code> — egy fejlett modellnek
-  (például Claude Fable 5), jelölj ki egy témát, és kezdj el beszélgetni. A dump
-  szándékosan úgy készül, hogy önmagában elég legyen a folytatáshoz: a fejlécek, az
-  import-számlák és a csomag-nyomvonal együtt megmondják, hol tart a munka és mi a
-  következő lépés.</p>
-
-  <p>Egy őszinte figyelmeztetés. Ehhez a középiskolai fizika és matematika valószínűleg nem
-  lesz elég — nem azért, mert a szöveg nehéz, hanem mert a <strong>saját ítéleted nélkül
-  nem fogod tudni megmondani, hogy amit kapsz, az igaz-e</strong>. A módszertan attól ér
-  valamit, hogy valaki számon kéri rajta a számot; ha ezt a szerepet nem tölti be senki,
-  csak egy jól formázott szöveg keletkezik.</p>
-
-  <p>Ezzel együtt <strong>örömmel megosztom bárkivel</strong> — hivatásos fizikussal és
-  lelkes amatőrrel egyaránt. A kritikát külön várom: ha valahol hibát találsz, vagy tudsz
-  egy élesebb próbát, az többet ér nekem, mint az egyetértés. Tanácsot, kérdést, cáfolatot
-  egyformán szívesen fogadok.</p>
-
-  <p><a class="mail" href="mailto:ivan.honis@ndot.io">ivan.honis@ndot.io</a></p>
-  </div>
-
   <h2>Licenc és idézés</h2>
   <p>Szöveg: CC BY-SA 4.0 · Kód: MIT. Idézéshez:
   <a href="https://github.com/ivanhonis/oop-physics-language/blob/master/CITATION.cff">CITATION.cff</a>.</p>
@@ -418,8 +413,8 @@ document.body.classList.remove('no-js');
     try{ localStorage.setItem('oopl-lang',l); }catch(e){}
   }
   bEn.onclick=function(){show('en')}; bHu.onclick=function(){show('hu')};
+  // the default is English; Hungarian only if the reader chose it before
   var saved; try{ saved=localStorage.getItem('oopl-lang'); }catch(e){}
-  if(!saved && (navigator.language||'').toLowerCase().indexOf('hu')===0) saved='hu';
   if(saved==='hu') show('hu');
 })();
 </script>
