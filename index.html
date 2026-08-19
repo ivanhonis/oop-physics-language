@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OOP Physics Language</title>
+<meta name="description" content="An object-oriented descriptive language for physics — every pattern sharpened to a computable claim, checked against measured quantum results.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="OOP Physics Language">
+<meta property="og:description" content="An object-oriented descriptive language for physics — every pattern sharpened to a computable claim, checked against measured quantum results.">
+<meta property="og:image" content="https://ivanhonis.github.io/oop-physics-language/media/OOP_Git_card.jpg">
+<meta property="og:url" content="https://ivanhonis.github.io/oop-physics-language/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="media/OOP_Logo.jpg">
+
+<style>
+:root{
+  --bg:#eef0f2; --surface:#fff; --ink:#1c2126; --muted:#5b666f;
+  --line:#d7dbdf; --steel:#6b7780; --pill:#e7eaed;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme=light]){
+    --bg:#14171a; --surface:#1b1f23; --ink:#e7ebee; --muted:#98a3ab;
+    --line:#2b3137; --steel:#93a0a9; --pill:#242a2f;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font:400 17px/1.65 ui-sans-serif,-apple-system,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+  letter-spacing:-0.006em;
+}
+.wrap{max-width:56rem;margin:0 auto;padding:0 1.5rem}
+a{color:inherit}
+a:hover{color:var(--steel)}
+
+/* ---------- hero ---------- */
+header{padding:4.5rem 0 2.5rem;text-align:center}
+/* the logo is a JPG with its own light ground: round it so it reads as a
+   card on both themes, instead of a blend trick that depends on the exact tone */
+header img{width:min(340px,72vw);height:auto;display:block;margin:0 auto 1.25rem;
+  border-radius:16px}
+h1{font-size:clamp(2.1rem,6vw,3.2rem);font-weight:600;letter-spacing:-0.03em;margin:0 0 .6rem}
+.tag{color:var(--muted);font-size:1.05rem;max-width:38rem;margin:0 auto;text-wrap:balance}
+
+/* ---------- language switch ---------- */
+.langbar{display:flex;justify-content:center;gap:.4rem;margin:2.25rem 0 0}
+.langbar button{
+  font:inherit;font-size:.9rem;padding:.4rem 1.1rem;border-radius:999px;
+  border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;
+}
+.langbar button[aria-pressed=true]{background:var(--surface);color:var(--ink);border-color:var(--steel)}
+
+/* ---------- sections ---------- */
+main{padding:1rem 0 5rem}
+section.lang{display:none}
+section.lang.on{display:block}
+.no-js section.lang{display:block}
+h2{font-size:1.5rem;font-weight:600;letter-spacing:-0.02em;margin:3rem 0 .9rem}
+h2:first-of-type{margin-top:1.5rem}
+p{margin:0 0 1rem}
+.lede{font-size:1.12rem}
+.muted{color:var(--muted)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:1.4rem 1.5rem;margin:1.25rem 0}
+
+ol.read{margin:0;padding-left:1.3rem}
+ol.read li{margin:.45rem 0}
+ol.read code{font-size:.92em}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  background:var(--pill);padding:.12em .38em;border-radius:5px;font-size:.9em}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:38rem;font-size:.94rem}
+th,td{text-align:left;padding:.62rem .9rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:.13em .55em;border-radius:999px;background:var(--pill);
+  font-size:.82rem;color:var(--muted);white-space:nowrap}
+
+.grid{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));margin:1.25rem 0}
+.grid div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem}
+.grid b{display:block;font-size:1.5rem;font-weight:600;letter-spacing:-0.02em}
+.grid span{color:var(--muted);font-size:.9rem}
+
+.btns{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.4rem 0}
+.btns a{display:inline-block;text-decoration:none;font-size:.95rem;padding:.55rem 1.1rem;
+  border-radius:10px;border:1px solid var(--line);background:var(--surface)}
+.btns a.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btns a:hover{border-color:var(--steel);color:var(--ink)}
+.btns a.primary:hover{color:var(--bg);opacity:.9}
+
+footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);font-size:.9rem}
+footer p{margin:.3rem 0}
+</style>
+</head>
+
+<body class="no-js">
+<div class="wrap">
+
+<header>
+  <img src="media/OOP_Logo.jpg" alt="">
+  <h1>OOP Physics Language</h1>
+  <p class="tag">An object-oriented descriptive language for physics — every pattern
+     sharpened to a computable claim, checked against measured quantum results.</p>
+
+  <div class="langbar">
+    <button id="btn-en" aria-pressed="true">English</button>
+    <button id="btn-hu" aria-pressed="false">Magyar</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ==================== ENGLISH ==================== -->
+<section class="lang on" id="en" lang="en">
+
+  <p class="lede">This is a descriptive language that models the physical world with
+  object-oriented patterns — <strong>not as metaphor</strong>. Every pattern is sharpened
+  until it yields a computable claim, and that claim is checked against measured
+  quantum-physics results.</p>
+
+  <div class="grid">
+    <div><b>17</b><span>proofs, one file each</span></div>
+    <div><b>5</b><span>laws, each with its proof</span></div>
+    <div><b>3</b><span>imported items, in total</span></div>
+    <div><b>2</b><span>languages, mirrored file by file</span></div>
+  </div>
+
+  <div class="btns">
+    <a class="primary" href="https://github.com/ivanhonis/oop-physics-language">Repository on GitHub</a>
+    <a href="https://github.com/ivanhonis/oop-physics-language/blob/master/en/00-introduction_en.md">Start reading</a>
+    <a href="https://github.com/ivanhonis/oop-physics-language/blob/master/en/II-proofs/II-00-index_en.md">Index of the proofs</a>
+  </div>
+
+  <h2>The method, and its yardstick</h2>
+  <p>Every new pattern remains a metaphor until it produces a number. The procedure is
+  fixed: state the pattern in OOP language, write down the mathematical form, then
+  recompute a known experimental or published result. Whatever does not pass the third
+  step does not enter the language.</p>
+  <p>A second yardstick measures whether the language <em>helps to think</em>: every
+  derivation must stay inside its own concepts, and every borrowed concept must be
+  recorded. Each proof closes with this <strong>import ledger</strong>. The total import
+  of the language so far is three items — locality, the form of attraction, and two type
+  declarations for the electron. Everything else was born inside.</p>
+
+  <h2>Reading order</h2>
+  <div class="card">
+    <ol class="read">
+      <li><a href="https://github.com/ivanhonis/oop-physics-language/blob/master/en/00-introduction_en.md">Introduction</a> — the idea and how it is built up</li>
+      <li><a href="https://github.com/ivanhonis/oop-physics-language/tree/master/en/I-language">Part I — the language</a>: concepts, laws, theorems, vetted contracts. Only what is proven.</li>
+      <li><a href="https://github.com/ivanhonis/oop-physics-language/tree/master/en/II-proofs">Part II — the proofs</a>: computed results, one by one, analyzed in the same order.</li>
+      <li><a href="https://github.com/ivanhonis/oop-physics-language/tree/master/en/III-frontier">Part III — the frontier</a>: candidate laws and open questions — what the language does not yet know.</li>
+      <li><a href="https://github.com/ivanhonis/oop-physics-language/tree/master/en/appendix">Appendix</a> — machinery, benchmarks, package trail</li>
+    </ol>
+  </div>
+
+  <h2>The proofs</h2>
+  <p class="muted">Every chapter proceeds in the same order: the question — the system and
+  the contract — the computation — the result — checking against reality — import ledger —
+  what it confirmed of the language.</p>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Proof</th><th>In one sentence</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td>II/1</td><td>The simplest contract yields the measurable advantage of joint ownership: entanglement is a theorem, not an assumption.</td><td><span class="pill">stands</span></td></tr>
+      <tr><td>II/2</td><td>The same contract drives the evolution too — the measured oscillation with no free parameter; the language is closed.</td><td><span class="pill">stands</span></td></tr>
+      <tr><td>II/3</td><td>The discrete value set is a consequence of boundness: a 1 : 4 : 9 : 16 ladder, with a lattice bonus.</td><td><span class="pill">stands</span></td></tr>
+      <tr><td>II/4</td><td>The attractive contract gives the hydrogen spectrum to four decimal places; level coincidence and ionization are unrequested bonuses.</td><td><span class="pill">stands</span></td></tr>
+      <tr><td>II/5</td><td>The frustration remainder is a number derived from exclusive ownership; the choice remains undecided.</td><td><span class="pill">stands</span></td></tr>
+      <tr><td>II/6</td><td>The bottom of every local mixing is the same ladder; the adjacency import narrows to locality.</td><td><span class="pill">stands</span></td></tr>
+      <tr><td>II/7</td><td>The filling order of exclusion on measured numbers: saturation at 2, 6, 12, 20.</td><td><span class="pill">stands</span></td></tr>
+      <tr><td>II/8</td><td>Main and secondary peaks (2, 6, 12; 4, 9) — the exchange discount on measured numbers.</td><td><span class="pill">stands</span></td></tr>
+      <tr><td>II/9</td><td>Band theorem; the self-rotating mixture of coverings beats the frozen covering — the decision is a theorem.</td><td><span class="pill">stands</span></td></tr>
+      <tr><td>II/10</td><td>The system can be its own environment — and under strong unevenness it cannot; two independent fingerprints.</td><td><span class="pill">on a small piece</span></td></tr>
+      <tr><td>II/11</td><td>Adjacency is a view of the finished state; a surface signature; the extension number is measurable.</td><td><span class="pill">stands</span></td></tr>
+      <tr><td>II/12</td><td>A failure proof: the selection candidate failed; its yield is the collapse theorem and the trace tie.</td><td><span class="pill">failure, 2 theorems</span></td></tr>
+      <tr><td>II/13</td><td>At high density the plane beats the line and the segmented one; the winner is singled out by shell fit.</td><td><span class="pill">partial yes</span></td></tr>
+      <tr><td>II/14</td><td>A complete staircase: sparsely the line, in the middle the plane, from half filling onwards space.</td><td><span class="pill">yes</span></td></tr>
+      <tr><td>II/15</td><td>At coordination eight the staircase climbs to four — but at the top it turns back: the densest region belongs to space.</td><td><span class="pill">partial</span></td></tr>
+      <tr><td>II/16</td><td>The staircase skips three; the top is taken by the native five — the birth of the unified top law.</td><td><span class="pill">partial</span></td></tr>
+      <tr><td>II/17</td><td>If the contract is generated by the state of the instances: does the flat network return, does it crumble into pairs, or something between?</td><td><span class="pill">running</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>How it is written</h2>
+  <p>One claim — one addressable file. Numbering is append-only: a new proof is always
+  appended to the end, and an existing identifier never changes. Larger derivations are
+  produced with the <strong>package method</strong>: a rulebook fixed <em>before</em> any
+  computation, then individually approved packages — which is what keeps a prediction
+  refutable. Failures stay in the repository with their verdict recorded; II/12 is a
+  failure proof, and it earned two theorems.</p>
+  <p>The research is conducted in Hungarian (<code>hu/</code>); the English mirror
+  (<code>en/</code>) lives on the same paths, file by file. Terminology for translations
+  is fixed in the dictionary chapter.</p>
+
+  <h2>Running the computations</h2>
+  <p>The code is language-independent and lives under <code>shared/</code>. Install the
+  single dependency, then run the environment check first — on Windows
+  <code>np.longdouble</code> is an alias of <code>float64</code>, which silently degrades
+  the extended-precision route several packages rely on:</p>
+  <div class="card"><code>pip install -r requirements.txt</code><br>
+  <code>python shared/environment-check.py</code></div>
+
+  <h2>Licence and citation</h2>
+  <p>Text: CC BY-SA 4.0 · Code: MIT. For citation use
+  <a href="https://github.com/ivanhonis/oop-physics-language/blob/master/CITATION.cff">CITATION.cff</a>.</p>
+
+</section>
+
+<!-- ==================== MAGYAR ==================== -->
+<section class="lang" id="hu" lang="hu">
+
+  <p class="lede">Ez egy leírónyelv, amely a fizikai világot objektumorientált mintákkal
+  írja le — <strong>nem metaforaként</strong>. Minden mintát addig pontosítunk, amíg
+  számolható állítást ad, és azt a kvantumfizika mért eredményein ellenőrizzük.</p>
+
+  <div class="grid">
+    <div><b>17</b><span>próba, egyenként egy fájl</span></div>
+    <div><b>5</b><span>törvény, mind a bizonyító próbájával</span></div>
+    <div><b>3</b><span>importált tétel, összesen</span></div>
+    <div><b>2</b><span>nyelv, fájlonkénti tükörrel</span></div>
+  </div>
+
+  <div class="btns">
+    <a class="primary" href="https://github.com/ivanhonis/oop-physics-language">A repó a GitHubon</a>
+    <a href="https://github.com/ivanhonis/oop-physics-language/blob/master/hu/00-introduction_hu.md">Olvasás indítása</a>
+    <a href="https://github.com/ivanhonis/oop-physics-language/blob/master/hu/II-proofs/II-00-index_hu.md">A próbák indexe</a>
+  </div>
+
+  <h2>A módszer és a mérce</h2>
+  <p>Minden új minta addig metafora, amíg nem ad számot. A menet rögzített: a minta
+  kimondása OOP-nyelven, a matematikai alak felírása, majd egy ismert kísérleti vagy
+  publikált eredmény visszaszámolása. Ami a harmadikon nem megy át, az nem kerül a nyelvbe.</p>
+  <p>A második mérce azt méri, <em>segít-e gondolkodni</em>: minden levezetést a nyelv
+  saját fogalmain belül kell elvégezni, és minden kölcsönzött fogalmat fel kell jegyezni.
+  Minden próba <strong>import-számlával</strong> zárul. A nyelv eddigi teljes importja
+  három tétel — a helyiség, a vonzás alakja, és két típusdeklaráció az elektronra.
+  Minden más belül született.</p>
+
+  <h2>Olvasási sorrend</h2>
+  <div class="card">
+    <ol class="read">
+      <li><a href="https://github.com/ivanhonis/oop-physics-language/blob/master/hu/00-introduction_hu.md">Bevezető</a> — az elgondolás és a felépítés</li>
+      <li><a href="https://github.com/ivanhonis/oop-physics-language/tree/master/hu/I-language">I. rész — a nyelv</a>: fogalmak, törvények, tételek, bevizsgált szerződések. Csak a bizonyított.</li>
+      <li><a href="https://github.com/ivanhonis/oop-physics-language/tree/master/hu/II-proofs">II. rész — a próbák</a>: számolt eredmények, egyenként, azonos rendben elemezve.</li>
+      <li><a href="https://github.com/ivanhonis/oop-physics-language/tree/master/hu/III-frontier">III. rész — a határ</a>: jelölt törvények és nyitott kérdések — amit a nyelv még nem tud.</li>
+      <li><a href="https://github.com/ivanhonis/oop-physics-language/tree/master/hu/appendix">Függelék</a> — gépezet, mércék, csomag-nyomvonal</li>
+    </ol>
+  </div>
+
+  <h2>A próbák</h2>
+  <p class="muted">Minden fejezet azonos rendben halad: a kérdés — a rendszer és a
+  szerződés — a számolás — az eredmény — ellenőrzés a valóságon — import-számla — mit
+  igazolt a nyelvből.</p>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Próba</th><th>Egy mondatban</th><th>Ítélet</th></tr></thead>
+    <tbody>
+      <tr><td>II/1</td><td>A legegyszerűbb szerződés kiadja a közös birtoklás mérhető előnyét: az összefonódás tétel, nem feltevés.</td><td><span class="pill">áll</span></td></tr>
+      <tr><td>II/2</td><td>Ugyanaz a szerződés hajtja a fejlődést is — szabad paraméter nélkül adja a mért lengést; a nyelv zárt.</td><td><span class="pill">áll</span></td></tr>
+      <tr><td>II/3</td><td>A diszkrét értékkészlet a kötöttség következménye: 1 : 4 : 9 : 16 létra, rácsos ráadással.</td><td><span class="pill">áll</span></td></tr>
+      <tr><td>II/4</td><td>A vonzó szerződés négy tizedesjegyre a mért színképet adja; szint-egybeesés és ionizáció kéretlen ráadás.</td><td><span class="pill">áll</span></td></tr>
+      <tr><td>II/5</td><td>A frusztráció-maradék a kizárólagos birtoklásból levezetett szám; eldöntetlen választás marad.</td><td><span class="pill">áll</span></td></tr>
+      <tr><td>II/6</td><td>Minden helyi keverés alja ugyanaz a létra; a szomszédság-import helyiséggé szűkül.</td><td><span class="pill">áll</span></td></tr>
+      <tr><td>II/7</td><td>A kizárás betöltési rendje mért számokon: betelés 2, 6, 12, 20-nál.</td><td><span class="pill">áll</span></td></tr>
+      <tr><td>II/8</td><td>Fő- és mellékcsúcsok (2, 6, 12; 4, 9) — a kicserélődési kedvezmény mért számokon.</td><td><span class="pill">áll</span></td></tr>
+      <tr><td>II/9</td><td>Sáv-tétel; a fedések önforgó keveréke veri a befagyott fedést — a döntés a nyelvben tétel.</td><td><span class="pill">áll</span></td></tr>
+      <tr><td>II/10</td><td>A rendszer saját környezete lehet — és erős egyenetlenségnél nem; két független ujjlenyomattal.</td><td><span class="pill">kis darabon</span></td></tr>
+      <tr><td>II/11</td><td>A szomszédság a kész állapot nézete; felület-ismertetőjel; a kiterjedésszám mérhető.</td><td><span class="pill">áll</span></td></tr>
+      <tr><td>II/12</td><td>Bukás-próba: a kiválasztási jelölt megbukott; hozadéka az összeomlási tétel és a nyom-döntetlen.</td><td><span class="pill">bukás, 2 tétel</span></td></tr>
+      <tr><td>II/13</td><td>Magas sűrűségen a sík veri a vonalat és a daraboltat; a győztest héj-illeszkedés jelöli ki.</td><td><span class="pill">részleges igen</span></td></tr>
+      <tr><td>II/14</td><td>Teljes lépcső: ritkán vonal, közepén sík, fél-töltéstől tér.</td><td><span class="pill">igen</span></td></tr>
+      <tr><td>II/15</td><td>Nyolcas koordináción a lépcső felmegy négyig — de a tetején visszafordul: a legsűrűbb tartomány a téré.</td><td><span class="pill">részleges</span></td></tr>
+      <tr><td>II/16</td><td>A lépcső kihagyja a hármat; a tetőt a honos öt viszi — az egyesített tető-törvény születése.</td><td><span class="pill">részleges</span></td></tr>
+      <tr><td>II/17</td><td>Ha a szerződést a példányok állapota generálja: visszatér a lapos háló, elomlik párokba, vagy marad köztes?</td><td><span class="pill">fut</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>Hogyan készül</h2>
+  <p>Egy állítás — egy címezhető fájl. A számozás bővítésálló: új próba mindig a sor
+  végére kerül, meglévő azonosító soha nem változik. A nagyobb levezetések a
+  <strong>csomag-módszerrel</strong> készülnek: a szabálykönyv minden számolás
+  <em>előtt</em> rögzül, utána jönnek az egyenként jóváhagyott csomagok — ez tartja
+  cáfolhatónak a jóslatot. A bukás is a repóban marad, kiírt ítélettel; a II/12
+  bukás-próba, és két tételt hozott.</p>
+  <p>A kutatás magyarul folyik (<code>hu/</code>); az angol tükör (<code>en/</code>)
+  ugyanazokon az útvonalakon él, fájlonként. A fordítások terminológia-forrása a
+  szótár-fejezet.</p>
+
+  <h2>A számolások futtatása</h2>
+  <p>A kód nyelvfüggetlen, a <code>shared/</code> alatt él. Telepítsd az egyetlen
+  függőséget, és futtasd elsőként a környezet-ellenőrzőt — Windowson a
+  <code>np.longdouble</code> a <code>float64</code> álneve, ami csendben elrontja azt a
+  kiterjesztett pontosságú utat, amire több csomag épül:</p>
+  <div class="card"><code>pip install -r requirements.txt</code><br>
+  <code>python shared/environment-check.py</code></div>
+
+  <h2>Licenc és idézés</h2>
+  <p>Szöveg: CC BY-SA 4.0 · Kód: MIT. Idézéshez:
+  <a href="https://github.com/ivanhonis/oop-physics-language/blob/master/CITATION.cff">CITATION.cff</a>.</p>
+
+</section>
+
+</main>
+
+<footer>
+  <p>© 2026 Iván Hőnis · Text CC BY-SA 4.0 · Code MIT</p>
+  <p><a href="https://github.com/ivanhonis/oop-physics-language">github.com/ivanhonis/oop-physics-language</a></p>
+</footer>
+
+</div>
+
+<script>
+document.body.classList.remove('no-js');
+(function(){
+  var en=document.getElementById('en'), hu=document.getElementById('hu');
+  var bEn=document.getElementById('btn-en'), bHu=document.getElementById('btn-hu');
+  function show(l){
+    var isHu = l==='hu';
+    hu.classList.toggle('on',isHu);  en.classList.toggle('on',!isHu);
+    bHu.setAttribute('aria-pressed',isHu); bEn.setAttribute('aria-pressed',!isHu);
+    document.documentElement.lang = l;
+    try{ localStorage.setItem('oopl-lang',l); }catch(e){}
+  }
+  bEn.onclick=function(){show('en')}; bHu.onclick=function(){show('hu')};
+  var saved; try{ saved=localStorage.getItem('oopl-lang'); }catch(e){}
+  if(!saved && (navigator.language||'').toLowerCase().indexOf('hu')===0) saved='hu';
+  if(saved==='hu') show('hu');
+})();
+</script>
+</body>
+</html>
