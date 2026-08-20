@@ -6,7 +6,8 @@
       "regisztralt": "rogzitve, meg nem futott",
       "itelet-varasra": "a futas elindult, az itelet nincs kimondva",
       "beallt": "a siker-feltetelek allnak",
-      "bukott": "valamelyik bukas-feltetel teljesult -- rogzitett bukas, nem torlendo"
+      "bukott": "valamelyik bukas-feltetel teljesult -- rogzitett bukas, nem torlendo",
+      "reszleges": "a lenyegi feltetel all, de valamelyik rogzitett feltetel nem -- a kulonbseg okat a bejegyzes kimondja"
     },
     "kotelezo_szabaly": "A siker- es bukas-feltetel a futas UTAN nem modosithato. A pecset ezt teszi ellenorizhetove; az ido-horgony a commit, amelyben a bejegyzes eloszor megjelenik."
   },
@@ -92,8 +93,8 @@
       "id": "JOS-02",
       "merfoldko": "P2.3 / dontő kiserlet",
       "datum": "2026-08-20",
-      "commit": null,
-      "allapot": "regisztralt",
+      "commit": "98d1b2735152a876273824ab8bc36c4e8d8b1022",
+      "allapot": "reszleges",
       "kerdes": "Ha a nyolcas koordinacio ter-jeloltje EGYSEGESEN a KON-02 kivalasztasi szabalybol jon (tengelyek + lapatlo) a kristalytani BCC helyett, tulel-e a II/15 lepcso-itelete -- azaz a teto-fordulas?",
       "joslat": "A ter-jelolt a lapatloval elveszti a tukor-jegyet (a tobblet-lepes koordinata-osszege paros), ezert a fo negyes kozul egyedul a honos negykiterjedes (hiperkocka) marad tukor-jegyu. A teto-torveny hordozo-fele szerint a teli veget ekkor a NEGYKITERJEDES viszi, es a II/15 teto-fordulasa -- a harom visszaterese a legsurubb tartomanyban -- ELTUNIK.",
       "megnevezett_gyoztes": "J4 (negykiterjedes, hiperkocka)",
@@ -146,7 +147,26 @@
         "hu/II-proofs/II-16-coordination-ten/PKG-16-1-rulebook_hu.md",
         "hu/III-frontier/III-01-candidate-laws_hu.md"
       ],
-      "pecset": "db104804893ee3ac668b0f0d264ae645781cc8a4c863bef500b64702dde1f27d"
+      "pecset": "db104804893ee3ac668b0f0d264ae645781cc8a4c863bef500b64702dde1f27d",
+      "eredmeny": {
+        "datum": "2026-08-20",
+        "csomag": "shared/II-15-dimension-fourth-rung/PKG-15-9-uniform-field.py",
+        "elofeltetel": "mind a negy indulo nyomosszege egzaktul 165888 (elteres 0,00e+00); minden korbeeres >= 8; a J3' csucs-uteme 13,000 < 16, tehat a tukor-jegyet a lapatlo tenylegesen elvette -- a hordozo-tetel elorejelzese szerint",
+        "savszerkezet_uj": "J1 vonal 1..4217 | J2 sik 4218..6910 | J3' ter 6911..9799 | J4 negykiterjedes 9800..20735 | J1 20736",
+        "savszerkezet_kozzetett": "J1 2..4217 | J2 4218..7964 | J4 7965..15996 | J3 (BCC) 15997..20734 | J4 20735..20736",
+        "S1": "ALL -- a J4 az ablak mind a 2000 tolteset nyeri (kuszob 1900)",
+        "S2": "NEM ALL BETU SZERINT -- a J3' 1 toltest 'nyer', es pontosan az N = 20736 teli tolteset",
+        "S2_magyarazat": "Az S2 TETEL SZERINT TELJESITHETETLEN volt, es ez a regisztracio hibaja, nem a vilage. A teli toltesnel minden indulo koltsege pontosan a nyomosszeg (165888) -- ez a II/12 nyom-dontetlen tetele. Az elore rogzitett holtverseny-szabaly (minden minimalis indulo nyerteskent szamit) mellett tehat MINDEN indulo nyeri az N = 20736-ot, barmi legyen a mezony. A 'nulla toltes' kuszob igy ab initio ervenytelen volt.",
+        "B1": "nem valt ki -- a J3' nem viszi a tetot",
+        "B3": "nem valt ki -- 2000-bol 1 holtversenyes, es az is a teli toltes",
+        "K1": "ALL -- a teljes mezony teteje valtozatlanul az (1, 3, 5, 7), 2000/2000",
+        "itelet": "RESZLEGES. A joslat LENYEGE beallt, es elesen: egyetlen lepes cserejevel -- (1,-1,-1) helyett (0,1,-1) -- a tukor-jegy eltunt, es vele egyutt a II/15 teto-fordulasa. A fo mezony teteje a honos negykiterjedese lett, a felteltes alatti 9800-tol a teli vegig. Egy rogzitett feltetel (S2) viszont nem all betu szerint, mert hibasan volt megfogalmazva.",
+        "ket_kovetkeztetes": [
+          "POZITIV: a teto-torveny HORDOZO-FELE ellenorzott kiserletet allt ki. Egy valtozot valtoztattunk (a tobblet-lepes paritasat), es pontosan egy hatas tunt el (a teto-fordulas). Ez erositi a torvenyt.",
+          "DEFLACIOS: 'nyolcason a harom viszi a tetot' a BCC kezi valasztasanak kovetkezmenye. A repo sajat kivalasztasi szabalyaval (KON-02) a valasz negy volna. A 'miert harom' kerdes ezen a szinten a jelolt-listan mulik, nem a nyelven."
+        ],
+        "tanulsag": "Harmadik regisztracios tanulsag: a siker- es bukas-felteteleket a pecsetelés elott ELLENORIZNI kell teljesithetosegre a mar bizonyitott tetelek ellen. A JOS-01 a holtverseny-szabalyt nem rogzitette; a JOS-02 rogzitette, de olyan kuszobot irt elo, amit egy sajat tetel kizar. A kovetkezo bejegyzes elott mindket ellenorzes kotelezo."
+      }
     }
   ]
 }

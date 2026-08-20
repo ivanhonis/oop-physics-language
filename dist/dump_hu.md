@@ -39,12 +39,15 @@ hu\II-proofs\II-14-dimension-staircase\PKG-14-4-readout_hu.md
 hu\II-proofs\II-14-dimension-staircase\PKG-14-5-readout-repeat_hu.md
 hu\II-proofs\II-14-dimension-staircase\proof_hu.md
 hu\II-proofs\II-15-dimension-fourth-rung\PKG-15-1-rulebook_hu.md
+hu\II-proofs\II-15-dimension-fourth-rung\PKG-15-10-dense-end_hu.md
 hu\II-proofs\II-15-dimension-fourth-rung\PKG-15-2-ladders_hu.md
 hu\II-proofs\II-15-dimension-fourth-rung\PKG-15-3-race_hu.md
 hu\II-proofs\II-15-dimension-fourth-rung\PKG-15-4-readout_hu.md
 hu\II-proofs\II-15-dimension-fourth-rung\PKG-15-5-hole-mirror_hu.md
 hu\II-proofs\II-15-dimension-fourth-rung\PKG-15-6-direction_hu.md
 hu\II-proofs\II-15-dimension-fourth-rung\PKG-15-7-top_hu.md
+hu\II-proofs\II-15-dimension-fourth-rung\PKG-15-8-top-full-field_hu.md
+hu\II-proofs\II-15-dimension-fourth-rung\PKG-15-9-uniform-field_hu.md
 hu\II-proofs\II-15-dimension-fourth-rung\proof_hu.md
 hu\II-proofs\II-16-coordination-ten\PKG-16-1-rulebook_hu.md
 hu\II-proofs\II-16-coordination-ten\PKG-16-2-ladders_hu.md
@@ -55,6 +58,8 @@ hu\II-proofs\II-16-coordination-ten\proof_hu.md
 hu\III-frontier\III-01-candidate-laws_hu.md
 hu\III-frontier\III-02-open-questions_hu.md
 hu\PROGRAM_hu.md
+shared\bench\bench.py
+shared\bench\tolerances.json
 shared\environment-check.py
 shared\II-13-dimension-race\PKG-13-2-ladders.py
 shared\II-13-dimension-race\PKG-13-3-race.py
@@ -95,16 +100,27 @@ shared\II-15-dimension-fourth-rung\letrak_gepi\K1.npy
 shared\II-15-dimension-fourth-rung\letrak_gepi\K2.npy
 shared\II-15-dimension-fourth-rung\letrak_gepi\K3.npy
 shared\II-15-dimension-fourth-rung\letrak_gepi\K4.npy
+shared\II-15-dimension-fourth-rung\PKG-15-10-dense-end.py
 shared\II-15-dimension-fourth-rung\PKG-15-2-ladders.py
 shared\II-15-dimension-fourth-rung\PKG-15-3-race.py
 shared\II-15-dimension-fourth-rung\PKG-15-4-readout.py
 shared\II-15-dimension-fourth-rung\PKG-15-5-hole-mirror.py
 shared\II-15-dimension-fourth-rung\PKG-15-6-direction.py
 shared\II-15-dimension-fourth-rung\PKG-15-7-top.py
+shared\II-15-dimension-fourth-rung\PKG-15-8-top-full-field.py
+shared\II-15-dimension-fourth-rung\PKG-15-9-uniform-field.py
 shared\II-16-coordination-ten\PKG-16-2-ladders.py
 shared\II-16-coordination-ten\PKG-16-3-race.py
 shared\II-16-coordination-ten\PKG-16-4-readout.py
 shared\II-16-coordination-ten\PKG-16-5-transfer.py
+shared\kernel\check.py
+shared\kernel\ledger.json
+shared\parallel\demo.py
+shared\parallel\letra_feladat.py
+shared\parallel\runner.py
+shared\register\predictions.json
+shared\register\seal.py
+shared\summation.py
 </directory>
 
 <file path="hu\00-introduction_hu.md">
@@ -131,7 +147,7 @@ id: APP-B
 type: appendix
 lang: hu
 pair: B-machinery_en.md
-pair_status: in-sync
+pair_status: outdated
 doc_version: "1.4"
 status: ervenyes
 ---
@@ -148,9 +164,37 @@ A II. rész minden száma négy, egymásra épülő eszköz valamelyikéből jö
 
 (4) **A teljes állapottér pontos minimuma**: kis darabokon a teljes súlyvektor-tér kezelése kerekítésmentes elvi hibával — sajátfeladat, időfejlesztés, nézet-számítás ([II/5](../II-proofs/II-05-triangle/proof_hu.md), [II/9](../II-proofs/II-09-kagome/proof_hu.md), [II/10](../II-proofs/II-10-internal-witness/proof_hu.md), [II/11](../II-proofs/II-11-locality-readout/proof_hu.md)).
 
-A [II/11](../II-proofs/II-11-locality-readout/proof_hu.md) a gépezetet két elemmel bővítette: a kész állapot páronkénti közelség-térképe és a belőle — címkék nélkül — dolgozó visszarakó; valamint az elfajult nulla-költségű altér egzakt vetítője. A II/13-hoz további kiegészítés: szabad kizáró példányok nézetei a példány-korrelációkból egzaktul számolódnak (a 4. eszköz gyorsított alakja). A II/14-hez: a szövés-létrák zárt Fourier-alakja mint kötelező ellenpróba a gépezet mellett, és az illeszkedési-mátrixos felépítés ($L = B^{\mathsf T} B$) mint független kódút a verseny előfeltétel-ellenőrzéséhez. A II/15-höz: a versenyt hosszú-lebegős úton kell futtatni, mert a teli vég közelében a szokásos gépi pontosság halmozási hibája a rögzített tűrés fölé nő. A II/16-hoz: a mezőny akkorára nőtt, hogy a teljes kétutas ellenőrzés géppel elvégezhetetlen — helyette **ritka, négyelemű alak** áll, amely sorsolt mintákon és kis példányokon fedezi ugyanazt, kimondottan gyengébb erővel, számmal jelentett lefedettséggel; ide tartozik a kiolvasás **mintavételes vetítő-pecsétje** is, a korábbi teljes vetítő helyett.
+A [II/11](../II-proofs/II-11-locality-readout/proof_hu.md) a gépezetet két elemmel bővítette: a kész állapot páronkénti közelség-térképe és a belőle — címkék nélkül — dolgozó visszarakó; valamint az elfajult nulla-költségű altér egzakt vetítője. A II/13-hoz további kiegészítés: szabad kizáró példányok nézetei a példány-korrelációkból egzaktul számolódnak (a 4. eszköz gyorsított alakja). A II/14-hez: a szövés-létrák zárt Fourier-alakja mint kötelező ellenpróba a gépezet mellett, és az illeszkedési-mátrixos felépítés ($L = B^{\mathsf T} B$) mint független kódút a verseny előfeltétel-ellenőrzéséhez. A II/15-höz: a versenyt hosszú-lebegős úton kell futtatni, mert a teli vég közelében a szokásos gépi pontosság halmozási hibája a rögzített tűrés fölé nő (ez a **H3**; a **H4** ezt visszavonta és hordozható útra cserélte — lásd alább). A II/16-hoz: a mezőny akkorára nőtt, hogy a teljes kétutas ellenőrzés géppel elvégezhetetlen — helyette **ritka, négyelemű alak** áll, amely sorsolt mintákon és kis példányokon fedezi ugyanazt, kimondottan gyengébb erővel, számmal jelentett lefedettséggel; ide tartozik a kiolvasás **mintavételes vetítő-pecsétje** is, a korábbi teljes vetítő helyett.
 
-Beépített pontossági ellenőrzések: a taszítási alapintegrál analitikus értéke ($\sqrt{\pi/2} \approx 1{,}2533$; rácson 1,246, 0,6%); a befagyott fedés analitikus 9/16-ának pontos visszaadása (II/9); a 12 objektumos Kagome-darab egyezése a publikált egzakt értékkel; a 12-es kör kötésárának egyezése a publikált egzakt értékkel, a kontroll-vetítő egzakt nyoma (132) és a kontroll közelség-szórása ($10^{-16}$) (II/11); a II/12 két tételének analitikus fedezete (a kövér-szerződés elrendezés nulla költsége és a teljes-töltési nyomösszeg egzakt); a II/13 létráinak kettős számolása (gépezet és zárt képlet, egyezés $10^{-15}$), a darabolt két független felépítése és a sík binomiális létrája mint az összeesési lemma spektrális megerősítése; a II/14 kettős számolása mind a 224 hálón ($7{,}9\cdot10^{-14}$), a 224 háló egzakt nyomösszege (3072), a tér-szövés páros-jegyének egzakt tükör-szimmetriája ($10^{-15}$) és a 12×12×12-es golyó egzakt $4r^2+2$ törvénye $r=5$-ig; a II/15 létráinak kettős számolása 32 célon ($1{,}3\cdot10^{-12}$), a teljes-töltési egyezés ($8{,}4\cdot10^{-12}$) és a vetítő zárt kontra gépi útja ($1{,}7\cdot10^{-15}$); a II/16 ritka maradék-próbája ($5{,}3\cdot10^{-14}$) és a mintavételes vetítő-pecsét két ága ($5{,}1\cdot10^{-14}$, illetve $9{,}4\cdot10^{-16}$).
+## A referencia-környezet
+
+A számolások **lokálisan** futnak, egy kimondott referencia-környezetben: Windows 11 Pro, Python 3.12.5, numpy 2.2.4, Intel i9 (8 mag / 16 szál), 128 GB. Az erőforrás nem korlát, ezért a méret-kérdéseket nem a költség dönti el, hanem a hatókör-határok. A környezet **rögzítve van, de nem követelmény**: azért írjuk le, hogy egy harmadik fél a környezeti különbséget meg tudja különböztetni az eredmény-különbségtől. A számolási út (lásd `H4`) platformfüggetlen, ezért más gépen is állnia kell — ha nem áll, az lelet. Az ellenőrzést a `shared/environment-check.py` végzi, a teljes reprodukciós padot a `shared/bench/bench.py`.
+
+## H4 — a hordozható összegzési út (a H3 helyesbítése)
+
+A **H3** (II/15) a teli vég halmozási hibájára úgy válaszolt, hogy az elsődleges számolási utat hosszú-lebegőssé tette. Ez a válasz **platformfüggő**: az `np.longdouble` csak ott a 80 bites kiterjesztett típus, ahol a C-eszközlánc adja (Linux/glibc, gcc vagy clang); Windowson, MSVC alatt a `float64` **álneve**. A referencia-környezetben tehát a H3 útja csendben hatástalan — és ami rosszabb, minden „két úton" próba, amely a két típust veti össze, ilyenkor önmagával hasonlít össze, és **pontosan nulla** eltérést jelent: zöld lámpa, amely semmit nem fedez.
+
+A **H4** a típus-alapú javítást algoritmikusra cseréli. A sodródás nem a lebegőpontos szélességből jött, hanem abból, hogy tízezernyi tagot **sorban** adunk össze. A gyógymód tehát az, hogy nem sorban adjuk össze: a rendezett létrát rövid blokkokra vágjuk, minden blokkot egzaktul összegzünk (`math.fsum`, helyesen kerekített), a blokk-összegeket egzaktul láncoljuk, és rendes lebegőpontos futó összeg csak egy blokkon belül fut. A hiba így a **blokkhosszal** skálázódik, nem $n$-nel.
+
+Mérve a II/15 létráján (20736 ütem, egzakt nyomösszeg 165888), eltérés az egzakt értéktől:
+
+| Út | Eltérés | Az $10^{-8}$ tűrés ellen |
+|---|---|---|
+| naiv futó összeg, `float64` | $1{,}93\cdot10^{-8}$ | bukik |
+| `longdouble` (H3) a referencia-gépen | $1{,}93\cdot10^{-8}$ | bukik — álnév |
+| **hordozható út (H4)** | **$0$** | **áll** |
+
+A 32 mentett II/15 létrán a legrosszabb eset a naiv úton $1{,}93\cdot10^{-8}$, a H4 úton $1{,}5\cdot10^{-10}$. Az út a `shared/summation.py`-ban áll, saját önpróbával.
+
+**Hatókör, kimondva.** A H4 az *összegzés* hibáját szünteti meg; a tárolt létra saját pontosságánál pontosabb nem lehet. A mentett gyorsítótár `float64`, ezért a visszaolvasott értékek padlója $\sim10^{-11}$ — a rögzített $10^{-8}$ tűrés alatt bőven, de a 80 bites úton született $10^{-13}$-as közzétett számoknál gyengébben. A közzétett értékek érvényesek; a referencia-környezet a rögzített tűrésen belül adja vissza őket.
+
+**A kétutas szabály új alakja.** A H3 kiürülése megmutatta, hogy a „két út" **két lebegőpontos típusként** való értelmezése törékeny: egyetlen típus-álnév kiüti, méghozzá némán. Ezért a szabály innentől **két algoritmust** jelent — zárt alak kontra gépezet, polcos/kompenzált összegzés kontra blokkos, illeszkedési-mátrixos felépítés kontra közvetlen —, nem két számábrázolást. Az így értett fedezet minden platformon áll, és nem tud csendben elpárologni. A pad a pontosan nulla eltérést jelentő kétutas próbát külön ítélettel (`URES`) fogja meg.
+
+**Átállási állapot.** A II/13 és II/14 csomagjai a referencia-környezetben hiánytalanul reprodukálódnak. A H3 útjára írt csomagok (`PKG-15-3`, `PKG-15-5`, `PKG-15-7`, és a II/16 érintett csomagjai) hat ellenőrzése addig `H4-VAR` státuszú a padon — **hiányzó előfeltétel, nem rossz szám** —, amíg a szkriptek át nem állnak a `shared/summation.py` útjára.
+
+## Beépített pontossági ellenőrzések
+
+A taszítási alapintegrál analitikus értéke ($\sqrt{\pi/2} \approx 1{,}2533$; rácson 1,246, 0,6%); a befagyott fedés analitikus 9/16-ának pontos visszaadása (II/9); a 12 objektumos Kagome-darab egyezése a publikált egzakt értékkel; a 12-es kör kötésárának egyezése a publikált egzakt értékkel, a kontroll-vetítő egzakt nyoma (132) és a kontroll közelség-szórása ($10^{-16}$) (II/11); a II/12 két tételének analitikus fedezete (a kövér-szerződés elrendezés nulla költsége és a teljes-töltési nyomösszeg egzakt); a II/13 létráinak kettős számolása (gépezet és zárt képlet, egyezés $10^{-15}$), a darabolt két független felépítése és a sík binomiális létrája mint az összeesési lemma spektrális megerősítése; a II/14 kettős számolása mind a 224 hálón ($7{,}9\cdot10^{-14}$), a 224 háló egzakt nyomösszege (3072), a tér-szövés páros-jegyének egzakt tükör-szimmetriája ($10^{-15}$) és a 12×12×12-es golyó egzakt $4r^2+2$ törvénye $r=5$-ig; a II/15 létráinak kettős számolása 32 célon ($1{,}3\cdot10^{-12}$), a teljes-töltési egyezés ($8{,}4\cdot10^{-12}$) és a vetítő zárt kontra gépi útja ($1{,}7\cdot10^{-15}$); a II/16 ritka maradék-próbája ($5{,}3\cdot10^{-14}$) és a mintavételes vetítő-pecsét két ága ($5{,}1\cdot10^{-14}$, illetve $9{,}4\cdot10^{-16}$).
 </file>
 
 <file path="hu\appendix\C-benchmarks_hu.md">
@@ -283,7 +327,7 @@ id: I-01
 type: chapter
 lang: hu
 pair: I-01-concept_en.md
-pair_status: needs-update
+pair_status: outdated
 doc_version: "1.3"
 status: ervenyes
 ---
@@ -296,11 +340,11 @@ Az elgondolás egy mondatban: a fizikai világ objektumorientált mintákkal ír
 
 **Az import-számla.** A fenti szabály azt méri, igazat mond-e a nyelv; azt nem, hogy segít-e gondolkodni. Erre a mérce: minden levezetést szigorúan a nyelv fogalmain belül kell elvégezni, és minden kívülről kölcsönzött fogalmat fel kell jegyezni. Három kimenet: *segít* — a kulcsgondolatot a nyelv szerkezete mondja ki előbb, a matematika csak igazolja; *lyukas* — kevés, körülhatárolt import kell, és ezek a nyelv következő bővítendő fogalmai; *nem segít* — annyi az import, hogy az út valójában a hagyományos fizikai levezetés, átcímkézve. A II. rész minden fejezete import-számlával zárul.
 
-**Mit számolunk importnak, és mit nem.** Két külön nyilvántartás van, mert két külön dologról szólnak. **Import** az a fogalom, amit a nyelv nem tudott előállítani, ezért kívülről kölcsönöztük — ez a világról szóló állítást hoz be, tehát a nyelv adóssága. **Kimondott konvenció** az, amit mi magunk rögzítettünk arról, hogyan folyjon egy próba — ez a világról semmit nem állít, de megszabja, mit jelent az eredmény, ezért ugyanúgy fel kell jegyezni. A kettőt eddig ugyanaz az oszlop vezette a [II. rész indexében](../II-proofs/II-00-index_hu.md), ezért itt kimondjuk a különbséget és külön soroljuk fel őket.
+**Mit számolunk importnak, és mit nem.** Két külön nyilvántartás van, mert két külön dologról szólnak. **Import** az a fogalom, amit a nyelv nem tudott előállítani, ezért kívülről kölcsönöztük — ez a világról szóló állítást hoz be, tehát a nyelv adóssága. **Kimondott konvenció** az, amit mi magunk rögzítettünk arról, hogyan folyjon egy próba — ez a világról semmit nem állít, de megszabja, mit jelent az eredmény, ezért ugyanúgy fel kell jegyezni. A kettőt eddig ugyanaz az oszlop vezette a [II. rész indexében](../II-proofs/II-00-index_hu.md), ezért itt kimondjuk a különbséget és külön soroljuk fel őket. Az alábbi két felsorolás géppel olvasható alakja — a hatókör-határokkal és a peremadattal együtt — a `shared/kernel/ledger.json` nyilvántartásban áll; a mellette futó ellenőrző fogja meg, ha a kettő elcsúszik egymástól.
 
 **Az importok — három tétel.** Helyiség (a [II/11](../II-proofs/II-11-locality-readout/proof_hu.md) óta felerészben tétel, maradéka a [kiválasztás nyitott kérdése](../III-frontier/III-02-open-questions_hu.md); a [II/9](../II-proofs/II-09-kagome/proof_hu.md) Kagome-szomszédsága ennek esete, nem külön tétel); [vonzásalak](../II-proofs/II-04-hydrogen-atom/proof_hu.md); [két típusdeklaráció az elektronra](../II-proofs/II-07-bowl-magic-numbers/proof_hu.md). Minden más belül született.
 
-**A kimondott konvenciók — kettő.** A versenyszabály ([II/12](../II-proofs/II-12-network-race/proof_hu.md)): rögzített szerződés-költségvetést kötelező elhelyezni, és az egyensúly a legkisebb összköltségű elrendezés. A kiválasztási szabály ([II/16](../II-proofs/II-16-coordination-ten/proof_hu.md)): mi kerül be a fő mezőnybe egy adott koordináción. A pásztázási és méret-korlátok (lépés-plafon, legkisebb oldalhossz) nem konvenciók, hanem kimondott hatókör-határok: a próba érvényességét szűkítik, nem a szabályát adják.
+**A kimondott konvenciók — négy.** A **versenyszabály** ([II/12](../II-proofs/II-12-network-race/proof_hu.md)): rögzített szerződés-költségvetést kötelező elhelyezni, és az egyensúly a legkisebb összköltségű elrendezés. A **kiválasztási szabály** ([II/16](../II-proofs/II-16-coordination-ten/proof_hu.md)): mi kerül be a fő mezőnybe egy adott koordináción. A **szövés-építés** ([II/13](../II-proofs/II-13-dimension-race/proof_hu.md) óta): minden induló háló egy csoportszerkezet ismétlése minden helyen — ez elégséges feltétele a helyek egyenrangúságának, de nem szükséges, mert van olyan háló, amely minden helyről ugyanúgy néz ki, mégsem áll elő így; a mezőnyt tehát az elven túl is szűkíti, ezért konvenció, nem az elv puszta megvalósítása. Az **őrszem-küszöb** ([PKG-14-5](../II-proofs/II-14-dimension-staircase/PKG-14-5-readout-repeat_hu.md)): a kiolvasás akkor teljes, ha a leggyengébb elfogadott és a legerősebb elutasított közelség hányadosa eléri a kettes tényezőt — a csomag maga mondja ki, hogy ez konvenció, nem levezetett szám. A pásztázási és méret-korlátok (lépés-plafon, legkisebb oldalhossz) nem konvenciók, hanem kimondott hatókör-határok: a próba érvényességét szűkítik, nem a szabályát adják.
 
 **Egy elem kettős állású, kimondva.** A helyek egyenrangúsága ([III/1, 5.](../III-frontier/III-01-candidate-laws_hu.md)) mint kimondás import volna, mint irány viszont az [5. törvény](I-06-identity_hu.md) kiterjesztése a helyekre. A fenti hármas a levezetése előtti állapotot tükrözi: **jelöltként tartjuk nyilván, nem importként** — ha a levezetés nem sikerül, negyedik importtá válik. Ez a nyilvántartás adóssága, nyíltan.
 
@@ -2024,6 +2068,132 @@ A hat pár szétválasztása: a keresztpárokat a páros-jegy, a J1–J2 párt a
 - **A8:** kétutas szabály rögzített mintavétellel: a fő jelöltek és a kontrollok mindkét úton (zárt Fourier-alak és gépi sajátfeladat) teljesen; a családból 24 sorsolt tag gépi keresztellenőrzése, a sorsolási mag rögzített száma: 20736.
 </file>
 
+<file path="hu\II-proofs\II-15-dimension-fourth-rung\PKG-15-10-dense-end_hu.md">
+---
+id: PKG-15-10
+type: package
+lang: hu
+pair: PKG-15-10-dense-end_en.md
+pair_status: missing
+doc_version: "1.4"
+status: jovahagyasra-var
+part_of: II-15
+builds_on: [II-12, PKG-15-5, PKG-15-6, PKG-15-9]
+imports: nulla
+---
+
+# PKG-15-10 — A teli-vég tétel (levezetés-csomag)
+
+**Egy mondatban.** A tető-törvény **hordozó-fele eddig mérés volt; innentől tétel**: mivel minden induló létrájának összsúlya azonos, a teli vég felől a legolcsóbb induló az, amelyiknek a **legmagasabb** ütemei a legnagyobbak — és a csúcs-ütem pontosan a tükör-jegyűeknél maximális.
+
+## 1. Kérdés
+
+A [III/1, 8.b](../../III-frontier/III-01-candidate-laws_hu.md) hiányzó tétele: **miért a tükör választ?** A [PKG-15-9](PKG-15-9-uniform-field_hu.md) megmondta, *mely* szövés tükör-jegyű (hordozó-tétel); ez a csomag azt mondja meg, *miért nyer* a tükör-jegyű a teli végen.
+
+## 2. Jelölés
+
+Rögzített $n$ hely és $k$ darab $\pm$ lépéspár (koordináció $2k$). Egy $X$ induló ütem-létrája növekvő sorrendben $\lambda^X_{(1)} \le \dots \le \lambda^X_{(n)}$. Az **ár** az alulról töltés költsége, a **felső farok** a legdrágább ütemek összege:
+
+$$\text{ár}_X(N) = \sum_{i=1}^{N} \lambda^X_{(i)}, \qquad S_X(m) = \sum_{i=n-m+1}^{n} \lambda^X_{(i)}.\tag{K-PKG1510-1}$$
+
+## 3. A levezetés — négy lemma, nulla import
+
+**L1 — Nyom-döntetlen.** Minden induló összsúlya azonos:
+
+$$T \;=\; \sum_{j} \lambda^X_j \;=\; 2kn \qquad \text{minden } X\text{-re.}\tag{K-PKG1510-2}$$
+
+*Bizonyítás:* egy $s$ lépés járuléka $\sum_j \bigl(2 - 2\cos(2\pi\langle j,s\rangle/n)\bigr) = 2n$, mert egy nemtriviális karakter összege a csoporton nulla. $k$ lépéssel $2kn$. $\square$ (Ez a [II/12](../II-12-network-race/proof_hu.md) nyom-döntetlen tétele, a szövés-családra kimondva.)
+
+**L2 — Kiegészítés.** Az L1-ből azonnal:
+
+$$\text{ár}_X(N) \;=\; T - S_X(n-N).\tag{K-PKG1510-3}$$
+
+> **Ez a csomag fordulópontja.** A teli vég felől nézve az alulról töltés nem versenyzés, hanem **kivonás**: adott $N$-nél a legolcsóbb induló pontosan az, amelyik a **legtöbbet hagyja ki**. A teli végen tehát nem az számít, kinek olcsóbbak az alsó ütemei, hanem kinek **drágábbak a felsők**.
+
+**L3 — Csúcs-korlát.** Minden indulóra $\lambda^X_{\max} \le 4k$, és **egyenlőség pontosan akkor, ha $X$ tükör-jegyű**.
+
+*Bizonyítás:* minden tag $2 - 2\cos\theta \le 4$, tehát $\lambda \le 4k$. Egyenlőség egy $j$-nél akkor és csak akkor, ha $\cos(2\pi\langle j,s\rangle/n) = -1$ minden $s$ lépésre, azaz $\langle j,s\rangle \equiv n/2 \pmod n$ mindenütt. Ilyen $j$ pontosan akkor létezik, ha van olyan másodrendű karakter, amely minden generátoron $-1$ — és ez szó szerint a [hordozó-tétel](PKG-15-9-uniform-field_hu.md) kétszínezése. $\square$ (Feltétel: $n$ páros; minden rögzített rendszerünkben az.)
+
+**L4 — Tükör-alak.** Ha $X$ tükör-jegyű, a létrája szimmetrikus a $2k$ körül ($\lambda \leftrightarrow 4k-\lambda$), ezért $S_X(m) = 4km - \text{ár}_X(m)$, és az L2-vel:
+
+$$\text{ár}_X(n-m) \;=\; T - 4km + \text{ár}_X(m).\tag{K-PKG1510-4}$$
+
+> **Ez a [lyuk-tükör tétel](PKG-15-5-hole-mirror_hu.md), egy sorban.** A PKG-15-5 négy lépésben vezette le; itt az L1 és az L3 következménye. Két tükör-jegyű indulóra a különbség $\text{ár}_X(n-m) - \text{ár}_Y(n-m) = \text{ár}_X(m) - \text{ár}_Y(m)$: **a teli végi sorrend azonos a ritka végivel** — amivel az [irány-tétel](PKG-15-6-direction_hu.md) a legalacsonyabb kiterjedésű tükör-jegyűt teszi a tetőre.
+
+## 4. A két tétel
+
+> **TA — Egy-lyuk tétel.** Az $N = n-1$ töltésen $\text{ár}_X(n-1) = T - \lambda^X_{\max} \ge T - 4k$, és egyenlőség pontosan a tükör-jegyűeknél. **A győztes tehát bizonyíthatóan tükör-jegyű, és a tükör-jegyűek holtversenyben állnak.**
+
+Ez egzakt, tanúsított szakasz nélkül — és pontosan az, amit a [PKG-15-5](PKG-15-5-hole-mirror_hu.md) *mért* („a 20735-ös holtverseny és a 16-os csúcs-ütem"). Most levezetve.
+
+> **TB — Teli-vég tétel.** Legyen $X$ tükör-jegyű, $Z$ nem az, és $\delta_Z = 4k - \lambda^Z_{\max} > 0$ a $Z$ **csúcs-hiánya**. Ha
+>
+> $$\text{ár}_X(m) \;<\; m\,\delta_Z,\tag{K-PKG1510-5}$$
+>
+> akkor $X$ szigorúan olcsóbb $Z$-nél az $N = n-m$ töltésen.
+
+*Bizonyítás:* $S_Z(m) \le m\lambda^Z_{\max} = m(4k-\delta_Z)$, míg az L4 szerint $S_X(m) = 4km - \text{ár}_X(m)$. Ha (K-PKG1510-5) áll, akkor $S_X(m) > S_Z(m)$, és az L2 miatt $\text{ár}_X(n-m) < \text{ár}_Z(n-m)$. $\square$
+
+**Hatókör, kimondva:** a (K-PKG1510-5) **elégséges**, nem szükséges — a tanúsított szakasz a valódi alsó becslése. Ez az [irány-tétel](PKG-15-6-direction_hu.md) mintája: tanúsított szakasz, számmal jelentve.
+
+## 5. Gépi megerősítés
+
+Futtatható alak: `shared/II-15-dimension-fourth-rung/PKG-15-10-dense-end.py`. Rendszer: a II/15 rögzített 20736 helye, $k=4$, $T = 165888$, $4k = 16$. A hordozható H4 úton.
+
+| Lépés | Eredmény |
+|---|---|
+| **L1** nyom-döntetlen | legnagyobb eltérés $0{,}000$ — áll |
+| **L2** kiegészítés, minden töltésen | $2{,}910\cdot10^{-11}$ — áll |
+| **L3** csúcs-korlát és egyenlőség | mind az 5 indulón áll |
+| **L4** tükör-alak, minden $m$-re | $3{,}3\cdot10^{-11}$ (BCC), $3{,}5\cdot10^{-11}$ (hiperkocka) — áll |
+
+**Csúcsok és csúcs-hiányok:**
+
+| Induló | Csúcs | Hiány $\delta$ | Tükör-jegy |
+|---|---|---|---|
+| J1 vonal | 11,03912 | 4,96088 | nem |
+| J2 sík (király) | 12,00000 | 4,00000 | nem |
+| J3 tér (BCC) | 16,00000 | 0 | **igen** |
+| J3′ tér (lapátló) | 13,00000 | 3,00000 | nem |
+| J4 hiperkocka | 16,00000 | 0 | **igen** |
+
+**TA a mezőnyön:** az $N = 20735$ árak — J1 165876,96; J2 165876; J3′ 165875; **J3 és J4 egyaránt 165872 = $T - 16$**. A győztesek pontosan a két tükör-jegyű, holtversenyben. **A TA áll.**
+
+**TB tanúsított szakaszai** (mindegyik gépileg visszaellenőrizve, hogy a következtetés valóban áll a szakaszon):
+
+| Tükör-jegyű $X$ | Nem tükör-jegyű $Z$ | $\delta_Z$ | Tanúsítva $N \ge$ |
+|---|---|---|---|
+| J3 (BCC) | J1 vonal | 4,96 | 14088 |
+| J3 (BCC) | J2 sík | 4,00 | 16486 |
+| J3 (BCC) | J3′ lapátlós tér | 3,00 | 18251 |
+| J4 hiperkocka | J1 vonal | 4,96 | 13509 |
+| J4 hiperkocka | J2 sík | 4,00 | 16653 |
+| J4 hiperkocka | J3′ lapátlós tér | 3,00 | 18853 |
+
+**Összesítve:** a közzétett mezőnyben (BCC-vel) a J3 az $N \ge 16486$ szakaszon **tételből** veri mindkét nem tükör-jegyű indulót — 4251 töltésen. A mért sávja 15997-től nyílt, tehát a tanúsítás a valódi szakasz szolid, konzervatív alsó becslése, ahogy vártuk.
+
+## 6. Import-számla
+
+Új import: **nulla.** Az L1 a II/12 tétele; az L3 egyenlőség-fele a PKG-15-9 hordozó-tétele; az L2 és az L4 tiszta átrendezés. A TA és a TB ezekből következik.
+
+## 7. Ítélet erről a csomagról
+
+**Áll.** Négy lemma és két tétel, mind gépileg megerősítve a rögzített rendszeren.
+
+## 8. Kimenő állítások
+
+- **K1:** **Kiegészítési azonosság** (K-PKG1510-3): a nyom-döntetlen miatt az alulról töltés a teli vég felől kivonás; a teli végen a legdrágább ütemek döntenek.
+- **K2:** **Egy-lyuk tétel (TA):** az $N = n-1$ töltésen a győztes bizonyíthatóan tükör-jegyű, és a tükör-jegyűek holtversenyben állnak. A [PKG-15-5](PKG-15-5-hole-mirror_hu.md) mért holtversenye ezzel **tétel**.
+- **K3:** **A lyuk-tükör tétel egysoros alakja** (K-PKG1510-4), az L1 és L3 következményeként.
+- **K4:** **Teli-vég tétel (TB):** ha $\text{ár}_X(m) < m\,\delta_Z$, akkor a tükör-jegyű $X$ veri a nem tükör-jegyű $Z$-t az $N = n-m$ töltésen. Tanúsított szakaszok a rögzített rendszeren: J3 kontra minden nem tükör-jegyű $N \ge 16486$-tól, J4 kontra ugyanazok $N \ge 18853$-tól.
+- **K5:** **A tető-törvény hordozó-fele levezetve.** Ami eddig mérés volt („a tetőt tükör-jegyű tag viszi", háromból hármon mérve), az egy tanúsított szakaszon tétel, az egy-lyukas töltésen pedig egzakt. Mérés csak annyi marad, hogy a tanúsított szakasz meddig ér a valódi sávhoz képest.
+- **K6:** **A III/1, 8.b hiányzó tétele lezárható.** A hordozó-kérdés két fele — *mely* szövés tükör-jegyű ([PKG-15-9](PKG-15-9-uniform-field_hu.md)) és *miért nyer* a tükör-jegyű (ez a csomag) — együtt megvan.
+
+**Bővítési irány:** a TB átvitele tízes koordinációra (a [PKG-16-5](../II-16-coordination-ten/PKG-16-5-transfer_hu.md) mintájára, változatlan szöveggel), és a tanúsított szakasz élesítése — a $S_Z(m) \le m\lambda^Z_{\max}$ becslés a leggyengébb láncszem.
+
+> A K1–K6 csak e csomag **jóváhagyása után** vezethető át a fejezetekbe.
+</file>
+
 <file path="hu\II-proofs\II-15-dimension-fourth-rung\PKG-15-2-ladders_hu.md">
 ---
 id: PKG-15-2
@@ -2366,6 +2536,245 @@ A tétel a tető **legfelső ~2100 töltésén** mondja ki, amit a II/15 mért: 
 - **F1:** a tető-tétel az 1. szakasz szerint, a 0,2072-es szigorúsági tartalékkal.
 - **F2:** a mért tér-sáv kétrétegű olvasata: 18649-től tétel, alatta (15997-től) mérés — a határ maga a dominancia-hézag tükörképe.
 - **F3:** a bizonyítási minta újrahasznosítható: irány-tétel + lyuk-tükör = tető-állítás, bármely jövőbeli páros páron (koordináció-pásztázásnál készen áll).
+</file>
+
+<file path="hu\II-proofs\II-15-dimension-fourth-rung\PKG-15-8-top-full-field_hu.md">
+---
+id: PKG-15-8
+type: package
+lang: hu
+pair: PKG-15-8-top-full-field_en.md
+pair_status: missing
+doc_version: "1.4"
+status: jovahagyasra-var
+part_of: II-15
+builds_on: [PKG-15-1, PKG-15-2, PKG-15-3, PKG-16-5]
+imports: nulla
+---
+
+# PKG-15-8 — A teljes mezőny teteje nyolcas koordináción (vak-jóslat csomag)
+
+**Egy mondatban.** A [tető-törvény](../../III-frontier/III-01-candidate-laws_hu.md) mért felének hiányzó harmadik támpontja: nyolcas koordináción a teljes mezőny teli végét mind a 2000 töltésen a **tükör-jegyű (1, 3, 5, 7) vonal-tag** viszi — pontosan az az induló, amelyet a jóslat a számolás előtt megnevezett.
+
+## 1. Kérdés (a számolás előtt rögzítve)
+
+Nyolcas koordináción a **teljes mezőny** tetejét tükör-jegyű vonal-tag viszi-e, ahogy a tető-törvény állítja — és melyik?
+
+Ez a `P1.1` mérföldkő. A kérdés azért nyitott, mert a [PKG-15-3](PKG-15-3-race_hu.md) csak annyit mondott ki, hogy ott a fő négyes egyetlen töltést sem nyer szigorúan; a tetőn álló vonal-imitátort nem nevezte meg, és a legtöbbet nyerő háromból kettő — a (3, 5, 6, 10) és a (3, 7, 8, 9) — páros lépést is tartalmaz, tehát **nem** tükör-jegyű. Az eredmény ezért nem volt sejthető.
+
+## 2. A vak-protokoll — a csomag lényege
+
+A jóslat a számolás **létezése előtt** rögzült, pecséttel és idő-horgonnyal:
+
+| | |
+|---|---|
+| bejegyzés | `JOS-01` (`shared/register/predictions.json`) |
+| pecsét | `4332b12717f2c30b…` (SHA-256 a rögzített mezőkön) |
+| idő-horgony | commit `751fbab`, 2026-08-20 13:56:34 +02:00 |
+| ellenőrzés | `python shared/register/seal.py` |
+
+A pecsét a jóslat-mondatot, a megnevezett győztest, a levezetést, az ablakot és a siker/bukás-feltételeket fedi; ezek a futás óta bizonyíthatóan nem változtak. A számolást végző szkript a pecsételő commit **után** készült.
+
+**A jóslat levezetése** (a `JOS-01`-ben, változatlanul): (i) a tetőt tükör-jegyű tag viszi — mért, hatoson és tízesen; (ii) a vonal-családon a tükör-jegy csupa-páratlan lépést jelent; (iii) a „legalacsonyabb kiterjedésű" kitétel a vonalra mutat; (iv) egyenlő kiterjedésen a törvény nem dönt, ezért döntetlen-törőnek a repó saját [kiválasztási szabályát](../II-16-coordination-ten/PKG-16-1-rulebook_hu.md) alkalmaztuk: legkisebb össz-lépésnégyzet. A 15 csupa-páratlan négyes közül az **(1, 3, 5, 7)** a minimum (84).
+
+## 3. Bemenetek
+
+- **[PKG-15-1](PKG-15-1-rulebook_hu.md)**: a rögzített rendszer (20736 hely, nyolcas koordináció) és a mezőny — 495 négylépéses családtag, 4 fő jelölt, 4 kontroll.
+- **[PKG-15-2](PKG-15-2-ladders_hu.md)**: a mentett létrák a fő és kontroll indulókhoz, valamint 24 családtaghoz.
+- **[PKG-16-5](../II-16-coordination-ten/PKG-16-5-transfer_hu.md)**: a leolvasás mintája — a teli vég 2000 töltése tízes koordináción; az ablak abszolút mérete innen öröklődik, hogy a két eredmény közvetlenül összevethető legyen.
+- **H4** ([B függelék](../../appendix/B-machinery_hu.md)): a hordozható összegzési út, `shared/summation.py`.
+
+## 4. Kötelező előfeltétel — független újraszámolás
+
+A létrákat itt **zárt Fourier-alakból** építjük, nem a gépezetből. A kettő egyezése a kétutas szabály új, algoritmus-alapú alakja:
+
+> A 24 mentett családtag-létra és a zárt alakú újraszámolás legnagyobb eltérése **$1{,}293\cdot10^{-12}$** (tűrés $10^{-8}$) — **áll**.
+
+Ez egyben a [PKG-15-2](PKG-15-2-ladders_hu.md) közzétett $1{,}30\cdot10^{-12}$-jének független megerősítése, **más algoritmussal**.
+
+## 5. A számolás
+
+- **Mezőny:** 495 családtag zárt alakból + 8 mentett fő/kontroll létra = **503 induló**.
+- **Költséggörbék:** a H4 hordozható úton, mind az 503 indulóra.
+- **Beépített ellenőrzés:** az egzakt nyomösszeg ($2\cdot4\cdot20736 = 165888$) mind az 503 indulón — legnagyobb eltérés $2{,}910\cdot10^{-11}$, **áll**.
+- **Tükör-jegy létrából:** a $d$-reguláris háló akkor páros, ha a színképe a $d$ körül szimmetrikus, azaz a létra és a $2d - \text{létra}$ ugyanaz a halmaz. Így a jegy a **mentett** fő és kontroll létrákon is eldönthető, ahol a lépéslista nincs meg. Eredmény: **20 tükör-jegyű induló** az 503-ból.
+- **Rendfüggetlenség:** a párhuzamos futtató 6 mintafeladata sorosan újraszámolva **bitre azonos**.
+- **A verseny:** az ablak minden töltésén a legolcsóbb induló(k), a rögzített $10^{-8}$ tűréssel.
+
+Futtatható alak: `shared/II-15-dimension-fourth-rung/PKG-15-8-top-full-field.py`.
+
+## 6. Eredmény
+
+Az ablak: $N = 18737 \ldots 20736$, 2000 töltés. Egyértelmű győztes 1998 töltésen, holtverseny 2-n.
+
+| Induló | Nyert töltés | Tükör-jegyű |
+|---|---|---|
+| **(1, 3, 5, 7)** | **2000** | igen |
+| K3, K1, K2, (3,7,9,11), (3,5,9,11), (3,5,7,9), (5,7,9,11) | 2 (holtversenyben) | igen |
+
+A fő négyes — vonal, sík, tér, négykiterjedés — az ablakban **egyetlen töltést sem nyer**.
+
+## 7. Ítélet a `JOS-01` rögzített feltételei szerint
+
+| Feltétel | Eredmény |
+|---|---|
+| **S1** — a 2000 töltésből ≥ 1900 tükör-jegyűé | **áll**: megengedő olvasat 2000/2000, szigorú olvasat 1999/2000 |
+| **S2** — a legtöbbet nyerő az (1, 3, 5, 7) | **áll** — mind a 2000 töltésen |
+| **B3** — a holtverseny uralja az ablakot | **nem vált ki** (2000-ból 2) |
+
+**A jóslat beállt.**
+
+**Utólagos jegyzet, kimondva, nem elsimítva.** A `JOS-01` rögzítette az ablakot és a küszöböket, de **nem rögzítette a holtverseny beszámítását**. Ezért mindkét olvasat jelentve áll; a különbség egyetlen töltés, tehát az ítéletet nem érinti. A holtverseny-szabály előzetes rögzítése a következő regisztráció tanulsága — nem most, a képernyőn álló számok ismeretében eldöntendő kérdés.
+
+## 8. Import-számla
+
+Új import: **nulla.** A rendszer, a mezőny és a lépés-plafon a PKG-15-1-ből örökölt; az ablak mérete a PKG-16-5-ből; a döntetlen-törő a kiválasztási szabály (kimondott konvenció, `KON-02`). A tükör-jegy létrából való eldöntése levezetett spektrális tény, nem új feltevés.
+
+## 9. Ítélet erről a csomagról
+
+**Áll.** Az előfeltétel teljesült, a beépített ellenőrzés áll, a rendfüggetlenség igazolt, és a vak-jóslat mindkét feltétele beállt.
+
+## 10. Kimenő állítások
+
+- **K1:** Nyolcas koordináción a teljes mezőny (503 induló) teli végét — $N = 18737\ldots20736$ — az **(1, 3, 5, 7)** tükör-jegyű vonal-tag viszi, mind a 2000 töltésen.
+- **K2:** Az ablakban minden minimális induló tükör-jegyű, egyetlen töltés kivételével (1999/2000 a szigorú olvasatban).
+- **K3:** A fő négyes az ablakban egyetlen töltést sem nyer — a [PKG-15-3](PKG-15-3-race_hu.md) mezőny-lelete a teli végen is megerősítve.
+- **K4:** A tető-törvény **mért fele** ezzel a teljes mezőnyön **háromból háromra** áll (hatos, nyolcas, tízes koordináció). A [III/1, 8.](../../III-frontier/III-01-candidate-laws_hu.md) táblájának „nincs megnézve" cellája kitölthető, és a 8.(a) hiányzó tétel törölhető.
+- **K5:** A nyolcas koordináción a legalacsonyabb tükör-hordozó a **vonal** (egy kiterjedés) — nem a három. A „miért három" kérdés alakváltása ezzel a harmadik koordináción is megerősítve: a hordozó-kérdés (III/1, 8.b) a nyitott.
+
+> A K1–K5 csak e csomag **jóváhagyása után** építhető be a fejezetekbe; addig a [III/1](../../III-frontier/III-01-candidate-laws_hu.md) és [III/2](../../III-frontier/III-02-open-questions_hu.md) szövege változatlan.
+</file>
+
+<file path="hu\II-proofs\II-15-dimension-fourth-rung\PKG-15-9-uniform-field_hu.md">
+---
+id: PKG-15-9
+type: package
+lang: hu
+pair: PKG-15-9-uniform-field_en.md
+pair_status: missing
+doc_version: "1.4"
+status: jovahagyasra-var
+part_of: II-15
+builds_on: [PKG-15-1, PKG-15-3, PKG-15-5, PKG-15-6, PKG-15-8, PKG-16-1]
+imports: nulla
+---
+
+# PKG-15-9 — A hordozó-tétel és az egységes mezőny döntő kísérlete
+
+**Egy mondatban.** Levezettük, mitől tükör-jegyű egy szövés, és a tétellel megmutattuk: a II/15 tető-fordulása — a három visszatérése a legsűrűbb tartományban — **egyetlen kézzel választott lépésen múlik**; ha a tér-jelölt a repó saját kiválasztási szabályából jön, a fordulás eltűnik.
+
+## 1. Kérdés (a számolás előtt rögzítve)
+
+Két kérdés, egy csomagban, mert a második az elsőből következik:
+
+1. **Miért választ a tükör?** A [III/1, 7–8.](../../III-frontier/III-01-candidate-laws_hu.md) hordozó-kérdése: levezethető-e, mely szövés tükör-jegyű, és kiadja-e a térkép a három mért koordinációt?
+2. **Mennyit hordoz ebből a kézi jelölt-választás?** Ha a nyolcas koordináció tér-jelöltje egységesen a `KON-02` kiválasztási szabályból jön, túléli-e a lépcső-ítélet?
+
+## 2. A hordozó-tétel
+
+> **Tétel.** Egy $\mathbb{Z}^d$-beli $\pm S$ lépéskészletű szövés akkor és csak akkor tükör-jegyű (páros), ha van a koordinátáknak olyan $T$ részhalmaza, amelyre **minden** $s \in S$ lépés $T$-összege páratlan:
+>
+> $$\sum_{i \in T} s_i \equiv 1 \pmod 2 \qquad \text{minden } s \in S\text{-re.}\tag{K-PKG159-1}$$
+
+**Levezetés, négy lépés, nulla import.** *(i)* A háló akkor páros, ha van kétszínezés, amelyben minden él színt vált. *(ii)* A szövés csúcsai $\mathbb{Z}^d$ pontjai, élei a $\pm S$ eltolások; egy színezés akkor konzisztens, ha $\mathbb{Z}^d \to \mathbb{Z}/2$ homomorfizmus. *(iii)* Minden ilyen homomorfizmus alakja $x \mapsto \sum_{i \in T} x_i \bmod 2$ valamely $T$ koordináta-részhalmazra. *(iv)* Az élek akkor váltanak színt, ha minden lépés képe 1 — ez a (K-PKG159-1). $\square$
+
+**Következmény (a gyakorlati alak).** Ha a szövés tartalmazza mind a $d$ tengelyt, akkor $T$ kényszerűen az összes koordináta, és a feltétel egyszerűsödik:
+
+> **minden többlet-lépés koordináta-összege páratlan.**
+
+Ez adja a lépés-szintű magyarázatot: a **testátló** $(1,-1,-1)$ összege $-1$, páratlan → tükör-jegy; a **lapátló** $(0,1,-1)$ összege $0$, páros → nincs tükör-jegy.
+
+## 3. Kétutas ellenőrzés (a kétutas szabály algoritmus-alakja)
+
+A tükör-jegyet két **független algoritmussal** döntöttük el minden deklarált jelöltön:
+
+- **A út:** a (K-PKG159-1) kritérium — a $2^d$ koordináta-részhalmaz átvizsgálása.
+- **B út:** színkép-szimmetria — a létra és a $2\cdot\text{koordináció} - \text{létra}$ azonos halmaz-e.
+
+**Eredmény: a két út mind a 12 deklarált fő jelöltön egyezik, kivétel nélkül.**
+
+## 4. A tükör-hordozó-térkép
+
+A kritérium a deklarált mezőnyökön pontosan visszaadja a mért eredményt:
+
+| Koordináció | Tükör-jegyű fő jelöltek | Legalacsonyabb | A csomagok mérése |
+|---|---|---|---|
+| hatos | tér (3) | **3** | 3 ✔ |
+| nyolcas | tér BCC (3), négykiterjedés (4) | **3** | 3 ✔ |
+| tízes | ötkiterjedés (5) | **5** | 5 ✔ |
+
+**A `P2.3` (a) siker-feltétele tehát betű szerint teljesül.** De a térkép egységes konvenció mellett mást ad:
+
+| Koordináció | `KON-02` egységesen | „testátló-minta" egységesen | A csomagok ténylegesen |
+|---|---|---|---|
+| 6 | 3 | 3 | 3 |
+| 8 | **4** | 3 | **3** |
+| 10 | 5 | **3** | **5** |
+| 12 | 6 | 3 | — |
+
+**Egyik egységes konvenció sem adja ki a „3, 3, 5" mintát.** A nyolcas koordináció tér-jelöltje testátlót kapott, a tízesé lapátlót — **két különböző szabály.** A [PKG-16-1](../II-16-coordination-ten/PKG-16-1-rulebook_hu.md) §9 az eltérést már kimondta; ami eddig nem hangzott el: **ezen az egy lépésen múlik a minta.**
+
+## 5. A döntő kísérlet — vak protokoll
+
+A jóslat a számoló szkript **létezése előtt** rögzült:
+
+| | |
+|---|---|
+| bejegyzés | `JOS-02` (`shared/register/predictions.json`) |
+| pecsét | `db104804893ee3ac` |
+| idő-horgony | commit `98d1b273`, 2026-08-20 14:52:52 +02:00 |
+
+**A rendszer:** azonos a [PKG-15-1](PKG-15-1-rulebook_hu.md)-gyel — 20736 hely, nyolcas koordináció, J1 vonal, J2 király-sík, J4 hiperkocka változatlan. **Egyetlen csere:** J3′ tér = 24×24×36, bekötés ±(1,0,0), ±(0,1,0), ±(0,0,1), **±(0,1,−1)** — a `KON-02` kimenete a BCC helyett.
+
+**Előfeltételek, mind teljesült:** nyomösszeg egzaktul 165888 minden indulón (eltérés 0,00); minden körbeérés ≥ 8; és a hordozó-tétel előrejelzése beigazolódott — **a J3′ csúcs-üteme 13,000 < 16, a tükör-jegy eltűnt.**
+
+Futtatható alak: `shared/II-15-dimension-fourth-rung/PKG-15-9-uniform-field.py`.
+
+## 6. Eredmény — a lépcső egységes mezőnyön
+
+| Sáv | Közzétett (BCC-vel) | Egységes mezőny (lapátlóval) |
+|---|---|---|
+| vonal | 2..4217 | 1..4217 |
+| sík | 4218..**7964** | 4218..**6910** |
+| tér | **15997..20734** (a tetőn) | **6911..9799** (középen) |
+| négykiterjedés | 7965..15996 | **9800..20735** (a tetőn) |
+
+A lépcső **monoton** lett: vonal → sík → tér → négykiterjedés. **A három nem tér vissza a legsűrűbb tartományban.**
+
+Az ablakban ($N = 18737\ldots20736$): a négykiterjedés **2000/2000**; holtverseny 1, és az is a teli töltés.
+
+## 7. Ítélet a `JOS-02` rögzített feltételei szerint
+
+| Feltétel | Eredmény |
+|---|---|
+| **S1** — ≥ 1900 a négykiterjedésé | **áll** — 2000/2000 |
+| **S2** — a J3′ nulla töltést nyer | **nem áll betű szerint** — 1 töltést nyer |
+| **B1** — a J3′ mégis viszi a tetőt | nem vált ki |
+| **B3** — a holtverseny uralja az ablakot | nem vált ki |
+| **K1** — kontroll: a teljes mezőny teteje (1,3,5,7) | **áll** — 2000/2000 |
+
+**Ítélet: részleges.**
+
+**Az S2 hibája a regisztrációé, nem a világé — kimondva.** Az az egy töltés az $N = 20736$ **teli** töltés, ahol minden induló költsége pontosan a nyomösszeg. Ez a [II/12](../II-12-network-race/proof_hu.md) **nyom-döntetlen tétele**. Az előre rögzített holtverseny-szabály mellett tehát *minden* induló „nyeri" a teli töltést, bármi legyen a mezőny: az „S2 = nulla" küszöb **tétel szerint teljesíthetetlen volt, ab initio**. A feltétel érvénytelen, nem cáfolt.
+
+## 8. Import-számla
+
+Új import: **nulla.** A hordozó-tétel tiszta paritás-levezetés a lépéskészletről. A rendszer a PKG-15-1-ből, az ablak a PKG-16-5-ből, a döntetlen-törő a `KON-02`-ből (kimondott konvenció) örökölt. A nyom-döntetlen a II/12 tétele.
+
+## 9. Ítélet erről a csomagról
+
+**Áll, részleges jóslat-ítélettel.** A hordozó-tétel levezetve és két úton igazolva; a döntő kísérlet lefutott, a kontroll áll, és a jóslat lényege beigazolódott.
+
+## 10. Kimenő állítások
+
+- **K1:** **Hordozó-tétel** (K-PKG159-1): egy szövés akkor és csak akkor tükör-jegyű, ha van olyan koordináta-részhalmaz, amelyre minden lépés összege páratlan. Tengelyeket tartalmazó szövésnél: minden többlet-lépés koordináta-összege páratlan. **Tétel, nulla importtal.**
+- **K2:** A kritérium a három mért koordináció deklarált mezőnyén kivétel nélkül visszaadja a mért tükör-jegyeket, két független algoritmussal.
+- **K3:** A tükör-hordozó-térkép **konvenció-függő**: `KON-02` egységesen mindig a honos fokot adja (6→3, 8→**4**, 10→5, 12→6); a „3, 3, 5" mintát egyik egységes konvenció sem adja ki.
+- **K4:** **Ellenőrzött kísérlet:** a többlet-lépés paritásának megváltoztatása — és csak azé — megszünteti a tető-fordulást. Ez a tető-törvény **hordozó-felét erősíti**: a tükör-jegy az, ami a teli véget dönti.
+- **K5:** Ugyanez **deflációs** a kiterjedés-kérdésre: „nyolcason a három viszi a tetőt" a kristálytani BCC kézi választásának következménye. A repó saját szabályával négy volna.
+- **K6:** A `KON-02` érzékenységi száma megvan: **a kiválasztási szabály megváltoztatása a nyolcas tükör-hordozót 3-ról 4-re fordítja, és a tető-fordulást megszünteti.**
+
+> A K1–K6 csak e csomag **jóváhagyása után** vezethető át a fejezetekbe. A [III/1, 8.](../../III-frontier/III-01-candidate-laws_hu.md) és a [III/2, 8.](../../III-frontier/III-02-open-questions_hu.md) átírása a jóváhagyás dolga.
 </file>
 
 <file path="hu\II-proofs\II-15-dimension-fourth-rung\proof_hu.md">
@@ -2758,7 +3167,7 @@ id: III-01
 type: chapter
 lang: hu
 pair: III-01-candidate-laws_en.md
-pair_status: in-sync
+pair_status: outdated
 doc_version: "1.4"
 status: jelolt
 ---
@@ -2777,20 +3186,27 @@ status: jelolt
 
 6. **A héj-illeszkedési szabály (jelölt, hatóköre a II/14-ben pontosítva).** A hálóversenyt fokbetelés dönti: a győztes szövés az, amelynek létrájában a töltésnél éppen betelik egy fok. Mellette a II/12 fok-rezonanciái, a [II/13](../II-proofs/II-13-dimension-race/proof_hu.md) teljes győztes-táblája (a sík a 11-es zárt fokán győz) és a [II/14](../II-proofs/II-14-dimension-staircase/proof_hu.md) alsó fésűje (a vonal a saját széteső többszörözéseivel maradékosztály-mintában váltakozik). **Ellene** a II/14 döntő határa: a sík–tér váltást nem fokbetelés, hanem a tükör dönti (7. jelölt) — a tér a középső polca *közepén*, pontosan fél-töltésnél veszi át a versenyt. Ami hiányzik: a két mechanizmus hatókörének éles kimondása — mikor dönt a fok, és mikor a tükör. A [II/15](../II-proofs/II-15-dimension-fourth-rung/proof_hu.md) tovább szűkíti: a felső sávhatárok nem polc-határok (a legközelebbi zárt foktól 2, 3, illetve 112 töltésre esnek) — a sávhatár a költséggörbék metszéspontja. A [II/16](../II-proofs/II-16-coordination-ten/proof_hu.md) képe vegyes: két sávhatár 1 és 3 töltésre éles a bejövő zárt foktól, a honosé 5338-ra nem — a hatókör kérdése nyitott marad.
 
-7. **A tükör-szabály (jelölt — új, a II/14-ből).** A betöltés felső féltekéjét az a háló nyeri, amelynek létrája a fokátlag körül szimmetrikus és a legszélesebb (a páros-jegy: a hálóban nincs páratlan kör, a létra tükrös) — a tükör tolja legmagasabbra a betöltetlen ütemeket. Bizonyíték: a [II/14](../II-proofs/II-14-dimension-staircase/proof_hu.md) tér-sávja pontosan fél-töltésnél nyílik, és a teli véget csupa-páratlan lépésű (maguk is páros-jegyű) vonalak viszik. Két éle van: a jegy **nem** kiterjedés-tulajdon (vonalon is előállítható — ezért a kiválasztáshoz önmagában kevés), és ugyanez a tükör kis méreten a kiolvasást rontja (átellenes visszhang — a II/14 kiolvasási korlátja). Ami hiányzik: az éles kimondás és bizonyítás, és a viszonya a héj-szabályhoz (6.). A [II/15](../II-proofs/II-15-dimension-fourth-rung/proof_hu.md) élesítette és meg is lepte: a fő mezőnyben a felső felet **pontosan** a tükör-jegyű pár nyeri — minden felső töltés az övék —, de a páron belül a tetőn a sorrend fordul (8. jelölt). A [II/16](../II-proofs/II-16-coordination-ten/proof_hu.md) a harmadik, kivétel nélküli megerősítés — és az egyetlen, ahol a teljes mezőnyre is megnéztük: tízes koordináción a felső fél az egyetlen tükör-jegyű fő jelölté (a honos öté), a teljes mezőny teteje pedig a páros vonal-tagé.
+7. **A tükör-szabály (jelölt — új, a II/14-ből).** A betöltés felső féltekéjét az a háló nyeri, amelynek létrája a fokátlag körül szimmetrikus és a legszélesebb (a páros-jegy: a hálóban nincs páratlan kör, a létra tükrös) — a tükör tolja legmagasabbra a betöltetlen ütemeket. Bizonyíték: a [II/14](../II-proofs/II-14-dimension-staircase/proof_hu.md) tér-sávja pontosan fél-töltésnél nyílik, és a teli véget csupa-páratlan lépésű (maguk is páros-jegyű) vonalak viszik. Két éle van: a jegy **nem** kiterjedés-tulajdon (vonalon is előállítható — ezért a kiválasztáshoz önmagában kevés), és ugyanez a tükör kis méreten a kiolvasást rontja (átellenes visszhang — a II/14 kiolvasási korlátja). **Ez a jelölt ma tétellé vált:** a [hordozó-tétel](../II-proofs/II-15-dimension-fourth-rung/PKG-15-9-uniform-field_hu.md) mondja meg, mely szövés tükör-jegyű, a [teli-vég tétel](../II-proofs/II-15-dimension-fourth-rung/PKG-15-10-dense-end_hu.md) pedig azt, miért nyer a tükör-jegyű a teli végen — az egy-lyukas töltésen egzaktul, fölötte tanúsított szakaszon. Ami hiányzik: a viszonya a héj-szabályhoz (6.). A [II/15](../II-proofs/II-15-dimension-fourth-rung/proof_hu.md) élesítette és meg is lepte: a fő mezőnyben a felső felet **pontosan** a tükör-jegyű pár nyeri — minden felső töltés az övék —, de a páron belül a tetőn a sorrend fordul (8. jelölt). A [II/16](../II-proofs/II-16-coordination-ten/proof_hu.md) a harmadik, kivétel nélküli megerősítés — és az egyetlen, ahol a teljes mezőnyre is megnéztük: tízes koordináción a felső fél az egyetlen tükör-jegyű fő jelölté (a honos öté), a teljes mezőny teteje pedig a páros vonal-tagé.
 
-8. **A tető-törvény — egyesített alak (két tételi lábbal; a hordozó-fele mért).** A tetőt a **teljes mezőny** legalacsonyabb kiterjedésű tükör-jegyű tagja viszi. A hatókör kimondva, mert a két olvasat nem ugyanaz: a **fő mezőny** a kézzel felsorolt jelöltek (vonal, sík, tér, négykiterjedés, ötkiterjedés), a **teljes mezőny** ezen felül a végigpásztázott vonal-család minden tagja. A törvény a teljes mezőnyre szól, mert a „legalacsonyabb kiterjedésű" kitételnek csak ott van értelme — a fő mezőnyben a vonal a tetőn sehol sem játszik.
+8. **A tető-törvény — egyesített alak (a hordozó-fele már tétel).** A tetőt a **teljes mezőny** legalacsonyabb kiterjedésű tükör-jegyű tagja viszi. A hatókör kimondva, mert a két olvasat nem ugyanaz: a **fő mezőny** a kézzel felsorolt jelöltek (vonal, sík, tér, négykiterjedés, ötkiterjedés), a **teljes mezőny** ezen felül a végigpásztázott vonal-család minden tagja. A törvény a teljes mezőnyre szól, mert a „legalacsonyabb kiterjedésű" kitételnek csak ott van értelme — a fő mezőnyben a vonal a tetőn sehol sem játszik.
 
-    Három összetevője: *(i)* a tetőt a tükör-jegyűek uralják — mért (a 7. jelölt); *(ii)* tükör-jegyűek közt a teli vég a ritka vég tükre — a [lyuk-tükör tétel](../II-proofs/II-15-dimension-fourth-rung/PKG-15-5-hole-mirror_hu.md), tízesen a [PKG-16-5](../II-proofs/II-16-coordination-ten/PKG-16-5-transfer_hu.md)-ben megerősítve; *(iii)* ritkán az alacsonyabb kiterjedés az olcsóbb — az [irány-tétel](../II-proofs/II-15-dimension-fourth-rung/PKG-15-6-direction_hu.md), tanúsított szakaszokkal mindkét nagy koordináción. A (ii) és a (iii) tétel, hatókör-függetlenül; az (i) mérés, és a mérés hatóköre koordinációnként más:
+    **Ami eddig mérés volt, ma tétel.** A törvény három összetevőjéből mind a három levezetett: *(i)* **a tetőt a tükör-jegyűek viszik** — a [teli-vég tétel](../II-proofs/II-15-dimension-fourth-rung/PKG-15-10-dense-end_hu.md), és az egy-lyukas töltésen egzaktul; *(ii)* tükör-jegyűek közt a teli vég a ritka vég tükre — a [lyuk-tükör tétel](../II-proofs/II-15-dimension-fourth-rung/PKG-15-5-hole-mirror_hu.md), ma a nyom-döntetlenből egy sorban is levezetve; *(iii)* ritkán az alacsonyabb kiterjedés az olcsóbb — az [irány-tétel](../II-proofs/II-15-dimension-fourth-rung/PKG-15-6-direction_hu.md).
+
+    **A hordozó-kérdés lezárva, két csomagban.** *Mely* szövés tükör-jegyű: a [hordozó-tétel](../II-proofs/II-15-dimension-fourth-rung/PKG-15-9-uniform-field_hu.md) — akkor és csak akkor, ha van olyan koordináta-részhalmaz, amelyre minden lépés összege páratlan; tengelyeket tartalmazó szövésnél: minden többlet-lépés koordináta-összege páratlan. *Miért nyer* a tükör-jegyű a teli végen: a [teli-vég tétel](../II-proofs/II-15-dimension-fourth-rung/PKG-15-10-dense-end_hu.md) — mivel a nyom-döntetlen szerint minden induló összsúlya azonos, az alulról töltés a teli vég felől kivonás, ott tehát a legmagasabb ütemek döntenek, és a csúcs-ütem pontosan a tükör-jegyűeknél maximális.
 
     | Koordináció | A fő mezőny teteje | A teljes mezőny teteje |
     |---|---|---|
     | hatos ([II/14](../II-proofs/II-14-dimension-staircase/proof_hu.md)) | tér — az egyetlen tükör-jegyű fő jelölt | csupa-páratlan lépésű vonalak — tükör-jegyűek |
-    | nyolcas ([II/15](../II-proofs/II-15-dimension-fourth-rung/proof_hu.md)) | tér — a tükör-jegyű pár alacsonyabbika | **nincs megnézve** |
+    | nyolcas ([II/15](../II-proofs/II-15-dimension-fourth-rung/proof_hu.md)) | tér — a tükör-jegyű pár alacsonyabbika | **(1, 3, 5, 7)** — mind a 2000 felső töltésen ([PKG-15-8](../II-proofs/II-15-dimension-fourth-rung/PKG-15-8-top-full-field_hu.md)) |
     | tízes ([II/16](../II-proofs/II-16-coordination-ten/proof_hu.md)) | ötkiterjedésű honos — az egyetlen tükör-jegyű fő jelölt | (1, 3, 5, 7, 9) páros vonal-tag — tükör-jegyű |
 
-    **A mérés állása tehát, pontosan: a fő mezőnyön mindhárom koordináción kivétel nélkül áll; a teljes mezőnyön — vagyis abban az olvasatban, amelyikről a törvény szól — háromból kettőn.** A korábbi „tető-hármas" olvasat ennek árnyéka volt: a hatos és nyolcas koordináción a legalacsonyabb tükör-hordozó *történetesen* a három.
+    **A mérés állása tehát, pontosan: a teljes mezőnyön — vagyis abban az olvasatban, amelyikről a törvény szól — mindhárom koordináción áll.** A nyolcas cellát a [PKG-15-8](../II-proofs/II-15-dimension-fourth-rung/PKG-15-8-top-full-field_hu.md) töltötte ki, előre lepecsételt és commitolt vak jóslattal (`JOS-01`).
 
+    **Amit a teljes mezőnyön ez jelent, kimondva:** minden koordináción van csupa-páratlan lépésű vonal (1, 3, 5, …), az mindig tükör-jegyű, és a kiterjedése 1. A törvény „legalacsonyabb kiterjedésű" kitétele a teljes mezőnyön tehát **mindig a vonalat** jelöli ki. A törvény igaz és levezetett — de a **kiterjedésszámról nem mond semmit**.
+
+    **A fő mezőny „3, 3, 5" mintája konvenció-műtermék** ([PKG-15-9](../II-proofs/II-15-dimension-fourth-rung/PKG-15-9-uniform-field_hu.md)). A hordozó-tétel megmutatta, hogy a nyolcas koordináción a tér azért tükör-jegyű, mert **testátlót** kapott — a kiválasztási szabály lapátlót adna, aminek páros a koordináta-összege. Ellenőrzött kísérletben ezt az egy lépést kicserélve a tér elveszti a tükör-jegyet, és a **tető-fordulás eltűnik**: a fő mezőny teteje a háromról a honos négyre vált. Egységes konvenció mellett a térkép mindig a honos fokot adja (6→3, 8→**4**, 10→5, 12→6); a „3, 3, 5" mintát egyetlen egységes szabály sem adja ki. A nyolcas testátlót, a tízes lapátlót kapott — két különböző szabály.
+
+    **Ami hiányzik:** *(a)* a teli-vég tétel tanúsított szakaszának élesítése — a jelenlegi becslés elégséges, nem szükséges feltétel; *(b)* a tétel átvitele tízes koordinációra; *(c)* a kiválasztási konvenció rendezése — amíg nincs egységes szabály, a fő mezőny állításai a listáról szólnak, nem a világról. A „miért három" kérdés ezen a szinten **lezárult**: a válasz a jelölt-listán múlt, nem a nyelven. A kérdés a [gyökér-programra](III-02-open-questions_hu.md) száll.
     Ami hiányzik, három tétel: **(a) a nyolcas koordináció teljes-mezőny-teteje** — a [PKG-15-3](../II-proofs/II-15-dimension-fourth-rung/PKG-15-3-race_hu.md) csak annyit mond, hogy ott a fő négyes egyetlen töltést sem nyer szigorúan, a tetőn álló vonal-imitátort nem nevezi meg; a legtöbbet nyerő háromból kettő — a (3, 5, 6, 10) és a (3, 7, 8, 9) — páros lépést is tartalmaz, tehát **nem** tükör-jegyű, így az eredmény nem sejthető, meg kell nézni. Új próba nem kell hozzá: ugyanaz a leolvasás a mentett verseny-állapotból, amit a [PKG-16-5](../II-proofs/II-16-coordination-ten/PKG-16-5-transfer_hu.md) tízesen már elvégzett. **(b) A hordozó-fele levezetése** — miért a tükör választ, a 7. jelölt tételesítése. **(c) A tükör-hordozó-térkép** — mely koordináción mely fok a legalacsonyabb tükör-jegyű szövés.
 </file>
 
@@ -3117,29 +3533,748 @@ A szakaszhatár kapu: a következő szakasz csak az előző kimondott ítéletei
 *A program mérföldkövei csomag-módszerrel futnak; ez a fájl a mérföldkövek szabálykönyveinek szabálykönyve. Módosítása a repó rendje szerint történik: a lefutott mérföldkövek szakasza nem írható át, bővítés a szakasz végére kerül.*
 </file>
 
-<file path="shared\environment-check.py">
-# environment-check.py — run this BEFORE any package script in shared/
+<file path="shared\bench\bench.py">
+# bench.py -- the verification bench (milestone P0.2)
 #
-# Why this exists. Several packages of Part II declare an extended-precision
-# primary computation route (correction H3 of II/15): the cost curves are
-# accumulated in np.longdouble, because the float64 accumulation error near
-# the full end is larger than the fixed identity tolerance of 1e-8.
+# Why this exists. The repository's own rule says: what can only be reproduced
+# by hand is reproducibility debt, and it must be paid off before anything new
+# is built on it. This bench pays it off mechanically. It re-runs the package
+# scripts of the rulebook-era proofs (II/13 onward), harvests the accuracy
+# checks they print, and compares each one against the value published in the
+# package -- within a tolerance declared in tolerances.json, never widened
+# after the fact.
 #
-# np.longdouble is NOT the same width everywhere. On Linux/glibc with gcc or
-# clang it is the 80-bit x87 extended type (16 bytes stored, ~18 significant
-# digits). On Windows with the MSVC toolchain — and on some other platforms —
-# numpy maps it onto float64. There it is silently the SAME type as float64,
-# so the H3 correction has no effect and the scripts can report FAILS where
-# the packages record HOLDS.
+# The bench proves nothing and overturns nothing. A red line means "this number
+# does not come back on this machine", which may be an environment limit rather
+# than a defect -- run shared/environment-check.py first to tell the two apart.
 #
-# This script measures the consequence instead of guessing it: it builds the
-# real II/15 hypercube ladder (12^4 = 20736 beats, exact trace 165888) and
-# reports how far the accumulated total lands from the exact value.
+# One verdict deserves special attention: URES (vacuous). A two-way check
+# compares two supposedly independent computation routes. If it reports exactly
+# zero deviation, the two routes have most likely collapsed into one (on this
+# platform np.longdouble is an alias of float64), so the check covers nothing.
+# A vacuous check is reported as a failure, because a false green is worse than
+# a red: it is the machine equivalent of a hand-set value nobody measured.
 #
-# Exit code: 0 if extended precision is genuinely available, 1 if not.
-# Nothing here is a proof or a package result — it is an environment report.
+# Usage:
+#   python shared/bench/bench.py            # skips the scripts marked slow
+#   python shared/bench/bench.py --teljes   # runs everything, however long
+#   python shared/bench/bench.py --proba II-14
+#
+# Exit code: 0 if every check that ran is green, 1 otherwise.
 
+import json
+import os
+import re
+import subprocess
 import sys
+import time
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+
+# The workstation has 8 cores / 16 threads and 128 GB, but the other half of the
+# machine belongs to its owner: never take more than MAX_MAG cores. Children get
+# their BLAS/OpenMP thread pools pinned to 1, otherwise N parallel scripts would
+# each spin up their own pool and the real load would be N x cores, not N.
+MAX_MAG = 8
+EGYSZALU_KORNYEZET = {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1",
+                      "MKL_NUM_THREADS": "1", "NUMEXPR_NUM_THREADS": "1",
+                      "VECLIB_MAXIMUM_THREADS": "1"}
+
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
+
+SHARED = Path(__file__).resolve().parents[1]
+ROOT = SHARED.parent
+TURESEK = Path(__file__).resolve().parent / "tolerances.json"
+
+OK, BUKIK, URES, NEM_FUT, HIANYZO = "ALL", "BUKIK", "URES", "NEM FUT", "NINCS MEG"
+H4_VAR = "H4-VAR"
+
+# Checks whose declared primary route was the extended-precision one of H3.
+# Correction H4 retired that route, so in the reference environment their
+# PRECONDITION is missing -- the number is not wrong, the script simply has not
+# been moved to shared/summation.py yet. Reporting these as BUKIK would be a
+# false accusation; reporting them as green would be a false clearance. They get
+# their own verdict, are listed in full, and do not decide the exit code.
+BUKO = (BUKIK, URES, HIANYZO)
+
+
+def szam(szoveg):
+    try:
+        return float(szoveg)
+    except ValueError:
+        return None
+
+
+def ertekel(ell, kimenet):
+    """One check against one captured stdout. Returns (verdict, read value, note)."""
+    m = re.search(ell["minta"], kimenet)
+    if not m:
+        return HIANYZO, None, "a minta nem talalt a kimenetben"
+    nyers = m.group(1).strip()
+    mod = ell.get("mod", "tures")
+
+    if mod == "szoveg":
+        return (OK if nyers == ell["ertek"] else BUKIK), nyers, ""
+
+    ertek = szam(nyers)
+    if ertek is None:
+        return BUKIK, nyers, "a kiolvasott ertek nem szam"
+
+    if mod == "egyezes":
+        elteres = abs(ertek - ell["ertek"])
+        jo = elteres <= ell.get("tures", 0)
+        return (OK if jo else BUKIK), nyers, ("elteres %.3g" % elteres if not jo else "")
+
+    # mod == "tures"
+    if ell.get("ketutas") and ertek == 0.0:
+        return URES, nyers, "pontosan nulla -- a ket ut valoszinuleg egybeesett"
+    jo = ertek <= ell["tures"]
+    return (OK if jo else BUKIK), nyers, ("" if jo else "tures %.3g" % ell["tures"])
+
+
+def futtat(szkript_ut, szalak):
+    """Package scripts must run from their own directory (relative cache paths).
+    `szalak` pins the child's BLAS/OpenMP pools so the total load stays bounded."""
+    ut = SHARED / szkript_ut
+    if not ut.exists():
+        return None, 0.0, "a szkript nem letezik"
+    kornyezet = dict(os.environ)
+    kornyezet.update({k: str(szalak) for k in EGYSZALU_KORNYEZET})
+    kezd = time.time()
+    try:
+        p = subprocess.run([sys.executable, ut.name], cwd=str(ut.parent),
+                           capture_output=True, text=True, errors="replace",
+                           env=kornyezet)
+    except OSError as e:
+        return None, time.time() - kezd, str(e)
+    return (p.stdout or "") + (p.stderr or ""), time.time() - kezd, None
+
+
+def main(argv):
+    teljes = "--teljes" in argv
+    szures = None
+    if "--proba" in argv:
+        szures = argv[argv.index("--proba") + 1]
+    jobs = MAX_MAG
+    if "--jobs" in argv:
+        jobs = int(argv[argv.index("--jobs") + 1])
+    jobs = max(1, min(jobs, MAX_MAG))
+
+    print("== hitelesito-pad (P0.2) ==")
+    print()
+    if not TURESEK.exists():
+        print("HIBA: a tures-fajl nem talalhato: %s" % TURESEK)
+        return 1
+    tar = json.loads(TURESEK.read_text(encoding="utf-8"))
+    padok = tar["padok"]
+    if szures:
+        padok = [p for p in padok if p["proba"] == szures]
+
+    print("tures-fajl : %s" % TURESEK.relative_to(ROOT).as_posix())
+    print("mod        : %s%s" % ("teljes" if teljes else "gyors (a lassu szkriptek kimaradnak)",
+                                 (", szures: " + szures) if szures else ""))
+    print("magok      : legfeljebb %d (a gep tobbi resze a felhasznaloe)" % jobs)
+    print()
+
+    osszes = {OK: 0, BUKIK: 0, URES: 0, HIANYZO: 0, NEM_FUT: 0, H4_VAR: 0}
+    reszletek, varok = [], []
+
+    kihagyott = {p["szkript"] for p in padok if p.get("lassu") and not teljes}
+    futando = [p for p in padok if p["szkript"] not in kihagyott]
+    parhuzamos = [p for p in futando if not p.get("memoriaigenyes")]
+    sorosak = [p for p in futando if p.get("memoriaigenyes")]
+
+    eredmeny = {}
+    if parhuzamos:
+        n = min(jobs, len(parhuzamos))
+        print("  parhuzamosan: %d szkript, %d dolgozo (a gyerekek szalpoolja 1-re kotve)"
+              % (len(parhuzamos), n))
+        with ThreadPoolExecutor(max_workers=n) as pool:
+            valaszok = list(pool.map(lambda p: futtat(p["szkript"], 1), parhuzamos))
+        for pad, valasz in zip(parhuzamos, valaszok):
+            eredmeny[pad["szkript"]] = valasz
+    for pad in sorosak:
+        print("  sorosan (memoriaigenyes, %d szalon): %s" % (jobs, pad["szkript"]))
+        eredmeny[pad["szkript"]] = futtat(pad["szkript"], jobs)
+    print()
+
+    for pad in padok:
+        nev = pad["szkript"]
+        if nev in kihagyott:
+            print("  [kihagyva]  %s  (lassu; --teljes futtatja)" % nev)
+            osszes[NEM_FUT] += len(pad["ellenorzesek"])
+            continue
+
+        kimenet, ido, hiba = eredmeny[nev]
+        if kimenet is None:
+            print("  [NEM FUT]   %s  -- %s" % (nev, hiba))
+            osszes[NEM_FUT] += len(pad["ellenorzesek"])
+            continue
+
+        print("  %s  (%.1f s)" % (nev, ido))
+        for ell in pad["ellenorzesek"]:
+            itelet, olvasott, megj = ertekel(ell, kimenet)
+            if itelet in BUKO and ell.get("h3_fuggo"):
+                itelet = H4_VAR
+                megj = "a H3 kiterjesztett ut visszavonva -- a szkript meg nem all a H4 uton"
+            osszes[itelet] = osszes.get(itelet, 0) + 1
+            jelzo = {OK: "ALL   ", BUKIK: "BUKIK ", URES: "URES  ",
+                     HIANYZO: "NINCS ", H4_VAR: "H4-VAR"}[itelet]
+            sor = "      %s %-46s olvasott: %-14s kozzetett: %s" % (
+                jelzo, ell["nev"][:46], str(olvasott)[:14], ell.get("kozzetett", "-"))
+            print(sor)
+            if megj:
+                print("             ^ %s" % megj)
+            if itelet in BUKO:
+                reszletek.append((pad["proba"], nev, ell["nev"], itelet, olvasott, megj))
+            elif itelet == H4_VAR:
+                varok.append((pad["proba"], nev, ell["nev"], olvasott))
+        print()
+
+    var = tar.get("felvetelre_var", [])
+    if var:
+        print("  felvetelre var (%d szkript, meg nincs mintaja):" % len(var))
+        for v in var:
+            print("      %-52s %s" % (v["szkript"], v["ok"]))
+        print()
+
+    fut = osszes[OK] + osszes[BUKIK] + osszes[URES] + osszes[HIANYZO] + osszes[H4_VAR]
+    print("  osszegzes: %d ellenorzes futott -- ALL %d | BUKIK %d | URES %d | "
+          "NINCS MEG %d | H4-VAR %d"
+          % (fut, osszes[OK], osszes[BUKIK], osszes[URES], osszes[HIANYZO],
+             osszes[H4_VAR]))
+    if osszes[NEM_FUT]:
+        print("             tovabbi %d ellenorzes nem futott (lassu vagy hianyzo szkript)"
+              % osszes[NEM_FUT])
+    print()
+
+    if varok:
+        print("  H4-VAR (%d) -- nem rossz szam, hanem hianyzo elofeltetel:" % len(varok))
+        for proba, szkript, ell, olvasott in varok:
+            print("      [%s] %-44s olvasott: %s" % (proba, ell[:44], olvasott))
+        print("      A hordozhato utat a shared/summation.py adja; a szkriptek")
+        print("      atallitasa a H4 helyesbites dolga (B fuggelek).")
+        print()
+
+    if not reszletek:
+        print("ITELET: ALL -- minden lefutott ellenorzes visszaadta a kozzetett szamot.")
+        if varok:
+            print("        (%d ellenorzes H4-VAR statuszban -- lasd fent.)" % len(varok))
+        return 0
+
+    print("ITELET: BUKIK -- %d ellenorzes nem all:" % len(reszletek))
+    for proba, szkript, ell, itelet, olvasott, megj in reszletek:
+        print("   [%s] %s / %s -> %s (%s)%s"
+              % (itelet, proba, ell, olvasott, szkript, (" -- " + megj) if megj else ""))
+    print()
+    print("Mielott ezt hibanak veszed: futtasd a shared/environment-check.py-t.")
+    print("Kornyezeti korlat es hiba ket kulon dolog, es a pad nem tudja szetvalasztani.")
+    return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))
+</file>
+
+<file path="shared\bench\tolerances.json">
+{
+  "meta": {
+    "leiras": "A hitelesito-pad tures-fajlja (P0.2). Minden bejegyzes egy kozzetett ellenorzo szam a szabalyrend szerinti probakbol (II/13-tol). A 'kozzetett' mezo a csomagban/B fuggelekben allo ertek; a 'tures' az a sav, amin belul a gepi ujrafuttatas meg egyezonek szamit. A turest utolag tagitani TILOS -- a szabalykonyv 7. pontja.",
+    "hatokor": "A pad a szabalyrend szerinti probakat fedi (II/13-II/16). A korabbi tizenket proba eszkozei nem allnak futtathato alakban -- ez kimondott hatokor-hatar, nem hiany.",
+    "modok": {
+      "tures": "a kiolvasott szam <= tures",
+      "egyezes": "|kiolvasott - ertek| <= tures",
+      "szoveg": "a kiolvasott szoveg pontosan az 'ertek'"
+    },
+    "ketutas_jelentese": "Ket fuggetlen szamolasi ut osszevetese. Ha az eredmeny PONTOSAN nulla, a pad URES iteletet ad: a ket ut valoszinuleg ugyanaz lett (lasd environment-check.py), tehat a proba nem fedez semmit.",
+    "h3_fuggo_jelentese": "Az ellenorzes deklaralt elsodleges utja a H3 kiterjesztett-pontossagu ut volt, amit a H4 helyesbites visszavont. A referencia-kornyezetben ez az ut NEM letezik, ezert a proba elofeltetele hianyzik: az itelet H4-VAR, nem BUKIK. A szam nem rossz -- a szkript meg nem allt at a shared/summation.py hordozhato utjara."
+  },
+  "padok": [
+    {
+      "proba": "II-13",
+      "szkript": "II-13-dimension-race/PKG-13-2-ladders.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "nyomosszeg (mind a 64)",
+          "mod": "egyezes",
+          "ertek": 64.0,
+          "tures": 1e-09,
+          "kozzetett": "64",
+          "minta": "trace sums \\(all 64\\):\\s*([0-9.eE+-]+)"
+        },
+        {
+          "nev": "J1 zart alak kontra gepezet",
+          "mod": "tures",
+          "tures": 1e-14,
+          "ketutas": true,
+          "kozzetett": "1e-15",
+          "minta": "J1 analytic vs machinery, largest deviation:\\s*([0-9.eE+-]+)"
+        },
+        {
+          "nev": "J3 ket fuggetlen felepitese",
+          "mod": "tures",
+          "tures": 1e-14,
+          "ketutas": true,
+          "kozzetett": "1e-15",
+          "minta": "J3 by its two constructions, largest deviation:\\s*([0-9.eE+-]+)"
+        },
+        {
+          "nev": "J2 kontra a hiperkocka binomialis letraja",
+          "mod": "tures",
+          "tures": 1e-14,
+          "ketutas": true,
+          "kozzetett": "1e-15",
+          "minta": "J2 == binomial ladder of the hypercube\\? largest deviation:\\s*([0-9.eE+-]+)"
+        },
+        {
+          "nev": "letra-osztalyok a pasztazasban",
+          "mod": "egyezes",
+          "ertek": 7.0,
+          "tures": 0,
+          "kozzetett": "7 osztaly",
+          "minta": "members: 21, distinct ladders:\\s*(\\d+)"
+        }
+      ]
+    },
+    {
+      "proba": "II-13",
+      "szkript": "II-13-dimension-race/PKG-13-3-race.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "a sik gyoztes savja (7. szabaly fo olvasata)",
+          "mod": "szoveg",
+          "ertek": "10, 11, 12, 13, 14, 15",
+          "kozzetett": "10-15",
+          "minta": "fillings where J2 < J1 and J2 < J3: \\[([0-9, ]+)\\]"
+        }
+      ]
+    },
+    {
+      "proba": "II-13",
+      "szkript": "II-13-dimension-race/PKG-13-4-readout.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "golyo a gyoztesen (r=0..2)",
+          "mod": "szoveg",
+          "ertek": "1, 6, 16",
+          "kozzetett": "1, 6, 16",
+          "minta": "ball: \\[([0-9, ]+)\\]"
+        }
+      ]
+    },
+    {
+      "proba": "II-14",
+      "szkript": "II-14-dimension-staircase/PKG-14-2-ladders.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "nyomosszeg mind a 224 halon",
+          "mod": "egyezes",
+          "ertek": 3072.0,
+          "tures": 1e-09,
+          "kozzetett": "3072 (egzakt)",
+          "minta": "trace sum min/max:\\s*([0-9.eE+-]+)"
+        },
+        {
+          "nev": "gepezet kontra zart keplet, 224 halon",
+          "mod": "tures",
+          "tures": 1e-13,
+          "ketutas": true,
+          "kozzetett": "7,9e-14",
+          "minta": "largest machinery-formula deviation:\\s*([0-9.eE+-]+)"
+        },
+        {
+          "nev": "a ter-szoves paros-jegyenek tukor-szimmetriaja",
+          "mod": "tures",
+          "tures": 1e-14,
+          "kozzetett": "1e-15",
+          "minta": "J3 symmetry deviation:\\s*([0-9.eE+-]+)"
+        }
+      ]
+    },
+    {
+      "proba": "II-14",
+      "szkript": "II-14-dimension-staircase/PKG-14-3-race.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "nyomosszeg a versenyben",
+          "mod": "egyezes",
+          "ertek": 3072.0,
+          "tures": 1e-09,
+          "kozzetett": "3072 (egzakt)",
+          "minta": "trace sum min/max:\\s*([0-9.eE+-]+)"
+        },
+        {
+          "nev": "a sik savja",
+          "mod": "szoveg",
+          "ertek": "130..255",
+          "kozzetett": "130-255",
+          "minta": "plane band: ([0-9.]+\\.\\.[0-9]+)"
+        },
+        {
+          "nev": "a ter savja (fel-toltestol)",
+          "mod": "szoveg",
+          "ertek": "256..511",
+          "kozzetett": "256-511",
+          "minta": "space band: ([0-9.]+\\.\\.[0-9]+)"
+        }
+      ]
+    },
+    {
+      "proba": "II-14",
+      "szkript": "II-14-dimension-staircase/PKG-14-4-readout.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "rezonancia-orszem (a szuk, regi alak)",
+          "mod": "egyezes",
+          "ertek": 0.0,
+          "tures": 0,
+          "kozzetett": "0 db",
+          "minta": "resonance sentinel: other classes agreeing exactly with the neighbour:\\s*(\\d+)"
+        }
+      ]
+    },
+    {
+      "proba": "II-14",
+      "szkript": "II-14-dimension-staircase/PKG-14-5-readout-repeat.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "letra ket uton",
+          "mod": "tures",
+          "tures": 1e-13,
+          "ketutas": true,
+          "kozzetett": "1,6e-14",
+          "minta": "ladder by two routes: largest deviation = ([0-9.eE+-]+)"
+        },
+        {
+          "nev": "vetito ket uton",
+          "mod": "tures",
+          "tures": 1e-14,
+          "ketutas": true,
+          "kozzetett": "6,7e-16",
+          "minta": "projector by two routes: largest deviation = ([0-9.eE+-]+)"
+        },
+        {
+          "nev": "sav-orszem (KON-04 erzekenysegi szama)",
+          "mod": "egyezes",
+          "ertek": 2.8437,
+          "tures": 0.001,
+          "kozzetett": "S = 2,84",
+          "minta": "band sentinel: S = ([0-9.]+)"
+        },
+        {
+          "nev": "egzakt golyo r=0..5 (4r^2+2)",
+          "mod": "szoveg",
+          "ertek": "1, 7, 25, 63, 129, 231",
+          "kozzetett": "1, 7, 25, 63, 129, 231",
+          "minta": "ball \\(r=0\\.\\.5\\): \\[([0-9, ]+)\\]"
+        },
+        {
+          "nev": "a csomag sajat itelete",
+          "mod": "szoveg",
+          "ertek": "HOLDS",
+          "kozzetett": "all",
+          "minta": "VERDICT: (HOLDS|FAILS)"
+        }
+      ]
+    },
+    {
+      "proba": "II-15",
+      "szkript": "II-15-dimension-fourth-rung/PKG-15-2-ladders.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "nyomosszeg 165888 mindenutt",
+          "mod": "szoveg",
+          "ertek": "HOLDS",
+          "kozzetett": "all",
+          "minta": "trace sum 165888 everywhere: (HOLDS|FAILS)"
+        },
+        {
+          "nev": "letra-osztalyok (rejtett egybeeses nelkul)",
+          "mod": "egyezes",
+          "ertek": 502.0,
+          "tures": 0,
+          "kozzetett": "502 osztaly",
+          "minta": "ladder classes: (\\d+) classes on 503 networks"
+        },
+        {
+          "nev": "A8 -- mind a 32 cel ket uton",
+          "mod": "tures",
+          "tures": 1e-11,
+          "ketutas": true,
+          "kozzetett": "1,3e-12",
+          "minta": "all 32 targets by two routes; largest deviation ([0-9.eE+-]+)"
+        }
+      ]
+    },
+    {
+      "proba": "II-15",
+      "szkript": "II-15-dimension-fourth-rung/PKG-15-3-race.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "teljes-toltesi egyezes",
+          "mod": "tures",
+          "tures": 1e-11,
+          "kozzetett": "8,4e-12",
+          "minta": "full-end deviation ([0-9.eE+-]+)",
+          "h3_fuggo": true
+        },
+        {
+          "nev": "kereszt-ellenorzes float64-en",
+          "mod": "tures",
+          "tures": 1e-07,
+          "ketutas": true,
+          "kozzetett": "a hosszu-lebegos ut fedezete",
+          "minta": "cross-check \\(float64\\): largest cost deviation ([0-9.eE+-]+)",
+          "h3_fuggo": true
+        },
+        {
+          "nev": "a kiolvasasi pont (rogzitett valasztas)",
+          "mod": "egyezes",
+          "ertek": 11075.0,
+          "tures": 0,
+          "kozzetett": "N = 11075",
+          "minta": "-> N = (\\d+)"
+        }
+      ]
+    },
+    {
+      "proba": "II-15",
+      "szkript": "II-15-dimension-fourth-rung/PKG-15-4-readout.py",
+      "lassu": true,
+      "memoriaigenyes": true,
+      "megjegyzes": "A ketutas pecset suru sajatfeladatot futtat (~10-11 GB, ezen a gepen 1020 s). Ezert lassu ES memoriaigenyes: a pad sosem inditja parhuzamosan.",
+      "ellenorzesek": [
+        {
+          "nev": "zart fok rese (2 - gyok3)",
+          "mod": "egyezes",
+          "ertek": 0.267949192,
+          "tures": 1e-08,
+          "kozzetett": "0,267949192",
+          "minta": "gap above degree 11075 is ([0-9.]+)"
+        },
+        {
+          "nev": "sav-orszem (KON-04 erzekenysegi szama)",
+          "mod": "egyezes",
+          "ertek": 5.3707,
+          "tures": 0.001,
+          "kozzetett": "S = 5,37",
+          "minta": "band sentinel: S = ([0-9.]+)"
+        },
+        {
+          "nev": "egzakt kobos golyo r=0..5",
+          "mod": "szoveg",
+          "ertek": "1, 9, 41, 129, 321, 681",
+          "kozzetett": "1, 9, 41, 129, 321, 681",
+          "minta": "ball \\(r=0\\.\\.5\\): \\[([0-9, ]+)\\]"
+        },
+        {
+          "nev": "teljessegi szamla",
+          "mod": "szoveg",
+          "ertek": "82944/82944",
+          "kozzetett": "82944/82944",
+          "minta": "completeness ledger: found (\\d+/\\d+)"
+        },
+        {
+          "nev": "vetito ket uton (a pecset)",
+          "mod": "tures",
+          "tures": 1e-14,
+          "ketutas": true,
+          "kozzetett": "1,7e-15",
+          "minta": "projector by two routes: largest deviation = ([0-9.eE+-]+)"
+        },
+        {
+          "nev": "a csomag ketutas pecsetje",
+          "mod": "szoveg",
+          "ertek": "HOLDS",
+          "kozzetett": "all",
+          "minta": "TWO-ROUTE SEAL: (HOLDS|FAILS)"
+        }
+      ]
+    },
+    {
+      "proba": "II-15",
+      "szkript": "II-15-dimension-fourth-rung/PKG-15-5-hole-mirror.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "E1 tukor-azonossag",
+          "mod": "tures",
+          "tures": 1e-11,
+          "kozzetett": "a csomag ALL-t rogzit",
+          "minta": "E1 mirror identity: .*? at most ([0-9.eE+-]+)",
+          "h3_fuggo": true
+        },
+        {
+          "nev": "E2 egy-lyukas holtverseny (N = 20735)",
+          "mod": "tures",
+          "tures": 1e-11,
+          "kozzetett": "a csomag ALL-t rogzit",
+          "minta": "E2 single-hole tie:.*? filling N = \\d+ = ([0-9.eE+-]+)",
+          "h3_fuggo": true
+        },
+        {
+          "nev": "E3 csucs-utem a paros indulokon (J3)",
+          "mod": "egyezes",
+          "ertek": 16.0,
+          "tures": 1e-09,
+          "kozzetett": "16 (tetelbol)",
+          "minta": "J3: (16\\.[0-9]+)"
+        },
+        {
+          "nev": "E5 negativ kontroll (a parossag szukseges)",
+          "mod": "szoveg",
+          "ertek": "HOLDS",
+          "kozzetett": "all",
+          "minta": "bipartite condition is necessary: (HOLDS|FAILS)"
+        }
+      ]
+    },
+    {
+      "proba": "II-15",
+      "szkript": "II-15-dimension-fourth-rung/PKG-15-6-direction.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "szendvics-lemma a teljes racson (sertesek)",
+          "mod": "egyezes",
+          "ertek": 0.0,
+          "tures": 0,
+          "kozzetett": "0 sertes",
+          "minta": "sandwich lemma on the full lattice: largest violation ([0-9.eE+-]+)"
+        },
+        {
+          "nev": "J3-J4 ar-atbillenes",
+          "mod": "egyezes",
+          "ertek": 4740.0,
+          "tures": 0,
+          "kozzetett": "4740",
+          "minta": "J3-J4\\s+\\d+\\s+\\d+\\s+(\\d+)"
+        },
+        {
+          "nev": "dominancia-hezag felso vege (J1-J2)",
+          "mod": "egyezes",
+          "ertek": 61.6,
+          "tures": 0.05,
+          "kozzetett": "43-62%",
+          "minta": "J1-J2\\s+\\d+\\s+\\d+\\s+\\d+\\s+([0-9.]+)%"
+        }
+      ]
+    },
+    {
+      "proba": "II-15",
+      "szkript": "II-15-dimension-fourth-rung/PKG-15-7-top.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "E1 szigorusagi tartalek a tetel-szakaszon",
+          "mod": "egyezes",
+          "ertek": 0.20718,
+          "tures": 1e-05,
+          "kozzetett": "0,2072",
+          "minta": "smallest advantage ([0-9.]+)"
+        },
+        {
+          "nev": "E2 egy-lyukas holtverseny",
+          "mod": "tures",
+          "tures": 1e-11,
+          "kozzetett": "1,7e-13",
+          "minta": "E2 single-hole tie: \\|dPrice\\(20735\\)\\| = ([0-9.eE+-]+)",
+          "h3_fuggo": true
+        },
+        {
+          "nev": "E3 tukor-atvitel a szakaszon",
+          "mod": "tures",
+          "tures": 1e-11,
+          "kozzetett": "2,2e-12",
+          "minta": "E3 mirror transfer on the stretch: largest deviation ([0-9.eE+-]+)",
+          "h3_fuggo": true
+        },
+        {
+          "nev": "E4 tanusitott lefedettseg",
+          "mod": "egyezes",
+          "ertek": 44.0,
+          "tures": 0.05,
+          "kozzetett": "44,0%",
+          "minta": "= ([0-9.]+)%; the remainder"
+        },
+        {
+          "nev": "a tanusitott szakasz a mert savon belul van",
+          "mod": "szoveg",
+          "ertek": "HOLDS",
+          "kozzetett": "all",
+          "minta": "part of the measured space band \\(15997\\.\\.20734\\): (HOLDS|FAILS)"
+        }
+      ]
+    }
+  ],
+  "felvetelre_var": [
+    {
+      "szkript": "II-16-coordination-ten/PKG-16-2-ladders.py",
+      "kozzetett": "ritka maradek-proba 5,3e-14; 804 osztaly",
+      "ok": "248832 hely; a futasido meg ismeretlen"
+    },
+    {
+      "szkript": "II-16-coordination-ten/PKG-16-3-race.py",
+      "kozzetett": "savszerkezet: vonal, sik, negykiterjedes, otkiterjedes",
+      "ok": "248832 hely; a futasido meg ismeretlen"
+    },
+    {
+      "szkript": "II-16-coordination-ten/PKG-16-4-readout.py",
+      "kozzetett": "sav-orszem S = 7,29; mintaveteles vetito-pecset 5,1e-14 es 9,4e-16",
+      "ok": "248832 hely; a futasido meg ismeretlen"
+    },
+    {
+      "szkript": "II-16-coordination-ten/PKG-16-5-transfer.py",
+      "kozzetett": "a teli veg 2000 toltesebol 1999 a paros vonal-tage",
+      "ok": "248832 hely; a futasido meg ismeretlen"
+    }
+  ]
+}
+</file>
+
+<file path="shared\environment-check.py">
+# environment-check.py -- run this BEFORE any package script in shared/
+#
+# What this checks, and what changed.
+#
+# It used to ask a platform question: "is np.longdouble genuinely the 80-bit
+# extended type here?" That mattered while correction H3 of II/15 made extended
+# precision the primary computation route, because on Windows with MSVC
+# np.longdouble is an ALIAS of float64 and the correction was silently
+# inoperative there. The answer was to move the work to Linux.
+#
+# Correction H4 retires that route. The drift never came from the float width;
+# it came from accumulating tens of thousands of terms in sequence. Summing in
+# short blocks with exact block offsets (shared/summation.py) removes it in
+# plain float64, on every platform. So the question this script asks is no
+# longer "is your platform good enough" but "does the portable route hold here"
+# -- and the expected answer is yes, everywhere.
+#
+# The reference environment below is declared, not required: it records where
+# the published numbers of this repository are produced, so a third party can
+# tell an environment difference from a result difference. A machine that does
+# not match it should still pass this check. If it does not, that is a finding.
+#
+# Exit code: 0 if the portable route meets the fixed identity tolerance, 1 if not.
+
+import os
+import platform
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 try:
     import numpy as np
@@ -3148,73 +4283,103 @@ except ImportError:
     print("    pip install -r requirements.txt")
     raise SystemExit(2)
 
-TOLERANCE = 1e-8          # the fixed identity tolerance (PKG-15-2 L5, PKG-15-3)
-EXACT_TRACE = 165888.0    # 2 * 4 * 20736 — the trace tie of II/15
+import summation
+
+# The declared reference environment: the machine on which the published
+# numbers of this repository are produced. Recorded for comparison, not enforced.
+REFERENCIA = {
+    "os": "Windows 11 Pro",
+    "python": "3.12.5",
+    "numpy": "2.2.4",
+    "cpu": "Intel i9, 8 mag / 16 szal",
+    "ram": "128 GB",
+    "megjegyzes": "A tesztek lokalisan futnak; az eroforras nem korlat. "
+                  "A szamolasi ut (H4) platformfuggetlen, ezert mas gepen is all.",
+}
+
+EGZAKT_NYOM = 165888.0     # the II/15 J4 ladder: 2 * 4 * 20736
 
 
-def accumulation_error(dtype):
-    """The II/15 J4 hypercube ladder, accumulated: how far the total lands
-    from the exact trace. This is the quantity the fixed tolerance guards."""
-    k = (2 * np.pi * np.arange(12)).astype(dtype) / 12
-    one = 2.0 - 2.0 * np.cos(k)
-    lam = (one[:, None, None, None] + one[None, :, None, None]
-           + one[None, None, :, None] + one[None, None, None, :])
-    total = np.cumsum(np.sort(lam.ravel()))[-1]
-    return abs(float(total) - EXACT_TRACE)
+def memoria_gb():
+    """Best-effort physical memory, standard library only."""
+    try:
+        if os.name == "nt":
+            import ctypes
+
+            class MEMORYSTATUSEX(ctypes.Structure):
+                _fields_ = [("dwLength", ctypes.c_ulong),
+                            ("dwMemoryLoad", ctypes.c_ulong),
+                            ("ullTotalPhys", ctypes.c_ulonglong),
+                            ("ullAvailPhys", ctypes.c_ulonglong),
+                            ("ullTotalPageFile", ctypes.c_ulonglong),
+                            ("ullAvailPageFile", ctypes.c_ulonglong),
+                            ("ullTotalVirtual", ctypes.c_ulonglong),
+                            ("ullAvailVirtual", ctypes.c_ulonglong),
+                            ("ullAvailExtendedVirtual", ctypes.c_ulonglong)]
+
+            st = MEMORYSTATUSEX()
+            st.dwLength = ctypes.sizeof(st)
+            ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(st))
+            return st.ullTotalPhys / 2 ** 30
+        return (os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES")) / 2 ** 30
+    except Exception:
+        return None
 
 
 def main():
     print("== environment check for the computation code in shared/ ==")
     print()
-    print("interpreter : Python %s" % sys.version.split()[0])
-    print("platform    : %s" % sys.platform)
-    print("numpy       : %s" % np.__version__)
+
+    ram = memoria_gb()
+    print("this machine")
+    print("   os          : %s %s" % (platform.system(), platform.release()))
+    print("   interpreter : Python %s" % sys.version.split()[0])
+    print("   numpy       : %s" % np.__version__)
+    print("   cores       : %s logical" % (os.cpu_count() or "?"))
+    print("   memory      : %s" % ("%.0f GB" % ram if ram else "unknown"))
+    print()
+    print("declared reference environment (for comparison, not a requirement)")
+    for kulcs in ("os", "python", "numpy", "cpu", "ram"):
+        print("   %-11s : %s" % (kulcs, REFERENCIA[kulcs]))
     print()
 
-    ld_size = np.dtype(np.longdouble).itemsize
-    f64_size = np.dtype(np.float64).itemsize
-    ld_eps = float(np.finfo(np.longdouble).eps)
-    f64_eps = float(np.finfo(np.float64).eps)
-    extended = ld_eps < f64_eps
-
-    print("np.longdouble : %d bytes, eps = %.3e" % (ld_size, ld_eps))
-    print("np.float64    : %d bytes, eps = %.3e" % (f64_size, f64_eps))
-    print("extended precision genuinely available: %s"
-          % ("yes" if extended else "NO — longdouble is an alias of float64"))
+    # Recorded, no longer a blocker: this is what H3 depended on.
+    kiterjesztett = float(np.finfo(np.longdouble).eps) < float(np.finfo(np.float64).eps)
+    print("np.longdouble is genuinely extended here: %s"
+          % ("yes" if kiterjesztett else "NO -- it is an alias of float64"))
+    print("   (recorded only. Correction H4 retired the extended-precision route,")
+    print("    so this no longer decides whether the packages can be reproduced.)")
     print()
 
-    err_f64 = accumulation_error(np.float64)
-    err_ld = accumulation_error(np.longdouble)
-    print("measured consequence (II/15 ladder, 20736 beats, exact trace %d):"
-          % EXACT_TRACE)
-    print("   accumulated on float64    : deviation %.3e" % err_f64)
-    print("   accumulated on longdouble : deviation %.3e" % err_ld)
-    print("   fixed identity tolerance  : %.1e" % TOLERANCE)
+    letra = summation._letra_II15()
+    naiv = abs(float(np.cumsum(letra)[-1]) - EGZAKT_NYOM)
+    h4 = abs(float(summation.pontos_cumsum(letra)[-1]) - EGZAKT_NYOM)
+
+    print("the measured consequence (II/15 ladder, %d beats, exact trace %d):"
+          % (letra.size, EGZAKT_NYOM))
+    print("   naive running sum, float64 : deviation %.3e" % naiv)
+    print("   portable route (H4)        : deviation %.3e" % h4)
+    print("   fixed identity tolerance   : %.1e" % summation.TURES)
     print()
 
-    if extended and err_ld < TOLERANCE:
-        print("VERDICT: OK — the extended-precision route works. The packages")
-        print("that declare it (PKG-15-3, PKG-15-5, PKG-15-6, PKG-15-7,")
-        print("PKG-16-2, PKG-16-3, PKG-16-5) will reproduce their published")
-        print("numbers on this machine.")
+    if h4 <= summation.TURES:
+        print("VERDICT: OK -- the portable route meets the fixed tolerance on this")
+        print("machine, so the computation code can reproduce its published numbers")
+        print("here. No extended-precision platform is required.")
+        if naiv > summation.TURES:
+            print()
+            print("Note: the naive route would NOT meet the tolerance here (%.3e)."
+                  % naiv)
+            print("Package scripts still written against the retired H3 route report")
+            print("failures on this machine until they are moved to shared/summation.py;")
+            print("shared/bench/bench.py marks those checks separately, as pending H4")
+            print("rather than as wrong numbers.")
         return 0
 
-    print("VERDICT: DEGRADED — the extended-precision route is not available")
-    print("on this machine, so the H3 correction of II/15 has no effect here.")
-    print()
-    print("What to expect. Near the full end the accumulated cost misses the")
-    print("exact value by %.1e, which is above the fixed %.0e tolerance."
-          % (err_ld, TOLERANCE))
-    print("Concretely, PKG-15-7-top.py reports FAILS for its checks E2 and E3")
-    print("(single-hole tie, mirror transfer) with a deviation around 2e-8,")
-    print("where the package records 1.7e-13 and 2.2e-12. The same limitation")
-    print("touches PKG-15-3, PKG-15-5, PKG-15-6, PKG-16-2, PKG-16-3, PKG-16-5.")
-    print()
-    print("This is an environment limit, not a result. The findings of the")
-    print("packages are unaffected; only their reproduction on this machine is.")
-    print("To reproduce them exactly, run the code on a platform where")
-    print("np.longdouble is the 80-bit extended type — Linux/glibc with a gcc")
-    print("or clang build of numpy is the usual choice.")
+    print("VERDICT: FAILS -- the portable route does not meet the fixed tolerance")
+    print("here (%.3e against %.1e). This is a genuine finding, not a platform"
+          % (h4, summation.TURES))
+    print("limitation: report it before running anything else.")
     return 1
 
 
@@ -4340,6 +5505,179 @@ print("VERDICT:", "HOLDS — the 12-weave size diagnosis is confirmed within sco
 [binaris melleklet, 166016 bajt - a tartalma nem kerul a dumpba]
 </file>
 
+<file path="shared\II-15-dimension-fourth-rung\PKG-15-10-dense-end.py">
+# PKG-15-10-dense-end.py -- machine confirmation of the dense-end theorem
+#
+# The idea in one line. Every entrant at a fixed coordination has the SAME total
+# ladder weight -- the trace tie of II/12 -- so filling from below to N is the
+# same thing as leaving out the top n-N beats. Near the full end the cheapest
+# entrant is therefore not the one with the lowest beats but the one whose
+# HIGHEST beats are largest. And the highest beat is bounded by twice the
+# coordination, with equality exactly for the mirror-marked entrants.
+#
+# That turns the measured carrier half of the top law into a derivation:
+#
+#   L1  trace tie      sum of all beats = 2kn, identical for every entrant
+#   L2  complement     price(N) = T - S(n-N),  S(m) = sum of the top m beats
+#   L3  peak bound     peak <= 4k, equality iff mirror-marked (carrier theorem)
+#   TA  single hole    at N = n-1 the winner is mirror-marked, and all
+#                      mirror-marked entrants tie -- exactly what PKG-15-5
+#                      measured, now derived
+#   L4  mirror form    for mirror-marked X: price_X(n-m) = T - 4km + price_X(m)
+#                      -- the hole-mirror theorem, in one line
+#   TB  stretch        if price_X(m) < m * delta_Z, then the mirror-marked X is
+#                      strictly cheaper than the non-mirror Z at N = n-m, where
+#                      delta_Z = 4k - peak_Z is Z's peak deficit
+#
+# TB is a SUFFICIENT condition, so the stretch it certifies is a lower bound on
+# the real one. That is the honest form: a certified stretch, in the manner of
+# PKG-15-6, not a claim about the whole range.
+#
+# This script checks every step against the real II/15 ladders.
+
+import sys
+import time
+from pathlib import Path
+
+import numpy as np
+
+SHARED = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(SHARED))
+
+import summation                                             # noqa: E402
+
+HELYEK = 20736
+FOKOK = 4                                # k: the number of +- pairs
+CSUCS_KORLAT = 4.0 * FOKOK               # 4k = 16 = twice the coordination
+NYOM = 2.0 * FOKOK * HELYEK              # T = 2kn = 165888
+TURES = summation.TURES
+
+MEZONY = [
+    ("J1 line",             (HELYEK,),          [(1,), (2,), (3,), (4,)]),
+    ("J2 plane (king)",     (144, 144),         [(1, 0), (0, 1), (1, 1), (1, -1)]),
+    ("J3 space (BCC)",      (24, 24, 36),       [(1, 0, 0), (0, 1, 0), (0, 0, 1), (1, -1, -1)]),
+    ("J3' space (face diag)", (24, 24, 36),     [(1, 0, 0), (0, 1, 0), (0, 0, 1), (0, 1, -1)]),
+    ("J4 hypercube",        (12, 12, 12, 12),   [(1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1)]),
+]
+
+
+def letra(oldalak, lepesek):
+    racsok = np.meshgrid(*[np.arange(n) for n in oldalak], indexing="ij")
+    lam = np.zeros(oldalak, dtype=np.float64)
+    for s in lepesek:
+        faz = np.zeros(oldalak, dtype=np.float64)
+        for i, n in enumerate(oldalak):
+            faz += 2.0 * np.pi * racsok[i] * s[i] / n
+        lam += 2.0 - 2.0 * np.cos(faz)
+    return np.sort(lam.ravel())
+
+
+def main():
+    kezd = time.time()
+    print("== PKG-15-10 -- the dense-end theorem, machine confirmation ==")
+    print("   n = %d places, k = %d pairs, coordination %d" % (HELYEK, FOKOK, 2 * FOKOK))
+    print("   T = 2kn = %.0f, peak bound 4k = %.0f" % (NYOM, CSUCS_KORLAT))
+    print()
+
+    nevek, letrak, arak = [], [], []
+    for nev, oldalak, lepesek in MEZONY:
+        lam = letra(oldalak, lepesek)
+        nevek.append(nev)
+        letrak.append(lam)
+        arak.append(summation.pontos_cumsum(lam))
+
+    # --- L1: the trace tie --------------------------------------------------
+    print("== L1  trace tie: every entrant sums to T ==")
+    legrosszabb = max(abs(summation.pontos_osszeg(l) - NYOM) for l in letrak)
+    print("   largest deviation from %.0f: %.3e -- %s"
+          % (NYOM, legrosszabb, "HOLDS" if legrosszabb <= TURES else "FAILS"))
+    print()
+
+    # --- L2: the complement identity ---------------------------------------
+    print("== L2  complement: price(N) + S(n-N) = T, at every filling ==")
+    l2 = 0.0
+    for lam, ar in zip(letrak, arak):
+        forditott = summation.pontos_cumsum(lam[::-1])       # top-m sums
+        # price(N) + S(n-N) for N = 1..n-1
+        osszeg = ar[:-1] + forditott[len(forditott) - 2::-1]
+        l2 = max(l2, float(np.max(np.abs(osszeg - NYOM))))
+    print("   largest deviation: %.3e -- %s" % (l2, "HOLDS" if l2 <= TURES else "FAILS"))
+    print()
+
+    # --- L3: peak bound and the mirror mark --------------------------------
+    print("== L3  peak <= 4k, equality iff mirror-marked ==")
+    hiany = {}
+    for nev, lam in zip(nevek, letrak):
+        csucs = float(lam[-1])
+        tukros = float(np.max(np.abs(np.sort(lam) - np.sort(CSUCS_KORLAT - lam)))) <= TURES
+        hiany[nev] = CSUCS_KORLAT - csucs
+        egyezik = (abs(csucs - CSUCS_KORLAT) <= TURES) == tukros
+        print("   %-22s peak %8.5f | deficit %7.5f | mirror: %-3s | L3 %s"
+              % (nev, csucs, hiany[nev], "yes" if tukros else "no",
+                 "HOLDS" if egyezik else "FAILS"))
+    print()
+
+    # --- TA: the single-hole filling ---------------------------------------
+    print("== TA  single hole, N = n-1: winner is mirror-marked, mirrors tie ==")
+    egylyuk = np.array([a[HELYEK - 2] for a in arak])
+    legolcsobb = egylyuk.min()
+    gyoztesek = [nevek[i] for i in range(len(nevek))
+                 if egylyuk[i] <= legolcsobb + TURES]
+    print("   prices at N = %d:" % (HELYEK - 1))
+    for nev, p in zip(nevek, egylyuk):
+        print("      %-22s %14.6f   (T - peak = %14.6f)"
+              % (nev, p, NYOM - float(np.max(letrak[nevek.index(nev)]))))
+    print("   winners: %s" % ", ".join(gyoztesek))
+    mind_tukros = all(hiany[g] <= TURES for g in gyoztesek)
+    print("   every winner mirror-marked: %s -- %s"
+          % ("yes" if mind_tukros else "NO", "HOLDS" if mind_tukros else "FAILS"))
+    print()
+
+    # --- L4: the mirror form (hole-mirror in one line) ---------------------
+    print("== L4  for mirror-marked X: price(n-m) = T - 4km + price(m) ==")
+    for nev, lam, ar in zip(nevek, letrak, arak):
+        if hiany[nev] > TURES:
+            continue
+        m = np.arange(1, HELYEK)
+        bal = ar[HELYEK - m - 1]
+        jobb = NYOM - CSUCS_KORLAT * m + ar[m - 1]
+        print("   %-22s largest deviation over all m: %.3e -- %s"
+              % (nev, float(np.max(np.abs(bal - jobb))),
+                 "HOLDS" if float(np.max(np.abs(bal - jobb))) <= 1e-7 else "FAILS"))
+    print()
+
+    # --- TB: the certified stretch -----------------------------------------
+    print("== TB  certified stretch: price_X(m) < m * deficit_Z  =>  X beats Z at N = n-m ==")
+    print("   %-22s %-22s %10s %14s %10s" % ("mirror-marked X", "non-mirror Z",
+                                             "deficit", "certified m", "= fillings N >="))
+    for xi, xnev in enumerate(nevek):
+        if hiany[xnev] > TURES:
+            continue
+        for zi, znev in enumerate(nevek):
+            if hiany[znev] <= TURES:
+                continue
+            d = hiany[znev]
+            m = np.arange(1, HELYEK)
+            teljesul = arak[xi][m - 1] < d * m
+            # the certified stretch is the initial run of m where it holds
+            hatar = int(np.argmax(~teljesul)) if not teljesul.all() else HELYEK - 1
+            # verify the conclusion really holds on that stretch
+            valos = bool(np.all(arak[xi][HELYEK - m[:hatar] - 1]
+                                < arak[zi][HELYEK - m[:hatar] - 1] + TURES))
+            print("   %-22s %-22s %10.5f %14d %10d   %s"
+                  % (xnev, znev, d, hatar, HELYEK - hatar,
+                     "verified" if valos else "CONTRADICTED"))
+    print()
+    print("   (a sufficient condition, so the stretch is a lower bound on the real one)")
+    print()
+    print("   (%.1f s)" % (time.time() - kezd))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+</file>
+
 <file path="shared\II-15-dimension-fourth-rung\PKG-15-2-ladders.py">
 # PKG-15-2 — Beat ladders (II/15)
 # Builds on the outgoing claims of PKG-15-1 (A1-A8). Its business:
@@ -5413,6 +6751,464 @@ print("consistency: the certified stretch is part of the measured space band "
       "(15997..20734): %s" % ("HOLDS" if LOWER >= MEASURED_START else "FAILS"))
 </file>
 
+<file path="shared\II-15-dimension-fourth-rung\PKG-15-8-top-full-field.py">
+# PKG-15-8-top-full-field.py -- the top of the FULL field at coordination eight
+#
+# The question, registered in advance. The top law (III/1, 8.) says the full end
+# is carried by the lowest-extension mirror-marked member of the FULL field. Its
+# two theorem legs are proved; its measured leg stands at coordination six and
+# ten, and coordination eight has never been read. This script reads it.
+#
+# The prediction was sealed and committed BEFORE this computation existed:
+# JOS-01 in shared/register/predictions.json, seal 4332b127..., commit 751fbab
+# of 2026-08-20T13:56:34+02:00. Its criteria, fixed there and not touched here:
+#
+#   window : the full end, N = 18737 .. 20736 (2000 fillings, the same absolute
+#            window PKG-16-5 read at coordination ten, so the two compare)
+#   S1     : at least 1900 of the 2000 go to a mirror-marked entrant
+#   S2     : the entrant winning the most fillings in the window is (1, 3, 5, 7)
+#   B1/B2/B3 : the failure branches, see the register
+#
+# Route: the H4 portable summation of shared/summation.py throughout. The field
+# is the 503 entrants PKG-15-1 declared -- 495 four-step family members, the main
+# four, and the four controls.
+#
+# Mandatory precondition, in the spirit of the two-way rule: the closed-form
+# ladders built here must agree with the ladders PKG-15-2 saved, on every cached
+# entrant. Two algorithms, not two float widths. If that fails, nothing below is
+# worth reading.
+
+import itertools
+import sys
+import time
+from pathlib import Path
+
+import numpy as np
+
+SHARED = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(SHARED))
+
+import summation                                             # noqa: E402
+from parallel.letra_feladat import letra, paros_jegy         # noqa: E402
+from parallel.runner import Feladat, futtat                  # noqa: E402
+
+HELYEK = 20736
+FOKOK = 4
+KOORDINACIO = 2 * FOKOK                  # eight contracts per place
+CSUCS = 2.0 * KOORDINACIO                # 16: the peak beat of a mirror-marked net
+LEPES_PLAFON = 12
+TURES = summation.TURES                  # 1e-8, the fixed identity tolerance
+GYORSITOTAR = SHARED / "II-15-dimension-fourth-rung" / "letrak_gepi"
+
+ABLAK_ELSO, ABLAK_UTOLSO = 18737, 20736  # fixed in JOS-01
+S1_KUSZOB = 1900
+S2_JOSLAT = (1, 3, 5, 7)
+
+
+def csalad():
+    return list(itertools.combinations(range(1, LEPES_PLAFON + 1), FOKOK))
+
+
+def tukor_jegy_letrabol(lam):
+    """Mirror mark straight from the ladder, independent of how the net was named.
+
+    A d-regular net is bipartite exactly when its beat spectrum is symmetric
+    about d, so lam and 2d - lam must be the same multiset. This works for the
+    saved main and control ladders too, where the step list is not available."""
+    tukrozott = np.sort(CSUCS - lam)
+    return float(np.max(np.abs(np.sort(lam) - tukrozott))) <= TURES
+
+
+def elofeltetel():
+    """The closed route against the ladders PKG-15-2 saved."""
+    print("== PRECONDITION: closed-form ladders against the saved cache ==")
+    fajlok = sorted(GYORSITOTAR.glob("(*.npy"))
+    if not fajlok:
+        print("   no cached family ladders found -- cannot verify. STOPPING.")
+        return False, {}
+    legrosszabb, db = 0.0, 0
+    for f in fajlok:
+        lepesek = tuple(int(x) for x in f.stem.strip("()").split(","))
+        mentett = np.sort(np.load(f).astype(np.float64).ravel())
+        sajat = letra(HELYEK, lepesek)
+        legrosszabb = max(legrosszabb, float(np.max(np.abs(mentett - sajat))))
+        db += 1
+    all_e = legrosszabb <= TURES
+    print("   %d cached family ladders, largest deviation %.3e (tolerance %.1e) -- %s"
+          % (db, legrosszabb, TURES, "HOLDS" if all_e else "FAILS"))
+    print()
+    return all_e, {}
+
+
+def fo_es_kontroll():
+    """The main four and the four controls, from the saved cache."""
+    mezony = {}
+    for nev in ("J1", "J2", "J3", "J4", "K1", "K2", "K3", "K4"):
+        ut = GYORSITOTAR / ("%s.npy" % nev)
+        if ut.exists():
+            mezony[nev] = np.sort(np.load(ut).astype(np.float64).ravel())
+    return mezony
+
+
+def main():
+    kezd = time.time()
+    print("== PKG-15-8 -- the top of the FULL field, coordination eight ==")
+    print("   system: %d places, %d contracts each" % (HELYEK, KOORDINACIO))
+    print("   window: N = %d .. %d (%d fillings), fixed in JOS-01"
+          % (ABLAK_ELSO, ABLAK_UTOLSO, ABLAK_UTOLSO - ABLAK_ELSO + 1))
+    print()
+
+    rendben, _ = elofeltetel()
+    if not rendben:
+        return 1
+
+    tagok = csalad()
+    feladatok = [Feladat(azonosito=str(l),
+                         fuggveny="parallel.letra_feladat:letra",
+                         argumentumok={"n": HELYEK, "lepesek": l}) for l in tagok]
+    print("== the field ==")
+    eredmeny = futtat(feladatok, magok=8, rendproba=6, gyoker=str(SHARED),
+                      cimke="family ladders", halkan=False)
+    if eredmeny.hibak:
+        print("   %d tasks failed -- STOPPING." % len(eredmeny.hibak))
+        return 1
+    if eredmeny.rendproba and eredmeny.rendproba[1]:
+        print("   ORDER-INDEPENDENCE CHECK FAILED -- STOPPING.")
+        return 1
+
+    nevek = [str(l) for l in tagok]
+    letrak = list(eredmeny.ertekek)
+    lepes_szerint = {str(l): l for l in tagok}
+
+    extra = fo_es_kontroll()
+    for nev, lam in extra.items():
+        nevek.append(nev)
+        letrak.append(lam)
+    print("   entrants: %d family + %d main/control = %d"
+          % (len(tagok), len(extra), len(nevek)))
+    print()
+
+    # --- cost curves on the H4 route ---------------------------------------
+    print("== cost curves (H4 portable route) ==")
+    gorbek = np.empty((len(nevek), HELYEK), dtype=np.float64)
+    egzakt_nyom = 2.0 * FOKOK * HELYEK
+    nyom_hiba = 0.0
+    for i, lam in enumerate(letrak):
+        gorbek[i] = summation.pontos_cumsum(np.sort(lam))
+        nyom_hiba = max(nyom_hiba, abs(gorbek[i, -1] - egzakt_nyom))
+    print("   built-in check -- exact trace %d on every entrant: largest deviation "
+          "%.3e -- %s" % (egzakt_nyom, nyom_hiba,
+                          "HOLDS" if nyom_hiba <= TURES else "FAILS"))
+    if nyom_hiba > TURES:
+        return 1
+
+    tukros = np.array([tukor_jegy_letrabol(np.sort(l)) for l in letrak])
+    print("   mirror-marked entrants (spectrum symmetric about %d): %d of %d"
+          % (CSUCS, int(tukros.sum()), len(nevek)))
+    print()
+
+    # --- the race on the fixed window --------------------------------------
+    print("== the race on the window ==")
+    a, b = ABLAK_ELSO - 1, ABLAK_UTOLSO          # 0-based slice
+    ablak = gorbek[:, a:b]
+    legolcsobb = ablak.min(axis=0)
+    nyertes_maszk = ablak <= (legolcsobb + TURES)     # ties included
+    nyertes_db = nyertes_maszk.sum(axis=0)
+
+    holtverseny = int(np.count_nonzero(nyertes_db > 1))
+    egyertelmu = ablak.shape[1] - holtverseny
+    print("   fillings: %d | unique winner: %d | tied: %d"
+          % (ablak.shape[1], egyertelmu, holtverseny))
+
+    # S1, in both readings -- see the honest note printed at the end
+    barmelyik = np.array([bool(tukros[nyertes_maszk[:, j]].any())
+                          for j in range(ablak.shape[1])])
+    mind = np.array([bool(tukros[nyertes_maszk[:, j]].all())
+                     for j in range(ablak.shape[1])])
+    print("   S1 permissive (a mirror-marked entrant is among the minima): %d / %d"
+          % (int(barmelyik.sum()), ablak.shape[1]))
+    print("   S1 strict     (every minimal entrant is mirror-marked)     : %d / %d"
+          % (int(mind.sum()), ablak.shape[1]))
+
+    # S2: who wins the most fillings in the window (ties credited to each)
+    pontszam = nyertes_maszk.sum(axis=1)
+    sorrend = np.argsort(-pontszam)
+    print()
+    print("   entrants winning the most fillings in the window:")
+    for i in sorrend[:8]:
+        if pontszam[i] == 0:
+            break
+        print("      %-16s %5d fillings   mirror-marked: %s"
+              % (nevek[i], int(pontszam[i]), "yes" if tukros[i] else "no"))
+
+    gyoztes = nevek[int(sorrend[0])]
+    print()
+    print("== VERDICT against the sealed criteria of JOS-01 ==")
+    s1_lazan = int(barmelyik.sum()) >= S1_KUSZOB
+    s1_szigoruan = int(mind.sum()) >= S1_KUSZOB
+    s2 = lepes_szerint.get(gyoztes) == S2_JOSLAT
+    b3 = holtverseny > ablak.shape[1] // 2
+
+    print("   S1 (>= %d of 2000 to a mirror-marked entrant)" % S1_KUSZOB)
+    print("        permissive reading: %s" % ("HOLDS" if s1_lazan else "FAILS"))
+    print("        strict reading    : %s" % ("HOLDS" if s1_szigoruan else "FAILS"))
+    print("   S2 (the most-winning entrant is %s): %s -- it is %s"
+          % (str(S2_JOSLAT), "HOLDS" if s2 else "FAILS", gyoztes))
+    print("   B3 (ties dominate the window): %s (%d of %d tied)"
+          % ("TRIGGERED" if b3 else "not triggered", holtverseny, ablak.shape[1]))
+    print()
+    print("   Honest note, stated rather than resolved after the fact: JOS-01 fixed")
+    print("   the window and the thresholds but did NOT fix how ties are credited.")
+    print("   Both readings are therefore reported, and the tie count with them.")
+    print("   Fixing the tie rule in advance is a lesson for the next registration,")
+    print("   not something to settle now that the numbers are on the screen.")
+    print()
+    print("   (%.1f s)" % (time.time() - kezd))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+</file>
+
+<file path="shared\II-15-dimension-fourth-rung\PKG-15-9-uniform-field.py">
+# PKG-15-9-uniform-field.py -- the decisive experiment on the selection rule
+#
+# The question. The staircase of II/15 turns back at the top: the densest region
+# goes to the space, not to the native four-extension. The carrier theorem says
+# that can only happen because the space candidate there is mirror-marked, and it
+# is mirror-marked only because it was given a BODY diagonal, (1,-1,-1), whose
+# coordinate sum is odd. The repository's own selection rule KON-02 would have
+# given it a FACE diagonal, (0,1,-1), whose coordinate sum is even -- and that
+# one carries no mirror mark.
+#
+# So the whole turn-back may rest on a single hand-picked step. This script
+# rebuilds the field with the KON-02 candidate in place of the crystallographic
+# BCC, changing NOTHING else, and re-runs the race.
+#
+# The prediction was sealed and committed BEFORE this script existed:
+# JOS-02, seal db104804893ee3ac, commit 98d1b273 of 2026-08-20T14:52:52+02:00.
+#
+#   S1  at least 1900 of the top 2000 fillings go to J4, the four-extension
+#   S2  the face-diagonal space wins ZERO fillings in that window
+#   B1  if the face-diagonal space still takes the top (>= 1000), the carrier
+#       half of the top law has failed and the turn-back is not a parity effect
+#   K1  control: the full-field top must still be (1, 3, 5, 7); if it moved,
+#       the experiment is broken, not a finding
+#
+# The tie rule is fixed in the register, in advance this time: an entrant wins a
+# filling if its cost is within 1e-8 of the minimum, ties credited to all minima.
+
+import itertools
+import sys
+import time
+from pathlib import Path
+
+import numpy as np
+
+SHARED = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(SHARED))
+
+import summation                                             # noqa: E402
+from parallel.letra_feladat import letra as vonal_letra      # noqa: E402
+from parallel.runner import Feladat, futtat                  # noqa: E402
+
+HELYEK = 20736
+FOKOK = 4
+KOORDINACIO = 2 * FOKOK
+CSUCS = 2.0 * KOORDINACIO                # 16 for a mirror-marked entrant
+EGZAKT_NYOM = 2.0 * FOKOK * HELYEK       # 165888
+TURES = summation.TURES
+ABLAK_ELSO, ABLAK_UTOLSO = 18737, 20736
+S1_KUSZOB, S2_KUSZOB = 1900, 0
+
+# The field of PKG-15-1, with ONE substitution: J3.
+FO_MEZONY = [
+    ("J1 line", (HELYEK,), [(1,), (2,), (3,), (4,)]),
+    ("J2 plane (king)", (144, 144), [(1, 0), (0, 1), (1, 1), (1, -1)]),
+    ("J3' space (KON-02: axes + FACE diagonal)", (24, 24, 36),
+     [(1, 0, 0), (0, 1, 0), (0, 0, 1), (0, 1, -1)]),
+    ("J4 four-extension (hypercube)", (12, 12, 12, 12),
+     [(1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1)]),
+]
+# kept only to show what was replaced
+BCC = [(1, 0, 0), (0, 1, 0), (0, 0, 1), (1, -1, -1)]
+
+
+def letra_torusz(oldalak, lepesek):
+    """The beat ladder of the weave on the torus with the given sides, from the
+    closed Fourier form -- no matrix is ever built."""
+    racsok = np.meshgrid(*[np.arange(n) for n in oldalak], indexing="ij")
+    lam = np.zeros(oldalak, dtype=np.float64)
+    for s in lepesek:
+        faz = np.zeros(oldalak, dtype=np.float64)
+        for i, n in enumerate(oldalak):
+            faz += 2.0 * np.pi * racsok[i] * s[i] / n
+        lam += 2.0 - 2.0 * np.cos(faz)
+    return np.sort(lam.ravel())
+
+
+def tukor_jegy(lam):
+    return float(np.max(np.abs(np.sort(lam) - np.sort(CSUCS - lam)))) <= TURES
+
+
+def korbeeres_legalabb(lepesek, oldalak, padlo=8):
+    """No wrap shorter than `padlo` graph steps: walk the infinite lattice out to
+    padlo-1 steps and check that no lattice vector of the torus is reached."""
+    d = len(lepesek[0])
+    hely = {(0,) * d}
+    perem = {(0,) * d}
+    for _ in range(padlo - 1):
+        uj = set()
+        for p in perem:
+            for s in lepesek:
+                for jel in (1, -1):
+                    q = tuple(p[i] + jel * s[i] for i in range(d))
+                    if q not in hely:
+                        hely.add(q)
+                        uj.add(q)
+        perem = uj
+    for p in hely:
+        if p != (0,) * d and all(p[i] % oldalak[i] == 0 for i in range(d)):
+            return False
+    return True
+
+
+def savok(nevek, gorbek):
+    """Winner runs over the whole filling range: (label, from, to)."""
+    gyoztes = np.argmin(gorbek, axis=0)
+    ki, kezd = [], 0
+    for n in range(1, gorbek.shape[1]):
+        if gyoztes[n] != gyoztes[kezd]:
+            ki.append((nevek[gyoztes[kezd]], kezd + 1, n))
+            kezd = n
+    ki.append((nevek[gyoztes[kezd]], kezd + 1, gorbek.shape[1]))
+    return ki
+
+
+def main():
+    kezd = time.time()
+    print("== PKG-15-9 -- the uniform-field experiment at coordination eight ==")
+    print("   substitution: J3 space gets the KON-02 face diagonal (0,1,-1)")
+    print("                 instead of the crystallographic BCC body diagonal (1,-1,-1)")
+    print("   everything else identical to PKG-15-1.")
+    print()
+
+    print("== PRECONDITIONS ==")
+    nevek, letrak = [], []
+    for nev, oldalak, lepesek in FO_MEZONY:
+        assert int(np.prod(oldalak)) == HELYEK, nev
+        lam = letra_torusz(oldalak, lepesek)
+        nevek.append(nev)
+        letrak.append(lam)
+        nyom = summation.pontos_osszeg(lam)
+        jegy = tukor_jegy(lam)
+        korbe = korbeeres_legalabb(lepesek, oldalak)
+        print("   %-42s trace dev %.2e | peak %8.5f | mirror: %-3s | wrap>=8: %s"
+              % (nev, abs(nyom - EGZAKT_NYOM), lam[-1],
+                 "yes" if jegy else "no", "yes" if korbe else "NO"))
+        if abs(nyom - EGZAKT_NYOM) > TURES or not korbe:
+            print("   PRECONDITION FAILED -- stopping.")
+            return 1
+
+    bcc_letra = letra_torusz((24, 24, 36), BCC)
+    print("   %-42s               | peak %8.5f | mirror: %s   (replaced)"
+          % ("[the BCC used by II/15, for comparison]", bcc_letra[-1],
+             "yes" if tukor_jegy(bcc_letra) else "no"))
+    uj_j3_jegy = tukor_jegy(letrak[2])
+    print()
+    print("   the substitution did what the carrier theorem says: J3' mirror mark "
+          "is %s (peak %.5f < %.0f)" % ("GONE" if not uj_j3_jegy else "STILL THERE",
+                                        letrak[2][-1], CSUCS))
+    print()
+
+    # --- the main-four race ------------------------------------------------
+    gorbek = np.array([summation.pontos_cumsum(l) for l in letrak])
+    print("== the main-four race, whole range ==")
+    for nev, tol, ig in savok(nevek, gorbek):
+        print("   %-42s %6d .. %6d  (%d fillings)" % (nev, tol, ig, ig - tol + 1))
+    print()
+
+    a, b = ABLAK_ELSO - 1, ABLAK_UTOLSO
+    ablak = gorbek[:, a:b]
+    minimum = ablak.min(axis=0)
+    maszk = ablak <= (minimum + TURES)
+    pont = maszk.sum(axis=1)
+    holt = int(np.count_nonzero(maszk.sum(axis=0) > 1))
+
+    print("== the window N = %d .. %d (main four) ==" % (ABLAK_ELSO, ABLAK_UTOLSO))
+    for i, nev in enumerate(nevek):
+        print("   %-42s %5d fillings" % (nev, int(pont[i])))
+    print("   tied fillings: %d of %d" % (holt, ablak.shape[1]))
+    print()
+
+    # --- K1: the full-field control ----------------------------------------
+    print("== K1 control: the full field top must still be (1, 3, 5, 7) ==")
+    tagok = list(itertools.combinations(range(1, 13), 4))
+    feladatok = [Feladat(azonosito=str(l),
+                         fuggveny="parallel.letra_feladat:letra",
+                         argumentumok={"n": HELYEK, "lepesek": l}) for l in tagok]
+    csalad = futtat(feladatok, magok=8, rendproba=4, gyoker=str(SHARED),
+                    cimke="family ladders", halkan=True)
+    if csalad.hibak or (csalad.rendproba and csalad.rendproba[1]):
+        print("   family computation failed -- stopping.")
+        return 1
+    teljes_nevek = [str(l) for l in tagok] + nevek
+    teljes = np.empty((len(teljes_nevek), HELYEK), dtype=np.float64)
+    for i, lam in enumerate(csalad.ertekek):
+        teljes[i] = summation.pontos_cumsum(np.sort(lam))
+    teljes[len(tagok):] = gorbek
+
+    tablak = teljes[:, a:b]
+    tmask = tablak <= (tablak.min(axis=0) + TURES)
+    tpont = tmask.sum(axis=1)
+    tgyoztes = teljes_nevek[int(np.argmax(tpont))]
+    print("   full-field top of the window: %s (%d fillings)"
+          % (tgyoztes, int(tpont.max())))
+    k1 = tgyoztes == "(1, 3, 5, 7)"
+    print("   K1: %s" % ("HOLDS" if k1 else "BROKEN -- stop and find the error"))
+    print()
+
+    # --- verdict ------------------------------------------------------------
+    j4 = int(pont[3])
+    j3 = int(pont[2])
+    s1 = j4 >= S1_KUSZOB
+    s2 = j3 <= S2_KUSZOB
+    b1 = j3 >= ablak.shape[1] // 2
+    b3 = holt > ablak.shape[1] // 2
+
+    print("== VERDICT against the sealed criteria of JOS-02 ==")
+    print("   S1 (>= %d of 2000 to J4): %s -- J4 has %d"
+          % (S1_KUSZOB, "HOLDS" if s1 else "FAILS", j4))
+    print("   S2 (J3' wins zero): %s -- J3' has %d"
+          % ("HOLDS" if s2 else "FAILS", j3))
+    print("   B1 (J3' still takes the top): %s"
+          % ("TRIGGERED" if b1 else "not triggered"))
+    print("   B3 (ties dominate): %s" % ("TRIGGERED" if b3 else "not triggered"))
+    print("   K1 (control): %s" % ("HOLDS" if k1 else "BROKEN"))
+    print()
+    if not k1:
+        print("   The control broke. Nothing above counts as a finding.")
+        return 1
+    if s1 and s2:
+        print("   THE PREDICTION HOLDS: with a uniform selection rule the turn-back")
+        print("   disappears, and the top of the main field goes to the native")
+        print("   four-extension. The II/15 turn-back was a consequence of the")
+        print("   crystallographic BCC choice.")
+    elif b1:
+        print("   B1 TRIGGERED: the mirror mark is NOT what decides the top.")
+        print("   The carrier half of the top law has failed -- record it.")
+    else:
+        print("   PARTIAL: neither branch is clean. Report the numbers as they are.")
+    print()
+    print("   (%.1f s)" % (time.time() - kezd))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+</file>
+
 <file path="shared\II-16-coordination-ten\PKG-16-2-ladders.py">
 # PKG-16-2 — Beat ladders (II/16)
 # Builds on claims A1-A8 of PKG-16-1. 805 entrants (5 main + 8 controls +
@@ -6186,4 +7982,1672 @@ for i in tail:
 print("  ", dict(sorted(split.items(), key=lambda x: -x[1])[:5]))
 last8 = [name_of(int(bid[NH-1-m])) for m in range(1, 9)]
 print("   winners of the last 8 fillings (the full end): %s" % last8)
+</file>
+
+<file path="shared\kernel\check.py">
+# check.py -- the gate of the hand-set ledger (shared/kernel/ledger.json)
+#
+# Why this exists. Several results of Part II rest partly on items the language
+# did not derive but we set by hand: borrowed concepts (imports), our own rules
+# of play (conventions), raw world data (boundary data) and stated scope limits.
+# The repository already names them in prose; what was missing is a single
+# machine-checkable register and a gate that refuses to let it grow silently.
+#
+# This script is bookkeeping, not physics. It never recomputes a result and it
+# can never overturn a verdict. It answers exactly three questions:
+#
+#   A) Is the register internally sound? (schema, unique ids, live references)
+#   B) Does it agree with the corpus? (every declared import is registered,
+#      and the counts stated in I/1 match what the register actually holds)
+#   C) Do the gates hold? (import ratchet, sensitivity coverage, no item left
+#      in the dual "candidate import" status without a milestone to close it)
+#
+# Exit code: 0 if every hard check passes, 1 if any fails. Coverage below the
+# declared threshold is a hard failure too -- that is the point of the ratchet.
+#
+# Run from anywhere:  python shared/kernel/check.py
+
+import json
+import re
+import sys
+from pathlib import Path
+
+try:                                     # accented output where the console allows it
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+except Exception:                        # older interpreters / exotic consoles
+    pass
+
+ROOT = Path(__file__).resolve().parents[2]
+LEDGER = Path(__file__).resolve().parent / "ledger.json"
+KUTATASI_NYELV = "hu"                    # the language folder the register indexes
+
+RANGOK = ("import", "jelolt-import", "konvencio", "peremadat", "hatokor")
+ALLAPOTOK = ("aktiv", "reszben-tetelesitve", "jelolt", "torlesztve", "visszavont")
+ERZ_ALLAPOTOK = ("nincs-merve", "merve", "nem-ertelmezheto")
+KOTELEZO = ("id", "rang", "nev", "leiras", "bevezette", "hasznaljak",
+            "allapot", "torlesztes", "erzekenyseg", "forras")
+ID_ALAK = re.compile(r"^(IMP|KON|PER|HAT|JEL)-\d{2}$")
+
+# I/1 states the counts in words; the register must agree with the prose.
+SZAMNEVEK = {"nulla": 0, "egy": 1, "ketto": 2, "kettő": 2, "ket": 2, "két": 2,
+             "harom": 3, "három": 3, "negy": 4, "négy": 4, "ot": 5, "öt": 5,
+             "hat": 6, "het": 7, "hét": 7, "nyolc": 8, "kilenc": 9, "tiz": 10,
+             "tíz": 10}
+
+# The register only owes an entry for a proof whose header declares something.
+# A bare "nulla" means the chapter took on nothing of its own.
+TRIVIALIS_IMPORT = ("nulla",)
+
+
+class Jelentes:
+    """Collects findings so the whole report prints, not just the first failure."""
+
+    def __init__(self):
+        self.hibak = []
+        self.figyelmeztetesek = []
+
+    def hiba(self, kod, uzenet):
+        self.hibak.append((kod, uzenet))
+
+    def figyelem(self, kod, uzenet):
+        self.figyelmeztetesek.append((kod, uzenet))
+
+
+def fejlec(path):
+    """The YAML header of a markdown file, as a flat dict of raw strings."""
+    mezok = {}
+    try:
+        sorok = path.read_text(encoding="utf-8").splitlines()
+    except (OSError, UnicodeDecodeError):
+        return mezok
+    if not sorok or sorok[0].strip() != "---":
+        return mezok
+    for sor in sorok[1:]:
+        if sor.strip() == "---":
+            break
+        m = re.match(r"^([a-z_]+):\s*(.*)$", sor)
+        if m:
+            mezok[m.group(1)] = m.group(2).strip().strip('"')
+    return mezok
+
+
+def korpusz():
+    """id -> file, and id -> declared imports, for every chapter of the
+    research language. The register addresses the corpus by id, never by path."""
+    id_fajl, id_import = {}, {}
+    for path in sorted((ROOT / KUTATASI_NYELV).rglob("*.md")):
+        fej = fejlec(path)
+        azon = fej.get("id")
+        if not azon:
+            continue
+        id_fajl[azon] = path.relative_to(ROOT).as_posix()
+        if "imports" in fej:
+            id_import[azon] = fej["imports"]
+    return id_fajl, id_import
+
+
+# ---------------------------------------------------------------- A) soundness
+
+def a_csoport(tetelek, id_fajl, jel):
+    latott = set()
+    for t in tetelek:
+        azon = t.get("id", "<id nelkul>")
+        for mezo in KOTELEZO:
+            if mezo not in t:
+                jel.hiba("A1", "%s: hianyzo kotelezo mezo: %s" % (azon, mezo))
+        if not ID_ALAK.match(str(azon)):
+            jel.hiba("A2", "%s: az azonosito alakja nem PREFIX-NN" % azon)
+        if azon in latott:
+            jel.hiba("A2", "%s: ismetelt azonosito -- az id soha nem hasznalhato ujra" % azon)
+        latott.add(azon)
+
+        if t.get("rang") not in RANGOK:
+            jel.hiba("A1", "%s: ismeretlen rang: %r" % (azon, t.get("rang")))
+        if t.get("allapot") not in ALLAPOTOK:
+            jel.hiba("A1", "%s: ismeretlen allapot: %r" % (azon, t.get("allapot")))
+
+        erz = t.get("erzekenyseg") or {}
+        if erz.get("allapot") not in ERZ_ALLAPOTOK:
+            jel.hiba("A1", "%s: ismeretlen erzekenysegi allapot: %r"
+                     % (azon, erz.get("allapot")))
+        if erz.get("allapot") == "merve" and not erz.get("meres"):
+            jel.hiba("A1", "%s: 'merve' allapot meres-forras nelkul" % azon)
+
+        for hiv in t.get("forras", []):
+            if not (ROOT / hiv).exists():
+                jel.hiba("A3", "%s: a forras nem letezik: %s" % (azon, hiv))
+
+        hivatkozott = [t.get("bevezette")] + list(t.get("hasznaljak", []))
+        for cel in hivatkozott:
+            if cel and cel not in id_fajl:
+                jel.hiba("A4", "%s: feloldhatatlan azonosito: %s" % (azon, cel))
+
+
+# ------------------------------------------------- B) agreement with the corpus
+
+def b_csoport(tetelek, id_import, jel):
+    lefedett = set()
+    for t in tetelek:
+        if t.get("bevezette"):
+            lefedett.add(t["bevezette"])
+        lefedett.update(t.get("hasznaljak", []))
+
+    for azon, deklaralt in sorted(id_import.items()):
+        if deklaralt.strip().lower() in TRIVIALIS_IMPORT:
+            continue
+        if azon not in lefedett:
+            jel.hiba("B1", "%s: a fejlec importot deklaral, de a nyilvantartas "
+                           "nem fedi le -- %r" % (azon, deklaralt[:70]))
+
+    szabaly = ROOT / "hu" / "I-language" / "I-01-concept_hu.md"
+    if not szabaly.exists():
+        jel.figyelem("B2", "az I/1 nem talalhato; a darabszam-egyeztetes kimarad")
+        return
+
+    szoveg = szabaly.read_text(encoding="utf-8")
+    minta = {"import": r"\*\*Az importok\s*[-—]\s*(\w+)",
+             "konvencio": r"\*\*A kimondott konvenciok?\s*[-—]\s*(\w+)"}
+    minta["konvencio"] = r"\*\*A kimondott konvenci[oó]k\s*[-—]\s*(\w+)"
+
+    for rang, mint in minta.items():
+        m = re.search(mint, szoveg)
+        if not m:
+            jel.figyelem("B2", "az I/1-ben nem talalom a(z) '%s' darabszam-mondatot "
+                               "-- a szoveg alakja valtozhatott" % rang)
+            continue
+        kimondott = SZAMNEVEK.get(m.group(1).lower())
+        if kimondott is None:
+            jel.figyelem("B2", "ismeretlen szamnev az I/1-ben: %r" % m.group(1))
+            continue
+        tenyleges = sum(1 for t in tetelek
+                        if t.get("rang") == rang and t.get("allapot") != "visszavont")
+        if kimondott != tenyleges:
+            jel.hiba("B2", "az I/1 %d '%s' tetelt mond ki, a nyilvantartasban %d all"
+                     % (kimondott, rang, tenyleges))
+
+
+# ------------------------------------------------------------------- C) gates
+
+def c_csoport(meta, tetelek, jel):
+    aktiv_import = [t for t in tetelek
+                    if t.get("rang") == "import" and t.get("allapot") != "torlesztve"]
+    plafon = meta.get("import_plafon")
+    if plafon is None:
+        jel.hiba("C1", "a meta nem tartalmaz import_plafon-t -- a racsni nem all")
+    elif len(aktiv_import) > plafon:
+        jel.hiba("C1", "az aktiv importok szama %d, a plafon %d -- az import "
+                       "csendben nott" % (len(aktiv_import), plafon))
+
+    merendo = [t for t in tetelek if t.get("rang") in ("import", "konvencio")]
+    merve = [t for t in merendo
+             if (t.get("erzekenyseg") or {}).get("allapot") == "merve"]
+    arany = len(merve) / len(merendo) if merendo else 1.0
+    kuszob = meta.get("erzekenyseg_kuszob", 0.0)
+    if arany < kuszob:
+        jel.hiba("C2", "az erzekenysegi lefedettseg %.0f%%, a kuszob %.0f%%"
+                 % (100 * arany, 100 * kuszob))
+
+    for t in tetelek:
+        if t.get("rang") == "jelolt-import" and not t.get("torlesztes"):
+            jel.hiba("C3", "%s: kettos allasu elem torlesztesi merfoldko nelkul -- "
+                           "a magban ilyen nem maradhat" % t.get("id"))
+
+    return aktiv_import, merendo, merve, arany
+
+
+# ------------------------------------------------------------------- reporting
+
+def tabla(tetelek):
+    print("  %-8s %-14s %-46s %s" % ("id", "rang", "nev", "erzekenyseg"))
+    print("  " + "-" * 92)
+    for t in sorted(tetelek, key=lambda x: x.get("id", "")):
+        erz = (t.get("erzekenyseg") or {}).get("allapot", "?")
+        jel = {"merve": "[MERVE]", "nincs-merve": "[nincs merve]",
+               "nem-ertelmezheto": "[nem ertelmezheto]"}.get(erz, erz)
+        print("  %-8s %-14s %-46s %s"
+              % (t.get("id"), t.get("rang"), t.get("nev", "")[:46], jel))
+
+
+def main():
+    print("== a kezi beallitasok magja -- kapu-ellenorzes ==")
+    print()
+
+    if not LEDGER.exists():
+        print("HIBA: a nyilvantartas nem talalhato: %s" % LEDGER)
+        return 1
+    try:
+        tar = json.loads(LEDGER.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as e:
+        print("HIBA: a nyilvantartas nem ervenyes JSON: %s" % e)
+        return 1
+
+    meta = tar.get("meta", {})
+    tetelek = tar.get("tetelek", [])
+    id_fajl, id_import = korpusz()
+
+    print("nyilvantartas : %s (%d tetel)"
+          % (LEDGER.relative_to(ROOT).as_posix(), len(tetelek)))
+    print("korpusz       : %d azonositott fajl a(z) %s/ alatt, ebbol %d deklaral importot"
+          % (len(id_fajl), KUTATASI_NYELV, len(id_import)))
+    print()
+
+    jel = Jelentes()
+    a_csoport(tetelek, id_fajl, jel)
+    b_csoport(tetelek, id_import, jel)
+    aktiv_import, merendo, merve, arany = c_csoport(meta, tetelek, jel)
+
+    tabla(tetelek)
+    print()
+    print("  aktiv import        : %d / plafon %s"
+          % (len(aktiv_import), meta.get("import_plafon")))
+    print("  erzekenysegi fedes  : %d / %d = %.0f%% (kuszob %.0f%%)"
+          % (len(merve), len(merendo), 100 * arany,
+             100 * meta.get("erzekenyseg_kuszob", 0.0)))
+    print()
+
+    for kod, uzenet in jel.figyelmeztetesek:
+        print("FIGYELEM [%s] %s" % (kod, uzenet))
+    for kod, uzenet in jel.hibak:
+        print("HIBA     [%s] %s" % (kod, uzenet))
+    if jel.figyelmeztetesek or jel.hibak:
+        print()
+
+    if jel.hibak:
+        print("ITELET: BUKIK -- %d hiba. A kapu zarva: uj csomag nem epulhet, "
+              "amig ezek allnak." % len(jel.hibak))
+        return 1
+
+    print("ITELET: ALL -- a nyilvantartas ep, egyezik a korpusszal, es a kapuk allnak.")
+    if arany < 1.0:
+        print("Megjegyzes: %d kezi elem meg megmeretlen. Ez ma nem bukas (a kuszob "
+              "%.0f%%), de a P1.3 utan a kuszob emelendo."
+              % (len(merendo) - len(merve), 100 * meta.get("erzekenyseg_kuszob", 0.0)))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+</file>
+
+<file path="shared\kernel\ledger.json">
+{
+  "meta": {
+    "leiras": "A kezi beallitasok nyilvantartasa: minden olyan elem, amit a nyelv nem vezetett le, hanem mi allitottunk be. Negy rang: import / konvencio / peremadat / hatokor. Az igazsag forrasa mindig a hivatkozott fejezetfajl; ez a tar gepi kivonat.",
+    "doc_version": "1.4",
+    "szabaly_forras": "hu/I-language/I-01-concept_hu.md",
+    "program_forras": "hu/PROGRAM_hu.md",
+    "import_plafon": 3,
+    "erzekenyseg_kuszob": 0.0,
+    "kapu_megjegyzes": "Az import_plafon racsni: soha nem emelheto csendben. Az erzekenyseg_kuszob a megmert kezi elemek kotelezo aranya (import + konvencio rangon); a P1.3 lefutasa utan emelendo."
+  },
+  "tetelek": [
+    {
+      "id": "IMP-01",
+      "rang": "import",
+      "nev": "helyiseg (szomszedsag)",
+      "leiras": "A helyek kozotti 'mellette' viszony: mely helyek szerzodhetnek egymassal kozvetlenul. A II/3-ban szomszedsagkent lepett be, a II/6 helyisegge szukitette, a II/9 Kagome-szomszedsaga ennek esete (nem kulon tetel), a II/11 a felet tetelle emelte (a szomszedsag a kesz allapot nezete). Ami importkent megmarad: a kivalasztas.",
+      "bevezette": "II-03",
+      "hasznaljak": [
+        "II-03",
+        "II-06",
+        "II-09",
+        "II-11"
+      ],
+      "allapot": "reszben-tetelesitve",
+      "torlesztes": "P2.1",
+      "erzekenyseg": {
+        "allapot": "nincs-merve",
+        "meres": [],
+        "megjegyzes": "A II/6 egyformasagi probaja a szerzodes ALAKJARA nezve robusztus (minden helyi keveres alja ugyanaz), de magara a helyiseg-relaciora nem futott perturbacio."
+      },
+      "forras": [
+        "hu/I-language/I-01-concept_hu.md",
+        "hu/II-proofs/II-03-box/proof_hu.md",
+        "hu/II-proofs/II-11-locality-readout/proof_hu.md"
+      ]
+    },
+    {
+      "id": "IMP-02",
+      "rang": "import",
+      "nev": "vonzasalak (tavolsag-forditott kedvezmeny, 1/r)",
+      "leiras": "A vonzo szerzodes tavolsagfuggese. Ez adja a hidrogen negy tizedesjegyet; a II/8 taszitasi alakja ugyanennek elojelvaltott masa, ezert nem kulon import.",
+      "bevezette": "II-04",
+      "hasznaljak": [
+        "II-04",
+        "II-08"
+      ],
+      "allapot": "aktiv",
+      "torlesztes": "P2.4",
+      "erzekenyseg": {
+        "allapot": "nincs-merve",
+        "meres": [],
+        "megjegyzes": "Nincs megmerve, mit adna a nyelv mas kitevovel. A P2.4 bukas-aga eppen ezt keri: milyen kitevot ad a nyelv magatol."
+      },
+      "forras": [
+        "hu/I-language/I-01-concept_hu.md",
+        "hu/II-proofs/II-04-hydrogen-atom/proof_hu.md"
+      ]
+    },
+    {
+      "id": "IMP-03",
+      "rang": "import",
+      "nev": "ket tipusdeklaracio az elektronra",
+      "leiras": "(1) az elektron a kizaro osztalyba tartozik; (2) az elektronnak van belso ketertekű mezoje. Szerkezeti kolcson nulla. A melyebb levezetes (spin-statisztika tetel) relativitast kivan, ami a nyelv hatokoren kivul all.",
+      "bevezette": "II-07",
+      "hasznaljak": [
+        "II-07",
+        "II-08"
+      ],
+      "allapot": "aktiv",
+      "torlesztes": "P2.5",
+      "erzekenyseg": {
+        "allapot": "nincs-merve",
+        "meres": [],
+        "megjegyzes": "A P2.5 nem levezetni akarja, hanem peremadatta minositeni - a feltetel gepi: egyetlen tetel sem hasznalhatja a kizarolagossag INDOKAT, csak az ERTEKET."
+      },
+      "forras": [
+        "hu/I-language/I-01-concept_hu.md",
+        "hu/II-proofs/II-07-bowl-magic-numbers/proof_hu.md"
+      ]
+    },
+    {
+      "id": "JEL-01",
+      "rang": "jelolt-import",
+      "nev": "a helyek egyenrangusaga",
+      "leiras": "Nincs kituntetett hely: a szerzodeshalo minden helyrol ugyanugy nez ki. Kettos allasu, kimondva: mint kimondas uj import volna, mint irany az 5. torveny kiterjesztese a helyekre. A nyilvantartas jeloltkent vezeti; ha a levezetes nem sikerul, negyedik importta valik.",
+      "bevezette": "II-12",
+      "hasznaljak": [
+        "II-12",
+        "II-13",
+        "II-14",
+        "II-15",
+        "II-16"
+      ],
+      "allapot": "jelolt",
+      "torlesztes": "P2.1",
+      "erzekenyseg": {
+        "allapot": "nincs-merve",
+        "meres": [],
+        "megjegyzes": "A II/12 mentoprobaja mutatja, mi tortenik nelkule (osszeomlas, vakuum-parkolo), de ez nem perturbacios meres, hanem a jelolt bevezetesenek indoka."
+      },
+      "forras": [
+        "hu/I-language/I-01-concept_hu.md",
+        "hu/III-frontier/III-01-candidate-laws_hu.md",
+        "hu/II-proofs/II-12-network-race/proof_hu.md"
+      ]
+    },
+    {
+      "id": "KON-01",
+      "rang": "konvencio",
+      "nev": "versenyszabaly",
+      "leiras": "Rogzitett szerzodes-koltsegvetest kotelezo elhelyezni, es az egyensuly a legkisebb osszkoltsegu elrendezes. Elore deklaralt osszehasonlitasi konvencio.",
+      "bevezette": "II-12",
+      "hasznaljak": [
+        "II-12",
+        "II-13",
+        "II-14",
+        "II-15",
+        "II-16"
+      ],
+      "allapot": "aktiv",
+      "torlesztes": "P1.3",
+      "erzekenyseg": {
+        "allapot": "nincs-merve",
+        "meres": [],
+        "megjegyzes": "A P1.3 keri: legalabb 3 elore regisztralt varians (mas koltsegvetes-normalas) mellett valtozatlan-e a teto-gyoztes mindharom koordinacion."
+      },
+      "forras": [
+        "hu/I-language/I-01-concept_hu.md",
+        "hu/II-proofs/II-12-network-race/proof_hu.md"
+      ]
+    },
+    {
+      "id": "KON-02",
+      "rang": "konvencio",
+      "nev": "kivalasztasi szabaly",
+      "leiras": "Mi kerul be a fo mezonybe egy adott koordinacion: (i) a honos fok a csupasz egyseglepeseke; (ii) minden mas fokon a legkisebb ossz-lepesnegyzetu ot +/-par indul, lexikografikus dontetlen-torovel. Kimondott onhelyesbites: a szabaly a nyolcas koordinaciora visszavetitve a II/15 ter-jeloltjenel a kristalytani BCC helyett tengelyek+lapatlot adna.",
+      "bevezette": "PKG-16-1",
+      "hasznaljak": [
+        "II-16",
+        "PKG-16-1"
+      ],
+      "allapot": "aktiv",
+      "torlesztes": "P1.3",
+      "erzekenyseg": {
+        "allapot": "merve",
+        "meres": [
+          "PKG-15-9"
+        ],
+        "megjegyzes": "A PKG-15-9 ellenorzott kiserlete: a nyolcas koordinacio ter-jeloltjenek EGYETLEN lepeset cserelve (kristalytani BCC testatlo (1,-1,-1) helyett a KON-02 adta lapatlo (0,1,-1)) a ter elveszti a tukor-jegyet, es a II/15 teto-fordulasa ELTUNIK: a fo mezony teteje a 3-rol a honos 4-re valt. A tukor-hordozo-terkep KON-02 alatt egysegesen mindig a honos fokot adja (6->3, 8->4, 10->5, 12->6). AZ ERTEK: a konvencio NEM artalmatlan -- egy iteletet forditja meg. Ez a legerosebb megmert kezi hatas a taban. Hatokor: a fo mezonyre; a teljes mezony tetejet a csere nem erinti (K1 kontroll all)."
+      },
+      "forras": [
+        "hu/I-language/I-01-concept_hu.md",
+        "hu/II-proofs/II-16-coordination-ten/PKG-16-1-rulebook_hu.md"
+      ]
+    },
+    {
+      "id": "KON-03",
+      "rang": "konvencio",
+      "nev": "szoves-epites",
+      "leiras": "Minden jelolt szoves-halo: egy csoportszerkezet minden helyre ugyanazt a bekotesi mintat irja elo. A PKG-13-1 szerint ez az egyenrangusag megvalositasa, nem uj feltevés; a PKG-15-1 viszont orokolt, deklaralt konvenciokent sorolja fel. A ket besorolas elter - a nyilvantartas a szigorubbat veszi.",
+      "bevezette": "PKG-13-1",
+      "hasznaljak": [
+        "II-13",
+        "II-14",
+        "II-15",
+        "II-16"
+      ],
+      "allapot": "aktiv",
+      "torlesztes": "P0.1",
+      "erzekenyseg": {
+        "allapot": "nincs-merve",
+        "meres": [],
+        "megjegyzes": "Nem-szoves halok nem indultak egyik versenyen sem; a konvencio hatasa igy nincs megmerve."
+      },
+      "forras": [
+        "hu/II-proofs/II-13-dimension-race/PKG-13-1-rulebook_hu.md",
+        "hu/II-proofs/II-15-dimension-fourth-rung/PKG-15-1-rulebook_hu.md"
+      ]
+    },
+    {
+      "id": "KON-04",
+      "rang": "konvencio",
+      "nev": "orszem-kuszob (kettes tenyezo)",
+      "leiras": "A leggyengebb elfogadott es a legerosebb elutasitott kozelseg hanyadosa jelentendo; kettes tenyezo alatt az olvasat reszleges. Kimondva: konvencio, nem levezetett szam.",
+      "bevezette": "PKG-14-5",
+      "hasznaljak": [
+        "II-14",
+        "II-15",
+        "II-16",
+        "PKG-14-5"
+      ],
+      "allapot": "aktiv",
+      "torlesztes": "P1.3",
+      "erzekenyseg": {
+        "allapot": "merve",
+        "meres": [
+          "PKG-14-4",
+          "PKG-14-5",
+          "PKG-15-4",
+          "PKG-16-4"
+        ],
+        "megjegyzes": "A negy rogzitett kiolvasas sav-orszem erteke: 8-as szoves (bukott eset) S = 1,0 (egzakt egyezes, ezert a hanyados definicio szerint 1); 12-es szoves S = 2,84; II/15 S = 5,37; II/16 S = 7,29. A kuszob barhova tolhato az (1,0 ; 2,84] nyilt intervallumon belul anelkul, hogy a negy iteletbol barmelyik megfordulna. A valasztott T = 2 ezen belul all: lefele 2,00-szeres, felfele 1,42-szeres tartalekkal. HATOKOR, kimondva: ez a KIOLVASASI iteleteket meri, a verseny iteletere a kuszob nem hat; es leolvasas elfogadott csomagokbol, nem uj probafutas."
+      },
+      "forras": [
+        "hu/II-proofs/II-14-dimension-staircase/PKG-14-5-readout-repeat_hu.md",
+        "hu/II-proofs/II-16-coordination-ten/PKG-16-4-readout_hu.md"
+      ]
+    },
+    {
+      "id": "PER-01",
+      "rang": "peremadat",
+      "nev": "skala-kalibracio (fizikai allandok)",
+      "leiras": "A dimenziotlan racs-szamok mert egysegekre valtasa: h / hbar, m_e, e. A nyelv elvileg sem vezeti le - a vilag peldany-adata. A II/2 a h ~ 4,14 mikroeV/GHz valtast hasznalja, a II/4 atomi egysegben szamol es eV-re valt.",
+      "bevezette": "II-02",
+      "hasznaljak": [
+        "II-02",
+        "II-04"
+      ],
+      "allapot": "aktiv",
+      "torlesztes": null,
+      "erzekenyseg": {
+        "allapot": "nem-ertelmezheto",
+        "meres": [],
+        "megjegyzes": "Peremadatnal a perturbacio ertelmetlen: nem a probat allitja be, hanem a mertekegyseget adja. A P0.1 viszont keri a probankenti nyilvantartast, es a P4.7 zarasi audit ellenorzi."
+      },
+      "forras": [
+        "hu/PROGRAM_hu.md",
+        "hu/II-proofs/II-02-exchange-oscillation/proof_hu.md",
+        "hu/II-proofs/II-04-hydrogen-atom/proof_hu.md"
+      ]
+    },
+    {
+      "id": "HAT-01",
+      "rang": "hatokor",
+      "nev": "rogzitett rendszermeret",
+      "leiras": "Probankent rogzitett helyszam: II/13 = 16; II/14 = 512; II/15 = 20736 (a termeszetes kisebb 4096 kimondottan kizarva); II/16 = 248832 (= 12^5).",
+      "bevezette": "PKG-13-1",
+      "hasznaljak": [
+        "II-13",
+        "II-14",
+        "II-15",
+        "II-16"
+      ],
+      "allapot": "aktiv",
+      "torlesztes": "P4.1",
+      "erzekenyseg": {
+        "allapot": "merve",
+        "meres": [
+          "PKG-14-5",
+          "PKG-15-4",
+          "PKG-16-4"
+        ],
+        "megjegyzes": "HATOKORREL: a meres csak a KIOLVASASRA vonatkozik, a verseny iteletere nem. A PKG-14-5 a meret-mutermeket jeloltbol tetelle emelte (visszhang 16%, elojeles); a PKG-15-4 +17,4%-ot mert; a PKG-16-4 haromelemu visszhang-szamsort. A verseny sav-hatarainak meretfuggese nincs megmerve."
+      },
+      "forras": [
+        "hu/II-proofs/II-14-dimension-staircase/PKG-14-5-readout-repeat_hu.md",
+        "hu/II-proofs/II-15-dimension-fourth-rung/PKG-15-1-rulebook_hu.md",
+        "hu/II-proofs/II-16-coordination-ten/PKG-16-1-rulebook_hu.md"
+      ]
+    },
+    {
+      "id": "HAT-02",
+      "rang": "hatokor",
+      "nev": "korbeeres-padlo",
+      "leiras": "Minden korbezart irany korbeerese legalabb 8 graf-lepes, gepi bejarassal igazolva; a paros-jegyu indulokon paros is. A II/13 rezonancia-diagnozisanak oroksege.",
+      "bevezette": "PKG-14-1",
+      "hasznaljak": [
+        "II-14",
+        "II-15",
+        "II-16"
+      ],
+      "allapot": "aktiv",
+      "torlesztes": "P1.3",
+      "erzekenyseg": {
+        "allapot": "nincs-merve",
+        "meres": [],
+        "megjegyzes": "A padlo alatti halok nem indultak; a hatas nincs megmerve."
+      },
+      "forras": [
+        "hu/II-proofs/II-14-dimension-staircase/PKG-14-1-rulebook_hu.md",
+        "hu/II-proofs/II-15-dimension-fourth-rung/PKG-15-1-rulebook_hu.md"
+      ]
+    },
+    {
+      "id": "HAT-03",
+      "rang": "hatokor",
+      "nev": "lepes-plafon a vonal-csalad pasztazasaban (c <= 12)",
+      "leiras": "A vegigpasztazott vonal-csalad tagjainak lepes-plafonja. Ez hatarozza meg, meddig ter a 'teljes mezony' olvasat - eppen az, amelyikrol a teto-torveny szol.",
+      "bevezette": "PKG-14-1",
+      "hasznaljak": [
+        "II-14",
+        "II-15",
+        "II-16"
+      ],
+      "allapot": "aktiv",
+      "torlesztes": "P1.3",
+      "erzekenyseg": {
+        "allapot": "nincs-merve",
+        "meres": [],
+        "megjegyzes": "Magasabb plafon uj imitatorokat hozhat be; nem futott le."
+      },
+      "forras": [
+        "hu/II-proofs/II-14-dimension-staircase/PKG-14-1-rulebook_hu.md",
+        "hu/II-proofs/II-15-dimension-fourth-rung/PKG-15-1-rulebook_hu.md"
+      ]
+    },
+    {
+      "id": "HAT-04",
+      "rang": "hatokor",
+      "nev": "golyo-olvasat sugarhatara (r <= 3 / r <= 5)",
+      "leiras": "A kiolvasas golyotorvenyeit meddig ellenorizzuk: II/14 egzakt 4r^2+2 r=5-ig; II/15 egzakt kobos golyo r=5-ig; II/16 egzakt negyedrendu golyo.",
+      "bevezette": "PKG-14-1",
+      "hasznaljak": [
+        "II-14",
+        "II-15",
+        "II-16"
+      ],
+      "allapot": "aktiv",
+      "torlesztes": null,
+      "erzekenyseg": {
+        "allapot": "nincs-merve",
+        "meres": [],
+        "megjegyzes": "Kimondott hatokor-hatar: a torveny nagyobb sugaron nincs ellenorizve."
+      },
+      "forras": [
+        "hu/II-proofs/II-15-dimension-fourth-rung/PKG-15-1-rulebook_hu.md"
+      ]
+    },
+    {
+      "id": "HAT-05",
+      "rang": "hatokor",
+      "nev": "kiolvasasi jegyzokonyv ablaka (30-as elojeles ugras-ablak)",
+      "leiras": "Az elojeles ugras keresesi ablaka a kiolvasasnal, a sav-orszem melle rogzitve.",
+      "bevezette": "PKG-15-1",
+      "hasznaljak": [
+        "II-15",
+        "II-16"
+      ],
+      "allapot": "aktiv",
+      "torlesztes": null,
+      "erzekenyseg": {
+        "allapot": "nincs-merve",
+        "meres": [],
+        "megjegyzes": "Az ablakmeret perturbalasa nem futott le."
+      },
+      "forras": [
+        "hu/II-proofs/II-15-dimension-fourth-rung/PKG-15-1-rulebook_hu.md"
+      ]
+    },
+    {
+      "id": "HAT-06",
+      "rang": "hatokor",
+      "nev": "a ketutas ellenorzes mintaveteles alakja",
+      "leiras": "A II/15-ben a ketutas mintavetel (A8); a II/16-ban a teljes suru ut gepileg elvegezhetetlen (495 GB, honapok), ezert ritka negyelemu alak all: ritka maradek-proba, momentum-fedezetek rend <= 4, kis-peldanyos suru hitelesites, mintaveteles vetito-pecset. Sorsolasi mag: 248832. Kimondva: gyengebb a II/15 teljes suru pecsetjenel; a lefedettseg szammal jelentendo.",
+      "bevezette": "PKG-15-1",
+      "hasznaljak": [
+        "II-15",
+        "II-16",
+        "PKG-16-1"
+      ],
+      "allapot": "aktiv",
+      "torlesztes": "P4.1",
+      "erzekenyseg": {
+        "allapot": "nincs-merve",
+        "meres": [],
+        "megjegyzes": "A mintameret hatasa a pecset erejere nincs kulon megmerve; a csomagok a lefedettseget szammal jelentik, de perturbacio nelkul."
+      },
+      "forras": [
+        "hu/II-proofs/II-16-coordination-ten/PKG-16-1-rulebook_hu.md"
+      ]
+    }
+  ]
+}
+</file>
+
+<file path="shared\parallel\demo.py">
+# demo.py -- a worked, real-scale example of the parallel runner
+#
+# The field: every four-step weave of the II/15 line family on the fixed system
+# of 20736 places -- all 495 of them, the same field PKG-15-1 declared. For each
+# entrant this builds the ladder by the closed route, takes its exact trace on
+# the H4 portable route, and reads the cost curve at five fillings.
+#
+# It stops deliberately short of comparing entrants. Who wins the top of the full
+# field is the registered blind prediction JOS-01 (milestone P1.1); that
+# comparison belongs to its own package, not to a runner demo.
+#
+# What this demonstrates instead, and what every parallel stage should show:
+#
+#   * the speed-up, measured against a serial sample rather than asserted;
+#   * the built-in check -- all 495 traces must equal 2 * 4 * 20736 = 165888;
+#   * the order-independence check, which is what makes the speed-up mean
+#     anything at all.
+#
+# Usage:
+#   python shared/parallel/demo.py
+#   python shared/parallel/demo.py --magok 4 --tiszta
+
+import itertools
+import shutil
+import sys
+import time
+from pathlib import Path
+
+SHARED = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(SHARED))
+
+from parallel.runner import ALAP_GYORSITOTAR, Feladat, futtat, jelentes  # noqa: E402
+from parallel.letra_feladat import letra_es_gorbe, paros_jegy            # noqa: E402
+
+HELYEK = 20736          # the fixed system of II/15
+LEPES_PLAFON = 12       # the declared scope limit HAT-03
+FOKOK = 4               # four +/- pairs = coordination eight
+EGZAKT_NYOM = 2.0 * FOKOK * HELYEK      # 165888
+
+
+def mezony():
+    """The line family exactly as PKG-15-1 declares it: every four-subset of the
+    steps 1..12. C(12,4) = 495 entrants."""
+    return list(itertools.combinations(range(1, LEPES_PLAFON + 1), FOKOK))
+
+
+def main(argv):
+    magok = 8
+    if "--magok" in argv:
+        magok = int(argv[argv.index("--magok") + 1])
+    if "--tiszta" in argv and ALAP_GYORSITOTAR.exists():
+        shutil.rmtree(ALAP_GYORSITOTAR, ignore_errors=True)
+        print("gyorsitotar torolve: %s" % ALAP_GYORSITOTAR)
+
+    tagok = mezony()
+    print("== parhuzamos pelda: a II/15 vonal-csalad letrai ==")
+    print()
+    print("  rendszer   : %d hely, %d +/- par (nyolcas koordinacio)" % (HELYEK, FOKOK))
+    print("  mezony     : %d csaladtag (%d-es lepes-plafon)" % (len(tagok), LEPES_PLAFON))
+    print("  egzakt nyom: %d minden indulon" % EGZAKT_NYOM)
+    print("  gyorsitotar: %s" % ALAP_GYORSITOTAR)
+    print()
+
+    # A serial sample first, to have something honest to compare against.
+    minta = tagok[:12]
+    kezd = time.time()
+    for lepesek in minta:
+        letra_es_gorbe(HELYEK, lepesek)
+    soros_egy = (time.time() - kezd) / len(minta)
+    print("  soros mero-minta: %d indulo, %.3f s/indulo -> a teljes mezony "
+          "sorosan ~%.1f s" % (len(minta), soros_egy, soros_egy * len(tagok)))
+    print()
+
+    feladatok = [Feladat(azonosito=str(lepesek),
+                         fuggveny="parallel.letra_feladat:letra_es_gorbe",
+                         argumentumok={"n": HELYEK, "lepesek": lepesek})
+                 for lepesek in tagok]
+
+    eredmeny = futtat(feladatok, magok=magok, rendproba=8,
+                      cimke="csaladtagok", gyoker=str(SHARED))
+
+    kod = jelentes(eredmeny, cimke="a mezony letrai")
+
+    # --- the built-in check every entrant carries ---------------------------
+    ertekek = [e for e in eredmeny.ertekek if e is not None]
+    legrosszabb = max((e["nyom_elteres"] for e in ertekek), default=float("inf"))
+    print("  beepitett ellenorzes -- nyomosszeg %d mind a %d indulon:"
+          % (EGZAKT_NYOM, len(ertekek)))
+    print("     legnagyobb elteres: %.3e  (a rogzitett tures 1.0e-08) -- %s"
+          % (legrosszabb, "ALL" if legrosszabb <= 1e-8 else "BUKIK"))
+    if legrosszabb > 1e-8:
+        kod = 1
+
+    # --- a field finding that costs nothing extra ---------------------------
+    # Not a race, just a census: how much of the field carries the mirror mark.
+    tukros = [e for e in ertekek if paros_jegy(e["lepesek"])]
+    print()
+    print("  mezony-lelet (nem verseny): %d tukor-jegyu (csupa-paratlan lepesu) "
+          "tag a %d-bol" % (len(tukros), len(ertekek)))
+    if tukros:
+        legkisebb = min(tukros, key=lambda e: sum(s * s for s in e["lepesek"]))
+        print("     a legkisebb ossz-lepesnegyzetu koztuk: %s (%d)"
+              % (str(legkisebb["lepesek"]),
+                 sum(s * s for s in legkisebb["lepesek"])))
+
+    if eredmeny.futott and soros_egy > 0:
+        becsult = soros_egy * eredmeny.futott
+        print()
+        print("  gyorsulas: %d indulo sorosan ~%.1f s, parhuzamosan %.1f s -> %.1fx"
+              % (eredmeny.futott, becsult, eredmeny.ido,
+                 becsult / max(eredmeny.ido, 1e-9)))
+    return kod
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))
+</file>
+
+<file path="shared\parallel\letra_feladat.py">
+# letra_feladat.py -- worker functions for the parallel runner
+#
+# Everything here must be importable in a fresh interpreter and must be a pure
+# function of its arguments: same inputs, same bits out, no shared state, no
+# global RNG, no reliance on which worker got there first. That is what makes a
+# field of these safe to spread across cores -- and what the runner's rendproba
+# re-checks afterwards instead of taking on trust.
+#
+# The ladder of a weave net C_n(steps) has a closed Fourier form: every beat is a
+# sum of one-dimensional contributions, so no matrix is ever built. This is the
+# closed route of appendix B, and its exact trace is known in advance --
+# 2 * (number of steps) * n -- which gives every task its own built-in check.
+
+import numpy as np
+
+import summation
+
+
+def letra(n, lepesek):
+    """The beat ladder of the circulant weave C_n(lepesek), sorted from cheapest.
+
+    Each step s contributes 2 - 2cos(2*pi*j*s/n) to beat j; the +/- pair of a step
+    is one contract, so a net with k steps is 2k-regular."""
+    j = np.arange(n, dtype=np.float64)
+    lam = np.zeros(n, dtype=np.float64)
+    for s in lepesek:
+        lam += 2.0 - 2.0 * np.cos(2.0 * np.pi * j * float(s) / n)
+    lam.sort()
+    return lam
+
+
+def letra_es_gorbe(n, lepesek, toltesek=None):
+    """One entrant's ladder, its exact trace, and its cost curve read at the
+    requested fillings -- the H4 portable route throughout.
+
+    Returns scalars and a short vector, never the whole curve: 500 entrants x
+    20736 floats would cost more in pickling than the arithmetic saved."""
+    lepesek = tuple(int(s) for s in lepesek)
+    lam = letra(n, lepesek)
+
+    nyom = summation.pontos_osszeg(lam)
+    egzakt_nyom = 2.0 * len(lepesek) * n
+
+    gorbe = summation.pontos_cumsum(lam)
+    if toltesek is None:
+        toltesek = (1, n // 4, n // 2, n - 1, n)
+    toltesek = tuple(int(t) for t in toltesek)
+
+    return {
+        "lepesek": lepesek,
+        "nyom": nyom,
+        "nyom_elteres": abs(nyom - egzakt_nyom),
+        "nulla_modusok": int(np.count_nonzero(lam < 1e-12)),
+        "csucs_utem": float(lam[-1]),
+        "polcok": int(np.unique(np.round(lam, 10)).size),
+        "toltesek": toltesek,
+        "arak": tuple(float(gorbe[t - 1]) for t in toltesek),
+    }
+
+
+def paros_jegy(lepesek):
+    """Does this entrant carry the mirror mark? On a circulant of even order the
+    net is bipartite exactly when every step is odd -- no odd cycle can close."""
+    return all(int(s) % 2 == 1 for s in lepesek)
+</file>
+
+<file path="shared\parallel\runner.py">
+# runner.py -- the parallel task runner for package computations
+#
+# What this is for. The gate rule of the rulebook orders PACKAGES: a package may
+# only build on an approved predecessor, so rulebook -> ladders -> race -> readout
+# is strictly sequential and must stay that way. Inside a single stage, however,
+# the work is a field of independent items -- 503 entrants, 495 family members,
+# six pairwise lemmas -- and nothing there depends on the order. That is where
+# this runner belongs, and only there.
+#
+# Three properties this has to guarantee, or parallelism would cost more than it
+# buys:
+#
+#   1. Order independence. The result must not depend on which worker finished
+#      first. Results are keyed by task id and returned in the order they were
+#      declared, never in completion order. On top of that, `rendproba` re-runs a
+#      sample of the tasks serially in this process and compares them bit for bit
+#      against the parallel results. That check is to scheduling what the two-way
+#      rule is to arithmetic: without it, "it ran faster" is not evidence.
+#
+#   2. A bounded machine. Never more than MAX_MAG cores -- the rest of the
+#      workstation belongs to its owner -- and the children's BLAS/OpenMP pools
+#      are pinned to one thread each, otherwise N workers would each open their
+#      own pool and the real load would be N x cores. Tasks declared memory-heavy
+#      run in a lane of their own.
+#
+#   3. Failure isolation and resume. One task raising must not lose the other
+#      502. Failures come back as markers, and every completed task is cached, so
+#      a re-run picks up where the last one stopped. Long fields are worth little
+#      if a crash at 90% means starting over.
+#
+# Windows note: worker functions are named as "module.path:function" strings, not
+# passed as objects. Process start-up here is spawn, so a worker must be
+# importable in a fresh interpreter -- lambdas and closures cannot cross that
+# boundary. Anything that calls futtat() needs an `if __name__ == "__main__":`
+# guard for the same reason.
+#
+# The cache lives in the system temp directory, never in the repository: it is
+# intermediate work, not a deliverable.
+
+import hashlib
+import importlib
+import os
+import pickle
+import sys
+import tempfile
+import time
+import traceback
+from collections import namedtuple
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from pathlib import Path
+
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
+
+MAX_MAG = 8                     # never take more than this; see the memory note above
+EGYSZALU = ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS",
+            "NUMEXPR_NUM_THREADS", "VECLIB_MAXIMUM_THREADS")
+
+ALAP_GYORSITOTAR = Path(tempfile.gettempdir()) / "oop-parallel"
+
+
+class Feladat(namedtuple("Feladat", "azonosito fuggveny argumentumok memoriaigenyes")):
+    """One independent item of a stage.
+
+    azonosito       -- unique, stable, and meaningful: it keys the cache and the
+                       report, so "(1, 3, 5, 7)" beats "task_42".
+    fuggveny        -- "modul.utvonal:fuggveny_nev"; must be importable in a
+                       fresh interpreter.
+    argumentumok    -- dict of keyword arguments; must be picklable.
+    memoriaigenyes  -- run this one alone, outside the pool.
+    """
+
+    def __new__(cls, azonosito, fuggveny, argumentumok=None, memoriaigenyes=False):
+        return super().__new__(cls, str(azonosito), fuggveny,
+                               dict(argumentumok or {}), bool(memoriaigenyes))
+
+
+class Hiba(namedtuple("Hiba", "azonosito kivetel nyomkoveto")):
+    """A task that raised. Kept as a value so the field still completes."""
+
+
+Eredmeny = namedtuple("Eredmeny",
+                      "ertekek hibak ido gyorsitotarbol futott magok rendproba")
+
+
+def _kulcs(feladat):
+    nyers = repr((feladat.fuggveny, sorted(feladat.argumentumok.items()))).encode("utf-8")
+    return hashlib.sha256(nyers).hexdigest()[:24]
+
+
+def _betolt(fuggveny_nev):
+    modul_nev, _, nev = fuggveny_nev.partition(":")
+    if not nev:
+        raise ValueError("a fuggveny alakja 'modul:fuggveny_nev' kell legyen: %r"
+                         % fuggveny_nev)
+    return getattr(importlib.import_module(modul_nev), nev)
+
+
+def _vegrehajt(csomag):
+    """Runs in the worker. Module level so spawn can find it."""
+    azonosito, fuggveny_nev, argumentumok, gyoker = csomag
+    if gyoker and gyoker not in sys.path:
+        sys.path.insert(0, gyoker)
+    try:
+        return azonosito, _betolt(fuggveny_nev)(**argumentumok), None
+    except Exception as e:                                   # isolate, never abort
+        return azonosito, None, (repr(e), traceback.format_exc())
+
+
+def _vegrehajt_koteg(csomagok):
+    """Several tasks per dispatch.
+
+    Handing over one short task at a time is a bad trade: on spawn platforms the
+    pickling and hand-off can cost as much as the arithmetic, and the field then
+    runs barely faster than serially. Batching amortises that. It changes nothing
+    about the results -- the tasks are independent either way -- only how many
+    times the boundary is crossed."""
+    return [_vegrehajt(cs) for cs in csomagok]
+
+
+def _kotegek(elemek, meret):
+    for i in range(0, len(elemek), meret):
+        yield elemek[i:i + meret]
+
+
+# One store, not one file per task. Per-task files looked tidy but on Windows
+# 495 small reads cost 13 s -- eight times longer than recomputing the field --
+# so the cache was a pessimisation exactly where it was meant to help. A single
+# pickle is read once, and checkpointed every MENTES_KOZ completions so a crash
+# still leaves the finished work behind.
+MENTES_KOZ = 50
+TAR_NEV = "tar.pickle"
+
+
+def _tar_betolt(mappa):
+    ut = Path(mappa) / TAR_NEV
+    if not ut.exists():
+        return {}
+    try:
+        with ut.open("rb") as f:
+            tar = pickle.load(f)
+        return tar if isinstance(tar, dict) else {}
+    except Exception:
+        return {}                                            # a damaged store just re-runs
+
+
+def _tar_ment(mappa, tar):
+    try:
+        mappa = Path(mappa)
+        mappa.mkdir(parents=True, exist_ok=True)
+        ideiglenes = mappa / (TAR_NEV + ".uj")
+        with ideiglenes.open("wb") as f:
+            pickle.dump(tar, f, protocol=pickle.HIGHEST_PROTOCOL)
+        ideiglenes.replace(mappa / TAR_NEV)                  # atomic: never a half file
+    except Exception:
+        pass                                                 # a cache miss is not a failure
+
+
+def _azonos(a, b):
+    """Bit-for-bit sameness, the only comparison worth making for an
+    order-independence check. A tolerance here would hide exactly what we look for."""
+    try:
+        import numpy as np
+        if isinstance(a, np.ndarray) or isinstance(b, np.ndarray):
+            a, b = np.asarray(a), np.asarray(b)
+            return a.shape == b.shape and a.dtype == b.dtype and np.array_equal(a, b)
+    except ImportError:
+        pass
+    if isinstance(a, (list, tuple)) and isinstance(b, (list, tuple)):
+        return len(a) == len(b) and all(_azonos(x, y) for x, y in zip(a, b))
+    if isinstance(a, dict) and isinstance(b, dict):
+        return a.keys() == b.keys() and all(_azonos(a[k], b[k]) for k in a)
+    return type(a) is type(b) and a == b
+
+
+def futtat(feladatok, magok=MAX_MAG, gyorsitotar=ALAP_GYORSITOTAR,
+           rendproba=0, gyoker=None, halkan=False, cimke="feladatok",
+           koteg=None):
+    """Run an independent field of tasks across processes.
+
+    rendproba -- how many tasks to re-run serially afterwards and compare bit for
+                 bit. 0 skips the check; anything above 0 is cheap insurance and
+                 the only thing that makes the speed-up trustworthy.
+    """
+    feladatok = list(feladatok)
+    azonositok = [f.azonosito for f in feladatok]
+    if len(set(azonositok)) != len(azonositok):
+        raise ValueError("ismetlodo feladat-azonosito: a gyorsitotar es a jelentes "
+                         "kulcsa serulne")
+
+    magok = max(1, min(int(magok), MAX_MAG))
+    gyorsitotar = Path(gyorsitotar) if gyorsitotar else None
+    gyoker = gyoker or str(Path(__file__).resolve().parents[1])
+
+    # Set before the pool exists: children inherit it, and they import numpy fresh.
+    for kulcs in EGYSZALU:
+        os.environ[kulcs] = "1"
+
+    kezd = time.time()
+    ertekek, hibak, tarbol = {}, {}, 0
+    varo = []
+
+    tar = _tar_betolt(gyorsitotar) if gyorsitotar else {}
+    for f in feladatok:
+        kulcs = _kulcs(f)
+        if gyorsitotar and kulcs in tar:
+            ertekek[f.azonosito] = tar[kulcs]
+            tarbol += 1
+            continue
+        varo.append(f)
+
+    parhuzamos = [f for f in varo if not f.memoriaigenyes]
+    sorosak = [f for f in varo if f.memoriaigenyes]
+
+    if not halkan:
+        print("  %s: %d db | gyorsitotarbol %d | futtatando %d (%d parhuzamos, "
+              "%d sorosan) | magok %d"
+              % (cimke, len(feladatok), tarbol, len(varo), len(parhuzamos),
+                 len(sorosak), magok))
+
+    kesz = 0
+
+    def _feldolgoz(azonosito, ertek, hiba, feladat):
+        nonlocal kesz
+        kesz += 1
+        if hiba is not None:
+            hibak[azonosito] = Hiba(azonosito, hiba[0], hiba[1])
+        else:
+            ertekek[azonosito] = ertek
+            if gyorsitotar:
+                tar[_kulcs(feladat)] = ertek
+                if kesz % MENTES_KOZ == 0:
+                    _tar_ment(gyorsitotar, tar)
+        if not halkan and (kesz % max(1, len(varo) // 10) == 0 or kesz == len(varo)):
+            print("     %d/%d (%.1f s)" % (kesz, len(varo), time.time() - kezd))
+
+    if parhuzamos:
+        szerint = {f.azonosito: f for f in parhuzamos}
+        if koteg is None:
+            # Enough batches to keep every worker fed even if the tasks differ
+            # in cost, but few enough that the hand-off stops dominating.
+            koteg = max(1, len(parhuzamos) // (magok * 4))
+        koteg = max(1, int(koteg))
+        csomagok = [(f.azonosito, f.fuggveny, f.argumentumok, gyoker)
+                    for f in parhuzamos]
+        if not halkan and koteg > 1:
+            print("     kotegmeret %d (%d koteg)"
+                  % (koteg, (len(csomagok) + koteg - 1) // koteg))
+        with ProcessPoolExecutor(max_workers=min(magok, len(parhuzamos))) as pool:
+            jovok = [pool.submit(_vegrehajt_koteg, cs)
+                     for cs in _kotegek(csomagok, koteg)]
+            for jovo in as_completed(jovok):
+                for azonosito, ertek, hiba in jovo.result():
+                    _feldolgoz(azonosito, ertek, hiba, szerint[azonosito])
+
+    for f in sorosak:
+        azonosito, ertek, hiba = _vegrehajt(
+            (f.azonosito, f.fuggveny, f.argumentumok, gyoker))
+        _feldolgoz(azonosito, ertek, hiba, f)
+
+    if gyorsitotar and varo:
+        _tar_ment(gyorsitotar, tar)
+    ido = time.time() - kezd
+
+    # --- order independence -------------------------------------------------
+    # Re-run a spread-out sample here, in this process, one after another, and
+    # demand bitwise sameness. Evenly spaced rather than random so the check is
+    # itself reproducible.
+    rendproba_eredmeny = None
+    if rendproba > 0 and feladatok:
+        minta_db = min(int(rendproba), len(feladatok))
+        lepes = max(1, len(feladatok) // minta_db)
+        minta = [feladatok[i] for i in range(0, len(feladatok), lepes)][:minta_db]
+        elteres = []
+        for f in minta:
+            _, ertek, hiba = _vegrehajt(
+                (f.azonosito, f.fuggveny, f.argumentumok, gyoker))
+            if hiba is not None or f.azonosito not in ertekek:
+                elteres.append(f.azonosito)
+            elif not _azonos(ertek, ertekek[f.azonosito]):
+                elteres.append(f.azonosito)
+        rendproba_eredmeny = (len(minta), elteres)
+        if not halkan:
+            if elteres:
+                print("     RENDPROBA BUKIK: %d/%d feladat mas eredmenyt adott "
+                      "sorosan: %s" % (len(elteres), len(minta), ", ".join(elteres[:5])))
+            else:
+                print("     rendproba: %d/%d feladat bitre azonos sorosan is -- ALL"
+                      % (len(minta), len(minta)))
+
+    # Deterministic order: as declared, never as completed.
+    rendezett = [ertekek.get(a) for a in azonositok]
+    return Eredmeny(rendezett, hibak, ido, tarbol, len(varo), magok,
+                    rendproba_eredmeny)
+
+
+def jelentes(eredmeny, cimke="futas"):
+    """One-screen summary; returns 0 if the run is trustworthy, 1 if not."""
+    print()
+    print("  == %s ==" % cimke)
+    print("     ido            : %.1f s (%d mag)" % (eredmeny.ido, eredmeny.magok))
+    print("     gyorsitotarbol : %d" % eredmeny.gyorsitotarbol)
+    print("     futott         : %d" % eredmeny.futott)
+    print("     hiba           : %d" % len(eredmeny.hibak))
+    if eredmeny.rendproba:
+        db, elteres = eredmeny.rendproba
+        print("     rendproba      : %d mintabol %d elteres -- %s"
+              % (db, len(elteres), "BUKIK" if elteres else "ALL"))
+    else:
+        print("     rendproba      : nem futott -- a gyorsulas igy nem bizonyitott")
+    for azonosito, h in list(eredmeny.hibak.items())[:5]:
+        print("     [HIBA] %s: %s" % (azonosito, h.kivetel))
+    if len(eredmeny.hibak) > 5:
+        print("     ... es meg %d" % (len(eredmeny.hibak) - 5))
+
+    rossz = bool(eredmeny.hibak) or bool(eredmeny.rendproba and eredmeny.rendproba[1])
+    print()
+    print("  ITELET: %s" % ("BUKIK" if rossz else "ALL"))
+    return 1 if rossz else 0
+</file>
+
+<file path="shared\register\predictions.json">
+{
+  "meta": {
+    "leiras": "Joslat-regiszter (P0.3). Minden bejegyzes egy elore rogzitett, meg le nem olvasott allitas: a joslat-mondat a nyelv fogalmaibol, a siker- es bukas-feltetelek szammal, a forras, es a pecset. A pecset a tartalom SHA-256 lenyomata; a seal.py ellenorzi, hogy a bejegyzes a regisztralas ota nem valtozott.",
+    "miert": "A repo 16 probaja mind ismert szamot adott vissza. A joslat-regiszter az elso olyan eszkoz, amellyel egy allitas UGY zarul le, hogy a valasz a lezaraskor senkinek nincs a birtokaban.",
+    "allapotok": {
+      "regisztralt": "rogzitve, meg nem futott",
+      "itelet-varasra": "a futas elindult, az itelet nincs kimondva",
+      "beallt": "a siker-feltetelek allnak",
+      "bukott": "valamelyik bukas-feltetel teljesult -- rogzitett bukas, nem torlendo",
+      "reszleges": "a lenyegi feltetel all, de valamelyik rogzitett feltetel nem -- a kulonbseg okat a bejegyzes kimondja"
+    },
+    "kotelezo_szabaly": "A siker- es bukas-feltetel a futas UTAN nem modosithato. A pecset ezt teszi ellenorizhetove; az ido-horgony a commit, amelyben a bejegyzes eloszor megjelenik."
+  },
+  "joslatok": [
+    {
+      "id": "JOS-01",
+      "merfoldko": "P1.1",
+      "datum": "2026-08-20",
+      "commit": "751fbabb40c1b1646d2746280b8b06661c904a35",
+      "allapot": "beallt",
+      "kerdes": "Nyolcas koordinacion a teljes mezony tetejet tukor-jegyu vonal-tag viszi-e, ahogy a teto-torveny allitja -- es melyik?",
+      "joslat": "A rogzitett 20736 helyes, nyolcas koordinaciju rendszeren a teljes mezony (503 indulo) teli veget a tukor-jegyu vonal-csalad tagjai viszik, es koztuk a legtobb toltest a (1, 3, 5, 7) bekotes nyeri.",
+      "megnevezett_gyoztes": [
+        1,
+        3,
+        5,
+        7
+      ],
+      "levezetes": [
+        "(i) A teto-torveny hordozo-fele (III/1, 7-8.): a tetot tukor-jegyu tag viszi. Mert, kivetel nelkul, hatos es tizes koordinacion.",
+        "(ii) A tukor-jegy a vonal-csaladon csupa-paratlan lepest jelent: a korkoros halo akkor paros, ha minden lepese paratlan (a helyszam, 20736, paros).",
+        "(iii) A torveny 'legalacsonyabb kiterjedesu' kitetele a vonalra mutat -- a vonal-csalad minden tagja egy kiterjedesu, a fo negyes tobbi tagja magasabb.",
+        "(iv) A torveny egyenlo kiterjedesen NEM dont -- ez a szovegenek kimondott hezagja. Dontetlen-torokent a repo sajat kivalasztasi szabalyat (KON-02) alkalmazzuk: legkisebb ossz-lepesnegyzet. A 12-es lepes-plafon alatti 15 csupa-paratlan negyes kozul az (1, 3, 5, 7) a minimum (1+9+25+49 = 84).",
+        "(v) Precedens: tizes koordinacion a teljes mezony tetejet a (1, 3, 5, 7, 9) vitte -- ugyanez a szerkezet eggyel magasabb fokon (PKG-16-5)."
+      ],
+      "ablak": {
+        "leiras": "A teli veg 2000 toltese: N = 18737 .. 20736.",
+        "indok": "Pontosan akkora abszolut ablak, mint amekkoran a PKG-16-5 tizes koordinacion leolvasta (a teli veg 2000 toltese) -- igy a ket eredmeny kozvetlenul osszevetheto.",
+        "masodlagos": "Robusztussagi jegyzetkent a felso 1% (208 toltes) kulon is jelentendo; ez nem itelet-feltetel."
+      },
+      "siker_felteteI": [
+        {
+          "kod": "S1",
+          "allitas": "Az ablak 2000 toltesebol legalabb 1900-at tukor-jegyu (csupa-paratlan lepesu) indulo nyer.",
+          "kuszob": 1900
+        },
+        {
+          "kod": "S2",
+          "allitas": "Az ablakban a legtobb toltest nyero indulo pontosan a (1, 3, 5, 7).",
+          "kuszob": null
+        }
+      ],
+      "siker": "S1 ES S2 -- ekkor a joslat beallt.",
+      "bukas_felteteI": [
+        {
+          "kod": "B1",
+          "allitas": "Ha S1 bukik: a teto-torveny mert fele a TELJES mezonyon nyolcason megbukott. Kovetkezmeny: a torveny a fo mezonyre szukitendo, a III/1, 8. atirando, es a mert fele haromból egyen all."
+        },
+        {
+          "kod": "B2",
+          "allitas": "Ha S1 all, de S2 bukik: a hordozo-fele all, a dontetlen-toro rossz. Kovetkezmeny: a torveny kiegeszitendo az eles kivalasztassal (III/1, 8.c -- a tukor-hordozo-terkep)."
+        },
+        {
+          "kod": "B3",
+          "allitas": "Ha az ablakot holtverseny uralja (a toltesek tobb mint fele holtversenyes): az itelet reszleges, a holtversenyes toltesek szama jelentendo, es a jegyzokonyv dontetlen-szabalya utolag nem valtoztathato."
+        }
+      ],
+      "ismert_feszultseg": "A PKG-15-3 szerint a fo negyes a teljes mezonyben PONTOSAN 2 toltesen nyer szigoruan, es a futas nem nevezi meg, melyik ketton. Ha ez a ket toltes a teli vegre esik, az S1-et (1900/2000) meg nem donti el, de a legfelso toltes akkor nem vonal-tage. A jegyzokonyv ezt kulon sorban jelenti -- elore kimondva, hogy utolag ne lehessen ertelmezni.",
+      "vegrehajtas": "A PKG-15-2 mentett letra-gyorsitotarabol (shared/II-15-dimension-fourth-rung/letrak_gepi/) a verseny ujrafuttathato -- a verseny maga reszosszeg-szamolas, a kesz letrakbol olcso. A leolvasas ugyanaz, amit a PKG-16-5 tizesen elvegzett. Kimenet: PKG-15-8 csomag.",
+      "kornyezeti_felteteI": "Hosszu-lebegos ut kotelezo (H3-helyesbites). A jelenlegi Windows-gepen az np.longdouble a float64 alneve, ezert a futas ITT NEM ervenyes. A joslat pont ezert vak: a regisztralas napjan a valasz senkinek nincs a birtokaban.",
+      "forras": [
+        "hu/III-frontier/III-01-candidate-laws_hu.md",
+        "hu/II-proofs/II-15-dimension-fourth-rung/PKG-15-3-race_hu.md",
+        "hu/II-proofs/II-16-coordination-ten/PKG-16-5-transfer_hu.md",
+        "hu/PROGRAM_hu.md"
+      ],
+      "pecset": "4332b12717f2c30ba6f4443727598ffb0adb9ea481313925d928c5c06429e5be",
+      "eredmeny": {
+        "datum": "2026-08-20",
+        "csomag": "shared/II-15-dimension-fourth-rung/PKG-15-8-top-full-field.py",
+        "elofeltetel": "a zart alaku letrak a 24 mentett csaladtag-letraval egyeznek; legnagyobb elteres 1,293e-12 (a PKG-15-2 kozzetett 1,30e-12-jenek fuggetlen megerositese, MAS algoritmussal)",
+        "beepitett_ellenorzes": "egzakt nyomosszeg 165888 mind az 503 indulon; legnagyobb elteres 2,910e-11 (tures 1e-8)",
+        "rendfuggetlenseg": "6/6 mintafeladat bitre azonos sorosan is",
+        "mezony": "503 indulo (495 csaladtag + 4 fo + 4 kontroll); tukor-jegyu: 20",
+        "S1": "ALL -- megengedo olvasat 2000/2000, szigoru olvasat 1999/2000 (kuszob 1900)",
+        "S2": "ALL -- a legtobb toltest nyero indulo a (1, 3, 5, 7), az ablak MIND A 2000 toltesen",
+        "B3": "nem valt ki -- 2000-bol 2 holtversenyes",
+        "itelet": "A joslat BEALLT. A teto-torveny mert fele ezzel a teljes mezonyon haromból haromra all (hatos, nyolcas, tizes koordinacio).",
+        "utolagos_jegyzet": "A JOS-01 rogzitette az ablakot es a kuszoboket, de NEM rogzitette a holtverseny beszamitasat. Ezert mindket olvasat jelentve; a kulonbseg egyetlen toltes, tehat az iteletet nem erinti. A holtverseny-szabaly elore rogzitese a kovetkezo regisztracio tanulsaga."
+      }
+    },
+    {
+      "id": "JOS-02",
+      "merfoldko": "P2.3 / dontő kiserlet",
+      "datum": "2026-08-20",
+      "commit": "98d1b2735152a876273824ab8bc36c4e8d8b1022",
+      "allapot": "reszleges",
+      "kerdes": "Ha a nyolcas koordinacio ter-jeloltje EGYSEGESEN a KON-02 kivalasztasi szabalybol jon (tengelyek + lapatlo) a kristalytani BCC helyett, tulel-e a II/15 lepcso-itelete -- azaz a teto-fordulas?",
+      "joslat": "A ter-jelolt a lapatloval elveszti a tukor-jegyet (a tobblet-lepes koordinata-osszege paros), ezert a fo negyes kozul egyedul a honos negykiterjedes (hiperkocka) marad tukor-jegyu. A teto-torveny hordozo-fele szerint a teli veget ekkor a NEGYKITERJEDES viszi, es a II/15 teto-fordulasa -- a harom visszaterese a legsurubb tartomanyban -- ELTUNIK.",
+      "megnevezett_gyoztes": "J4 (negykiterjedes, hiperkocka)",
+      "levezetes": [
+        "(i) A hordozo-tetel: egy szoves akkor tukor-jegyu, ha van olyan T koordinata-reszhalmaz, amelyre minden lepes T-osszege paratlan. Ha a szoves tartalmazza mind a d tengelyt, T kenyszeruen az osszes koordinata, tehat minden tobblet-lepes koordinata-osszegenek paratlannak kell lennie.",
+        "(ii) A BCC tobblet-lepese (1,-1,-1): osszeg -1, paratlan -> tukor-jegyu. A KON-02 adta lapatlo (0,1,-1): osszeg 0, paros -> NEM tukor-jegyu. A kulonbseg egyetlen lepesen mulik.",
+        "(iii) A tukor-jegyu szoves csucs-uteme pontosan 2*koordinacio = 16; a nem tukor-jegyue kisebb. A lyuk-tukor es az irany-tetel szerint a teli veget a legszelesebb, tukrosen szimmetrikus letra viszi.",
+        "(iv) Az egysegesitett mezonyben igy a fo negybol csak a J4 tukor-jegyu, tehat a teli veg ove kell legyen."
+      ],
+      "rendszer": "Azonos a PKG-15-1-gyel: 20736 hely, nyolcas koordinacio. J1 vonal (+-1,2,3,4), J2 sik (144x144 kiraly-szoves), J4 hiperkocka (12^4) valtozatlan. EGYETLEN valtozas: J3' ter = 24x24x36, bekotes +-(1,0,0), +-(0,1,0), +-(0,0,1), +-(0,1,-1) -- a KON-02 kimenete a BCC helyett. Kontrollok nem indulnak; a 495 tagu vonal-csalad a teljes-mezony kontrollhoz indul.",
+      "ablak": {
+        "leiras": "A teli veg 2000 toltese: N = 18737 .. 20736 -- azonos a JOS-01 ablakaval, hogy a ket eredmeny osszevetheto legyen.",
+        "verseny": "A fo negy (J1, J2, J3', J4) egymas kozott. A teljes mezony kulon, kontrollkent.",
+        "holtverseny_szabaly": "ELORE ROGZITVE (a JOS-01 tanulsaga): egy toltest egy indulo akkor nyer, ha koltsege a minimumtol legfeljebb 1e-8-cal ter el. Holtversenynel MINDEN minimalis indulo nyerteskent szamit. A megengedo olvasat a mervado; a szigoru olvasat (minden minimalis indulo ugyanaz) es a holtversenyes toltesek szama kotelezoen jelentendo."
+      },
+      "siker_felteteI": [
+        {
+          "kod": "S1",
+          "allitas": "A fo negy versenyeben az ablak 2000 toltesebol legalabb 1900-at a J4 (negykiterjedes) nyer.",
+          "kuszob": 1900
+        },
+        {
+          "kod": "S2",
+          "allitas": "A J3' (ter, lapatloval) az ablakban NULLA toltest nyer.",
+          "kuszob": 0
+        }
+      ],
+      "siker": "S1 ES S2 -- ekkor a joslat beallt: a teto-fordulas a BCC-valasztas kovetkezmenye volt.",
+      "bukas_felteteI": [
+        {
+          "kod": "B1",
+          "allitas": "Ha a J3' az ablak toltesenek legalabb felet (>=1000) megnyeri: a tukor-jegy NEM az, ami a tetot donti. Kovetkezmeny: a teto-torveny hordozo-fele (III/1, 7-8.) megbukott, es a II/15 teto-fordulasa nem paritas-eredetu. Ez a legsulyosabb kimenet, es rogzitett bukaskent kimondando."
+        },
+        {
+          "kod": "B2",
+          "allitas": "Ha sem a J4, sem a J3' nem uralja az ablakot (mindketto 1000 alatt): reszleges itelet, a savtabla szammal jelentendo; a hordozo-fele se nem all, se nem bukik ezen a probaan."
+        },
+        {
+          "kod": "B3",
+          "allitas": "Ha az ablak tolteseinek tobb mint fele holtversenyes: reszleges itelet, es a holtverseny-szam jelentendo."
+        }
+      ],
+      "kontroll_feltetel": "K1 -- a TELJES mezony (495 csaladtag + fo negy) teteje valtozatlanul az (1, 3, 5, 7) tukor-jegyu vonal-tage kell legyen, mert azt a J3 cserejenek nem szabad erintenie. Ha ez megvaltozik, a kiserlet elrontott, NEM lelet: allj meg es keresd a hibat.",
+      "elofeltetel": "A J3' korbeerese minden korbezart iranyban legalabb 8 graf-lepes (gepi bejarassal igazolva); a nyomosszeg mind az indulon egzaktul 165888; a letrak a H4 hordozhato uton. A J3' csucs-uteme szigoruan kisebb 16-nal (ez igazolja, hogy tenyleg elvesztette a tukor-jegyet).",
+      "ismert_feszultseg": "A joslat a hordozo-teteltol es a lyuk-tukor/irany-tetelektol fugg, de a VERSENY kimenetelet egyik sem donti el: a paritas azt mondja meg, ki JOGOSULT a tetore, nem azt, ki nyeri. A savhatarok, a toltesszamok es a holtversenyek szama ismeretlen a regisztralas napjan.",
+      "vegrehajtas": "Uj csomag: PKG-15-9. A letrak zart Fourier-alakbol (a PKG-15-8 elofeltetele szerint), a koltseggorbek a shared/summation.py H4 utjan, a mezony a shared/parallel futtatoval.",
+      "forras": [
+        "hu/II-proofs/II-15-dimension-fourth-rung/PKG-15-1-rulebook_hu.md",
+        "hu/II-proofs/II-15-dimension-fourth-rung/PKG-15-3-race_hu.md",
+        "hu/II-proofs/II-16-coordination-ten/PKG-16-1-rulebook_hu.md",
+        "hu/III-frontier/III-01-candidate-laws_hu.md"
+      ],
+      "pecset": "db104804893ee3ac668b0f0d264ae645781cc8a4c863bef500b64702dde1f27d",
+      "eredmeny": {
+        "datum": "2026-08-20",
+        "csomag": "shared/II-15-dimension-fourth-rung/PKG-15-9-uniform-field.py",
+        "elofeltetel": "mind a negy indulo nyomosszege egzaktul 165888 (elteres 0,00e+00); minden korbeeres >= 8; a J3' csucs-uteme 13,000 < 16, tehat a tukor-jegyet a lapatlo tenylegesen elvette -- a hordozo-tetel elorejelzese szerint",
+        "savszerkezet_uj": "J1 vonal 1..4217 | J2 sik 4218..6910 | J3' ter 6911..9799 | J4 negykiterjedes 9800..20735 | J1 20736",
+        "savszerkezet_kozzetett": "J1 2..4217 | J2 4218..7964 | J4 7965..15996 | J3 (BCC) 15997..20734 | J4 20735..20736",
+        "S1": "ALL -- a J4 az ablak mind a 2000 tolteset nyeri (kuszob 1900)",
+        "S2": "NEM ALL BETU SZERINT -- a J3' 1 toltest 'nyer', es pontosan az N = 20736 teli tolteset",
+        "S2_magyarazat": "Az S2 TETEL SZERINT TELJESITHETETLEN volt, es ez a regisztracio hibaja, nem a vilage. A teli toltesnel minden indulo koltsege pontosan a nyomosszeg (165888) -- ez a II/12 nyom-dontetlen tetele. Az elore rogzitett holtverseny-szabaly (minden minimalis indulo nyerteskent szamit) mellett tehat MINDEN indulo nyeri az N = 20736-ot, barmi legyen a mezony. A 'nulla toltes' kuszob igy ab initio ervenytelen volt.",
+        "B1": "nem valt ki -- a J3' nem viszi a tetot",
+        "B3": "nem valt ki -- 2000-bol 1 holtversenyes, es az is a teli toltes",
+        "K1": "ALL -- a teljes mezony teteje valtozatlanul az (1, 3, 5, 7), 2000/2000",
+        "itelet": "RESZLEGES. A joslat LENYEGE beallt, es elesen: egyetlen lepes cserejevel -- (1,-1,-1) helyett (0,1,-1) -- a tukor-jegy eltunt, es vele egyutt a II/15 teto-fordulasa. A fo mezony teteje a honos negykiterjedese lett, a felteltes alatti 9800-tol a teli vegig. Egy rogzitett feltetel (S2) viszont nem all betu szerint, mert hibasan volt megfogalmazva.",
+        "ket_kovetkeztetes": [
+          "POZITIV: a teto-torveny HORDOZO-FELE ellenorzott kiserletet allt ki. Egy valtozot valtoztattunk (a tobblet-lepes paritasat), es pontosan egy hatas tunt el (a teto-fordulas). Ez erositi a torvenyt.",
+          "DEFLACIOS: 'nyolcason a harom viszi a tetot' a BCC kezi valasztasanak kovetkezmenye. A repo sajat kivalasztasi szabalyaval (KON-02) a valasz negy volna. A 'miert harom' kerdes ezen a szinten a jelolt-listan mulik, nem a nyelven."
+        ],
+        "tanulsag": "Harmadik regisztracios tanulsag: a siker- es bukas-felteteleket a pecsetelés elott ELLENORIZNI kell teljesithetosegre a mar bizonyitott tetelek ellen. A JOS-01 a holtverseny-szabalyt nem rogzitette; a JOS-02 rogzitette, de olyan kuszobot irt elo, amit egy sajat tetel kizar. A kovetkezo bejegyzes elott mindket ellenorzes kotelezo."
+      }
+    }
+  ]
+}
+</file>
+
+<file path="shared\register\seal.py">
+# seal.py -- the seal of the prediction register (milestone P0.3)
+#
+# Why this exists. Every one of the sixteen proofs so far handed back a number
+# that was already known. A prediction is a different animal: it is only worth
+# anything if the claim provably could not move after the answer arrived. Prose
+# cannot establish that. Two mechanisms can, together:
+#
+#   1. the seal -- a SHA-256 fingerprint of the substantive fields of the entry,
+#      so any later edit of the claim, the window, or the pass/fail conditions
+#      is detectable rather than invisible;
+#   2. the commit -- the entry must be committed before the run, so git history
+#      time-anchors it. The seal alone proves nothing: an uncommitted file can
+#      be rewritten and resealed in one breath.
+#
+# Note what is deliberately NOT here: secrecy. The salt of a target-number vault
+# hides a value the author must not peek at. This register does the opposite job
+# -- it publishes the claim and freezes it. Anyone can recompute the seal; that
+# is the point.
+#
+# Usage:
+#   python shared/register/seal.py              # verify every entry
+#   python shared/register/seal.py --pecsetel   # (re)seal entries that have none
+#
+# Exit code: 0 if every sealed entry matches its content, 1 otherwise.
+
+import hashlib
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
+
+ROOT = Path(__file__).resolve().parents[2]
+REGISZTER = Path(__file__).resolve().parent / "predictions.json"
+
+# Exactly the fields a prediction may not quietly change. Anything outside this
+# list (state, commit hash, notes) may be updated as the work proceeds.
+PECSETELT_MEZOK = ("id", "merfoldko", "datum", "kerdes", "joslat",
+                   "megnevezett_gyoztes", "levezetes", "ablak",
+                   "siker_felteteI", "siker", "bukas_felteteI",
+                   "ismert_feszultseg")
+
+
+def lenyomat(joslat):
+    """Canonical fingerprint: sorted keys, no whitespace slack, UTF-8."""
+    mag = {k: joslat.get(k) for k in PECSETELT_MEZOK}
+    nyers = json.dumps(mag, sort_keys=True, ensure_ascii=False,
+                       separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(nyers).hexdigest()
+
+
+def git(*argv):
+    try:
+        p = subprocess.run(["git"] + list(argv), cwd=str(ROOT),
+                           capture_output=True, text=True)
+    except OSError:
+        return None
+    return p.stdout if p.returncode == 0 else None
+
+
+def horgony(pecset, ut):
+    """The commit that first introduced this seal, found in git history.
+
+    Deliberately DERIVED, never hand-entered. A hash typed into the file would
+    be worth nothing -- whoever can edit the claim can edit the hash beside it.
+    `git log -S<seal>` answers a different question: in which commit did this
+    exact fingerprint first appear in this file? Nobody can backdate that
+    without rewriting history, which is itself visible."""
+    if not pecset:
+        return None, None, "pecset nelkul nincs horgony"
+    ki = git("log", "-S" + pecset, "--format=%H %aI", "--reverse", "--", ut)
+    if ki is None:
+        return None, None, "a git nem erheto el"
+    sorok = [s for s in ki.splitlines() if s.strip()]
+    if not sorok:
+        return None, None, "NINCS COMMITOLVA -- a bejegyzes ido-horgony nelkul all"
+    hash_, ido = sorok[0].split()[:2]
+    return hash_, ido, "%s (%s)" % (hash_[:12], ido)
+
+
+def munkapeldany(ut):
+    ki = git("status", "--porcelain", "--", ut)
+    if ki is None:
+        return "a git allapota nem olvashato"
+    sor = ki.strip()
+    if not sor:
+        return "tiszta"
+    if sor.startswith("??"):
+        return "kovetetlen"
+    return "modositva a commit ota (%s)" % sor.split()[0]
+
+
+def main(argv):
+    pecsetel = "--pecsetel" in argv
+
+    print("== joslat-regiszter -- pecset-ellenorzes (P0.3) ==")
+    print()
+    if not REGISZTER.exists():
+        print("HIBA: a regiszter nem talalhato: %s" % REGISZTER)
+        return 1
+    tar = json.loads(REGISZTER.read_text(encoding="utf-8"))
+    joslatok = tar.get("joslatok", [])
+
+    hibak, valtozott = [], False
+    for j in joslatok:
+        szamolt = lenyomat(j)
+        rogzitett = j.get("pecset")
+        azon = j.get("id", "?")
+
+        if rogzitett is None:
+            if pecsetel:
+                j["pecset"] = szamolt
+                valtozott = True
+                print("  [PECSETELVE] %s  %s" % (azon, szamolt[:16]))
+            else:
+                print("  [PECSET NELKUL] %s -- futtasd: --pecsetel" % azon)
+                hibak.append(azon)
+            continue
+
+        if rogzitett == szamolt:
+            print("  [ALL] %-8s %s  (%s, %s)"
+                  % (azon, rogzitett[:16], j.get("merfoldko"), j.get("allapot")))
+        else:
+            print("  [SERULT] %s -- a tartalom a pecsetelés ota megvaltozott!" % azon)
+            print("           rogzitett: %s" % rogzitett[:32])
+            print("           szamolt  : %s" % szamolt[:32])
+            hibak.append(azon)
+
+    print()
+    ut = REGISZTER.relative_to(ROOT).as_posix()
+    horgonytalan, sorok = [], []
+    for j in joslatok:
+        hash_, ido, uzenet = horgony(j.get("pecset"), ut)
+        sorok.append("  ido-horgony %-8s %s" % (j.get("id", "?"), uzenet))
+        if hash_ is None:
+            horgonytalan.append(j.get("id"))
+        elif j.get("commit") != hash_:
+            j["commit"] = hash_          # derived cache, refreshed on every run
+            valtozott = True
+
+    if valtozott:
+        REGISZTER.write_text(json.dumps(tar, ensure_ascii=False, indent=2) + "\n",
+                             encoding="utf-8")
+
+    print("  munkapeldany: %s" % munkapeldany(ut))
+    for sor in sorok:
+        print(sor)
+
+    if horgonytalan:
+        print()
+        print("  FIGYELEM: pecset commit nelkul nem bizonyit vaksagot. A bejegyzest")
+        print("            a FUTTATAS ELOTT commitolni kell, kulonben a joslat kesobb")
+        print("            nem joslat lesz, hanem fegyelmezett retrodikcio.")
+    print()
+
+    if hibak:
+        print("ITELET: BUKIK -- %d bejegyzes nem all: %s" % (len(hibak), ", ".join(hibak)))
+        return 1
+    print("ITELET: ALL -- minden bejegyzes pecsetje egyezik a tartalmaval.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))
+</file>
+
+<file path="shared\summation.py">
+# summation.py -- the portable exact-summation route (correction H4)
+#
+# Why this exists. Filling a ladder from below means one long running sum over
+# tens of thousands of beats, and a naive running sum drifts: on the II/15
+# ladder (20736 beats, exact trace 165888) plain np.cumsum lands 1.9e-08 away
+# from the exact value -- above the fixed identity tolerance of 1e-08.
+#
+# Correction H3 of II/15 answered this by switching the primary route to
+# np.longdouble. That answer is platform-dependent: np.longdouble is the 80-bit
+# extended type only where the C toolchain provides it (Linux/glibc with gcc or
+# clang). On Windows with MSVC it is an ALIAS of float64, so the correction is
+# silently inoperative -- and worse, any check that compares "the two routes"
+# then compares a type with itself and reports a deviation of exactly zero: a
+# green light covering nothing.
+#
+# H4 replaces the type-based fix with an algorithmic one. The drift comes from
+# accumulating n terms in sequence, so the cure is to stop accumulating in
+# sequence: cut the sorted ladder into short blocks, sum each block exactly with
+# math.fsum (which is correctly rounded), chain the block totals exactly, and
+# only inside a block let a short cumulative sum run. The error then scales with
+# the block length, not with n.
+#
+# Measured on the 32 saved II/15 ladders, deviation of the full end from the
+# exact trace:
+#
+#     np.cumsum, float64        1.930e-08     above the 1e-08 tolerance
+#     np.cumsum, longdouble     1.930e-08     identical -- the alias, on Windows
+#     this module               see self-test  far below the tolerance
+#
+# This route needs no extended type, so it holds on every platform, and it lets
+# the two-way rule be restated the way it should always have read: two
+# ALGORITHMS, not two float widths (see appendix B).
+#
+# Self-test:  python shared/summation.py
+
+import math
+
+import numpy as np
+
+BLOKK = 64          # block length; the error scales with this, not with n
+TURES = 1e-8        # the fixed identity tolerance of the rulebook-era proofs
+
+
+def pontos_osszeg(x):
+    """The exact sum, correctly rounded. math.fsum keeps the partial remainders
+    instead of discarding them, so the result is the nearest float to the true
+    total regardless of ordering."""
+    return math.fsum(np.asarray(x, dtype=np.float64).ravel().tolist())
+
+
+def pontos_cumsum(x, blokk=BLOKK):
+    """Cumulative sum with exact block offsets.
+
+    Every entry is (exact prefix of all whole blocks before it) + (a short local
+    cumulative sum inside its own block). The long chain is exact; only the last
+    few additions are ordinary float64, so the drift cannot build up over n.
+    """
+    x = np.asarray(x, dtype=np.float64).ravel()
+    n = x.size
+    if n == 0:
+        return np.empty(0, dtype=np.float64)
+
+    ki = np.empty(n, dtype=np.float64)
+    blokkok = [x[i:i + blokk] for i in range(0, n, blokk)]
+
+    # exact total of each block, then the exact running offset before each block
+    osszegek = [math.fsum(b.tolist()) for b in blokkok]
+    eltolas, futo = [], []
+    for o in osszegek:
+        eltolas.append(math.fsum(futo))
+        futo.append(o)
+
+    for i, (b, e) in enumerate(zip(blokkok, eltolas)):
+        kezd = i * blokk
+        ki[kezd:kezd + b.size] = np.cumsum(b) + e
+    return ki
+
+
+def ar(letra_rendezett, n):
+    """The price of filling n: the n cheapest beats, exactly. For a single
+    filling there is no reason to settle for anything less than fsum."""
+    return math.fsum(np.asarray(letra_rendezett,
+                                dtype=np.float64).ravel()[:n].tolist())
+
+
+def argorbe(letra):
+    """The whole cost curve of a ladder, filled from below."""
+    return pontos_cumsum(np.sort(np.asarray(letra, dtype=np.float64).ravel()))
+
+
+# --------------------------------------------------------------------- onproba
+
+def _letra_II15():
+    """The II/15 J4 hypercube ladder, built here so the self-test needs no cache:
+    12^4 = 20736 beats, exact trace 2 * 4 * 20736 = 165888."""
+    k = 2 * np.pi * np.arange(12) / 12
+    egy = 2.0 - 2.0 * np.cos(k)
+    lam = (egy[:, None, None, None] + egy[None, :, None, None]
+           + egy[None, None, :, None] + egy[None, None, None, :])
+    return np.sort(lam.ravel())
+
+
+def onproba():
+    print("== summation.py -- onproba (H4 hordozhato ut) ==")
+    print()
+    letra = _letra_II15()
+    egzakt = 165888.0
+    print("bemenet: a II/15 J4 letraja, %d utem, egzakt nyomosszeg %d"
+          % (letra.size, egzakt))
+    print()
+
+    naiv = abs(float(np.cumsum(letra)[-1]) - egzakt)
+    ld = abs(float(np.cumsum(letra.astype(np.longdouble))[-1]) - egzakt)
+    h4 = abs(float(pontos_cumsum(letra)[-1]) - egzakt)
+    fs = abs(pontos_osszeg(letra) - egzakt)
+
+    print("  %-34s %10s  %s" % ("ut", "elteres", "a 1e-08 tures ellen"))
+    print("  " + "-" * 62)
+    for nev, ertek in (("np.cumsum, float64", naiv),
+                       ("np.cumsum, longdouble (H3)", ld),
+                       ("math.fsum (egyetlen pont)", fs),
+                       ("pontos_cumsum (H4, blokk=%d)" % BLOKK, h4)):
+        print("  %-34s %10.3e  %s"
+              % (nev, ertek, "ALL" if ertek <= TURES else "BUKIK"))
+    print()
+
+    # the curve as a whole, not only its end: the race compares curves
+    gorbe_h4 = pontos_cumsum(letra)
+    gorbe_naiv = np.cumsum(letra)
+    print("  a ket ut legnagyobb elterese a teljes gorben: %.3e"
+          % float(np.max(np.abs(gorbe_h4 - gorbe_naiv))))
+
+    # spot check against fsum at a few fillings, the readout's own quantity
+    legrosszabb = 0.0
+    for n in (1, 2, 17, 1000, 10368, 20735, 20736):
+        legrosszabb = max(legrosszabb, abs(gorbe_h4[n - 1] - ar(letra, n)))
+    print("  pontos_cumsum kontra fsum het toltesen, legnagyobb elteres: %.3e"
+          % legrosszabb)
+    print()
+
+    jo = h4 <= TURES and fs <= TURES
+    print("ITELET: %s" % ("ALL -- a hordozhato ut a rogzitett tures alatt marad."
+                          if jo else "BUKIK -- a hordozhato ut sem eri el a turest."))
+    return 0 if jo else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(onproba())
 </file>

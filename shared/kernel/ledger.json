@@ -8,7 +8,6 @@
     "erzekenyseg_kuszob": 0.0,
     "kapu_megjegyzes": "Az import_plafon racsni: soha nem emelheto csendben. Az erzekenyseg_kuszob a megmert kezi elemek kotelezo aranya (import + konvencio rangon); a P1.3 lefutasa utan emelendo."
   },
-
   "tetelek": [
     {
       "id": "IMP-01",
@@ -16,7 +15,12 @@
       "nev": "helyiseg (szomszedsag)",
       "leiras": "A helyek kozotti 'mellette' viszony: mely helyek szerzodhetnek egymassal kozvetlenul. A II/3-ban szomszedsagkent lepett be, a II/6 helyisegge szukitette, a II/9 Kagome-szomszedsaga ennek esete (nem kulon tetel), a II/11 a felet tetelle emelte (a szomszedsag a kesz allapot nezete). Ami importkent megmarad: a kivalasztas.",
       "bevezette": "II-03",
-      "hasznaljak": ["II-03", "II-06", "II-09", "II-11"],
+      "hasznaljak": [
+        "II-03",
+        "II-06",
+        "II-09",
+        "II-11"
+      ],
       "allapot": "reszben-tetelesitve",
       "torlesztes": "P2.1",
       "erzekenyseg": {
@@ -36,7 +40,10 @@
       "nev": "vonzasalak (tavolsag-forditott kedvezmeny, 1/r)",
       "leiras": "A vonzo szerzodes tavolsagfuggese. Ez adja a hidrogen negy tizedesjegyet; a II/8 taszitasi alakja ugyanennek elojelvaltott masa, ezert nem kulon import.",
       "bevezette": "II-04",
-      "hasznaljak": ["II-04", "II-08"],
+      "hasznaljak": [
+        "II-04",
+        "II-08"
+      ],
       "allapot": "aktiv",
       "torlesztes": "P2.4",
       "erzekenyseg": {
@@ -55,7 +62,10 @@
       "nev": "ket tipusdeklaracio az elektronra",
       "leiras": "(1) az elektron a kizaro osztalyba tartozik; (2) az elektronnak van belso ketertekű mezoje. Szerkezeti kolcson nulla. A melyebb levezetes (spin-statisztika tetel) relativitast kivan, ami a nyelv hatokoren kivul all.",
       "bevezette": "II-07",
-      "hasznaljak": ["II-07", "II-08"],
+      "hasznaljak": [
+        "II-07",
+        "II-08"
+      ],
       "allapot": "aktiv",
       "torlesztes": "P2.5",
       "erzekenyseg": {
@@ -68,14 +78,19 @@
         "hu/II-proofs/II-07-bowl-magic-numbers/proof_hu.md"
       ]
     },
-
     {
       "id": "JEL-01",
       "rang": "jelolt-import",
       "nev": "a helyek egyenrangusaga",
       "leiras": "Nincs kituntetett hely: a szerzodeshalo minden helyrol ugyanugy nez ki. Kettos allasu, kimondva: mint kimondas uj import volna, mint irany az 5. torveny kiterjesztese a helyekre. A nyilvantartas jeloltkent vezeti; ha a levezetes nem sikerul, negyedik importta valik.",
       "bevezette": "II-12",
-      "hasznaljak": ["II-12", "II-13", "II-14", "II-15", "II-16"],
+      "hasznaljak": [
+        "II-12",
+        "II-13",
+        "II-14",
+        "II-15",
+        "II-16"
+      ],
       "allapot": "jelolt",
       "torlesztes": "P2.1",
       "erzekenyseg": {
@@ -89,14 +104,19 @@
         "hu/II-proofs/II-12-network-race/proof_hu.md"
       ]
     },
-
     {
       "id": "KON-01",
       "rang": "konvencio",
       "nev": "versenyszabaly",
       "leiras": "Rogzitett szerzodes-koltsegvetest kotelezo elhelyezni, es az egyensuly a legkisebb osszkoltsegu elrendezes. Elore deklaralt osszehasonlitasi konvencio.",
       "bevezette": "II-12",
-      "hasznaljak": ["II-12", "II-13", "II-14", "II-15", "II-16"],
+      "hasznaljak": [
+        "II-12",
+        "II-13",
+        "II-14",
+        "II-15",
+        "II-16"
+      ],
       "allapot": "aktiv",
       "torlesztes": "P1.3",
       "erzekenyseg": {
@@ -115,13 +135,18 @@
       "nev": "kivalasztasi szabaly",
       "leiras": "Mi kerul be a fo mezonybe egy adott koordinacion: (i) a honos fok a csupasz egyseglepeseke; (ii) minden mas fokon a legkisebb ossz-lepesnegyzetu ot +/-par indul, lexikografikus dontetlen-torovel. Kimondott onhelyesbites: a szabaly a nyolcas koordinaciora visszavetitve a II/15 ter-jeloltjenel a kristalytani BCC helyett tengelyek+lapatlot adna.",
       "bevezette": "PKG-16-1",
-      "hasznaljak": ["II-16", "PKG-16-1"],
+      "hasznaljak": [
+        "II-16",
+        "PKG-16-1"
+      ],
       "allapot": "aktiv",
       "torlesztes": "P1.3",
       "erzekenyseg": {
-        "allapot": "nincs-merve",
-        "meres": [],
-        "megjegyzes": "Ez a legerosebben gyanus kezi elem: a II/15 lelete szerint a KEZZEL FELSOROLT fo negyes a teljes 503-as mezonyben egyetlen toltest sem nyer szigoruan."
+        "allapot": "merve",
+        "meres": [
+          "PKG-15-9"
+        ],
+        "megjegyzes": "A PKG-15-9 ellenorzott kiserlete: a nyolcas koordinacio ter-jeloltjenek EGYETLEN lepeset cserelve (kristalytani BCC testatlo (1,-1,-1) helyett a KON-02 adta lapatlo (0,1,-1)) a ter elveszti a tukor-jegyet, es a II/15 teto-fordulasa ELTUNIK: a fo mezony teteje a 3-rol a honos 4-re valt. A tukor-hordozo-terkep KON-02 alatt egysegesen mindig a honos fokot adja (6->3, 8->4, 10->5, 12->6). AZ ERTEK: a konvencio NEM artalmatlan -- egy iteletet forditja meg. Ez a legerosebb megmert kezi hatas a taban. Hatokor: a fo mezonyre; a teljes mezony tetejet a csere nem erinti (K1 kontroll all)."
       },
       "forras": [
         "hu/I-language/I-01-concept_hu.md",
@@ -134,7 +159,12 @@
       "nev": "szoves-epites",
       "leiras": "Minden jelolt szoves-halo: egy csoportszerkezet minden helyre ugyanazt a bekotesi mintat irja elo. A PKG-13-1 szerint ez az egyenrangusag megvalositasa, nem uj feltevés; a PKG-15-1 viszont orokolt, deklaralt konvenciokent sorolja fel. A ket besorolas elter - a nyilvantartas a szigorubbat veszi.",
       "bevezette": "PKG-13-1",
-      "hasznaljak": ["II-13", "II-14", "II-15", "II-16"],
+      "hasznaljak": [
+        "II-13",
+        "II-14",
+        "II-15",
+        "II-16"
+      ],
       "allapot": "aktiv",
       "torlesztes": "P0.1",
       "erzekenyseg": {
@@ -153,12 +183,22 @@
       "nev": "orszem-kuszob (kettes tenyezo)",
       "leiras": "A leggyengebb elfogadott es a legerosebb elutasitott kozelseg hanyadosa jelentendo; kettes tenyezo alatt az olvasat reszleges. Kimondva: konvencio, nem levezetett szam.",
       "bevezette": "PKG-14-5",
-      "hasznaljak": ["II-14", "II-15", "II-16", "PKG-14-5"],
+      "hasznaljak": [
+        "II-14",
+        "II-15",
+        "II-16",
+        "PKG-14-5"
+      ],
       "allapot": "aktiv",
       "torlesztes": "P1.3",
       "erzekenyseg": {
         "allapot": "merve",
-        "meres": ["PKG-14-4", "PKG-14-5", "PKG-15-4", "PKG-16-4"],
+        "meres": [
+          "PKG-14-4",
+          "PKG-14-5",
+          "PKG-15-4",
+          "PKG-16-4"
+        ],
         "megjegyzes": "A negy rogzitett kiolvasas sav-orszem erteke: 8-as szoves (bukott eset) S = 1,0 (egzakt egyezes, ezert a hanyados definicio szerint 1); 12-es szoves S = 2,84; II/15 S = 5,37; II/16 S = 7,29. A kuszob barhova tolhato az (1,0 ; 2,84] nyilt intervallumon belul anelkul, hogy a negy iteletbol barmelyik megfordulna. A valasztott T = 2 ezen belul all: lefele 2,00-szeres, felfele 1,42-szeres tartalekkal. HATOKOR, kimondva: ez a KIOLVASASI iteleteket meri, a verseny iteletere a kuszob nem hat; es leolvasas elfogadott csomagokbol, nem uj probafutas."
       },
       "forras": [
@@ -166,14 +206,16 @@
         "hu/II-proofs/II-16-coordination-ten/PKG-16-4-readout_hu.md"
       ]
     },
-
     {
       "id": "PER-01",
       "rang": "peremadat",
       "nev": "skala-kalibracio (fizikai allandok)",
       "leiras": "A dimenziotlan racs-szamok mert egysegekre valtasa: h / hbar, m_e, e. A nyelv elvileg sem vezeti le - a vilag peldany-adata. A II/2 a h ~ 4,14 mikroeV/GHz valtast hasznalja, a II/4 atomi egysegben szamol es eV-re valt.",
       "bevezette": "II-02",
-      "hasznaljak": ["II-02", "II-04"],
+      "hasznaljak": [
+        "II-02",
+        "II-04"
+      ],
       "allapot": "aktiv",
       "torlesztes": null,
       "erzekenyseg": {
@@ -187,19 +229,27 @@
         "hu/II-proofs/II-04-hydrogen-atom/proof_hu.md"
       ]
     },
-
     {
       "id": "HAT-01",
       "rang": "hatokor",
       "nev": "rogzitett rendszermeret",
       "leiras": "Probankent rogzitett helyszam: II/13 = 16; II/14 = 512; II/15 = 20736 (a termeszetes kisebb 4096 kimondottan kizarva); II/16 = 248832 (= 12^5).",
       "bevezette": "PKG-13-1",
-      "hasznaljak": ["II-13", "II-14", "II-15", "II-16"],
+      "hasznaljak": [
+        "II-13",
+        "II-14",
+        "II-15",
+        "II-16"
+      ],
       "allapot": "aktiv",
       "torlesztes": "P4.1",
       "erzekenyseg": {
         "allapot": "merve",
-        "meres": ["PKG-14-5", "PKG-15-4", "PKG-16-4"],
+        "meres": [
+          "PKG-14-5",
+          "PKG-15-4",
+          "PKG-16-4"
+        ],
         "megjegyzes": "HATOKORREL: a meres csak a KIOLVASASRA vonatkozik, a verseny iteletere nem. A PKG-14-5 a meret-mutermeket jeloltbol tetelle emelte (visszhang 16%, elojeles); a PKG-15-4 +17,4%-ot mert; a PKG-16-4 haromelemu visszhang-szamsort. A verseny sav-hatarainak meretfuggese nincs megmerve."
       },
       "forras": [
@@ -214,7 +264,11 @@
       "nev": "korbeeres-padlo",
       "leiras": "Minden korbezart irany korbeerese legalabb 8 graf-lepes, gepi bejarassal igazolva; a paros-jegyu indulokon paros is. A II/13 rezonancia-diagnozisanak oroksege.",
       "bevezette": "PKG-14-1",
-      "hasznaljak": ["II-14", "II-15", "II-16"],
+      "hasznaljak": [
+        "II-14",
+        "II-15",
+        "II-16"
+      ],
       "allapot": "aktiv",
       "torlesztes": "P1.3",
       "erzekenyseg": {
@@ -233,7 +287,11 @@
       "nev": "lepes-plafon a vonal-csalad pasztazasaban (c <= 12)",
       "leiras": "A vegigpasztazott vonal-csalad tagjainak lepes-plafonja. Ez hatarozza meg, meddig ter a 'teljes mezony' olvasat - eppen az, amelyikrol a teto-torveny szol.",
       "bevezette": "PKG-14-1",
-      "hasznaljak": ["II-14", "II-15", "II-16"],
+      "hasznaljak": [
+        "II-14",
+        "II-15",
+        "II-16"
+      ],
       "allapot": "aktiv",
       "torlesztes": "P1.3",
       "erzekenyseg": {
@@ -252,7 +310,11 @@
       "nev": "golyo-olvasat sugarhatara (r <= 3 / r <= 5)",
       "leiras": "A kiolvasas golyotorvenyeit meddig ellenorizzuk: II/14 egzakt 4r^2+2 r=5-ig; II/15 egzakt kobos golyo r=5-ig; II/16 egzakt negyedrendu golyo.",
       "bevezette": "PKG-14-1",
-      "hasznaljak": ["II-14", "II-15", "II-16"],
+      "hasznaljak": [
+        "II-14",
+        "II-15",
+        "II-16"
+      ],
       "allapot": "aktiv",
       "torlesztes": null,
       "erzekenyseg": {
@@ -260,7 +322,9 @@
         "meres": [],
         "megjegyzes": "Kimondott hatokor-hatar: a torveny nagyobb sugaron nincs ellenorizve."
       },
-      "forras": ["hu/II-proofs/II-15-dimension-fourth-rung/PKG-15-1-rulebook_hu.md"]
+      "forras": [
+        "hu/II-proofs/II-15-dimension-fourth-rung/PKG-15-1-rulebook_hu.md"
+      ]
     },
     {
       "id": "HAT-05",
@@ -268,7 +332,10 @@
       "nev": "kiolvasasi jegyzokonyv ablaka (30-as elojeles ugras-ablak)",
       "leiras": "Az elojeles ugras keresesi ablaka a kiolvasasnal, a sav-orszem melle rogzitve.",
       "bevezette": "PKG-15-1",
-      "hasznaljak": ["II-15", "II-16"],
+      "hasznaljak": [
+        "II-15",
+        "II-16"
+      ],
       "allapot": "aktiv",
       "torlesztes": null,
       "erzekenyseg": {
@@ -276,7 +343,9 @@
         "meres": [],
         "megjegyzes": "Az ablakmeret perturbalasa nem futott le."
       },
-      "forras": ["hu/II-proofs/II-15-dimension-fourth-rung/PKG-15-1-rulebook_hu.md"]
+      "forras": [
+        "hu/II-proofs/II-15-dimension-fourth-rung/PKG-15-1-rulebook_hu.md"
+      ]
     },
     {
       "id": "HAT-06",
@@ -284,7 +353,11 @@
       "nev": "a ketutas ellenorzes mintaveteles alakja",
       "leiras": "A II/15-ben a ketutas mintavetel (A8); a II/16-ban a teljes suru ut gepileg elvegezhetetlen (495 GB, honapok), ezert ritka negyelemu alak all: ritka maradek-proba, momentum-fedezetek rend <= 4, kis-peldanyos suru hitelesites, mintaveteles vetito-pecset. Sorsolasi mag: 248832. Kimondva: gyengebb a II/15 teljes suru pecsetjenel; a lefedettseg szammal jelentendo.",
       "bevezette": "PKG-15-1",
-      "hasznaljak": ["II-15", "II-16", "PKG-16-1"],
+      "hasznaljak": [
+        "II-15",
+        "II-16",
+        "PKG-16-1"
+      ],
       "allapot": "aktiv",
       "torlesztes": "P4.1",
       "erzekenyseg": {
@@ -292,7 +365,9 @@
         "meres": [],
         "megjegyzes": "A mintameret hatasa a pecset erejere nincs kulon megmerve; a csomagok a lefedettseget szammal jelentik, de perturbacio nelkul."
       },
-      "forras": ["hu/II-proofs/II-16-coordination-ten/PKG-16-1-rulebook_hu.md"]
+      "forras": [
+        "hu/II-proofs/II-16-coordination-ten/PKG-16-1-rulebook_hu.md"
+      ]
     }
   ]
 }

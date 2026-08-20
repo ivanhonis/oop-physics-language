@@ -5,7 +5,7 @@ lang: hu
 pair: PKG-15-8-top-full-field_en.md
 pair_status: missing
 doc_version: "1.4"
-status: jovahagyasra-var
+status: jovahagyva
 part_of: II-15
 builds_on: [PKG-15-1, PKG-15-2, PKG-15-3, PKG-16-5]
 imports: nulla
