@@ -53,21 +53,45 @@ def lenyomat(joslat):
     return hashlib.sha256(nyers).hexdigest()
 
 
-def commit_allapot(ut):
-    """Is the register committed, and is the working copy clean?"""
+def git(*argv):
     try:
-        p = subprocess.run(["git", "status", "--porcelain", "--", str(ut)],
-                           cwd=str(ROOT), capture_output=True, text=True)
+        p = subprocess.run(["git"] + list(argv), cwd=str(ROOT),
+                           capture_output=True, text=True)
     except OSError:
-        return None, "a git nem erheto el"
-    if p.returncode != 0:
-        return None, "a git status hibaval tert vissza"
-    sor = (p.stdout or "").strip()
+        return None
+    return p.stdout if p.returncode == 0 else None
+
+
+def horgony(pecset, ut):
+    """The commit that first introduced this seal, found in git history.
+
+    Deliberately DERIVED, never hand-entered. A hash typed into the file would
+    be worth nothing -- whoever can edit the claim can edit the hash beside it.
+    `git log -S<seal>` answers a different question: in which commit did this
+    exact fingerprint first appear in this file? Nobody can backdate that
+    without rewriting history, which is itself visible."""
+    if not pecset:
+        return None, None, "pecset nelkul nincs horgony"
+    ki = git("log", "-S" + pecset, "--format=%H %aI", "--reverse", "--", ut)
+    if ki is None:
+        return None, None, "a git nem erheto el"
+    sorok = [s for s in ki.splitlines() if s.strip()]
+    if not sorok:
+        return None, None, "NINCS COMMITOLVA -- a bejegyzes ido-horgony nelkul all"
+    hash_, ido = sorok[0].split()[:2]
+    return hash_, ido, "%s (%s)" % (hash_[:12], ido)
+
+
+def munkapeldany(ut):
+    ki = git("status", "--porcelain", "--", ut)
+    if ki is None:
+        return "a git allapota nem olvashato"
+    sor = ki.strip()
     if not sor:
-        return True, "commitolva, a munkapeldany tiszta"
+        return "tiszta"
     if sor.startswith("??"):
-        return False, "NINCS COMMITOLVA -- a bejegyzes ido-horgony nelkul all"
-    return False, "commitolva, de azota modosult (%s)" % sor.split()[0]
+        return "kovetetlen"
+    return "modositva a commit ota (%s)" % sor.split()[0]
 
 
 def main(argv):
@@ -106,16 +130,30 @@ def main(argv):
             print("           szamolt  : %s" % szamolt[:32])
             hibak.append(azon)
 
+    print()
+    ut = REGISZTER.relative_to(ROOT).as_posix()
+    horgonytalan, sorok = [], []
+    for j in joslatok:
+        hash_, ido, uzenet = horgony(j.get("pecset"), ut)
+        sorok.append("  ido-horgony %-8s %s" % (j.get("id", "?"), uzenet))
+        if hash_ is None:
+            horgonytalan.append(j.get("id"))
+        elif j.get("commit") != hash_:
+            j["commit"] = hash_          # derived cache, refreshed on every run
+            valtozott = True
+
     if valtozott:
         REGISZTER.write_text(json.dumps(tar, ensure_ascii=False, indent=2) + "\n",
                              encoding="utf-8")
 
-    print()
-    horgony, uzenet = commit_allapot(REGISZTER.relative_to(ROOT).as_posix())
-    print("  ido-horgony: %s" % uzenet)
-    if horgony is False:
+    print("  munkapeldany: %s" % munkapeldany(ut))
+    for sor in sorok:
+        print(sor)
+
+    if horgonytalan:
+        print()
         print("  FIGYELEM: pecset commit nelkul nem bizonyit vaksagot. A bejegyzest")
-        print("            a FUTTATAS ELOTT commitolni kell, kulonben a P1.1 kesobb")
+        print("            a FUTTATAS ELOTT commitolni kell, kulonben a joslat kesobb")
         print("            nem joslat lesz, hanem fegyelmezett retrodikcio.")
     print()
 

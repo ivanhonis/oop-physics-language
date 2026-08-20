@@ -1,25 +1,33 @@
-# environment-check.py — run this BEFORE any package script in shared/
+# environment-check.py -- run this BEFORE any package script in shared/
 #
-# Why this exists. Several packages of Part II declare an extended-precision
-# primary computation route (correction H3 of II/15): the cost curves are
-# accumulated in np.longdouble, because the float64 accumulation error near
-# the full end is larger than the fixed identity tolerance of 1e-8.
+# What this checks, and what changed.
 #
-# np.longdouble is NOT the same width everywhere. On Linux/glibc with gcc or
-# clang it is the 80-bit x87 extended type (16 bytes stored, ~18 significant
-# digits). On Windows with the MSVC toolchain — and on some other platforms —
-# numpy maps it onto float64. There it is silently the SAME type as float64,
-# so the H3 correction has no effect and the scripts can report FAILS where
-# the packages record HOLDS.
+# It used to ask a platform question: "is np.longdouble genuinely the 80-bit
+# extended type here?" That mattered while correction H3 of II/15 made extended
+# precision the primary computation route, because on Windows with MSVC
+# np.longdouble is an ALIAS of float64 and the correction was silently
+# inoperative there. The answer was to move the work to Linux.
 #
-# This script measures the consequence instead of guessing it: it builds the
-# real II/15 hypercube ladder (12^4 = 20736 beats, exact trace 165888) and
-# reports how far the accumulated total lands from the exact value.
+# Correction H4 retires that route. The drift never came from the float width;
+# it came from accumulating tens of thousands of terms in sequence. Summing in
+# short blocks with exact block offsets (shared/summation.py) removes it in
+# plain float64, on every platform. So the question this script asks is no
+# longer "is your platform good enough" but "does the portable route hold here"
+# -- and the expected answer is yes, everywhere.
 #
-# Exit code: 0 if extended precision is genuinely available, 1 if not.
-# Nothing here is a proof or a package result — it is an environment report.
+# The reference environment below is declared, not required: it records where
+# the published numbers of this repository are produced, so a third party can
+# tell an environment difference from a result difference. A machine that does
+# not match it should still pass this check. If it does not, that is a finding.
+#
+# Exit code: 0 if the portable route meets the fixed identity tolerance, 1 if not.
 
+import os
+import platform
 import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 try:
     import numpy as np
@@ -28,73 +36,103 @@ except ImportError:
     print("    pip install -r requirements.txt")
     raise SystemExit(2)
 
-TOLERANCE = 1e-8          # the fixed identity tolerance (PKG-15-2 L5, PKG-15-3)
-EXACT_TRACE = 165888.0    # 2 * 4 * 20736 — the trace tie of II/15
+import summation
+
+# The declared reference environment: the machine on which the published
+# numbers of this repository are produced. Recorded for comparison, not enforced.
+REFERENCIA = {
+    "os": "Windows 11 Pro",
+    "python": "3.12.5",
+    "numpy": "2.2.4",
+    "cpu": "Intel i9, 8 mag / 16 szal",
+    "ram": "128 GB",
+    "megjegyzes": "A tesztek lokalisan futnak; az eroforras nem korlat. "
+                  "A szamolasi ut (H4) platformfuggetlen, ezert mas gepen is all.",
+}
+
+EGZAKT_NYOM = 165888.0     # the II/15 J4 ladder: 2 * 4 * 20736
 
 
-def accumulation_error(dtype):
-    """The II/15 J4 hypercube ladder, accumulated: how far the total lands
-    from the exact trace. This is the quantity the fixed tolerance guards."""
-    k = (2 * np.pi * np.arange(12)).astype(dtype) / 12
-    one = 2.0 - 2.0 * np.cos(k)
-    lam = (one[:, None, None, None] + one[None, :, None, None]
-           + one[None, None, :, None] + one[None, None, None, :])
-    total = np.cumsum(np.sort(lam.ravel()))[-1]
-    return abs(float(total) - EXACT_TRACE)
+def memoria_gb():
+    """Best-effort physical memory, standard library only."""
+    try:
+        if os.name == "nt":
+            import ctypes
+
+            class MEMORYSTATUSEX(ctypes.Structure):
+                _fields_ = [("dwLength", ctypes.c_ulong),
+                            ("dwMemoryLoad", ctypes.c_ulong),
+                            ("ullTotalPhys", ctypes.c_ulonglong),
+                            ("ullAvailPhys", ctypes.c_ulonglong),
+                            ("ullTotalPageFile", ctypes.c_ulonglong),
+                            ("ullAvailPageFile", ctypes.c_ulonglong),
+                            ("ullTotalVirtual", ctypes.c_ulonglong),
+                            ("ullAvailVirtual", ctypes.c_ulonglong),
+                            ("ullAvailExtendedVirtual", ctypes.c_ulonglong)]
+
+            st = MEMORYSTATUSEX()
+            st.dwLength = ctypes.sizeof(st)
+            ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(st))
+            return st.ullTotalPhys / 2 ** 30
+        return (os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES")) / 2 ** 30
+    except Exception:
+        return None
 
 
 def main():
     print("== environment check for the computation code in shared/ ==")
     print()
-    print("interpreter : Python %s" % sys.version.split()[0])
-    print("platform    : %s" % sys.platform)
-    print("numpy       : %s" % np.__version__)
+
+    ram = memoria_gb()
+    print("this machine")
+    print("   os          : %s %s" % (platform.system(), platform.release()))
+    print("   interpreter : Python %s" % sys.version.split()[0])
+    print("   numpy       : %s" % np.__version__)
+    print("   cores       : %s logical" % (os.cpu_count() or "?"))
+    print("   memory      : %s" % ("%.0f GB" % ram if ram else "unknown"))
+    print()
+    print("declared reference environment (for comparison, not a requirement)")
+    for kulcs in ("os", "python", "numpy", "cpu", "ram"):
+        print("   %-11s : %s" % (kulcs, REFERENCIA[kulcs]))
     print()
 
-    ld_size = np.dtype(np.longdouble).itemsize
-    f64_size = np.dtype(np.float64).itemsize
-    ld_eps = float(np.finfo(np.longdouble).eps)
-    f64_eps = float(np.finfo(np.float64).eps)
-    extended = ld_eps < f64_eps
-
-    print("np.longdouble : %d bytes, eps = %.3e" % (ld_size, ld_eps))
-    print("np.float64    : %d bytes, eps = %.3e" % (f64_size, f64_eps))
-    print("extended precision genuinely available: %s"
-          % ("yes" if extended else "NO — longdouble is an alias of float64"))
+    # Recorded, no longer a blocker: this is what H3 depended on.
+    kiterjesztett = float(np.finfo(np.longdouble).eps) < float(np.finfo(np.float64).eps)
+    print("np.longdouble is genuinely extended here: %s"
+          % ("yes" if kiterjesztett else "NO -- it is an alias of float64"))
+    print("   (recorded only. Correction H4 retired the extended-precision route,")
+    print("    so this no longer decides whether the packages can be reproduced.)")
     print()
 
-    err_f64 = accumulation_error(np.float64)
-    err_ld = accumulation_error(np.longdouble)
-    print("measured consequence (II/15 ladder, 20736 beats, exact trace %d):"
-          % EXACT_TRACE)
-    print("   accumulated on float64    : deviation %.3e" % err_f64)
-    print("   accumulated on longdouble : deviation %.3e" % err_ld)
-    print("   fixed identity tolerance  : %.1e" % TOLERANCE)
+    letra = summation._letra_II15()
+    naiv = abs(float(np.cumsum(letra)[-1]) - EGZAKT_NYOM)
+    h4 = abs(float(summation.pontos_cumsum(letra)[-1]) - EGZAKT_NYOM)
+
+    print("the measured consequence (II/15 ladder, %d beats, exact trace %d):"
+          % (letra.size, EGZAKT_NYOM))
+    print("   naive running sum, float64 : deviation %.3e" % naiv)
+    print("   portable route (H4)        : deviation %.3e" % h4)
+    print("   fixed identity tolerance   : %.1e" % summation.TURES)
     print()
 
-    if extended and err_ld < TOLERANCE:
-        print("VERDICT: OK — the extended-precision route works. The packages")
-        print("that declare it (PKG-15-3, PKG-15-5, PKG-15-6, PKG-15-7,")
-        print("PKG-16-2, PKG-16-3, PKG-16-5) will reproduce their published")
-        print("numbers on this machine.")
+    if h4 <= summation.TURES:
+        print("VERDICT: OK -- the portable route meets the fixed tolerance on this")
+        print("machine, so the computation code can reproduce its published numbers")
+        print("here. No extended-precision platform is required.")
+        if naiv > summation.TURES:
+            print()
+            print("Note: the naive route would NOT meet the tolerance here (%.3e)."
+                  % naiv)
+            print("Package scripts still written against the retired H3 route report")
+            print("failures on this machine until they are moved to shared/summation.py;")
+            print("shared/bench/bench.py marks those checks separately, as pending H4")
+            print("rather than as wrong numbers.")
         return 0
 
-    print("VERDICT: DEGRADED — the extended-precision route is not available")
-    print("on this machine, so the H3 correction of II/15 has no effect here.")
-    print()
-    print("What to expect. Near the full end the accumulated cost misses the")
-    print("exact value by %.1e, which is above the fixed %.0e tolerance."
-          % (err_ld, TOLERANCE))
-    print("Concretely, PKG-15-7-top.py reports FAILS for its checks E2 and E3")
-    print("(single-hole tie, mirror transfer) with a deviation around 2e-8,")
-    print("where the package records 1.7e-13 and 2.2e-12. The same limitation")
-    print("touches PKG-15-3, PKG-15-5, PKG-15-6, PKG-16-2, PKG-16-3, PKG-16-5.")
-    print()
-    print("This is an environment limit, not a result. The findings of the")
-    print("packages are unaffected; only their reproduction on this machine is.")
-    print("To reproduce them exactly, run the code on a platform where")
-    print("np.longdouble is the 80-bit extended type — Linux/glibc with a gcc")
-    print("or clang build of numpy is the usual choice.")
+    print("VERDICT: FAILS -- the portable route does not meet the fixed tolerance")
+    print("here (%.3e against %.1e). This is a genuine finding, not a platform"
+          % (h4, summation.TURES))
+    print("limitation: report it before running anything else.")
     return 1
 
 

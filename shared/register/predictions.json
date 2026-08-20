@@ -15,8 +15,8 @@
       "id": "JOS-01",
       "merfoldko": "P1.1",
       "datum": "2026-08-20",
-      "commit": null,
-      "allapot": "regisztralt",
+      "commit": "751fbabb40c1b1646d2746280b8b06661c904a35",
+      "allapot": "beallt",
       "kerdes": "Nyolcas koordinacion a teljes mezony tetejet tukor-jegyu vonal-tag viszi-e, ahogy a teto-torveny allitja -- es melyik?",
       "joslat": "A rogzitett 20736 helyes, nyolcas koordinaciju rendszeren a teljes mezony (503 indulo) teli veget a tukor-jegyu vonal-csalad tagjai viszik, es koztuk a legtobb toltest a (1, 3, 5, 7) bekotes nyeri.",
       "megnevezett_gyoztes": [
@@ -73,7 +73,80 @@
         "hu/II-proofs/II-16-coordination-ten/PKG-16-5-transfer_hu.md",
         "hu/PROGRAM_hu.md"
       ],
-      "pecset": "4332b12717f2c30ba6f4443727598ffb0adb9ea481313925d928c5c06429e5be"
+      "pecset": "4332b12717f2c30ba6f4443727598ffb0adb9ea481313925d928c5c06429e5be",
+      "eredmeny": {
+        "datum": "2026-08-20",
+        "csomag": "shared/II-15-dimension-fourth-rung/PKG-15-8-top-full-field.py",
+        "elofeltetel": "a zart alaku letrak a 24 mentett csaladtag-letraval egyeznek; legnagyobb elteres 1,293e-12 (a PKG-15-2 kozzetett 1,30e-12-jenek fuggetlen megerositese, MAS algoritmussal)",
+        "beepitett_ellenorzes": "egzakt nyomosszeg 165888 mind az 503 indulon; legnagyobb elteres 2,910e-11 (tures 1e-8)",
+        "rendfuggetlenseg": "6/6 mintafeladat bitre azonos sorosan is",
+        "mezony": "503 indulo (495 csaladtag + 4 fo + 4 kontroll); tukor-jegyu: 20",
+        "S1": "ALL -- megengedo olvasat 2000/2000, szigoru olvasat 1999/2000 (kuszob 1900)",
+        "S2": "ALL -- a legtobb toltest nyero indulo a (1, 3, 5, 7), az ablak MIND A 2000 toltesen",
+        "B3": "nem valt ki -- 2000-bol 2 holtversenyes",
+        "itelet": "A joslat BEALLT. A teto-torveny mert fele ezzel a teljes mezonyon haromból haromra all (hatos, nyolcas, tizes koordinacio).",
+        "utolagos_jegyzet": "A JOS-01 rogzitette az ablakot es a kuszoboket, de NEM rogzitette a holtverseny beszamitasat. Ezert mindket olvasat jelentve; a kulonbseg egyetlen toltes, tehat az iteletet nem erinti. A holtverseny-szabaly elore rogzitese a kovetkezo regisztracio tanulsaga."
+      }
+    },
+    {
+      "id": "JOS-02",
+      "merfoldko": "P2.3 / dontő kiserlet",
+      "datum": "2026-08-20",
+      "commit": null,
+      "allapot": "regisztralt",
+      "kerdes": "Ha a nyolcas koordinacio ter-jeloltje EGYSEGESEN a KON-02 kivalasztasi szabalybol jon (tengelyek + lapatlo) a kristalytani BCC helyett, tulel-e a II/15 lepcso-itelete -- azaz a teto-fordulas?",
+      "joslat": "A ter-jelolt a lapatloval elveszti a tukor-jegyet (a tobblet-lepes koordinata-osszege paros), ezert a fo negyes kozul egyedul a honos negykiterjedes (hiperkocka) marad tukor-jegyu. A teto-torveny hordozo-fele szerint a teli veget ekkor a NEGYKITERJEDES viszi, es a II/15 teto-fordulasa -- a harom visszaterese a legsurubb tartomanyban -- ELTUNIK.",
+      "megnevezett_gyoztes": "J4 (negykiterjedes, hiperkocka)",
+      "levezetes": [
+        "(i) A hordozo-tetel: egy szoves akkor tukor-jegyu, ha van olyan T koordinata-reszhalmaz, amelyre minden lepes T-osszege paratlan. Ha a szoves tartalmazza mind a d tengelyt, T kenyszeruen az osszes koordinata, tehat minden tobblet-lepes koordinata-osszegenek paratlannak kell lennie.",
+        "(ii) A BCC tobblet-lepese (1,-1,-1): osszeg -1, paratlan -> tukor-jegyu. A KON-02 adta lapatlo (0,1,-1): osszeg 0, paros -> NEM tukor-jegyu. A kulonbseg egyetlen lepesen mulik.",
+        "(iii) A tukor-jegyu szoves csucs-uteme pontosan 2*koordinacio = 16; a nem tukor-jegyue kisebb. A lyuk-tukor es az irany-tetel szerint a teli veget a legszelesebb, tukrosen szimmetrikus letra viszi.",
+        "(iv) Az egysegesitett mezonyben igy a fo negybol csak a J4 tukor-jegyu, tehat a teli veg ove kell legyen."
+      ],
+      "rendszer": "Azonos a PKG-15-1-gyel: 20736 hely, nyolcas koordinacio. J1 vonal (+-1,2,3,4), J2 sik (144x144 kiraly-szoves), J4 hiperkocka (12^4) valtozatlan. EGYETLEN valtozas: J3' ter = 24x24x36, bekotes +-(1,0,0), +-(0,1,0), +-(0,0,1), +-(0,1,-1) -- a KON-02 kimenete a BCC helyett. Kontrollok nem indulnak; a 495 tagu vonal-csalad a teljes-mezony kontrollhoz indul.",
+      "ablak": {
+        "leiras": "A teli veg 2000 toltese: N = 18737 .. 20736 -- azonos a JOS-01 ablakaval, hogy a ket eredmeny osszevetheto legyen.",
+        "verseny": "A fo negy (J1, J2, J3', J4) egymas kozott. A teljes mezony kulon, kontrollkent.",
+        "holtverseny_szabaly": "ELORE ROGZITVE (a JOS-01 tanulsaga): egy toltest egy indulo akkor nyer, ha koltsege a minimumtol legfeljebb 1e-8-cal ter el. Holtversenynel MINDEN minimalis indulo nyerteskent szamit. A megengedo olvasat a mervado; a szigoru olvasat (minden minimalis indulo ugyanaz) es a holtversenyes toltesek szama kotelezoen jelentendo."
+      },
+      "siker_felteteI": [
+        {
+          "kod": "S1",
+          "allitas": "A fo negy versenyeben az ablak 2000 toltesebol legalabb 1900-at a J4 (negykiterjedes) nyer.",
+          "kuszob": 1900
+        },
+        {
+          "kod": "S2",
+          "allitas": "A J3' (ter, lapatloval) az ablakban NULLA toltest nyer.",
+          "kuszob": 0
+        }
+      ],
+      "siker": "S1 ES S2 -- ekkor a joslat beallt: a teto-fordulas a BCC-valasztas kovetkezmenye volt.",
+      "bukas_felteteI": [
+        {
+          "kod": "B1",
+          "allitas": "Ha a J3' az ablak toltesenek legalabb felet (>=1000) megnyeri: a tukor-jegy NEM az, ami a tetot donti. Kovetkezmeny: a teto-torveny hordozo-fele (III/1, 7-8.) megbukott, es a II/15 teto-fordulasa nem paritas-eredetu. Ez a legsulyosabb kimenet, es rogzitett bukaskent kimondando."
+        },
+        {
+          "kod": "B2",
+          "allitas": "Ha sem a J4, sem a J3' nem uralja az ablakot (mindketto 1000 alatt): reszleges itelet, a savtabla szammal jelentendo; a hordozo-fele se nem all, se nem bukik ezen a probaan."
+        },
+        {
+          "kod": "B3",
+          "allitas": "Ha az ablak tolteseinek tobb mint fele holtversenyes: reszleges itelet, es a holtverseny-szam jelentendo."
+        }
+      ],
+      "kontroll_feltetel": "K1 -- a TELJES mezony (495 csaladtag + fo negy) teteje valtozatlanul az (1, 3, 5, 7) tukor-jegyu vonal-tage kell legyen, mert azt a J3 cserejenek nem szabad erintenie. Ha ez megvaltozik, a kiserlet elrontott, NEM lelet: allj meg es keresd a hibat.",
+      "elofeltetel": "A J3' korbeerese minden korbezart iranyban legalabb 8 graf-lepes (gepi bejarassal igazolva); a nyomosszeg mind az indulon egzaktul 165888; a letrak a H4 hordozhato uton. A J3' csucs-uteme szigoruan kisebb 16-nal (ez igazolja, hogy tenyleg elvesztette a tukor-jegyet).",
+      "ismert_feszultseg": "A joslat a hordozo-teteltol es a lyuk-tukor/irany-tetelektol fugg, de a VERSENY kimenetelet egyik sem donti el: a paritas azt mondja meg, ki JOGOSULT a tetore, nem azt, ki nyeri. A savhatarok, a toltesszamok es a holtversenyek szama ismeretlen a regisztralas napjan.",
+      "vegrehajtas": "Uj csomag: PKG-15-9. A letrak zart Fourier-alakbol (a PKG-15-8 elofeltetele szerint), a koltseggorbek a shared/summation.py H4 utjan, a mezony a shared/parallel futtatoval.",
+      "forras": [
+        "hu/II-proofs/II-15-dimension-fourth-rung/PKG-15-1-rulebook_hu.md",
+        "hu/II-proofs/II-15-dimension-fourth-rung/PKG-15-3-race_hu.md",
+        "hu/II-proofs/II-16-coordination-ten/PKG-16-1-rulebook_hu.md",
+        "hu/III-frontier/III-01-candidate-laws_hu.md"
+      ],
+      "pecset": "db104804893ee3ac668b0f0d264ae645781cc8a4c863bef500b64702dde1f27d"
     }
   ]
 }

@@ -8,27 +8,34 @@
 #
 #   python shared/environment-check.py
 #
-# Ez megnezi, hogy a gepen a np.longdouble valoban kiterjesztett pontossagu-e.
-# A II/15 H3-helyesbitese ota tobb csomag elsodleges szamolasi utja hosszu-
-# lebegos, mert a float64 halmozasi hibaja a teli veg kozeleben nagyobb, mint
-# a rogzitett 1e-8 azonossag-tures. A np.longdouble viszont NEM mindenutt
-# ugyanolyan szeles: Linux/glibc alatt (gcc/clang) a 80 bites kiterjesztett
-# tipus, Windowson az MSVC-s numpy viszont a float64-re kepezi le. Ott a H3
-# helyesbites csendben hatastalan, es a szkriptek BUKIK-ot irhatnak ott, ahol
-# a csomagok ALL-t rogzitenek. Az ellenorzo ezt megmeri, es 1-es kilepesi
-# koddal jelez. Az erintett csomagok: PKG-15-3, PKG-15-5, PKG-15-6, PKG-15-7,
-# PKG-16-2, PKG-16-3, PKG-16-5.
+# Ez jelenti a gep adatait, osszeveti a kimondott referencia-kornyezettel
+# (Windows 11 Pro, Python 3.12.5, numpy 2.2.4, i9 8 mag / 16 szal, 128 GB), es
+# megmeri, hogy a hordozhato osszegzesi ut (H4, shared/summation.py) a rogzitett
+# 1e-8-as azonossag-tures alatt marad-e. A referencia-kornyezet ROGZITETT, de NEM
+# kovetelmeny: azert all ott, hogy a kornyezeti kulonbseg megkulonboztetheto
+# legyen az eredmeny-kulonbsegtol. A H4 ut platformfuggetlen, ezert mas gepen is
+# allnia kell; ha nem all, az lelet.
 #
-# It checks whether np.longdouble really is an extended-precision type on this
-# machine. Since correction H3 of II/15 the primary computation route of
-# several packages is extended precision, because the float64 accumulation
-# error near the full end exceeds the fixed identity tolerance of 1e-8. But
-# np.longdouble is not the same width everywhere: on Linux/glibc (gcc/clang)
-# it is the 80-bit extended type, while on Windows the MSVC build of numpy
-# maps it onto float64. There the H3 correction is silently ineffective, and
-# the scripts may report FAILS where the packages record HOLDS. The check
-# measures this and signals with exit code 1. Affected packages: PKG-15-3,
-# PKG-15-5, PKG-15-6, PKG-15-7, PKG-16-2, PKG-16-3, PKG-16-5.
+# It reports this machine, compares it with the declared reference environment,
+# and measures whether the portable summation route (correction H4,
+# shared/summation.py) stays under the fixed identity tolerance of 1e-8. The
+# reference environment is DECLARED, not required: it is written down so that an
+# environment difference can be told apart from a result difference. The H4 route
+# is platform-independent and must hold elsewhere too; if it does not, that is a
+# finding.
+#
+# TORTENETI JEGYZET / HISTORICAL NOTE. A H3 helyesbites (II/15) hosszu-lebegos
+# utat irt elo, mert a naiv futo osszeg halmozasi hibaja a tures fole no. Az
+# np.longdouble viszont csak Linux/glibc alatt (gcc/clang) a 80 bites kiterjesztett
+# tipus; Windowson az MSVC-s numpy a float64-re kepezi le, ahol a helyesbites
+# csendben hatastalan. A H4 ezt algoritmikus uttal valtotta ki (blokkonkent egzakt
+# osszegzes), igy a platform-kerdes lekerult a napirendrol. Az erintett csomagok
+# (PKG-15-3, PKG-15-5, PKG-15-7 es a II/16 erintett csomagjai) meg a regi utra
+# vannak irva; a shared/bench/bench.py ezeket H4-VAR statuszban jelenti.
+#
+# A teljes reprodukcios pad / the full reproduction bench:
+#
+#   python shared/bench/bench.py
 #
 # A szkriptek a sajat konyvtarukbol futtatandok (relativ gyorsitotar-utvonalak):
 # The scripts are to be run from their own directory (relative cache paths):
