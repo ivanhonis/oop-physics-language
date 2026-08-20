@@ -8,7 +8,7 @@ doc_version: "1.4"
 status: reszleges
 builds_on: [II-14, II-13, II-12, II-11, I-06]
 imports: nulla
-packages: [PKG-15-1, PKG-15-2, PKG-15-3, PKG-15-4, PKG-15-5, PKG-15-6, PKG-15-7, PKG-15-8, PKG-15-9, PKG-15-10]
+packages: [PKG-15-1, PKG-15-2, PKG-15-3, PKG-15-4, PKG-15-5, PKG-15-6, PKG-15-7, PKG-15-8, PKG-15-9, PKG-15-10, PKG-15-11]
 ---
 
 # II/15. A negyedik fok — az ítélet: részleges („a negyedik fok áll, a tető a háromé")

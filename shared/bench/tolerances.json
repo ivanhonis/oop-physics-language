@@ -435,6 +435,66 @@
           "minta": "part of the measured space band \\(15997\\.\\.20734\\): (HOLDS|FAILS)"
         }
       ]
+    },
+    {
+      "proba": "II-16",
+      "szkript": "II-16-coordination-ten/PKG-16-6-hole-ladder-transfer.py",
+      "lassu": false,
+      "megjegyzes": "A H4 hordozhato uton es zart Fourier-alakbol szamol, ezert NEM H3-fuggo: ez a PKG-16-3 savtablajanak fuggetlen ellenorzese a paddon.",
+      "ellenorzesek": [
+        {
+          "nev": "nyomosszeg 2488320 az utem-letrakon",
+          "mod": "tures",
+          "tures": 1e-08,
+          "kozzetett": "2488320 (egzakt)",
+          "minta": "largest deviation from 2488320: ([0-9.eE+-]+)"
+        },
+        {
+          "nev": "a LYUK-letrak nyomosszege is 2488320",
+          "mod": "tures",
+          "tures": 1e-08,
+          "kozzetett": "2488320 (egzakt)",
+          "minta": "the HOLE ladders also sum to 2488320: ([0-9.eE+-]+)"
+        },
+        {
+          "nev": "lyuk-letra azonossag (J5)",
+          "mod": "tures",
+          "tures": 1e-06,
+          "kozzetett": "6,4e-10",
+          "minta": "J5 five-extension \\(native\\)\\s+largest deviation: ([0-9.eE+-]+)"
+        },
+        {
+          "nev": "tukor-jegyu indulok szama",
+          "mod": "egyezes",
+          "ertek": 1.0,
+          "tures": 0,
+          "kozzetett": "1 (a honos ot)",
+          "minta": "mirror-marked entrants: (\\d+)"
+        },
+        {
+          "nev": "az egy-lyukas toltes gyoztese",
+          "mod": "szoveg",
+          "ertek": "J5 five-extension (native)",
+          "kozzetett": "a honos ot",
+          "minta": "winners: (J5 five-extension \\(native\\))"
+        },
+        {
+          "nev": "a honos ot savhatara (a PKG-16-3 kozzetett szama)",
+          "mod": "egyezes",
+          "ertek": 125564.0,
+          "tures": 0,
+          "kozzetett": "125 564",
+          "minta": "J5 five-extension \\(native\\)\\s+(\\d+) \\.\\."
+        },
+        {
+          "nev": "a sik savhatara (a PKG-16-3 kozzetett szama)",
+          "mod": "egyezes",
+          "ertek": 42662.0,
+          "tures": 0,
+          "kozzetett": "42 662",
+          "minta": "J2 plane\\s+(\\d+) \\.\\."
+        }
+      ]
     }
   ],
   "felvetelre_var": [

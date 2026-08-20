@@ -45,6 +45,8 @@ A [II/14 — kiterjedés-lépcső](../II-proofs/II-14-dimension-staircase/proof_
 - **[PKG-15-9 — a hordozó-tétel és az egységes mezőny](../II-proofs/II-15-dimension-fourth-rung/PKG-15-9-uniform-field_hu.md):** levezetve, mitől tükör-jegyű egy szövés, és ellenőrzött kísérlettel megmérve, mennyit hordoz ebből a kézi jelölt-választás; hozadéka: a tető-fordulás **egyetlen lépésen** múlik (testátló kontra lapátló), és a „3, 3, 5” minta konvenció-műtermék.
 - **[PKG-15-10 — a teli-vég tétel](../II-proofs/II-15-dimension-fourth-rung/PKG-15-10-dense-end_hu.md):** a tető-törvény hordozó-fele mérésből tétellé; hozadéka a kiegészítési azonosság, az egy-lyuk tétel (a PKG-15-5 mért holtversenye levezetve), a lyuk-tükör tétel egysoros alakja, és a tanúsított szakaszok.
 
+- **[PKG-15-11 — a lyuk-létra](../II-proofs/II-15-dimension-fourth-rung/PKG-15-11-hole-ladder_hu.md):** a teli-vég tétel egyetlen becslése azonosságra cserélve; hozadéka a lyuk-létra (minden induló második, azonos összsúlyú létrája), a tükör-jegy létra-azonosság alakja, és a tanúsított szakaszok élesítése (a régi becslés 4500–9000 töltést adott fel).
+
 ## II/16 — Tízes koordináció: a tető törvénye
 
 - **[PKG-16-1 — szabálykönyv](../II-proofs/II-16-coordination-ten/PKG-16-1-rulebook_hu.md):** a kiválasztási szabály (kimondott konvenció), a négyfokú ítélet a néven nevezett visszafordulás-esettel, a kétutas szabály négyelemű ritka alakja; hozadéka a párosság-lelet (a tükör-jegy egyedül a honosé) és a döntő-kísérletté élesített tető-kérdés.
