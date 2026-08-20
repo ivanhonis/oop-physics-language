@@ -1,0 +1,462 @@
+{
+  "meta": {
+    "leiras": "A hitelesito-pad tures-fajlja (P0.2). Minden bejegyzes egy kozzetett ellenorzo szam a szabalyrend szerinti probakbol (II/13-tol). A 'kozzetett' mezo a csomagban/B fuggelekben allo ertek; a 'tures' az a sav, amin belul a gepi ujrafuttatas meg egyezonek szamit. A turest utolag tagitani TILOS -- a szabalykonyv 7. pontja.",
+    "hatokor": "A pad a szabalyrend szerinti probakat fedi (II/13-II/16). A korabbi tizenket proba eszkozei nem allnak futtathato alakban -- ez kimondott hatokor-hatar, nem hiany.",
+    "modok": {
+      "tures": "a kiolvasott szam <= tures",
+      "egyezes": "|kiolvasott - ertek| <= tures",
+      "szoveg": "a kiolvasott szoveg pontosan az 'ertek'"
+    },
+    "ketutas_jelentese": "Ket fuggetlen szamolasi ut osszevetese. Ha az eredmeny PONTOSAN nulla, a pad URES iteletet ad: a ket ut valoszinuleg ugyanaz lett (lasd environment-check.py), tehat a proba nem fedez semmit.",
+    "h3_fuggo_jelentese": "Az ellenorzes deklaralt elsodleges utja a H3 kiterjesztett-pontossagu ut volt, amit a H4 helyesbites visszavont. A referencia-kornyezetben ez az ut NEM letezik, ezert a proba elofeltetele hianyzik: az itelet H4-VAR, nem BUKIK. A szam nem rossz -- a szkript meg nem allt at a shared/summation.py hordozhato utjara."
+  },
+  "padok": [
+    {
+      "proba": "II-13",
+      "szkript": "II-13-dimension-race/PKG-13-2-ladders.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "nyomosszeg (mind a 64)",
+          "mod": "egyezes",
+          "ertek": 64.0,
+          "tures": 1e-09,
+          "kozzetett": "64",
+          "minta": "trace sums \\(all 64\\):\\s*([0-9.eE+-]+)"
+        },
+        {
+          "nev": "J1 zart alak kontra gepezet",
+          "mod": "tures",
+          "tures": 1e-14,
+          "ketutas": true,
+          "kozzetett": "1e-15",
+          "minta": "J1 analytic vs machinery, largest deviation:\\s*([0-9.eE+-]+)"
+        },
+        {
+          "nev": "J3 ket fuggetlen felepitese",
+          "mod": "tures",
+          "tures": 1e-14,
+          "ketutas": true,
+          "kozzetett": "1e-15",
+          "minta": "J3 by its two constructions, largest deviation:\\s*([0-9.eE+-]+)"
+        },
+        {
+          "nev": "J2 kontra a hiperkocka binomialis letraja",
+          "mod": "tures",
+          "tures": 1e-14,
+          "ketutas": true,
+          "kozzetett": "1e-15",
+          "minta": "J2 == binomial ladder of the hypercube\\? largest deviation:\\s*([0-9.eE+-]+)"
+        },
+        {
+          "nev": "letra-osztalyok a pasztazasban",
+          "mod": "egyezes",
+          "ertek": 7.0,
+          "tures": 0,
+          "kozzetett": "7 osztaly",
+          "minta": "members: 21, distinct ladders:\\s*(\\d+)"
+        }
+      ]
+    },
+    {
+      "proba": "II-13",
+      "szkript": "II-13-dimension-race/PKG-13-3-race.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "a sik gyoztes savja (7. szabaly fo olvasata)",
+          "mod": "szoveg",
+          "ertek": "10, 11, 12, 13, 14, 15",
+          "kozzetett": "10-15",
+          "minta": "fillings where J2 < J1 and J2 < J3: \\[([0-9, ]+)\\]"
+        }
+      ]
+    },
+    {
+      "proba": "II-13",
+      "szkript": "II-13-dimension-race/PKG-13-4-readout.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "golyo a gyoztesen (r=0..2)",
+          "mod": "szoveg",
+          "ertek": "1, 6, 16",
+          "kozzetett": "1, 6, 16",
+          "minta": "ball: \\[([0-9, ]+)\\]"
+        }
+      ]
+    },
+    {
+      "proba": "II-14",
+      "szkript": "II-14-dimension-staircase/PKG-14-2-ladders.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "nyomosszeg mind a 224 halon",
+          "mod": "egyezes",
+          "ertek": 3072.0,
+          "tures": 1e-09,
+          "kozzetett": "3072 (egzakt)",
+          "minta": "trace sum min/max:\\s*([0-9.eE+-]+)"
+        },
+        {
+          "nev": "gepezet kontra zart keplet, 224 halon",
+          "mod": "tures",
+          "tures": 1e-13,
+          "ketutas": true,
+          "kozzetett": "7,9e-14",
+          "minta": "largest machinery-formula deviation:\\s*([0-9.eE+-]+)"
+        },
+        {
+          "nev": "a ter-szoves paros-jegyenek tukor-szimmetriaja",
+          "mod": "tures",
+          "tures": 1e-14,
+          "kozzetett": "1e-15",
+          "minta": "J3 symmetry deviation:\\s*([0-9.eE+-]+)"
+        }
+      ]
+    },
+    {
+      "proba": "II-14",
+      "szkript": "II-14-dimension-staircase/PKG-14-3-race.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "nyomosszeg a versenyben",
+          "mod": "egyezes",
+          "ertek": 3072.0,
+          "tures": 1e-09,
+          "kozzetett": "3072 (egzakt)",
+          "minta": "trace sum min/max:\\s*([0-9.eE+-]+)"
+        },
+        {
+          "nev": "a sik savja",
+          "mod": "szoveg",
+          "ertek": "130..255",
+          "kozzetett": "130-255",
+          "minta": "plane band: ([0-9.]+\\.\\.[0-9]+)"
+        },
+        {
+          "nev": "a ter savja (fel-toltestol)",
+          "mod": "szoveg",
+          "ertek": "256..511",
+          "kozzetett": "256-511",
+          "minta": "space band: ([0-9.]+\\.\\.[0-9]+)"
+        }
+      ]
+    },
+    {
+      "proba": "II-14",
+      "szkript": "II-14-dimension-staircase/PKG-14-4-readout.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "rezonancia-orszem (a szuk, regi alak)",
+          "mod": "egyezes",
+          "ertek": 0.0,
+          "tures": 0,
+          "kozzetett": "0 db",
+          "minta": "resonance sentinel: other classes agreeing exactly with the neighbour:\\s*(\\d+)"
+        }
+      ]
+    },
+    {
+      "proba": "II-14",
+      "szkript": "II-14-dimension-staircase/PKG-14-5-readout-repeat.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "letra ket uton",
+          "mod": "tures",
+          "tures": 1e-13,
+          "ketutas": true,
+          "kozzetett": "1,6e-14",
+          "minta": "ladder by two routes: largest deviation = ([0-9.eE+-]+)"
+        },
+        {
+          "nev": "vetito ket uton",
+          "mod": "tures",
+          "tures": 1e-14,
+          "ketutas": true,
+          "kozzetett": "6,7e-16",
+          "minta": "projector by two routes: largest deviation = ([0-9.eE+-]+)"
+        },
+        {
+          "nev": "sav-orszem (KON-04 erzekenysegi szama)",
+          "mod": "egyezes",
+          "ertek": 2.8437,
+          "tures": 0.001,
+          "kozzetett": "S = 2,84",
+          "minta": "band sentinel: S = ([0-9.]+)"
+        },
+        {
+          "nev": "egzakt golyo r=0..5 (4r^2+2)",
+          "mod": "szoveg",
+          "ertek": "1, 7, 25, 63, 129, 231",
+          "kozzetett": "1, 7, 25, 63, 129, 231",
+          "minta": "ball \\(r=0\\.\\.5\\): \\[([0-9, ]+)\\]"
+        },
+        {
+          "nev": "a csomag sajat itelete",
+          "mod": "szoveg",
+          "ertek": "HOLDS",
+          "kozzetett": "all",
+          "minta": "VERDICT: (HOLDS|FAILS)"
+        }
+      ]
+    },
+    {
+      "proba": "II-15",
+      "szkript": "II-15-dimension-fourth-rung/PKG-15-2-ladders.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "nyomosszeg 165888 mindenutt",
+          "mod": "szoveg",
+          "ertek": "HOLDS",
+          "kozzetett": "all",
+          "minta": "trace sum 165888 everywhere: (HOLDS|FAILS)"
+        },
+        {
+          "nev": "letra-osztalyok (rejtett egybeeses nelkul)",
+          "mod": "egyezes",
+          "ertek": 502.0,
+          "tures": 0,
+          "kozzetett": "502 osztaly",
+          "minta": "ladder classes: (\\d+) classes on 503 networks"
+        },
+        {
+          "nev": "A8 -- mind a 32 cel ket uton",
+          "mod": "tures",
+          "tures": 1e-11,
+          "ketutas": true,
+          "kozzetett": "1,3e-12",
+          "minta": "all 32 targets by two routes; largest deviation ([0-9.eE+-]+)"
+        }
+      ]
+    },
+    {
+      "proba": "II-15",
+      "szkript": "II-15-dimension-fourth-rung/PKG-15-3-race.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "teljes-toltesi egyezes",
+          "mod": "tures",
+          "tures": 1e-11,
+          "kozzetett": "8,4e-12",
+          "minta": "full-end deviation ([0-9.eE+-]+)",
+          "h3_fuggo": true
+        },
+        {
+          "nev": "kereszt-ellenorzes float64-en",
+          "mod": "tures",
+          "tures": 1e-07,
+          "ketutas": true,
+          "kozzetett": "a hosszu-lebegos ut fedezete",
+          "minta": "cross-check \\(float64\\): largest cost deviation ([0-9.eE+-]+)",
+          "h3_fuggo": true
+        },
+        {
+          "nev": "a kiolvasasi pont (rogzitett valasztas)",
+          "mod": "egyezes",
+          "ertek": 11075.0,
+          "tures": 0,
+          "kozzetett": "N = 11075",
+          "minta": "-> N = (\\d+)"
+        }
+      ]
+    },
+    {
+      "proba": "II-15",
+      "szkript": "II-15-dimension-fourth-rung/PKG-15-4-readout.py",
+      "lassu": true,
+      "memoriaigenyes": true,
+      "megjegyzes": "A ketutas pecset suru sajatfeladatot futtat (~10-11 GB, ezen a gepen 1020 s). Ezert lassu ES memoriaigenyes: a pad sosem inditja parhuzamosan.",
+      "ellenorzesek": [
+        {
+          "nev": "zart fok rese (2 - gyok3)",
+          "mod": "egyezes",
+          "ertek": 0.267949192,
+          "tures": 1e-08,
+          "kozzetett": "0,267949192",
+          "minta": "gap above degree 11075 is ([0-9.]+)"
+        },
+        {
+          "nev": "sav-orszem (KON-04 erzekenysegi szama)",
+          "mod": "egyezes",
+          "ertek": 5.3707,
+          "tures": 0.001,
+          "kozzetett": "S = 5,37",
+          "minta": "band sentinel: S = ([0-9.]+)"
+        },
+        {
+          "nev": "egzakt kobos golyo r=0..5",
+          "mod": "szoveg",
+          "ertek": "1, 9, 41, 129, 321, 681",
+          "kozzetett": "1, 9, 41, 129, 321, 681",
+          "minta": "ball \\(r=0\\.\\.5\\): \\[([0-9, ]+)\\]"
+        },
+        {
+          "nev": "teljessegi szamla",
+          "mod": "szoveg",
+          "ertek": "82944/82944",
+          "kozzetett": "82944/82944",
+          "minta": "completeness ledger: found (\\d+/\\d+)"
+        },
+        {
+          "nev": "vetito ket uton (a pecset)",
+          "mod": "tures",
+          "tures": 1e-14,
+          "ketutas": true,
+          "kozzetett": "1,7e-15",
+          "minta": "projector by two routes: largest deviation = ([0-9.eE+-]+)"
+        },
+        {
+          "nev": "a csomag ketutas pecsetje",
+          "mod": "szoveg",
+          "ertek": "HOLDS",
+          "kozzetett": "all",
+          "minta": "TWO-ROUTE SEAL: (HOLDS|FAILS)"
+        }
+      ]
+    },
+    {
+      "proba": "II-15",
+      "szkript": "II-15-dimension-fourth-rung/PKG-15-5-hole-mirror.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "E1 tukor-azonossag",
+          "mod": "tures",
+          "tures": 1e-11,
+          "kozzetett": "a csomag ALL-t rogzit",
+          "minta": "E1 mirror identity: .*? at most ([0-9.eE+-]+)",
+          "h3_fuggo": true
+        },
+        {
+          "nev": "E2 egy-lyukas holtverseny (N = 20735)",
+          "mod": "tures",
+          "tures": 1e-11,
+          "kozzetett": "a csomag ALL-t rogzit",
+          "minta": "E2 single-hole tie:.*? filling N = \\d+ = ([0-9.eE+-]+)",
+          "h3_fuggo": true
+        },
+        {
+          "nev": "E3 csucs-utem a paros indulokon (J3)",
+          "mod": "egyezes",
+          "ertek": 16.0,
+          "tures": 1e-09,
+          "kozzetett": "16 (tetelbol)",
+          "minta": "J3: (16\\.[0-9]+)"
+        },
+        {
+          "nev": "E5 negativ kontroll (a parossag szukseges)",
+          "mod": "szoveg",
+          "ertek": "HOLDS",
+          "kozzetett": "all",
+          "minta": "bipartite condition is necessary: (HOLDS|FAILS)"
+        }
+      ]
+    },
+    {
+      "proba": "II-15",
+      "szkript": "II-15-dimension-fourth-rung/PKG-15-6-direction.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "szendvics-lemma a teljes racson (sertesek)",
+          "mod": "egyezes",
+          "ertek": 0.0,
+          "tures": 0,
+          "kozzetett": "0 sertes",
+          "minta": "sandwich lemma on the full lattice: largest violation ([0-9.eE+-]+)"
+        },
+        {
+          "nev": "J3-J4 ar-atbillenes",
+          "mod": "egyezes",
+          "ertek": 4740.0,
+          "tures": 0,
+          "kozzetett": "4740",
+          "minta": "J3-J4\\s+\\d+\\s+\\d+\\s+(\\d+)"
+        },
+        {
+          "nev": "dominancia-hezag felso vege (J1-J2)",
+          "mod": "egyezes",
+          "ertek": 61.6,
+          "tures": 0.05,
+          "kozzetett": "43-62%",
+          "minta": "J1-J2\\s+\\d+\\s+\\d+\\s+\\d+\\s+([0-9.]+)%"
+        }
+      ]
+    },
+    {
+      "proba": "II-15",
+      "szkript": "II-15-dimension-fourth-rung/PKG-15-7-top.py",
+      "lassu": false,
+      "ellenorzesek": [
+        {
+          "nev": "E1 szigorusagi tartalek a tetel-szakaszon",
+          "mod": "egyezes",
+          "ertek": 0.20718,
+          "tures": 1e-05,
+          "kozzetett": "0,2072",
+          "minta": "smallest advantage ([0-9.]+)"
+        },
+        {
+          "nev": "E2 egy-lyukas holtverseny",
+          "mod": "tures",
+          "tures": 1e-11,
+          "kozzetett": "1,7e-13",
+          "minta": "E2 single-hole tie: \\|dPrice\\(20735\\)\\| = ([0-9.eE+-]+)",
+          "h3_fuggo": true
+        },
+        {
+          "nev": "E3 tukor-atvitel a szakaszon",
+          "mod": "tures",
+          "tures": 1e-11,
+          "kozzetett": "2,2e-12",
+          "minta": "E3 mirror transfer on the stretch: largest deviation ([0-9.eE+-]+)",
+          "h3_fuggo": true
+        },
+        {
+          "nev": "E4 tanusitott lefedettseg",
+          "mod": "egyezes",
+          "ertek": 44.0,
+          "tures": 0.05,
+          "kozzetett": "44,0%",
+          "minta": "= ([0-9.]+)%; the remainder"
+        },
+        {
+          "nev": "a tanusitott szakasz a mert savon belul van",
+          "mod": "szoveg",
+          "ertek": "HOLDS",
+          "kozzetett": "all",
+          "minta": "part of the measured space band \\(15997\\.\\.20734\\): (HOLDS|FAILS)"
+        }
+      ]
+    }
+  ],
+  "felvetelre_var": [
+    {
+      "szkript": "II-16-coordination-ten/PKG-16-2-ladders.py",
+      "kozzetett": "ritka maradek-proba 5,3e-14; 804 osztaly",
+      "ok": "248832 hely; a futasido meg ismeretlen"
+    },
+    {
+      "szkript": "II-16-coordination-ten/PKG-16-3-race.py",
+      "kozzetett": "savszerkezet: vonal, sik, negykiterjedes, otkiterjedes",
+      "ok": "248832 hely; a futasido meg ismeretlen"
+    },
+    {
+      "szkript": "II-16-coordination-ten/PKG-16-4-readout.py",
+      "kozzetett": "sav-orszem S = 7,29; mintaveteles vetito-pecset 5,1e-14 es 9,4e-16",
+      "ok": "248832 hely; a futasido meg ismeretlen"
+    },
+    {
+      "szkript": "II-16-coordination-ten/PKG-16-5-transfer.py",
+      "kozzetett": "a teli veg 2000 toltesebol 1999 a paros vonal-tage",
+      "ok": "248832 hely; a futasido meg ismeretlen"
+    }
+  ]
+}
