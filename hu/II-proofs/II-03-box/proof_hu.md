@@ -3,11 +3,11 @@ id: II-03
 type: proof
 lang: hu
 pair: proof_en.md
-pair_status: in-sync
+pair_status: outdated
 doc_version: "1.3"
 status: ervenyes
 builds_on: [I-05, II-01]
-imports: "egy tétel: szomszédság (a II/6 helyiséggé szűkíti)"
+imports: "két tétel: szomszédság (a II/6 helyiséggé szűkíti); a rács kiterjedésszáma (egy)"
 ---
 
 # II/3. A doboz — kvantáltság kötöttségből
@@ -22,4 +22,4 @@ imports: "egy tétel: szomszédság (a II/6 helyiséggé szűkíti)"
 
 **Ellenőrzés a valóságon.** A folytonos létrát félvezető kvantumgödrökben közvetlenül mérik. A durva-felosztású, eltérő létrát a fizika kristályrácsokban méri — a nyelv kéretlenül a rácsos változat mért viselkedését is visszaadta.
 
-**Import-számla:** egy tétel — a **szomszédság** (a helyek sorba rendezése, a „mellette" viszony). A [II/6](../II-06-universality/proof_hu.md) ezt később helyiséggé szűkíti. **Mit igazolt:** a [4. törvény](../../I-language/I-05-contract_hu.md) 2. következményét (diszkrét ütemek kötöttségből).
+**Import-számla (a 2026-08-20-i függőségi audit után helyesbítve):** két tétel — a **szomszédság** A második, eddig be nem könyvelt import a **rács kiterjedésszáma**: a közzétett 1 : 4 : 9 : 16 létra az egykiterjedésű dobozé, és ezt a fejezet sehol nem mondta ki (`IMP-04`). (a helyek sorba rendezése, a „mellette" viszony). A [II/6](../II-06-universality/proof_hu.md) ezt később helyiséggé szűkíti. **Mit igazolt:** a [4. törvény](../../I-language/I-05-contract_hu.md) 2. következményét (diszkrét ütemek kötöttségből).

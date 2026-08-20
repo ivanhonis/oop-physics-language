@@ -18,7 +18,7 @@ Ez a fájl terv, nem eredmény: az igazság forrása mindig a lefutott próbák 
 
 ## 1. A kiindulás: mi van meg, és miért támadható
 
-**Ami megvan.** Öt törvény és egy növekvő tétel-készlet (két típusosztály, kizárás, No-Cloning, lyuk-tükör, irány-tétel, tető-tétel, összeomlási tétel — az [I/9](I-language/I-09-laws-table_hu.md) táblája); tizenhat számolt próba, köztük egy intézményesített bukás ([II/12](II-proofs/II-12-network-race/proof_hu.md)); az import-számla (jelenleg három import) és az import/konvenció szétválasztás; a csomag-módszer előre rögzített szabálykönyvvel és kapu-szabállyal; 10⁻¹²–10⁻¹⁶ szintű kétutas számolások; és egy saját születésű törvény-jelölt (a tető-törvény, [III/1, 8.](III-frontier/III-01-candidate-laws_hu.md)). Ez a fegyelem ritka vagyon — a program nem nulláról indul, hanem egy proto-formális rendszert emel gépi kikényszerítésre.
+**Ami megvan.** Öt törvény és egy növekvő tétel-készlet (két típusosztály, kizárás, No-Cloning, lyuk-tükör, irány-tétel, tető-tétel, összeomlási tétel — az [I/9](I-language/I-09-laws-table_hu.md) táblája); tizenhat számolt próba, köztük egy intézményesített bukás ([II/12](II-proofs/II-12-network-race/proof_hu.md)); az import-számla (jelenleg négy import, gépi nyilvántartással és racsnival) és az import/konvenció/peremadat/hatókör szétválasztás; a csomag-módszer előre rögzített szabálykönyvvel és kapu-szabállyal; 10⁻¹²–10⁻¹⁶ szintű kétutas számolások; és egy saját születésű törvény-jelölt (a tető-törvény, [III/1, 8.](III-frontier/III-01-candidate-laws_hu.md)). Ez a fegyelem ritka vagyon — a program nem nulláról indul, hanem egy proto-formális rendszert emel gépi kikényszerítésre.
 
 **Ami támadható.** A szkeptikus fizikus hat vádja, veszélyességi sorrendben — és az a mérföldkő, amelyik az adott vádat elhallgattatja:
 
@@ -26,8 +26,8 @@ Ez a fájl terv, nem eredmény: az igazság forrása mindig a lefutott próbák 
 |---|---|---|
 | 1 | **Retrodikció + átcímkézés:** mind a 16 próba ismert számot ad vissza, a szerző választotta célpontokon, a standard QM gépezetén | P1.4, P1.5 (vak célpontok), P4.4, P4.5 (valódi jóslat) — addig P1.2 (prior-art audit) tartja sakkban |
 | 2 | **Formális státusz tisztázatlan:** ha a nyelv ekvivalens a rácsos QM-mel, definíció szerint nem jósolhat mást; ha nem, hol tér el? | P2.6 (ekvivalencia vagy eltérési pont) |
-| 3 | **Az importok a lényeget hozzák:** az 1/r adja a hidrogén négy tizedesét, a típusdeklarációk a bűvös számokat | P2.1, P2.2, P2.4, P2.5 (import-nullázás vagy becsületes véglegesítés) |
-| 4 | **A kiterjedés-verseny önjáték:** a győztest részben a saját konvenciók definiálják; mért ellenpár nincs; a tető-törvény mért fele háromból kettőn áll | P1.1 (a hiányzó harmadik mérés), P1.3 (konvenció-robusztusság) |
+| 3 | **Az importok a lényeget hozzák:** az 1/r **és a kimondatlanul betett kiterjedésszám együtt** adja a hidrogén négy tizedesét, a típusdeklarációk a bűvös számokat — és a PKG-15-9 óta tudjuk, hogy a kiterjedés-verseny a hármat belülről nem adja ki | P2.1, P2.2, P2.4, P2.5 (import-nullázás vagy becsületes véglegesítés) |
+| 4 | **A kiterjedés-verseny önjáték:** a győztest részben a saját konvenciók definiálják; mért ellenpár nincs | **részben beismerve, számmal:** a P1.1 lezárult (a mért fél háromból hármon áll), a PKG-15-9 pedig ellenőrzött kísérletben kimutatta, hogy a fő mezőny „3, 3, 5” mintája konvenció-műtermék. Marad: a KON-01 és a KON-03 érzékenysége |
 | 5 | **Kis rendszerek:** ami 12 objektumon tétel, az a határértékben lehet műtermék (a PKG-14-5 precedens ezt bizonyította is) | P4.1–P4.4, P4.6 (méret-létra, 100 → 10³ → 10⁵) |
 | 6 | **Statika-katalógus:** a 16 próbából egy számol időfejlődést; nincs hőmérséklet, nincs nyitott rendszer, nincs szava a kvázirészecskére | 3. szakasz (folyamat-modellezés) |
 
@@ -39,7 +39,7 @@ A diagnózis kulcsa: a vádak nem cáfolandók vitában — mindegyikhez fájlba
 
 A „high-end" nem önminősítés, hanem hat, előre rögzített, gépileg auditálható feltétel. A program akkor ért célba, ha mind a hat áll — és minden feltételhez tartozik becsületes bukó-ág is.
 
-- **H1 — Zárt könyvelés.** Minden állítás pontosan egy kategóriában áll: törvény / géppel ellenőrzött levezetési nyomvonalú tétel / kimondott konvenció / peremadat (a világ példány-adata, amelyet a nyelv elvileg sem vezet le). A megmagyarázatlan importok száma 0, vagy legfeljebb 1, kimondott hatókörrel. A szám nyilvános és követhető (ma: 3).
+- **H1 — Zárt könyvelés.** Minden állítás pontosan egy kategóriában áll: törvény / géppel ellenőrzött levezetési nyomvonalú tétel / kimondott konvenció / peremadat (a világ példány-adata, amelyet a nyelv elvileg sem vezet le). A megmagyarázatlan importok száma 0, vagy legfeljebb 1, kimondott hatókörrel. A szám nyilvános és követhető (ma: **4** — a 2026-08-20-i függőségi audit egy be nem könyvelt bemenetet, a kiterjedésszámot talált; a szám nem azért nőtt, mert új import került be, hanem mert a könyvelés rövid volt).
 - **H2 — Tisztázott formális státusz.** Vagy bizonyított megfeleltetési tétel (az öt törvény + importok pontosan a véges dimenziós, rácsos kvantummechanikát adják — ekkor a nyelv értéke a levezetési út és a könyvelés, kimondva), vagy legalább egy megnevezett, számolható eltérési pont.
 - **H3 — Predikció.** Gépi tanúval igazolt vak-protokoll; legalább két belső jóslat (saját, még le nem olvasott számolásokon) és legalább egy időbélyegesen regisztrált, fizikus közönség előtt is jóslatnak számító állítás.
 - **H4 — Skálázás.** A nyelv saját tételeiből indokolt gépezetek (felület-törvény → tenzorháló; tanítás → neurális tanú) 100-tól 10⁵ objektumig, minden szám pecséttel (fokozat + erő).

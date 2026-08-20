@@ -4,9 +4,21 @@
     "doc_version": "1.4",
     "szabaly_forras": "hu/I-language/I-01-concept_hu.md",
     "program_forras": "hu/PROGRAM_hu.md",
-    "import_plafon": 3,
+    "import_plafon": 4,
     "erzekenyseg_kuszob": 0.0,
-    "kapu_megjegyzes": "Az import_plafon racsni: soha nem emelheto csendben. Az erzekenyseg_kuszob a megmert kezi elemek kotelezo aranya (import + konvencio rangon); a P1.3 lefutasa utan emelendo."
+    "kapu_megjegyzes": "Az import_plafon racsni: soha nem emelheto csendben. Az erzekenyseg_kuszob a megmert kezi elemek kotelezo aranya (import + konvencio rangon); a P1.3 lefutasa utan emelendo.",
+    "plafon_tortenet": [
+      {
+        "ertek": 3,
+        "datum": "2026-08-20",
+        "indok": "a tar felallitasakor az I/1 harom importja"
+      },
+      {
+        "ertek": 4,
+        "datum": "2026-08-20",
+        "indok": "A P0.1 fuggosegi audit egy BE NEM KONYVELT bemenetet talalt: a kiterjedesszam (IMP-04). A plafon nem azert nott, mert uj importot vettunk fel, hanem mert a konyveles rovid volt. A racsni pontosan ezt fogta meg -- ez a mukodese, nem a megkerulese. A felhasznalo dontese: 'mindig az oszinte hiteles utat valasztjuk'."
+      }
+    ]
   },
   "tetelek": [
     {
@@ -77,6 +89,34 @@
         "hu/I-language/I-01-concept_hu.md",
         "hu/II-proofs/II-07-bowl-magic-numbers/proof_hu.md"
       ]
+    },
+    {
+      "id": "IMP-04",
+      "rang": "import",
+      "nev": "a kiterjedesszam a mert celpontoknal",
+      "leiras": "Az egyes probak rogzitik, hany kiterjedesu racson szamolnak, es ezt a mert celponthoz igazitjak -- de a II/3 es a II/4 SEHOL nem mondja ki a sajat kiterjedesszamat (a II/7 kimondja: 'sikban'). A szam a kozzetett eredmenyekbol egyertelmuen visszafejtheto: a II/3 letraja 1:4:9:16 az EGYkiterjedesu doboze (haromban a legalso szintek nem ezek); a II/4 letraja 1:1/4:1/9:1/16 (-0,5; -0,125; -0,0556; -0,0313 atomi egysegben), az iranyfuggo mintazat masodik fokra eso egybeesesevel, a HAROMkiterjedesu Coulomb-feladat sajatja -- ket kiterjedesben a letra 1:1/9:1/25 volna. A II/1-II/12 nem all futtathato alakban (kimondott hatokor-hatar), ezert ez a szamokbol vont kovetkeztetes, nem kodbol olvasott teny.",
+      "bevezette": "II-04",
+      "hasznaljak": [
+        "II-03",
+        "II-04",
+        "II-07"
+      ],
+      "allapot": "aktiv",
+      "torlesztes": "P2.4",
+      "erzekenyseg": {
+        "allapot": "merve",
+        "meres": [
+          "PKG-15-9"
+        ],
+        "megjegyzes": "A PKG-15-9 megmutatta, hogy a kiterjedes-verseny NEM adja ki a harmat: a fo mezony '3, 3, 5' mintaja konvencio-mutermek, a teljes mezonyon pedig a hordozo mindig 1. A kiterjedesszam tehat nem a nyelvbol jon -- ezert kulon import, nem a vonzasalak resze. A ket bemenet EGYUTT adja a hidrogen-egyezest: harom kiterjedes ES 1/r."
+      },
+      "forras": [
+        "hu/II-proofs/II-04-hydrogen-atom/proof_hu.md",
+        "hu/II-proofs/II-03-box/proof_hu.md",
+        "hu/II-proofs/II-15-dimension-fourth-rung/PKG-15-9-uniform-field_hu.md",
+        "hu/appendix/C-benchmarks_hu.md"
+      ],
+      "megjegyzes": "RANG NYITOTT, kimondva. Szigoru olvasat: import -- a nyelv nem tudta eloallitani, ezert kivulrol vettuk (ez az itt rogzitett besorolas). Alternativa: peremadat, a vilag peldany-adata -- de a PROGRAM peremadat-definicioja azt keri, hogy a nyelv 'elvileg se' vezesse le, es ez a gyoker-program (III/2, 7.) lefutasaig nincs eldontve. A konzervativ irany az import; a P2.5 mintajara kesobb atminosulhet."
     },
     {
       "id": "JEL-01",

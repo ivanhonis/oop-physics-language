@@ -3,11 +3,11 @@ id: II-07
 type: proof
 lang: hu
 pair: proof_en.md
-pair_status: in-sync
+pair_status: outdated
 doc_version: "1.3"
 status: ervenyes
 builds_on: [I-06, II-03]
-imports: "két típusdeklaráció: az elektron kizáró osztályú; az elektronnak van belső kétértékű mezője"
+imports: "két típusdeklaráció: az elektron kizáró osztályú; az elektronnak van belső kétértékű mezője; és a tál kiterjedésszáma (kettő, a szövegben kimondva)"
 ---
 
 # II/7. A tál és a bűvös számok — az azonosság próbája
@@ -29,4 +29,4 @@ Számolva: finom felosztásnál a létra 1 : 2,000 : 2,999 : 3,997, a fokon bel�
 
 **Ellenőrzés a valóságon.** [Tarucha és társai (1996)](../../appendix/C-benchmarks_hu.md) mesterséges atomon pontosan ezt mérik: a betöltési energia csúcsai 2, 6 és 12 elektronnál (a 20-as fok a mérés szélén már elmosódik). Kitekintő: ugyanez a gépezet három kiterjedésű tállal 2, 8, 20 betelést ígér — az atommagok mért első bűvös számait.
 
-**Import-számla:** két típusdeklaráció — (1) az elektron a kizáró osztályba tartozik (egy bit; a fizika mélyebb levezetéséhez, a spin–statisztika tételhez relativitás kell, az a nyelv hatókörén kívül); (2) az elektronnak van belső kétértékű mezője. Szerkezeti kölcsön nulla. **Mit igazolt:** az 5. törvényt és a kizárás tételét mért számokon.
+**Import-számla:** két típusdeklaráció — (1) az elektron a kizáró osztályba tartozik (egy bit; a fizika mélyebb levezetéséhez, a spin–statisztika tételhez relativitás kell, az a nyelv hatókörén kívül); (2) az elektronnak van belső kétértékű mezője. Harmadik bemenet, a 2026-08-20-i függőségi audit után külön könyvelve: a **tál kiterjedésszáma** — a fejezet kimondja („síkban”), de eddig nem szerepelt az import-számlán (`IMP-04`). Szerkezeti kölcsön nulla. **Mit igazolt:** az 5. törvényt és a kizárás tételét mért számokon.

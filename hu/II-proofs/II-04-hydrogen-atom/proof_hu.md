@@ -3,11 +3,11 @@ id: II-04
 type: proof
 lang: hu
 pair: proof_en.md
-pair_status: in-sync
+pair_status: outdated
 doc_version: "1.3"
 status: ervenyes
 builds_on: [II-03]
-imports: "egy tétel: a vonzás alakja (távolság-fordított kedvezmény)"
+imports: "két tétel: a vonzás alakja (távolság-fordított kedvezmény); a rács kiterjedésszáma (három)"
 ---
 
 # II/4. A hidrogénatom
@@ -20,4 +20,4 @@ imports: "egy tétel: a vonzás alakja (távolság-fordított kedvezmény)"
 
 **Ellenőrzés a valóságon.** A hidrogén mért színképe, szint-egybeesése és ionizációs küszöbe ([C függelék](../../appendix/C-benchmarks_hu.md)).
 
-**Import-számla:** egy tétel — a **vonzás alakja** (távolság-fordított kedvezmény). **Mit igazolt:** a kvantáltság-tételt éles számokkal; a szint-egybeesés és az ionizáció kéretlen ráadásait.
+**Import-számla (a 2026-08-20-i függőségi audit után helyesbítve):** két tétel — a **vonzás alakja** (távolság-fordított kedvezmény) és a **rács kiterjedésszáma** (három). A második eddig be nem könyvelt bemenet volt: a fejezet nem mondja ki, hány kiterjedésen számol, de a közzétett 1 : 1/4 : 1/9 : 1/16 létra és a szint-egybeesés a háromkiterjedésű Coulomb-feladat sajátja — két kiterjedésben a létra 1 : 1/9 : 1/25 volna (`IMP-04`). **Mit igazolt:** a kvantáltság-tételt éles számokkal; a szint-egybeesés és az ionizáció kéretlen ráadásait.
