@@ -52,10 +52,9 @@ hu\II-proofs\II-16-coordination-ten\PKG-16-3-race_hu.md
 hu\II-proofs\II-16-coordination-ten\PKG-16-4-readout_hu.md
 hu\II-proofs\II-16-coordination-ten\PKG-16-5-transfer_hu.md
 hu\II-proofs\II-16-coordination-ten\proof_hu.md
-hu\II-proofs\II-17-contract-origin\II-17-HANDOVER_hu.md
-hu\II-proofs\II-17-contract-origin\PKG-17-1-rulebook_hu.md
 hu\III-frontier\III-01-candidate-laws_hu.md
 hu\III-frontier\III-02-open-questions_hu.md
+hu\PROGRAM_hu.md
 shared\environment-check.py
 shared\II-13-dimension-race\PKG-13-2-ladders.py
 shared\II-13-dimension-race\PKG-13-3-race.py
@@ -106,7 +105,6 @@ shared\II-16-coordination-ten\PKG-16-2-ladders.py
 shared\II-16-coordination-ten\PKG-16-3-race.py
 shared\II-16-coordination-ten\PKG-16-4-readout.py
 shared\II-16-coordination-ten\PKG-16-5-transfer.py
-shared\II-17-contract-origin\PKG-17-2-verify.py
 </directory>
 
 <file path="hu\00-introduction_hu.md">
@@ -144,15 +142,15 @@ A II. rész minden száma négy, egymásra épülő eszköz valamelyikéből jö
 
 (1) **Zárt alakok**: ahol a rendszer kicsi, a minimum kézzel számolható ([II/1](../II-proofs/II-01-pair-bond/proof_hu.md): $L = \tfrac{1}{2} + \tfrac{1}{2}\cos^2(\theta_1 - \theta_2)$; a [II/5](../II-proofs/II-05-triangle/proof_hu.md) példány-szintű ága; a [II/12](../II-proofs/II-12-network-race/proof_hu.md) két tétele; a [II/13](../II-proofs/II-13-dimension-race/proof_hu.md) összeesési lemmája).
 
-(2) **A rácsgépezet**: a helyek rekeszekre osztása, a szerződések mátrixa, önforgó mintázatok és költséglétra sajátfeladatként; a felosztás finomításával a folytonos válasz, durván a rácsos ([II/3](../II-proofs/II-03-box/proof_hu.md), [II/4](../II-proofs/II-04-hydrogen-atom/proof_hu.md), [II/6](../II-proofs/II-06-universality/proof_hu.md), [II/7](../II-proofs/II-07-bowl-magic-numbers/proof_hu.md); a II/12–II/14-ben ugyanez hálózatokon fut: a szerződésháló mátrixa, ütem-létra, alulról töltés).
+(2) **A rácsgépezet**: a helyek rekeszekre osztása, a szerződések mátrixa, önforgó mintázatok és költséglétra sajátfeladatként; a felosztás finomításával a folytonos válasz, durván a rácsos ([II/3](../II-proofs/II-03-box/proof_hu.md), [II/4](../II-proofs/II-04-hydrogen-atom/proof_hu.md), [II/6](../II-proofs/II-06-universality/proof_hu.md), [II/7](../II-proofs/II-07-bowl-magic-numbers/proof_hu.md); a II/12–II/16-ban ugyanez hálózatokon fut: a szerződésháló mátrixa, ütem-létra, alulról töltés).
 
 (3) **A fok-verseny**: kiszámolt páronkénti taszítási integrálok a rács-mintázatokon, majd a fokon belüli összes elrendezés egzakt, teljes keresése ([II/8](../II-proofs/II-08-exclusion-vs-repulsion/proof_hu.md)).
 
 (4) **A teljes állapottér pontos minimuma**: kis darabokon a teljes súlyvektor-tér kezelése kerekítésmentes elvi hibával — sajátfeladat, időfejlesztés, nézet-számítás ([II/5](../II-proofs/II-05-triangle/proof_hu.md), [II/9](../II-proofs/II-09-kagome/proof_hu.md), [II/10](../II-proofs/II-10-internal-witness/proof_hu.md), [II/11](../II-proofs/II-11-locality-readout/proof_hu.md)).
 
-A [II/11](../II-proofs/II-11-locality-readout/proof_hu.md) a gépezetet két elemmel bővítette: a kész állapot páronkénti közelség-térképe és a belőle — címkék nélkül — dolgozó visszarakó; valamint az elfajult nulla-költségű altér egzakt vetítője. A II/13-hoz további kiegészítés: szabad kizáró példányok nézetei a példány-korrelációkból egzaktul számolódnak (a 4. eszköz gyorsított alakja). A II/14-hez: a szövés-létrák zárt Fourier-alakja mint kötelező ellenpróba a gépezet mellett, és az illeszkedési-mátrixos felépítés ($L = B^{\mathsf T} B$) mint független kódút a verseny előfeltétel-ellenőrzéséhez.
+A [II/11](../II-proofs/II-11-locality-readout/proof_hu.md) a gépezetet két elemmel bővítette: a kész állapot páronkénti közelség-térképe és a belőle — címkék nélkül — dolgozó visszarakó; valamint az elfajult nulla-költségű altér egzakt vetítője. A II/13-hoz további kiegészítés: szabad kizáró példányok nézetei a példány-korrelációkból egzaktul számolódnak (a 4. eszköz gyorsított alakja). A II/14-hez: a szövés-létrák zárt Fourier-alakja mint kötelező ellenpróba a gépezet mellett, és az illeszkedési-mátrixos felépítés ($L = B^{\mathsf T} B$) mint független kódút a verseny előfeltétel-ellenőrzéséhez. A II/15-höz: a versenyt hosszú-lebegős úton kell futtatni, mert a teli vég közelében a szokásos gépi pontosság halmozási hibája a rögzített tűrés fölé nő. A II/16-hoz: a mezőny akkorára nőtt, hogy a teljes kétutas ellenőrzés géppel elvégezhetetlen — helyette **ritka, négyelemű alak** áll, amely sorsolt mintákon és kis példányokon fedezi ugyanazt, kimondottan gyengébb erővel, számmal jelentett lefedettséggel; ide tartozik a kiolvasás **mintavételes vetítő-pecsétje** is, a korábbi teljes vetítő helyett.
 
-Beépített pontossági ellenőrzések: a taszítási alapintegrál analitikus értéke ($\sqrt{\pi/2} \approx 1{,}2533$; rácson 1,246, 0,6%); a befagyott fedés analitikus 9/16-ának pontos visszaadása (II/9); a 12 objektumos Kagome-darab egyezése a publikált egzakt értékkel; a 12-es kör kötésárának egyezése a publikált egzakt értékkel, a kontroll-vetítő egzakt nyoma (132) és a kontroll közelség-szórása ($10^{-16}$) (II/11); a II/12 két tételének analitikus fedezete (a kövér-szerződés elrendezés nulla költsége és a teljes-töltési nyomösszeg egzakt); a II/13 létráinak kettős számolása (gépezet és zárt képlet, egyezés $10^{-15}$), a darabolt két független felépítése és a sík binomiális létrája mint az összeesési lemma spektrális megerősítése; a II/14 kettős számolása mind a 224 hálón ($7{,}9\cdot10^{-14}$), a 224 háló egzakt nyomösszege (3072), a tér-szövés páros-jegyének egzakt tükör-szimmetriája ($10^{-15}$) és a 12×12×12-es golyó egzakt $4r^2+2$ törvénye $r=5$-ig.
+Beépített pontossági ellenőrzések: a taszítási alapintegrál analitikus értéke ($\sqrt{\pi/2} \approx 1{,}2533$; rácson 1,246, 0,6%); a befagyott fedés analitikus 9/16-ának pontos visszaadása (II/9); a 12 objektumos Kagome-darab egyezése a publikált egzakt értékkel; a 12-es kör kötésárának egyezése a publikált egzakt értékkel, a kontroll-vetítő egzakt nyoma (132) és a kontroll közelség-szórása ($10^{-16}$) (II/11); a II/12 két tételének analitikus fedezete (a kövér-szerződés elrendezés nulla költsége és a teljes-töltési nyomösszeg egzakt); a II/13 létráinak kettős számolása (gépezet és zárt képlet, egyezés $10^{-15}$), a darabolt két független felépítése és a sík binomiális létrája mint az összeesési lemma spektrális megerősítése; a II/14 kettős számolása mind a 224 hálón ($7{,}9\cdot10^{-14}$), a 224 háló egzakt nyomösszege (3072), a tér-szövés páros-jegyének egzakt tükör-szimmetriája ($10^{-15}$) és a 12×12×12-es golyó egzakt $4r^2+2$ törvénye $r=5$-ig; a II/15 létráinak kettős számolása 32 célon ($1{,}3\cdot10^{-12}$), a teljes-töltési egyezés ($8{,}4\cdot10^{-12}$) és a vetítő zárt kontra gépi útja ($1{,}7\cdot10^{-15}$); a II/16 ritka maradék-próbája ($5{,}3\cdot10^{-14}$) és a mintavételes vetítő-pecsét két ága ($5{,}1\cdot10^{-14}$, illetve $9{,}4\cdot10^{-16}$).
 </file>
 
 <file path="hu\appendix\C-benchmarks_hu.md">
@@ -195,14 +193,14 @@ id: APP-D
 type: appendix
 lang: hu
 pair: D-package-method_en.md
-pair_status: in-sync
+pair_status: needs-update
 doc_version: "1.4"
 status: ervenyes
 ---
 
 # D) A csomag-nyomvonal
 
-A csomag-módszer elve a nyelv saját módszertani szabálya: [I/1](../I-language/I-01-concept_hu.md); a technikai leképezése (csomag-sablon, kapu-szabály, branch- és PR-rend) a [szabálykönyvben](../../CONTRIBUTING.md) áll. Ez a fájl a lefutott csomagsorozatok **nyomvonalát** őrzi: próbánként egy szakasz, csomagonként egy sor — mi volt a csomag dolga, és mi lett a hozadéka. Új próba nyomvonala mindig új szakaszként kerül a végére.
+A csomag-módszer elve a nyelv saját módszertani szabálya: [I/1](../I-language/I-01-concept_hu.md); a technikai leképezése (csomag-sablon, kapu-szabály, branch- és PR-rend) a [szabálykönyvben](../../CONTRIBUTING.md) áll. Ez a fájl a lefutott csomagsorozatok **nyomvonalát** őrzi: próbánként egy szakasz, csomagonként egy sor — mi volt a csomag dolga, és mi lett a hozadéka. Új próba nyomvonala mindig új szakaszként kerül a végére. A nyomvonal a II/13-nál kezdődik, mert a csomag-módszer ott lépett életbe; a korábbi tizenkét próba a szabályrend kialakulása előtt készült, nyomvonaluk nincs.
 
 ## A II/13 nyomvonala
 
@@ -285,7 +283,7 @@ id: I-01
 type: chapter
 lang: hu
 pair: I-01-concept_en.md
-pair_status: in-sync
+pair_status: needs-update
 doc_version: "1.3"
 status: ervenyes
 ---
@@ -296,9 +294,17 @@ Az elgondolás egy mondatban: a fizikai világ objektumorientált mintákkal ír
 
 **A módszertani szabály.** Minden új minta addig metafora, amíg nem ad számot. A nyelv bővítésének menete rögzített: (1) a minta kimondása OOP-nyelven, (2) a matematikai alak felírása, (3) egy ismert kísérleti vagy publikált számolt eredmény visszaszámolása. Ami a (3)-on nem megy át, az nem kerül a nyelvbe.
 
-**Az import-számla.** A fenti szabály azt méri, igazat mond-e a nyelv; azt nem, hogy segít-e gondolkodni. Erre a mérce: minden levezetést szigorúan a nyelv fogalmain belül kell elvégezni, és minden kívülről kölcsönzött fogalmat fel kell jegyezni. Három kimenet: *segít* — a kulcsgondolatot a nyelv szerkezete mondja ki előbb, a matematika csak igazolja; *lyukas* — kevés, körülhatárolt import kell, és ezek a nyelv következő bővítendő fogalmai; *nem segít* — annyi az import, hogy az út valójában a hagyományos fizikai levezetés, átcímkézve. A II. rész minden fejezete import-számlával zárul; a teljes nyelv eddigi importja három tétel (helyiség — a [II/11](../II-proofs/II-11-locality-readout/proof_hu.md) óta felerészben tétel, maradéka a [kiválasztás nyitott kérdése](../III-frontier/III-02-open-questions_hu.md) —, [vonzásalak](../II-proofs/II-04-hydrogen-atom/proof_hu.md), [két típusdeklaráció az elektronra](../II-proofs/II-07-bowl-magic-numbers/proof_hu.md)), minden más belül született.
+**Az import-számla.** A fenti szabály azt méri, igazat mond-e a nyelv; azt nem, hogy segít-e gondolkodni. Erre a mérce: minden levezetést szigorúan a nyelv fogalmain belül kell elvégezni, és minden kívülről kölcsönzött fogalmat fel kell jegyezni. Három kimenet: *segít* — a kulcsgondolatot a nyelv szerkezete mondja ki előbb, a matematika csak igazolja; *lyukas* — kevés, körülhatárolt import kell, és ezek a nyelv következő bővítendő fogalmai; *nem segít* — annyi az import, hogy az út valójában a hagyományos fizikai levezetés, átcímkézve. A II. rész minden fejezete import-számlával zárul.
 
-**A csomag-módszer.** A II/13-tól a nagyobb levezetések előre rögzített szabálykönyvvel, egyenként ellenőrzött levezetés-csomagokban készülnek (kérdés — bemenetek — levezetés — ítélet — kimenő állítások), kapu-szabállyal: csomagra csak jóváhagyása után építhet a következő, és a fejezet kizárólag elfogadott csomagok kimenő állításaiból áll össze. A szabálykönyv számolás előtti rögzítése az utólagos szabálymódosítást zárja ki — a jóslat így marad cáfolható. A nyomvonal: [D függelék](../appendix/D-package-method_hu.md).
+**Mit számolunk importnak, és mit nem.** Két külön nyilvántartás van, mert két külön dologról szólnak. **Import** az a fogalom, amit a nyelv nem tudott előállítani, ezért kívülről kölcsönöztük — ez a világról szóló állítást hoz be, tehát a nyelv adóssága. **Kimondott konvenció** az, amit mi magunk rögzítettünk arról, hogyan folyjon egy próba — ez a világról semmit nem állít, de megszabja, mit jelent az eredmény, ezért ugyanúgy fel kell jegyezni. A kettőt eddig ugyanaz az oszlop vezette a [II. rész indexében](../II-proofs/II-00-index_hu.md), ezért itt kimondjuk a különbséget és külön soroljuk fel őket.
+
+**Az importok — három tétel.** Helyiség (a [II/11](../II-proofs/II-11-locality-readout/proof_hu.md) óta felerészben tétel, maradéka a [kiválasztás nyitott kérdése](../III-frontier/III-02-open-questions_hu.md); a [II/9](../II-proofs/II-09-kagome/proof_hu.md) Kagome-szomszédsága ennek esete, nem külön tétel); [vonzásalak](../II-proofs/II-04-hydrogen-atom/proof_hu.md); [két típusdeklaráció az elektronra](../II-proofs/II-07-bowl-magic-numbers/proof_hu.md). Minden más belül született.
+
+**A kimondott konvenciók — kettő.** A versenyszabály ([II/12](../II-proofs/II-12-network-race/proof_hu.md)): rögzített szerződés-költségvetést kötelező elhelyezni, és az egyensúly a legkisebb összköltségű elrendezés. A kiválasztási szabály ([II/16](../II-proofs/II-16-coordination-ten/proof_hu.md)): mi kerül be a fő mezőnybe egy adott koordináción. A pásztázási és méret-korlátok (lépés-plafon, legkisebb oldalhossz) nem konvenciók, hanem kimondott hatókör-határok: a próba érvényességét szűkítik, nem a szabályát adják.
+
+**Egy elem kettős állású, kimondva.** A helyek egyenrangúsága ([III/1, 5.](../III-frontier/III-01-candidate-laws_hu.md)) mint kimondás import volna, mint irány viszont az [5. törvény](I-06-identity_hu.md) kiterjesztése a helyekre. A fenti hármas a levezetése előtti állapotot tükrözi: **jelöltként tartjuk nyilván, nem importként** — ha a levezetés nem sikerül, negyedik importtá válik. Ez a nyilvántartás adóssága, nyíltan.
+
+**A csomag-módszer.** A szabályrend a munka közben alakult ki: a II/13-tól a nagyobb levezetések előre rögzített szabálykönyvvel, egyenként ellenőrzött levezetés-csomagokban készülnek (kérdés — bemenetek — levezetés — ítélet — kimenő állítások), kapu-szabállyal: csomagra csak jóváhagyása után építhet a következő, és a fejezet kizárólag elfogadott csomagok kimenő állításaiból áll össze. A szabálykönyv számolás előtti rögzítése az utólagos szabálymódosítást zárja ki — a jóslat így marad cáfolható. A nyomvonal: [D függelék](../appendix/D-package-method_hu.md).
 </file>
 
 <file path="hu\I-language\I-02-object-state_hu.md">
@@ -504,7 +510,9 @@ status: ervenyes
 | 4 | A szerződés bíró és motor. | [II/2](../II-proofs/II-02-exchange-oscillation/proof_hu.md) (statika+dinamika egy számmal); II/3–II/10 mind rá épül |
 | 5 | A példányazonosító nem adat. | [II/7](../II-proofs/II-07-bowl-magic-numbers/proof_hu.md) (bűvös számok), [II/8](../II-proofs/II-08-exclusion-vs-repulsion/proof_hu.md) (Hund), [II/11](../II-proofs/II-11-locality-readout/proof_hu.md) (átnevezés-próba a helyeken) |
 
-Tételek (levezetettek): két típusosztály és a kizárás ([I/6](I-06-identity_hu.md)); kicserélődési kedvezmény ([I/6](I-06-identity_hu.md), [II/8](../II-proofs/II-08-exclusion-vs-repulsion/proof_hu.md)); clone() lehetetlensége és az átadási szemantika ([I/7](I-07-measurement_hu.md)); a getter díja ([I/7](I-07-measurement_hu.md)); egyformasági tétel ([II/6](../II-proofs/II-06-universality/proof_hu.md)); frusztráció-maradék ([II/5](../II-proofs/II-05-triangle/proof_hu.md)); sáv-tétel a csupa-háromszög rácson ([II/9](../II-proofs/II-09-kagome/proof_hu.md)); helyiség-visszaolvasás és felület-ismertetőjel ([II/11](../II-proofs/II-11-locality-readout/proof_hu.md)); összeomlási tétel és nyom-döntetlen ([II/12](../II-proofs/II-12-network-race/proof_hu.md)); szövés-összeesési lemma ([II/13](../II-proofs/II-13-dimension-race/proof_hu.md)). Jelölt törvények: [III/1](../III-frontier/III-01-candidate-laws_hu.md).
+Tételek (levezetettek): két típusosztály és a kizárás ([I/6](I-06-identity_hu.md)); kicserélődési kedvezmény ([I/6](I-06-identity_hu.md), [II/8](../II-proofs/II-08-exclusion-vs-repulsion/proof_hu.md)); clone() lehetetlensége és az átadási szemantika ([I/7](I-07-measurement_hu.md)); a getter díja ([I/7](I-07-measurement_hu.md)); egyformasági tétel ([II/6](../II-proofs/II-06-universality/proof_hu.md)); frusztráció-maradék ([II/5](../II-proofs/II-05-triangle/proof_hu.md)); sáv-tétel a csupa-háromszög rácson ([II/9](../II-proofs/II-09-kagome/proof_hu.md)); helyiség-visszaolvasás és felület-ismertetőjel ([II/11](../II-proofs/II-11-locality-readout/proof_hu.md)); összeomlási tétel és nyom-döntetlen ([II/12](../II-proofs/II-12-network-race/proof_hu.md)); szövés-összeesési lemma ([II/13](../II-proofs/II-13-dimension-race/proof_hu.md)); méret-műtermék tétel ([PKG-14-5](../II-proofs/II-14-dimension-staircase/PKG-14-5-readout-repeat_hu.md)); lyuk-tükör tétel ([PKG-15-5](../II-proofs/II-15-dimension-fourth-rung/PKG-15-5-hole-mirror_hu.md)); irány-tétel ([PKG-15-6](../II-proofs/II-15-dimension-fourth-rung/PKG-15-6-direction_hu.md)); tető-tétel ([PKG-15-7](../II-proofs/II-15-dimension-fourth-rung/PKG-15-7-top_hu.md)). Jelölt törvények: [III/1](../III-frontier/III-01-candidate-laws_hu.md).
+
+A II/13 utáni négy tétel egy-egy mondatban, mert a szövegük a csomagokban áll, nem fejezetben: **a méret-műtermék tétel** — a kis szövésen fellépő átellenes visszhang a méret műterméke, nagyobb szövésen a kiolvasás hiánytalanul zárul; **a lyuk-tükör tétel** — két tükör-jegyű háló költségkülönbsége bármely töltésen egyenlő a tükörtöltésen vett különbséggel, vagyis a teli vég a ritka vég tükörképe; **az irány-tétel** — a ritka szakaszon a kisebb kiterjedésű háló a szigorúan olcsóbb, tanúsított szakaszhosszal minden páron; **a tető-tétel** — az előző kettő összefűzése: a legsűrűbb szakaszon a kisebb kiterjedés veri a nagyobbat. A tető-tétel a [III/1, 8.](../III-frontier/III-01-candidate-laws_hu.md) tető-törvényének tételi lába; a törvény másik, mért fele ott áll jelöltként.
 </file>
 
 <file path="hu\I-language\I-10-dictionary_hu.md">
@@ -630,14 +638,20 @@ id: II-00
 type: index
 lang: hu
 pair: II-00-index_en.md
-pair_status: in-sync
-doc_version: "1.4"
+pair_status: needs-update
+doc_version: "1.5"
 status: ervenyes
 ---
 
 # II. rész — A próbák (index)
 
 Minden fejezet azonos rendben halad: **a kérdés — a rendszer és a szerződés — a számolás — az eredmény — ellenőrzés a valóságon — import-számla — mit igazolt a nyelvből.** A fejezetszámozás bővítésálló: új próba mindig a sor végére kerül. Ez a fájl csak navigáció; az igazság forrása a próbafájl.
+
+**A szabályrend két nemzedéke.** A szabálykönyv munka közben alakult ki: a csomag-módszer a II/13-tól él, előtte a próbák szabadabb rendben készültek. Az ellenőrzések a korábbi tizenkét próbán is megtörténtek, de nem a mai szabályrend szerint — előre rögzített szabálykönyv, kapu-szabály, pecsét —, ezért a repóban nem állnak futtatható, újraszámolható alakban. Ez nem az ítéletüket kérdőjelezi meg, hanem a bizonyítékuk rangját mondja ki: a II/13-tól szabályrend szerinti a bizonyítás, előtte szabályrend előtti.
+
+**Mikor kell pótolni.** Szabályrend előtti próba eredményére új állítás nem építhető. Ha egy tétel vagy mérföldkő egy korábbi próbára támaszkodik, annak a próbának a szabályrend szerinti megismétlése új próbaként, a sor végén, saját számmal fut le. A meglévő fejezet nem íródik át és nem számozódik át.
+
+**Ha az új szám mást ad.** Az új, pecsételt szám a mérvadó; a korábbi érték szabályrend előtti leletté minősül. A csere feltétele a rá épülő állítások átvizsgálása — a régi számot hordozó törvény-, tétel- és szerződés-hivatkozások mind ellenőrzendők, mielőtt a fejezet ítélete módosul. Ha egy tétel az új számmal nem áll, az bukás-eredmény, a II/12 mintájára rögzítve.
 
 | Próba | Egy mondatban | Ítélet | Import |
 |---|---|---|---|
@@ -657,9 +671,6 @@ Minden fejezet azonos rendben halad: **a kérdés — a rendszer és a szerződ�
 | [II/14 — A kiterjedés-lépcső](II-14-dimension-staircase/proof_hu.md) | Teljes lépcső: ritkán vonal, közepén sík, fél-töltéstől tér; a sík–tér határt a tükör-jegy dönti; az előny vékony. | igen; a kiolvasási korlát méret-műtermékként igazolva (PKG-14-5) | nulla |
 | [II/15 — A negyedik fok](II-15-dimension-fourth-rung/proof_hu.md) | Nyolcas koordináción a lépcső felmegy négyig — a negyedik foké a legnagyobb sáv, benne a fél-töltés —, de a tetején visszafordul: a legsűrűbb tartomány a téré. | részleges — a negyedik fok áll, a tető a háromé | nulla |
 | [II/16 — Tízes koordináció](II-16-coordination-ten/proof_hu.md) | A lépcső kihagyja a hármat; a tetőt az egyetlen tükör-jegyű fő jelölt, a honos öt viszi — az egyesített tető-törvény születése. | részleges — két néven nevezett lelettel; a tető-törvény két lábon áll | a kiválasztási szabály (kimondott konvenció) |
-| [II/17 — A szerződés eredete](II-17-contract-origin/II-17-HANDOVER_hu.md) | **Fut.** Ha a szerződés tartalmát nem kívülről adjuk, hanem a példányok kész állapota generálja: visszatér-e a lapos háló, elomlik-e párokba, vagy marad köztes? | folyamatban — a szabálykönyv fagyasztva, a hurok még nem futott | a generáló szabály (kimondott konvenció) |
-
-> **Futó próba.** A II/17 még nem zárult le, ezért nincs `proof_hu.md`-je; a sor az átadó jegyzetre mutat, amely összefoglalja, hol tart és mi a következő lépés.
 </file>
 
 <file path="hu\II-proofs\II-01-pair-bond\proof_hu.md">
@@ -2706,7 +2717,7 @@ packages: [PKG-16-1, PKG-16-2, PKG-16-3, PKG-16-4, PKG-16-5]
 
 # II/16. Tízes koordináció — az ítélet: részleges („a lépcső kihagyja a hármat; a tető a honosé")
 
-**Egy mondatban.** Tízes koordináción a lépcső vonal–sík–négykiterjedés–ötkiterjedés sorrendben áll — a hármat kihagyja —, a tetőt pedig az egyetlen tükör-jegyű fő jelölt, az ötkiterjedésű honos viszi; a három próba (II/14, II/15, II/16) együtt új törvényt ad: **a tetőt a mezőny legalacsonyabb kiterjedésű tükör-jegyű tagja viszi** — a korábbi „tető-hármas" olvasat ennek árnyéka volt.
+**Egy mondatban.** Tízes koordináción a lépcső vonal–sík–négykiterjedés–ötkiterjedés sorrendben áll — a hármat kihagyja —, a tetőt pedig az egyetlen tükör-jegyű fő jelölt, az ötkiterjedésű honos viszi; a három próba (II/14, II/15, II/16) együtt új törvényt ad: **a tetőt a teljes mezőny legalacsonyabb kiterjedésű tükör-jegyű tagja viszi** — a korábbi „tető-hármas" olvasat ennek árnyéka volt.
 
 ## A kérdés és a rendszer
 
@@ -2722,7 +2733,7 @@ A hurok a honos győztesen zárul ([PKG-16-4](PKG-16-4-readout_hu.md)): az N = 1
 
 ## A tétel-átvitel — a törvény két lába
 
-A [lyuk-tükör tétel](../II-15-dimension-fourth-rung/PKG-15-5-hole-mirror_hu.md) szövege változatlanul érvényes; a páros készleten ([PKG-16-5](PKG-16-5-transfer_hu.md)) a tanúsított tető-szakaszokon **tételként a ritka sorrend tükre él: vonal < tér < négykiterjedés < ötkiterjedés** — és a teljes mezőny utolsó 2000 töltéséből 1999-et valóban a páros vonal-tag, az (1, 3, 5, 7, 9) nyeri. Az egyesített tető-törvény ([III/1, 8.](../../III-frontier/III-01-candidate-laws_hu.md)) így két lábon áll: a „tükör-jegyűek uralják a tetőt" fele mért, három koordináción kivétel nélkül; a „közülük a legalacsonyabb" fele tétel.
+A [lyuk-tükör tétel](../II-15-dimension-fourth-rung/PKG-15-5-hole-mirror_hu.md) szövege változatlanul érvényes; a páros készleten ([PKG-16-5](PKG-16-5-transfer_hu.md)) a tanúsított tető-szakaszokon **tételként a ritka sorrend tükre él: vonal < tér < négykiterjedés < ötkiterjedés** — és a teljes mezőny utolsó 2000 töltéséből 1999-et valóban a páros vonal-tag, az (1, 3, 5, 7, 9) nyeri. Az egyesített tető-törvény ([III/1, 8.](../../III-frontier/III-01-candidate-laws_hu.md)) így két lábon áll: a „közülük a legalacsonyabb" fele tétel; a „tükör-jegyűek uralják a tetőt" fele mért — a hatókörével együtt: **a fő mezőnyön mindhárom koordináción kivétel nélkül, a teljes mezőnyön háromból kettőn.** A teljes mezőnyre e próba nézte meg először és eddig utoljára a tetőt (a fenti 1999/2000-es lelet); hatoson a [II/14](../II-14-dimension-staircase/proof_hu.md) teli végét szintén tükör-jegyű vonalak viszik, a nyolcas koordináció teljes-mezőny-teteje viszont **nincs megnézve** — a [PKG-15-3](../II-15-dimension-fourth-rung/PKG-15-3-race_hu.md) csak annyit rögzít, hogy ott a fő négyes egyetlen töltést sem nyer szigorúan.
 
 ## A mezőny-lelet
 
@@ -2734,240 +2745,11 @@ A négyelemű kétutas forma redundanciája élesben vizsgázott: a maradék-pr�
 
 ## Mit igazolt, és mit nem
 
-Igazolta: az ötödik fok létezik és győztese belülről is öt; a tükör-uralom harmadik, kivétel nélküli megerősítését; és az egyesített tető-törvényt a két lábával. Amit nem: a „miért három" kérdés ezzel **végleg alakot váltott** — a hatos és nyolcas koordináción a legalacsonyabb tükör-hordozó *történetesen* a három; hogy miért a tükör választ (a hordozó-fele levezetése), miért maradt ki a három e koordináción, és miért ott ül a világ sűrűsége, ahol — nyitott. A kiválasztási szabály kimondott konvenció; az 1/r-vonzás-import érintetlen.
+Igazolta: az ötödik fok létezik és győztese belülről is öt; a tükör-uralom harmadik, kivétel nélküli megerősítését a fő mezőnyön; az egyesített tető-törvényt a két lábával; és — elsőként a három próba közül — a tető leolvasását a **teljes** mezőnyön is. Amit nem: a „miért három" kérdés ezzel **végleg alakot váltott** — a hatos és nyolcas koordináción a legalacsonyabb tükör-hordozó *történetesen* a három; hogy miért a tükör választ (a hordozó-fele levezetése), miért maradt ki a három e koordináción, és miért ott ül a világ sűrűsége, ahol — nyitott. Nyitva maradt a törvény mért felének harmadik támpontja is: a nyolcas koordináció teljes-mezőny-teteje ([III/2, 8.](../../III-frontier/III-02-open-questions_hu.md)). A kiválasztási szabály kimondott konvenció; az 1/r-vonzás-import érintetlen.
 
 ## Bővítési irány
 
-Három út: **a tükör-hordozó-térkép** — mely koordinációkon mely fok a legalacsonyabb tükör-jegyű szövés (kombinatorikus, próbán kívül is levezethető); **a hordozó-kérdés** — a III/1, 7. tételesítése: miért a tükör választ; és **a gyökér-programnak átadott pontos kérdés** ([III/2, 7–8.](../../III-frontier/III-02-open-questions_hu.md)): miért olyan a világ szerződés-szerkezete, hogy a legalacsonyabb tükör-hordozója a három.
-</file>
-
-<file path="hu\II-proofs\II-17-contract-origin\II-17-HANDOVER_hu.md">
----
-id: II-17-handover
-type: note
-part_of: II-17
-lang: hu
-pair: II-17-HANDOVER_en.md
-pair_status: in-sync
-doc_version: "1.0"
-status: ervenyes
-builds_on: [PKG-17-1]
-imports: "nincs"
----
-
-# II/17 — Átadó jegyzet (hol tartunk, mi jön)
-
-**Ez a fájl azért van, hogy a repó dumpja önmagában elég legyen a folytatáshoz.** Aki innen veszi fel a fonalat — ember vagy gép —, ebből tudja meg, miért létezik a II/17, mi van már lezárva, és mi a következő lépés.
-
-## 1. Miért létezik ez a fejezet
-
-A II/12–II/16 három próbán át ugyanazt a leletet adta: **kézzel felsorolt hálók közt a kiválasztás nem dőlhet el**, mert a hangolt vonal-családtagok mindent imitálnak. A II/16 ezt lezárta: a lépcső tetejét a koordinációszám dönti el, azt pedig kézzel adjuk meg. Ebből következik, hogy a **hármas kiterjedés a nyelvben ma egyetlen helyen él: a vonzás 1/r alakjában**, amit a II/4 importként kap.
-
-A visszakövetés a szerkezeti gyökérig: a nyelv szabályozza, hogy **az állapotot ki birtokolja** (2. törvény), de nem szabályozza, hogy **a szerződést ki birtokolja**. Ami szabályozatlan, az a modellezőre marad — ezért adjuk kézzel a hálót. A II/17 ezt a lyukat célozza. Ha a szerződés a példányok állapotából születik, akkor a háló kimenetté válik, és az 1/r alakja szerkezetileg nem lehet import.
-
-Az összeomlási tétel szökési útja — az **üres hely** (szerződés példány nélkül) — ugyanennek a hiánynak a nyoma: ilyen csak akkor lehet, ha a szerződést nem példány hordozza.
-
-## 2. Mi van lezárva
-
-**`PKG-17-1-rulebook_hu.md` — fagyasztva (`jovahagyva`), nem módosítható.** Tartalma: a lemma, a rendszer (12 objektum, mind a 66 pár, változó tartalmú kötés-szerződés), a hurok, a generáló szabály hat tagja, két normálás, négy induló, 200 kör, mag 1166, négy ítélet-osztály, a kiolvasási kapu, az import-számla.
-
-**`PKG-17-2-verify.py` — a B3-előfeltétel, lefutott, a kapu tiszta.** Amit visszaad: kötésár egzaktul 45/66, elfajulás 132, közelség-szórás 1,5·10⁻¹⁶; kör kötésára 0,30105, közelségei 0,4438 / 0,1231 / 0,0656 / 0,0448 / 0,0366; ráadásul a II/1 zárt alakja és a II/5 három száma (3/2, négyszeres elfajulás, 15/8). A nulla-próba mind a hat családtagon a várt eredményt adja.
-
-**Amit a hitelesítés hozott, még fagyasztás előtt:** az F5 (küszöbös) családtag a lapos indulóból egyetlen körben nullára visz minden tartalmat. Ebből lett a negyedik ítélet-osztály (**ÜRES**) és a T1 kivétele. Az F5 azért marad a családban, mert ez a híd az üres szerződés ára felé.
-
-## 3. Amit a hitelesítés menet közben rögzített (nem kell újra levezetni)
-
-A kötés-szerződés zárt alakja két úton felépítve egyezik: a négy súly alakjából (`a² + d² + ½(b+c)²`) és operátor-alakban is. Az alapállapot magnesezettség-blokkokban számolható, az elfajult eset egzakt vetítővel — ez a II/11 kontroll-módszere. A közelség-mérőszám természetes alapú (a II/11 0,69 jegye = ln 2).
-
-## 4. A következő lépés
-
-**`PKG-17-2-loop.py`** — a hurok maga. 48 futás (6 családtag × 2 normálás × 4 induló), 200 kör, percek. A hitelesítőben már készen áll minden alkatrész, amit használni fog.
-
-Sorrend a szabálykönyv szerint: B3-előfeltétel → nulla-próba → elfajulás-kezelő naplózással → 48 futás → besorolás. **A kiolvasás kapuja: kizárólag KÖZTES ítélet esetén.**
-
-## 5. Az elágazás (előre rögzítve, nem az eredmény után választandó)
-
-| Ítélet | Mit jelent | Folytatás |
-|---|---|---|
-| **KÖZTES** | a lemma áll | PKG-17-3: kiolvasás; utána nagyobb rendszer, mert 12 objektumon kiterjedésszám nem mondható ki |
-| **PÁR** | a kötés-szerződés rossz hordozó | ugyanez a hurok a **simasági szerződéssel**, helyeken — ágváltás, nem kudarc |
-| **LAPOS** | a közelség nem az a kivonat, amiből szerkezet születhet | új kérdés: van-e más állapot-kivonat, ami szimmetriát tud törni |
-| **ÜRES** | a generálás elviszi a hálót | az ár kérdése előre hozandó (PKG-17-4) |
-
-## 6. Függő nyelv-módosítások
-
-**Mehet bármikor** (a mai állapotot rögzíti, nem eredményt állít):
-
-1. `I-01-concept_hu.md` — az import-számla kettébontása: *helyiség* (fél tétel, marad) és *a szerződésháló eredete* (új, teljesen nyitott sor).
-2. Hiányzó `imports:` sorok a hálót kapó fejezetek fejlécébe: II/3, II/4, II/6, II/9, II/10 → szomszédság; II/12–II/16 → felsorolt mezőny és kötelező költségvetés.
-
-**Vár a hurok eredményére** (mert a megoldásról állít valamit):
-
-3. `I-04-ownership-view_hu.md` — a szerződés birtoklása ma szabályozatlan.
-4. `I-08-contract-store_hu.md` — új sor: üres szerződés, *jelölt, ára levezetetlen*.
-5. `III-01-candidate-laws_hu.md` — új 9. jelölt két lábbal: (a) a szerződés kötelező minden pár közt, levezetési jelölt az 5. törvényből; (b) az üres szerződés nem ingyenes, levezetési jelölt az 1. törvényből. Bukási feltétel vele együtt: ha a kijövő koordinációszám az üres-ár alakjára érzékeny, a jelölt megbukott.
-6. `III-02-open-questions_hu.md` — a 2., a 7. és a 8. sűrűség-fele egy programmá vonva; a mérőszáma: *van-e olyan fejezet, amelynek a bemenetei közt nem szerepel háló*.
-7. `I-10-dictionary_hu.md` — az üres szerződés sora; a jobb oldal **üresen hagyandó**, mert a fizikának erre nincs bevett szava.
-
-**Amihez nem szabad nyúlni:** az I/9 törvénytáblája. Nincs hatodik törvény, amíg a próba le nem futott.
-
-## 7. Egy elvi döntés, ami már megszületett
-
-Verziószám (**„leíró nyelv 2.0"**) nem lesz. Az elévülés nem a fejezeteket éri, hanem a bemeneteiket, és erre a fejlécek `imports:` mezője a nyilvántartás. A verzió így nem dátum, hanem lekérdezés: **azok a fejezetek, amelyeknél az import-lista üres.** Ma három ilyen van (II/1, II/2, II/5) — a II/8 vizsgálandó, mert az már ma is minden pár közt ható, távolsággal csökkenő szerződéssel dolgozik, vagyis lehet, hogy eleve ide tartozik.
-
-## 8. Kockázat, amit a következő ülés elején érdemes szem előtt tartani
-
-A **II/3, II/4, II/6, II/9, II/10** öt fejezete arra épül, hogy a keverés csak szomszédok közt folyik. Kötelező szerződés mellett ez csak akkor marad igaz, ha a generált tartalmak a távolsággal csökkennek. **Az első kötelezettség tehát nem a geometria előállítása, hanem a csökkenés visszaadása** — enélkül nincs mit tovább vizsgálni.
-</file>
-
-<file path="hu\II-proofs\II-17-contract-origin\PKG-17-1-rulebook_hu.md">
----
-id: PKG-17-1
-type: package
-part_of: II-17
-lang: hu
-pair: PKG-17-1-rulebook_en.md
-pair_status: in-sync
-doc_version: "1.4"
-status: jovahagyva
-builds_on: [II-12, II-11, II-05, II-01, I-06, I-04]
-imports: "a generáló szabály (kimondott konvenció, 9. szakasz)"
----
-
-# PKG-17-1 — A szerződés eredete: a lapos állapot stabilitása (levezetés-csomag)
-
-**Számolást nem tartalmaz** — a szabályokat rögzíti minden számolás előtt; utólag nem módosítható.
-
-## 1. Kérdés (egy mondat, előre rögzítve)
-
-Ha a szerződés tartalmát nem kívülről adjuk meg, hanem a példányok kész állapota generálja — visszatér-e a rendszer a tökéletesen lapos szerződéshálóhoz, elomlik-e a párokba, vagy marad a kettő között valami?
-
-**Amit ez a csomag nem kérdez:** hány kiterjedésű a kijövő háló, mekkora a koordinációszám, és mi a vonzás alakja. Ezek későbbi csomagok tárgyai; itt szándékosan egyetlen eldöntendő kérdés áll.
-
-## 2. Bemenetek
-
-A [II/11](../II-11-locality-readout/proof_hu.md) teljes gépezete és **kiszámolt kontrollja**: a páronkénti közelség-mérőszám a kész állapotból, az elfajult nulla-költségű altér egzakt vetítője, a vak visszarakó és a golyó-olvasat. A [II/1](../II-01-pair-bond/proof_hu.md) kötés-szerződése zárt alakban; a [II/5](../II-05-triangle/proof_hu.md) frusztráció-maradéka; a [II/12](../II-12-network-race/proof_hu.md) összeomlási tétele és a kötés-oldal kézzel eldőlt páros-fedése; a [kizárólagos birtoklás](../../I-language/I-07-measurement_hu.md) és az [5. törvény](../../I-language/I-06-identity_hu.md).
-
-A II/15–II/16 három helyesbítés-tanulsága szabályként öröklődik, ahol értelmezhető: az elsődleges számolási út hosszú-lebegős (H3); az elemek egyedisége gépi állítással igazolt (H1).
-
-## 3. A rögzített rendszer
-
-- **Tizenkét objektum, mind a 66 pár közt szerződés** — a rendszer azonos a [II/11](../II-11-locality-readout/proof_hu.md) kontrolljával, azzal az egy különbséggel, hogy a szerződések **tartalma** nem egységes, hanem változó.
-- A szerződés alakja a bevizsgált kötés-szerződés, páronkénti tartalommal: $w_{ij} \ge 0$ szorozza a [II/1](../II-01-pair-bond/proof_hu.md) zárt alakját. Tartalom nélküli (üres) pár megengedett — $w_{ij} = 0$.
-- Az állapot a **teljes állapottér pontos minimuma** (B függelék, 4. eszköz; 4096 dimenzió, sűrű úton egzaktul). Elfajulás esetén a nulla-költségű altér egyenletes keveréke, **egzakt vetítővel** — a II/11 kontroll-módszere, változatlanul.
-- Az elsődleges út hosszú-lebegős; az azonosság-tűrés $10^{-10}$, a hurok megállási tűrése $10^{-9}$ a tartalom-vektoron.
-
-## 4. A hurok és a generáló szabály
-
-A hurok egy köre, rögzítve:
-
-1. adott tartalom-vektorból ($w$, 66 szám) a kész állapot,
-2. a kész állapotból a páronkénti közelség ($I_{ij}$) — a II/11 mérőszáma, változatlanul,
-3. a közelségből az új tartalom: $w_{ij} = f(I_{ij})$, majd normálás,
-4. ismétlés megállásig vagy a rögzített körszámig (**200 kör**).
-
-**A generáló szabály családja** (mind a hat tag kötelezően lefut):
-
-| Tag | $f$ | Miért van benne |
-|---|---|---|
-| F1 | $x$ | egyenes arány |
-| F2 | $x^2$ | erősített visszacsatolás |
-| F3 | $\sqrt{x}$ | tompított visszacsatolás |
-| F4 | $x/(1+x)$ | telítődő |
-| F5 | $\max(0,\, x - \bar{x})$ | átlag fölötti rész (küszöbös) |
-| F6 | $x$, de körönként félúton lépve | lassított hurok (a körbe-ugrálás kiszűrésére) |
-
-**Normálás — két alak, mindkettő kötelező:** (N1) a tartalmak összege 66 egység; (N2) a legnagyobb tartalom 1. A normálás az a hely, ahol a II/12 költségvetés-konvenciója visszaszivároghatna; ezért két, egymással nem rokon alakon fut, és az ítélet csak a **kettő egyezésén** áll.
-
-**Indulás — négy induló, mindegyik minden családtaggal és mindkét normálással:**
-
-| Induló | Leírás | Mit próbál |
-|---|---|---|
-| I1 | lapos + sorsolt zaj, $10^{-3}$ | stabil-e a lapos állapot |
-| I2 | lapos + egyetlen pár megemelve | vonzza-e a pár-sarok |
-| I3 | lapos + egy párosítás (6 diszjunkt pár) megemelve | a II/12 páros-fedése mint medence |
-| I4 | lapos + a 12-es kör élei megemelve | a geometria mint medence |
-
-Sorsolási mag mindenütt: **1166** (= 66 · 17 + 44; kimondott, rögzített szám). A zaj nagysága és a megemelés mértéke ($1{,}1\times$) rögzített.
-
-## 5. Levezetett előzetes tények
-
-**(T1) A lapos állapot fixpont — egy kivétellel.** Teljes hálón, egységes tartalommal a rendszer minden párja egyenrangú; a kész állapotból számolt közelség ezért minden páron azonos, tehát az új tartalom is egységes. Ez nem várakozás, hanem szimmetria-következmény — a kérdés emiatt **nem** az, hogy létezik-e lapos fixpont, hanem hogy **stabil-e**.
-
-**A kivétel az F5** (küszöbös tag): a lapos ponton minden közelség egyenlő az átlagával, tehát az átlag fölötti rész mindenütt pontosan nulla. Az F5 a lapos indulóból **egyetlen körben az ÜRES állapotba visz** — nem fixpont, hanem azonnali szétesés. A küszöbös generálás tehát önmagában szimmetriatörő; ez az F5 érdemi tartalma a családban, és ezért marad benne.
-
-**(T2) Az üres szerződés ára ebben a csomagban nem hat.** Kötelező szerződés mellett a párok száma rögzített (66), a folytonos generálás pedig általános helyzetben sehol nem ad pontos nullát; az üres ára így minden elrendezésre azonos állandó, a szimmetriát nem tudja megtörni. **Kimondva: az üres ára ezért nincs benne ebben a csomagban** — a helye a koordinációszám kérdése, ahol a párok aktív/üres választása maga a tét; a folytatás neve **PKG-17-4**-re foglalva. Ez a sorrend nem kényelem: ha a lapos állapot stabil, akkor nincs olyan távolság, amit az üres ára árazhatna.
-
-**Az egy kivétel itt is az F5:** nála az üres szerződés ténylegesen megjelenik — mégpedig azonnal és mindenütt (T1). Az F5 tehát a híd az ár kérdéséhez: megmutatja, hogy ár nélkül az üres eset nem egyensúlyt hoz, hanem elviszi az egész hálót. Az F5 viselkedése minden futásban **külön jelentendő**.
-
-**(T3) Két ismert sarok, mindkettő kiszámolt számokkal.** A lapos sarok a II/11 kontrollja: kötésár egzaktul $45/66 = 0{,}6818$, elfajulás 132, mind a 66 közelség 0,012, szórás $10^{-16}$. A pár-sarok a II/12 kötés-oldali győztese: hat diszjunkt pár, **nulla költség**. A pár-sarok tehát költségben verhetetlen — a hurok nem költséget minimalizál, de ezt a vonzást a jegyzőkönyvnek látnia kell.
-
-**(T4) Az elfajulás a hurok érzékeny pontja.** A lapos állapot alapállapota 132-szeresen elfajult; a hurok első lépése ezért csak az egzakt vetítővel értelmes. Ha a zaj feloldja az elfajulást, az egyértelmű alapállapot használandó; ha nem oldja fel, a vetítő. A kettő közti váltás körönként jelentendő — **a váltások száma a jegyzőkönyv része**, mert egy ugráló hurok nem ugyanaz, mint egy sima.
-
-**(T5) A hurok két ellentétes erőt tartalmaz.** A generálás önerősítő (a közelebbi pár erősebb szerződést kap, attól még közelebb kerül); a [frusztráció](../II-05-triangle/proof_hu.md) ellene hat (egy tag nem lehet két teljes kötés része). A kimenet e kettő versenye. Melyik győz, az **regisztrált kérdés, nem jóslat**.
-
-## 6. Előre regisztrált tények és kérdések
-
-**Tételből:** a lapos induló zaj nélkül minden családtaggal és mindkét normálással pontosan helyben marad (T1) — ez a hurok **kötelező nulla-próbája**, futás előtt. A II/11 kontroll-számainak visszaadása (0,6818; 132; szórás $10^{-16}$) és a 12-es kör számainak visszaadása (kötésár 0,3011; közelségek 0,444 / 0,123 / 0,066 / 0,045 / 0,037) **B3-előfeltétel**: amíg nem egyeznek, a hurok nem indul.
-
-**Jóslat tudatosan nincs.** Regisztrált kérdések:
-
-- **(K-a, a próba fő kérdése)** stabil-e a lapos fixpont, és ha nem, melyik irányba fut el;
-- **(K-b)** függ-e a végállapot az indulótól (I1–I4) — egy medence van vagy több;
-- **(K-c)** egyezik-e a hat családtag és a két normálás ítélete;
-- **(K-d)** a köztes esetben mennyire tagolt a tartalom-vektor (hány elkülönülő szint), és ugrik-e a közelség-lista;
-- **(K-e)** a pár-sarok elérésekor: pontos párosítás-e, vagy csak részleges.
-
-## 7. Ítélet-szabály (rögzítve)
-
-A végállapot **négy osztály valamelyikébe** sorolandó, minden induló–családtag–normálás hármasra külön:
-
-- **ÜRES** — minden tartalom pontosan nulla; a háló megszűnt. A normálás ilyenkor nem elvégzendő, hanem az osztály maga az eredmény. (Elsőbbséget élvez: ha ez teljesül, nincs más besorolás.)
-- **LAPOS** — a tartalmak szórása a hurok végén a kiindulási zaj alatt marad (a lapos fixpont vonzó);
-- **PÁR** — a tartalom-vektor párosításba fut: legfeljebb 6 pár hordozza a tartalom legalább 95%-át;
-- **KÖZTES** — a fenti három egyike sem, és a hurok megállt a rögzített tűrésen belül.
-
-**A csomag ítélete:**
-
-- **Áll a lemma**, ha a KÖZTES osztály **mind a hat családtagon és mindkét normáláson** megjelenik, legalább az I1 indulóból. (Az I2–I4 medence-kérdés, nem az ítélet feltétele.)
-- **Megbukott a lemma**, ha az I1-ből minden családtagon LAPOS, PÁR vagy ÜRES jön ki. A bukás típusát meg kell nevezni.
-- **Részleges**, ha a családtagok szétválnak — ilyenkor **az eredmény a generáló szabály alakjára érzékeny**, és ezt kell ítéletként kiírni, nem a kedvező tagot választani.
-- **Nem áll össze ítélet**, ha a hurok 200 körön belül nem áll meg; ilyenkor a körbe-ugrálás ténye az eredmény, a periódus hosszával.
-
-Utólagos családbővítés, új induló, új normálás és a tűrések utólagos hangolása kizárva.
-
-## 8. A kiolvasási jegyzőkönyv
-
-**Kapu:** a kiolvasás **kizárólag KÖZTES ítélet esetén fut le.** LAPOS és PÁR esetén nincs mit kiolvasni, és a kiolvasás futtatása utólagos keresésnek minősül.
-
-KÖZTES esetén, a II/11 rendje szerint: a vak visszarakó a végállapot közelség-térképéről, a szomszédszámot nem kapja meg — a lista ugrása jelöli ki; teljesség-számla a talált kontra a tartalommal bíró párokra, fantom és hiányzó külön; golyó-olvasat **legfeljebb $r = 2$-ig**, és **kimondva: ez a méret kiterjedésszám kimondására nem elég** — csak arra felel, hogy van-e egyáltalán kitüntetett szomszédság. A kiterjedés-kérdés nagyobb rendszerre halasztva.
-
-Rezonancia-őrszem a II/13 tanulsága szerint; átellenes osztályok külön jelentve.
-
-## 9. Import-számla és a család-követelmény
-
-**Új, kimondott konvenció — a generáló szabály:** a szerződés tartalma a példányok kész állapotából, a II/11 közelség-mérőszámán keresztül számolódik. Ez a csomag egyetlen importja.
-
-**A család-követelmény ennek az importnak az ára:** az [egyformasági tétel](../II-06-universality/proof_hu.md) mintájára az eredmény csak akkor áll, ha a hat családtag és a két normálás **ugyanazt az ítélet-osztályt** adja. Ha nem, az import nem szűkült, csak egy szinttel beljebb költözött — és ezt így kell megírni.
-
-**Amit ez a csomag nem importál:** hálót (nincs, minden pár szerepel), költségvetést (nincs elosztandó mennyiség), mezőnyt (nincs jelölt-lista), koordinációszámot (nincs kimondva). **Ez az első csomag a nyomvonalon, amelynek a bemenetei közt háló nem szerepel.**
-
-## 10. Ítélet erről a csomagról
-
-**Áll.** Érdemi előzetes eredményei: a lapos fixpont tétele (T1) — amely a kérdést létezésről stabilitásra fordítja; az üres ár hatástalanságának levezetése ezen a rendszeren (T2), amely a csomagsorrendet is megszabja; és az elfajulás-kezelés kimondása a hurok érzékeny pontjaként (T4).
-
-**A B3-előfeltétel fagyasztás előtt lefutott** (`PKG-17-2-verify.py`), és minden hivatkozási szám visszajött: a kötésár egzaktul 45/66, az elfajulás 132, a közelség-szórás 1,5·10⁻¹⁶, a kör kötésára 0,30105 és közelségei 0,4438 / 0,1231 / 0,0656 / 0,0448 / 0,0366; ráadásul a II/1 zárt alakja és a II/5 három száma (3/2, négyszeres elfajulás, 15/8) is. A hitelesítés **egy leletet hozott**, amely a szabálykönyv szövegét módosította fagyasztás előtt: az F5 lapos viselkedése, amiből az ÜRES osztály és a T1 kivétele lett.
-
-## 11. Kimenő állítások (a PKG-17-2 csak ezekre építhet)
-
-- **A1:** rendszer = 12 objektum, mind a 66 pár, változó tartalmú kötés-szerződés; állapot a teljes állapottér egzakt minimuma, elfajulás egzakt vetítővel (3. szakasz).
-- **A2:** a hurok a 4. szakasz szerint: hat generáló családtag, két normálás, négy induló, 200 kör, mag 1166.
-- **A3:** B3-előfeltétel a II/11 kontroll- és kör-számainak visszaadása; a nulla-próba (zaj nélküli lapos induló helyben marad) kötelező.
-- **A4:** előre regisztrált tények és kérdések a 6. szakasz szerint; jóslat nincs.
-- **A5:** ítélet-szabály a 7. szakasz szerint, **négy osztállyal** (ÜRES, LAPOS, PÁR, KÖZTES) és a részleges eset kötelező kiírásával; az F5 viselkedése minden futásban külön jelentendő.
-- **A6:** kiolvasási jegyzőkönyv a 8. szakasz szerint, kapuval; kiterjedés-ítélet ezen a méreten nem adható.
-- **A7:** kötelező önellenőrzések — a kötés-szerződés zárt alakja két úton (sűrű sajátfeladat és a II/1 képlete), a vetítő nyoma a lapos ponton egzaktul 132, a tartalom-vektor normájának körönkénti jelentése, az elfajulás-váltások számlálása.
-- **A8:** bukás-ág megnevezve: **PÁR** ítélet esetén a következő csomag ugyanezt a hurkot a **simasági szerződéssel** ismétli helyeken, mert akkor a kötés-szerződés bizonyult alkalmatlan hordozónak; **LAPOS** ítélet esetén a hurok ebben az alakjában megbukott, és a generálásnak nem a közelségre, hanem más állapot-kivonatra kell épülnie.
+Négy út: **a nyolcas koordináció teljes-mezőny-teteje** — a mért fél hiányzó harmadik támpontja; új próba nem kell hozzá, ugyanaz a leolvasás a [PKG-15-3](../II-15-dimension-fourth-rung/PKG-15-3-race_hu.md) mentett verseny-állapotából, amit itt a [PKG-16-5](PKG-16-5-transfer_hu.md) elvégzett; **a tükör-hordozó-térkép** — mely koordinációkon mely fok a legalacsonyabb tükör-jegyű szövés (kombinatorikus, próbán kívül is levezethető); **a hordozó-kérdés** — a III/1, 7. tételesítése: miért a tükör választ; és **a gyökér-programnak átadott pontos kérdés** ([III/2, 7–8.](../../III-frontier/III-02-open-questions_hu.md)): miért olyan a világ szerződés-szerkezete, hogy a legalacsonyabb tükör-hordozója a három.
 </file>
 
 <file path="hu\III-frontier\III-01-candidate-laws_hu.md">
@@ -2995,9 +2777,21 @@ status: jelolt
 
 6. **A héj-illeszkedési szabály (jelölt, hatóköre a II/14-ben pontosítva).** A hálóversenyt fokbetelés dönti: a győztes szövés az, amelynek létrájában a töltésnél éppen betelik egy fok. Mellette a II/12 fok-rezonanciái, a [II/13](../II-proofs/II-13-dimension-race/proof_hu.md) teljes győztes-táblája (a sík a 11-es zárt fokán győz) és a [II/14](../II-proofs/II-14-dimension-staircase/proof_hu.md) alsó fésűje (a vonal a saját széteső többszörözéseivel maradékosztály-mintában váltakozik). **Ellene** a II/14 döntő határa: a sík–tér váltást nem fokbetelés, hanem a tükör dönti (7. jelölt) — a tér a középső polca *közepén*, pontosan fél-töltésnél veszi át a versenyt. Ami hiányzik: a két mechanizmus hatókörének éles kimondása — mikor dönt a fok, és mikor a tükör. A [II/15](../II-proofs/II-15-dimension-fourth-rung/proof_hu.md) tovább szűkíti: a felső sávhatárok nem polc-határok (a legközelebbi zárt foktól 2, 3, illetve 112 töltésre esnek) — a sávhatár a költséggörbék metszéspontja. A [II/16](../II-proofs/II-16-coordination-ten/proof_hu.md) képe vegyes: két sávhatár 1 és 3 töltésre éles a bejövő zárt foktól, a honosé 5338-ra nem — a hatókör kérdése nyitott marad.
 
-7. **A tükör-szabály (jelölt — új, a II/14-ből).** A betöltés felső féltekéjét az a háló nyeri, amelynek létrája a fokátlag körül szimmetrikus és a legszélesebb (a páros-jegy: a hálóban nincs páratlan kör, a létra tükrös) — a tükör tolja legmagasabbra a betöltetlen ütemeket. Bizonyíték: a [II/14](../II-proofs/II-14-dimension-staircase/proof_hu.md) tér-sávja pontosan fél-töltésnél nyílik, és a teli véget csupa-páratlan lépésű (maguk is páros-jegyű) vonalak viszik. Két éle van: a jegy **nem** kiterjedés-tulajdon (vonalon is előállítható — ezért a kiválasztáshoz önmagában kevés), és ugyanez a tükör kis méreten a kiolvasást rontja (átellenes visszhang — a II/14 kiolvasási korlátja). Ami hiányzik: az éles kimondás és bizonyítás, és a viszonya a héj-szabályhoz (6.). A [II/15](../II-proofs/II-15-dimension-fourth-rung/proof_hu.md) élesítette és meg is lepte: a felső felet **pontosan** a tükör-jegyű pár nyeri — minden felső töltés az övék —, de a páron belül a tetőn a sorrend fordul (8. jelölt). A [II/16](../II-proofs/II-16-coordination-ten/proof_hu.md) a harmadik, kivétel nélküli megerősítés: tízes koordináción a felső fél az egyetlen tükör-jegyű fő jelölté (a honos öté), a teljes mezőny teteje pedig a páros vonal-tagé.
+7. **A tükör-szabály (jelölt — új, a II/14-ből).** A betöltés felső féltekéjét az a háló nyeri, amelynek létrája a fokátlag körül szimmetrikus és a legszélesebb (a páros-jegy: a hálóban nincs páratlan kör, a létra tükrös) — a tükör tolja legmagasabbra a betöltetlen ütemeket. Bizonyíték: a [II/14](../II-proofs/II-14-dimension-staircase/proof_hu.md) tér-sávja pontosan fél-töltésnél nyílik, és a teli véget csupa-páratlan lépésű (maguk is páros-jegyű) vonalak viszik. Két éle van: a jegy **nem** kiterjedés-tulajdon (vonalon is előállítható — ezért a kiválasztáshoz önmagában kevés), és ugyanez a tükör kis méreten a kiolvasást rontja (átellenes visszhang — a II/14 kiolvasási korlátja). Ami hiányzik: az éles kimondás és bizonyítás, és a viszonya a héj-szabályhoz (6.). A [II/15](../II-proofs/II-15-dimension-fourth-rung/proof_hu.md) élesítette és meg is lepte: a fő mezőnyben a felső felet **pontosan** a tükör-jegyű pár nyeri — minden felső töltés az övék —, de a páron belül a tetőn a sorrend fordul (8. jelölt). A [II/16](../II-proofs/II-16-coordination-ten/proof_hu.md) a harmadik, kivétel nélküli megerősítés — és az egyetlen, ahol a teljes mezőnyre is megnéztük: tízes koordináción a felső fél az egyetlen tükör-jegyű fő jelölté (a honos öté), a teljes mezőny teteje pedig a páros vonal-tagé.
 
-8. **A tető-törvény — egyesített alak (két tételi lábbal; a hordozó-fele mért).** A tetőt a mezőny legalacsonyabb kiterjedésű tükör-jegyű tagja viszi. Három összetevője: *(i)* a tetőt a tükör-jegyűek uralják — mért, három koordináción (hatos, nyolcas, tízes) kivétel nélkül (a 7. jelölt); *(ii)* tükör-jegyűek közt a teli vég a ritka vég tükre — a [lyuk-tükör tétel](../II-proofs/II-15-dimension-fourth-rung/PKG-15-5-hole-mirror_hu.md), tízesen a [PKG-16-5](../II-proofs/II-16-coordination-ten/PKG-16-5-transfer_hu.md)-ben megerősítve; *(iii)* ritkán az alacsonyabb kiterjedés az olcsóbb — az [irány-tétel](../II-proofs/II-15-dimension-fourth-rung/PKG-15-6-direction_hu.md), tanúsított szakaszokkal mindkét nagy koordináción. A bizonyíték-sor: hatoson a tető a téré (az egyetlen páros fő jelölt), nyolcason a téré (a páros pár alacsonyabbika), tízesen az ötkiterjedésű honosé (az egyetlen páros fő jelölt), a teljes mezőnyben pedig a páros vonal-tagé — a korábbi „tető-hármas" olvasat ennek árnyéka volt. Ami hiányzik: a hordozó-fele levezetése (miért a tükör választ — a 7. jelölt tételesítése) és a tükör-hordozó-térkép (mely koordináción mely fok a legalacsonyabb páros szövés).
+8. **A tető-törvény — egyesített alak (két tételi lábbal; a hordozó-fele mért).** A tetőt a **teljes mezőny** legalacsonyabb kiterjedésű tükör-jegyű tagja viszi. A hatókör kimondva, mert a két olvasat nem ugyanaz: a **fő mezőny** a kézzel felsorolt jelöltek (vonal, sík, tér, négykiterjedés, ötkiterjedés), a **teljes mezőny** ezen felül a végigpásztázott vonal-család minden tagja. A törvény a teljes mezőnyre szól, mert a „legalacsonyabb kiterjedésű" kitételnek csak ott van értelme — a fő mezőnyben a vonal a tetőn sehol sem játszik.
+
+    Három összetevője: *(i)* a tetőt a tükör-jegyűek uralják — mért (a 7. jelölt); *(ii)* tükör-jegyűek közt a teli vég a ritka vég tükre — a [lyuk-tükör tétel](../II-proofs/II-15-dimension-fourth-rung/PKG-15-5-hole-mirror_hu.md), tízesen a [PKG-16-5](../II-proofs/II-16-coordination-ten/PKG-16-5-transfer_hu.md)-ben megerősítve; *(iii)* ritkán az alacsonyabb kiterjedés az olcsóbb — az [irány-tétel](../II-proofs/II-15-dimension-fourth-rung/PKG-15-6-direction_hu.md), tanúsított szakaszokkal mindkét nagy koordináción. A (ii) és a (iii) tétel, hatókör-függetlenül; az (i) mérés, és a mérés hatóköre koordinációnként más:
+
+    | Koordináció | A fő mezőny teteje | A teljes mezőny teteje |
+    |---|---|---|
+    | hatos ([II/14](../II-proofs/II-14-dimension-staircase/proof_hu.md)) | tér — az egyetlen tükör-jegyű fő jelölt | csupa-páratlan lépésű vonalak — tükör-jegyűek |
+    | nyolcas ([II/15](../II-proofs/II-15-dimension-fourth-rung/proof_hu.md)) | tér — a tükör-jegyű pár alacsonyabbika | **nincs megnézve** |
+    | tízes ([II/16](../II-proofs/II-16-coordination-ten/proof_hu.md)) | ötkiterjedésű honos — az egyetlen tükör-jegyű fő jelölt | (1, 3, 5, 7, 9) páros vonal-tag — tükör-jegyű |
+
+    **A mérés állása tehát, pontosan: a fő mezőnyön mindhárom koordináción kivétel nélkül áll; a teljes mezőnyön — vagyis abban az olvasatban, amelyikről a törvény szól — háromból kettőn.** A korábbi „tető-hármas" olvasat ennek árnyéka volt: a hatos és nyolcas koordináción a legalacsonyabb tükör-hordozó *történetesen* a három.
+
+    Ami hiányzik, három tétel: **(a) a nyolcas koordináció teljes-mezőny-teteje** — a [PKG-15-3](../II-proofs/II-15-dimension-fourth-rung/PKG-15-3-race_hu.md) csak annyit mond, hogy ott a fő négyes egyetlen töltést sem nyer szigorúan, a tetőn álló vonal-imitátort nem nevezi meg; a legtöbbet nyerő háromból kettő — a (3, 5, 6, 10) és a (3, 7, 8, 9) — páros lépést is tartalmaz, tehát **nem** tükör-jegyű, így az eredmény nem sejthető, meg kell nézni. Új próba nem kell hozzá: ugyanaz a leolvasás a mentett verseny-állapotból, amit a [PKG-16-5](../II-proofs/II-16-coordination-ten/PKG-16-5-transfer_hu.md) tízesen már elvégzett. **(b) A hordozó-fele levezetése** — miért a tükör választ, a 7. jelölt tételesítése. **(c) A tükör-hordozó-térkép** — mely koordináción mely fok a legalacsonyabb tükör-jegyű szövés.
 </file>
 
 <file path="hu\III-frontier\III-02-open-questions_hu.md">
@@ -3027,7 +2821,300 @@ status: jelolt
 
 7. **A mintázatból lett objektum.** A nyelv objektumai alapelemek; arra nincs fogalma, amikor sok alapelem közös mintázata maga kezd önálló objektumként viselkedni. Pedig a [II/9](../II-proofs/II-09-kagome/proof_hu.md) valóság-ellenőrzése már ilyenre hivatkozik (tört gerjesztések), és a „melyik folyadék" döntést (3.) a fizika is a gerjesztések fajtájával mondja ki. A hiányzó fogalom: a származtatott típus — és rá a kétosztályos tétel feltevése (két csere annyi, mint semmi) nem kötelező, tehát itt a nyelv új típusosztályokat nyithat. (A fizika a mintázatból lett objektumot kvázirészecskének, a két osztályon kívüli típusokat anyonoknak hívja.) A II/12 gyökér-jelzése ide is mutat: ha a csatolást maguk a példányok (mezőik mintázatai) hordozzák, a kiválasztási kérdés (2.) megoldása is itt születhet.
 
-8. **A kiterjedésszám — a II/16 után.** A koordináció-pásztázás lefutott ([II/16](../II-proofs/II-16-coordination-ten/proof_hu.md)): tízes koordináción a lépcső kihagyja a hármat (vonal, sík, négykiterjedés, ötkiterjedés), a tetőt az egyetlen tükör-jegyű fő jelölt — a honos öt — viszi, a teljes mezőny tetejét pedig a páros vonal-tag. A három próba egyesített törvénye ([III/1, 8.](III-01-candidate-laws_hu.md)): **a tetőt a mezőny legalacsonyabb kiterjedésű tükör-jegyű tagja viszi** — tételi fele a lyuk-tükör és az irány-tétel, mért fele háromszoros, kivétel nélkül. A „miért három" ezzel végleg alakot váltott: a hatos és nyolcas koordináción a legalacsonyabb tükör-hordozó *történetesen* a három. Nyitott kérdései: *a tükör-hordozó-térkép* (levezethető, próbán kívül is): mely koordinációkon mely fok a legalacsonyabb tükör-jegyű szövés; *a hordozó-kérdés:* miért a tükör választ — a [III/1, 7.](III-01-candidate-laws_hu.md) tételesítése; és *a sűrűség-kérdés végső alakja, a gyökér-programnak (7. kérdés) átadva:* **miért olyan a világ szerződés-szerkezete, hogy a legalacsonyabb tükör-hordozója a három?** Mellék-nyitottak: a három kimaradásának oka tízesen; a dominancia-hézag ~fele-mintája. Változatlan őszinte lelet: az 1/r-vonzás-import érintetlen — a lánc most így áll: a vonzás alakja adja a hármat kívülről; a versenyben a tükör és a sűrűség adja belülről; a kettő találkozása a gyökér-program dolga.
+8. **A kiterjedésszám — a II/16 után.** A koordináció-pásztázás lefutott ([II/16](../II-proofs/II-16-coordination-ten/proof_hu.md)): tízes koordináción a lépcső kihagyja a hármat (vonal, sík, négykiterjedés, ötkiterjedés), a tetőt az egyetlen tükör-jegyű fő jelölt — a honos öt — viszi, a teljes mezőny tetejét pedig a páros vonal-tag. A három próba egyesített törvénye ([III/1, 8.](III-01-candidate-laws_hu.md)): **a tetőt a teljes mezőny legalacsonyabb kiterjedésű tükör-jegyű tagja viszi** — tételi fele a lyuk-tükör és az irány-tétel, mért fele pedig a hatókörével együtt értendő: a fő mezőnyön mindhárom koordináción kivétel nélkül áll, a teljes mezőnyön — vagyis abban az olvasatban, amelyikről a törvény szól — háromból kettőn (hatoson és tízesen; a nyolcas nincs megnézve). A „miért három" ezzel végleg alakot váltott: a hatos és nyolcas koordináción a legalacsonyabb tükör-hordozó *történetesen* a három. Nyitott kérdései: *a tükör-hordozó-térkép* (levezethető, próbán kívül is): mely koordinációkon mely fok a legalacsonyabb tükör-jegyű szövés; *a hordozó-kérdés:* miért a tükör választ — a [III/1, 7.](III-01-candidate-laws_hu.md) tételesítése; és *a sűrűség-kérdés végső alakja, a gyökér-programnak (7. kérdés) átadva:* **miért olyan a világ szerződés-szerkezete, hogy a legalacsonyabb tükör-hordozója a három?** Mellék-nyitottak: *a nyolcas koordináció teljes-mezőny-teteje* — a [PKG-15-3](../II-proofs/II-15-dimension-fourth-rung/PKG-15-3-race_hu.md) csak annyit mond, hogy ott a fő négyes egyetlen töltést sem nyer szigorúan, a tetőn álló vonal-imitátort nem nevezi meg, és a legtöbbet nyerő háromból kettő nem tükör-jegyű, tehát az eredmény nem sejthető; új próba nem kell hozzá, ugyanaz a leolvasás a mentett verseny-állapotból, amit a [PKG-16-5](../II-proofs/II-16-coordination-ten/PKG-16-5-transfer_hu.md) tízesen már elvégzett — amíg ez nincs meg, a törvény mért fele háromból kettőn áll. Továbbá: a három kimaradásának oka tízesen; a dominancia-hézag ~fele-mintája. Változatlan őszinte lelet: az 1/r-vonzás-import érintetlen — a lánc most így áll: a vonzás alakja adja a hármat kívülről; a versenyben a tükör és a sűrűség adja belülről; a kettő találkozása a gyökér-program dolga.
+</file>
+
+<file path="hu\PROGRAM_hu.md">
+---
+id: PROGRAM
+type: rulebook
+lang: hu
+pair: PROGRAM_en.md
+pair_status: missing
+doc_version: "1.4"
+status: jelolt
+---
+
+# A kutatási program — a leírónyelvtől a zárt, prediktív modellező nyelvig
+
+**Egy mondatban.** Ez a dokumentum azt az utat rögzíti, amelyen a nyelv a visszaszámoló hasonlóság-gyűjtemény vádja alól számmal mentesül: zárt könyvelésű, formálisan tisztázott státuszú, előre jósló, folyamatokat is modellező és 10⁵ objektumig skálázó elmélet-nyelvvé válik — vagy pontosan rögzített bukásokkal kimondja, meddig ér. A programot AI-agentek hajtják végre; ezért minden mérföldkőnek gépileg eldönthető siker- és bukás-kritériuma van — ahol pedig ez elvileg lehetetlen (irodalom-audit, keresési ítélet), ott rögzített protokollú, naplózott, harmadik fél által megismételhető ítélet áll a helyén, és ez kimondva szerepel —, és minden lépés a repó saját módszertanán — csomag-módszer, import-számla, kétutas számolás — fut.
+
+Ez a fájl terv, nem eredmény: az igazság forrása mindig a lefutott próbák fájlja lesz. A mérföldkövek sorszáma bővítésálló; új mérföldkő mindig a szakasza végére kerül.
+
+---
+
+## 1. A kiindulás: mi van meg, és miért támadható
+
+**Ami megvan.** Öt törvény és egy növekvő tétel-készlet (két típusosztály, kizárás, No-Cloning, lyuk-tükör, irány-tétel, tető-tétel, összeomlási tétel — az [I/9](I-language/I-09-laws-table_hu.md) táblája); tizenhat számolt próba, köztük egy intézményesített bukás ([II/12](II-proofs/II-12-network-race/proof_hu.md)); az import-számla (jelenleg három import) és az import/konvenció szétválasztás; a csomag-módszer előre rögzített szabálykönyvvel és kapu-szabállyal; 10⁻¹²–10⁻¹⁶ szintű kétutas számolások; és egy saját születésű törvény-jelölt (a tető-törvény, [III/1, 8.](III-frontier/III-01-candidate-laws_hu.md)). Ez a fegyelem ritka vagyon — a program nem nulláról indul, hanem egy proto-formális rendszert emel gépi kikényszerítésre.
+
+**Ami támadható.** A szkeptikus fizikus hat vádja, veszélyességi sorrendben — és az a mérföldkő, amelyik az adott vádat elhallgattatja:
+
+| # | A vád | Ami elhallgattatja |
+|---|---|---|
+| 1 | **Retrodikció + átcímkézés:** mind a 16 próba ismert számot ad vissza, a szerző választotta célpontokon, a standard QM gépezetén | P1.4, P1.5 (vak célpontok), P4.4, P4.5 (valódi jóslat) — addig P1.2 (prior-art audit) tartja sakkban |
+| 2 | **Formális státusz tisztázatlan:** ha a nyelv ekvivalens a rácsos QM-mel, definíció szerint nem jósolhat mást; ha nem, hol tér el? | P2.6 (ekvivalencia vagy eltérési pont) |
+| 3 | **Az importok a lényeget hozzák:** az 1/r adja a hidrogén négy tizedesét, a típusdeklarációk a bűvös számokat | P2.1, P2.2, P2.4, P2.5 (import-nullázás vagy becsületes véglegesítés) |
+| 4 | **A kiterjedés-verseny önjáték:** a győztest részben a saját konvenciók definiálják; mért ellenpár nincs; a tető-törvény mért fele háromból kettőn áll | P1.1 (a hiányzó harmadik mérés), P1.3 (konvenció-robusztusság) |
+| 5 | **Kis rendszerek:** ami 12 objektumon tétel, az a határértékben lehet műtermék (a PKG-14-5 precedens ezt bizonyította is) | P4.1–P4.4, P4.6 (méret-létra, 100 → 10³ → 10⁵) |
+| 6 | **Statika-katalógus:** a 16 próbából egy számol időfejlődést; nincs hőmérséklet, nincs nyitott rendszer, nincs szava a kvázirészecskére | 3. szakasz (folyamat-modellezés) |
+
+A diagnózis kulcsa: a vádak nem cáfolandók vitában — mindegyikhez fájlban fekvő, gépileg ellenőrzött ellenbizonyíték építendő.
+
+---
+
+## 2. A mérce: a „high-end" hat feltétele
+
+A „high-end" nem önminősítés, hanem hat, előre rögzített, gépileg auditálható feltétel. A program akkor ért célba, ha mind a hat áll — és minden feltételhez tartozik becsületes bukó-ág is.
+
+- **H1 — Zárt könyvelés.** Minden állítás pontosan egy kategóriában áll: törvény / géppel ellenőrzött levezetési nyomvonalú tétel / kimondott konvenció / peremadat (a világ példány-adata, amelyet a nyelv elvileg sem vezet le). A megmagyarázatlan importok száma 0, vagy legfeljebb 1, kimondott hatókörrel. A szám nyilvános és követhető (ma: 3).
+- **H2 — Tisztázott formális státusz.** Vagy bizonyított megfeleltetési tétel (az öt törvény + importok pontosan a véges dimenziós, rácsos kvantummechanikát adják — ekkor a nyelv értéke a levezetési út és a könyvelés, kimondva), vagy legalább egy megnevezett, számolható eltérési pont.
+- **H3 — Predikció.** Gépi tanúval igazolt vak-protokoll; legalább két belső jóslat (saját, még le nem olvasott számolásokon) és legalább egy időbélyegesen regisztrált, fizikus közönség előtt is jóslatnak számító állítás.
+- **H4 — Skálázás.** A nyelv saját tételeiből indokolt gépezetek (felület-törvény → tenzorháló; tanítás → neurális tanú) 100-tól 10⁵ objektumig, minden szám pecséttel (fokozat + erő).
+- **H5 — Folyamat-modellezés.** A 4. törvény motor-fele valódi terjedést, tanú-ütemet (nyitott rendszert) és hőmérsékletet is számol, mért célszámokon.
+- **H6 — Hatókör-térkép.** A nyelv határa (relativitás, változó példányszám, gravitáció) ugyanolyan pontosan kimondva, mint a törvényei — soronként gépileg ellenőrzött ütközés-példával.
+
+---
+
+## 3. A program szerkezete: öt szakasz, kapukkal
+
+```
+0. szakasz          1. szakasz         2. szakasz        3. szakasz          4. szakasz
+FUNDAMENTUM   ──►   HITELESSÉG   ──►   ZÁRÁS       ──►   FOLYAMAT      ──►   SKÁLÁZÁS ÉS
+(mag, pad,          (vak próbák,       (importok,        (dinamika,          ELSŐ-KIMONDÁS
+széf, agent-        auditok, a         tételesítés,      tanú-ütem,          (gépezetek,
+protokoll)          8-as tető)         formális          hőmérséklet,        külső jóslatok,
+                                       státusz)          új típusok)         zárási audit)
+```
+
+A szakaszhatár kapu: a következő szakasz csak az előző kimondott ítéletei után nyílik — kivéve a megjelölt párhuzamos ágakat. A 3. és 4. szakasz nagyrészt párhuzamosan futhat, mert más gépezetre épülnek. Minden mérföldkő teljes csomag-nyomvonallal fut (szabálykönyv → számolás-csomagok → ítélet), és bármelyik érvényes kimenete a rögzített bukás is.
+
+---
+
+## 4. Mérföldkövek
+
+### 0. szakasz — A fundamentum (mind a négy párhuzamosan indítható)
+
+**P0.1 — A formális mag és a „levezetett" ige.**
+- *Kérdés:* előállítható-e a nyelv teljes fogalom-, törvény-, tétel- és import-leltára gépileg olvasható definíció-tárként, amelyen egy ellenőrző futás eldönti minden állítás státuszát?
+- *Siker:* `shared/kernel/` alatt definíció-tár + ellenőrző szkript, amely igazolja: (a) a függőségi gráf körmentes; (b) minden tétel levezetési útja törvényben, importban vagy korábbi tételben végződik; (c) a szabályrend szerinti próbák import-számlája egyezik a mag nyilvántartásával. A „levezetett" ige hármas operatív definíciója rögzül: (1) premissza csak mag-csomópont lehet; (2) az import-delta ≤ 0; (3) a regresszió zöld — az importot a tétellel helyettesítve mind a 16 próba ítélete változatlan. A nyilvántartás háromkategóriás lesz: **import / konvenció / peremadat**. Külön kimondandó tétel a magban: a **fizikai állandók** (ħ, mₑ, e — a skála-kalibráció, amellyel a nyelv dimenziótlan rács-számai mért egységekre váltanak) peremadat-rangú bemenetek; a tár próbánként nyilvántartja, melyik melyiket használja, és a zárási audit (P4.7) ellenőrzi.
+- *Bukás-ág:* ha három vagy több próba nem rekonstruálható a magból be nem jelentett import nélkül, a nyelv nem zárt — előbb a lyukak pótlandók, nem a formalizálás erőltetendő.
+- *Megjegyzés:* bizonyítás-asszisztens (Lean/Coq) ebben a fokban **nem** kell; a minimális hasznos alak a típusos, futtatható definíció-tár. Az asszisztens csak a zárt alakú tételekre (lyuk-tükör, irány-tétel, összeomlási tétel) mérlegelendő, később, külön döntéssel.
+
+**P0.2 — A hitelesítő-pad.**
+- *Kérdés:* gépi futtatással, emberi kéz nélkül visszaadja-e mind a négy meglévő eszköz a [B függelék](appendix/B-machinery_hu.md) összes rögzített ellenőrző számát? — az eszközök futtatható alakja a szabályrend előtti próbáknál még nem áll rendelkezésre, ezért a pad hatóköre a szabályrend szerinti próbák ellenőrző számai.
+- *Siker:* egyetlen paranccsal lefutó regressziós pad, zöld/piros ítélettel minden beépített pontossági ellenőrzésre (1,2533/1,246; a 9/16; a Kagome-érték; a 132-es nyom; a II/13–II/16 kettős számolásai és pecsétjei), géppel olvasható tűrés-fájllal.
+- *Bukás-ág:* ami csak kézzel reprodukálható, az reprodukálhatósági adósság — előbb ez törlesztendő, mielőtt bármi új épül.
+
+**P0.3 — A célszám-széf és a jóslat-regiszter.**
+- *Kérdés:* kikényszeríthető-e gépi tanúval, hogy egy levezetés a célszám ismerete nélkül záruljon le?
+- *Siker:* minden célszám sózott hash-ben, külön széf-fájlban; a jóslat-regiszter géppel olvasható (jóslat-mondat a nyelv fogalmaiból, szám, tűrés, forrás, bukás-feltétel, commit-hash, dátum); egy teljes vak-futás egy már álló próbán (kalibráció: a II/8 mellékcsúcsai) igazolja, hogy a levezetés-lezáró commit megelőzi a széf-nyitót.
+- *Bukás-ág:* ha a protokoll gépi tanúval nem kényszeríthető ki, a program nem indulhat — előbb környezetet kell váltani.
+
+**P0.4 — Az agent-protokoll 1.0.**
+- *Kérdés:* a csomag-módszer emberi fegyelme gépi kikényszerítésre emelhető-e?
+- *Siker:* szabálykönyv-sablon és -generátor, kapu-ellenőr (hash-elt szabálykönyv, pecsét-ellenőrzés, tűrés-tágítás tiltása), import-könyvelő, reprodukciós futtató (az `environment-check` mintájára) és gépi állapot-mentő. A protokoll vizsgája a P1.1: az a mérföldkő legfeljebb 1 emberi érintéssel (végső elfogadás) fut végig.
+- *Ítélet-sáv, hézag nélkül:* ≤ 1 érintés = áll; 2–3 érintés = részleges — a gyenge pontok néven nevezendők, a P1.2–P1.5 indulhat, de a P4.7 zárolva a javításig; > 3 érintés = a protokoll bukott, újratervezendő, mielőtt drágább kampány épülne rá.
+
+### 1. szakasz — Hitelesség (olcsó, nagy hozamú lépések; a vádak semlegesítése)
+
+**P1.1 — A nyolcas koordináció teljes-mezőny-teteje** *(belső vak-jóslat; az agent-protokoll vizsgája).*
+- *Kérdés:* a nyolcas koordináción a teljes mezőny tetejét tükör-jegyű vonal-tag viszi-e, ahogy a tető-törvény állítja?
+- *Siker:* az agent a tető-törvényből **előre** megnevezi a győztes lépés-halmazt (regiszter-commit), MAJD újrafuttatja a nyolcas versenyt a [PKG-15-2](II-proofs/II-15-dimension-fourth-rung/PKG-15-2-ladders_hu.md) mentett létra-gyorsítótárából (`shared/II-15-dimension-fourth-rung/letrak_gepi/`) — a futás a PKG-16-3 mintájára állapot-mentővé bővítve —, és a mentett állapotból végzi el ugyanazt a leolvasást, amit a [PKG-16-5](II-proofs/II-16-coordination-ten/PKG-16-5-transfer_hu.md) tízesen megcsinált. *Ténybeli helyesbítés, kimondva:* a repó (III/1, 8.a) „mentett verseny-állapot"-ot említ, de a fájlrendszeren ilyen nincs — csak a létrák gyorsítótára él; a verseny újrafuttatandó, ami a kész létrákból olcsó (a verseny maga részösszeg-számolás). A vak-feltétel így is természetes: a jóslat-commit a futtatás előtt rögzül, és a válasz ma senkinek nincs a birtokában.
+- *Bukás-ág:* ha a tető nem tükör-jegyű tagé (a legtöbbet nyerő három imitátorból kettő páros lépésű, tehát az eredmény nem sejthető!), a tető-törvény mért fele teljes mezőnyön megbukott — rögzített bukás, a törvény a fő mezőnyre szűkítendő, és a P2.3 hordozó-levezetése új célt kap: megmagyarázni a kivételt.
+- *Kimenet:* PKG-15-8 csomag; a [III/1, 8.](III-frontier/III-01-candidate-laws_hu.md) táblájának „nincs megnézve" cellája kitöltve, és a 8.(a) „mentett verseny-állapot" szövege helyesbítve.
+
+**P1.2 — Az átcímkézés-audit (prior-art minden tételre).**
+- *Kérdés:* van-e a nyelv tételei közt legalább kettő, amely nem egy ismert standard eredmény átnevezése?
+- *Siker:* tétel-per-tétel megfeleltetés-tábla rögzített keresési protokollal, háromértékű ítélettel: „ismert eredmény fordítása" / „ismert eredmény új levezetési úton" / „nincs publikált megfelelő" — legalább 2 tétel a harmadik kategóriában. *Kimondva:* ez a mérföldkő a bevezető gépi-eldönthetőség ígéretének kivétele — a hiány kereséssel nem bizonyítható; az ítélet protokoll-audit: rögzített keresési lépések, naplózott találatok, harmadik fél által megismételhető.
+- *Bukás-ág:* ha minden tétel az első kategória, és a levezetési út is lépésről lépésre a standardot követi: a „tétel" szó „fordítás"-ra cserélendő, és a program a pedagógiai irányra szűkítendő. Ez is kimondható, becsületes végállapot.
+
+**P1.3 — A konvenció-robusztussági próba.**
+- *Kérdés:* túléli-e a tető-törvény a saját konvencióinak perturbálását?
+- *Siker:* a versenyszabály és a kiválasztási szabály legalább 3 előre regisztrált, független variánsán (más költségvetés-normálás, más mezőny-kiválasztás) a tető-győztes változatlan mindhárom koordináción. Melléje: legalább egy publikált mért vagy numerikus rendszer megnevezése, ahol sűrűségfüggő effektív dimenzió-váltás látszik — vagy ennek hiánya őszintén rögzítve.
+- *Bukás-ág:* ha a győztes a három előre regisztrált variáns bármelyikén megfordul, a tető-törvény konvenció-műtermék — a III/1, 8. törlendő, és a II/13–II/16 ítélete „saját szabálykönyvön belül érvényes"-re szűkítendő.
+
+**P1.4 — Vak célpont-sorsolás.**
+- *Kérdés:* áll-e a nyelv olyan célpontokon is, amelyeket nem a szerző választott?
+- *Siker:* legalább 20 célpont sorsolva rögzített szabállyal publikált benchmark-táblákból (egzakt diagonalizációs értékek, tankönyvi zárt alakok); a jóslat-csomag hash-elve a számolás előtt; minden bukás néven nevezve az indexbe kerül.
+- *Ítélet-sáv, hézag nélkül:* ≥ 80% találat = áll; 50–79% = részleges — a bukott célpontok import-számlája kötelezően elemzendő, a P4.4/P4.5 zárolva a tisztázásig; < 50% = a 16 próba célpont-választási torzítás terméke, a II. rész „áll" ítéletei „áll, választott célponton"-ra minősítendők át.
+
+**P1.5 — A vak-retrodikciós létra: öt publikált, be nem épített célszám.**
+- *Kérdés:* ad-e a nyelv vakon helyes számot olyan mért vagy egzakt eredményekre, amelyekre még sosem számolt rá?
+- *Az öt cél, egyenként ítélve:* (1) a hidrogénmolekula kötéserőssége a [III/1, 2.](III-frontier/III-01-candidate-laws_hu.md) levezetésből — **kimondottan párhuzamos ág a P2.2-vel, a szakasz-kapu alól kivéve**: ez a cél a P2.2 vak-futása, ítélete a P2.2-vel együtt születik, a P2.2 kétlépcsős kritériuma szerint; a P1.5 a maradék négy célon lezárható. Célszám csak forrás-auditáltan kerülhet a széfbe: a **mért** szám D₀ = 4,4781 eV (Herzberg); a De ≈ 4,7477 eV (38 292,9 cm⁻¹) **számított referencia**, nem közvetlen mérés — a széf-bejegyzés e státuszt is rögzíti. (2) a háromkiterjedésű tál betelése — 2, 8, 20, tűrés nulla; *nem vak cél, kimondva:* a választ a [II/7](II-proofs/II-07-bowl-magic-numbers/proof_hu.md) kitekintője nyíltan tartalmazza, ez a kitekintő beváltása — a széf-zár rá nem értelmezhető. (3) a hálózatos Bell-sértés — Renou 2021 kvantum-értéke, és kötelezően a valós-súlyú korlát **fölött**; (4) a Heisenberg-gyűrű kötésenkénti alapenergiájának termodinamikai határa — Bethe/Hulthén publikált egzakt értéke (¼ − ln 2), méret-extrapolációval, előre rögzített extrapolációs szabálykönyvvel (a repó a 12-es gyűrűig jutott — a határérték új számolás); (5) az egymásba ágyazott tanú — Bong és társai 2020 publikált sértése.
+- *Siker:* legalább 4 az 5-ből áll. *Bukás-ág:* célonként — tűrésen kívüli szám, vagy ha a lezáráshoz új import kell (akkor az ítélet „lyukas", nem „áll"). Ha 5-ből 2+ bukik: a külső jóslatok (P4.4, P4.5) zárolva; a bukott célok import-számlája jelöli ki, mit kell előbb a nyelvbe beépíteni.
+- *A vak-protokoll korlátja, kimondva:* a végrehajtó AI-agent nem vak — a publikált célszámok a tanítóadatában lehetnek; a széf a leolvasás ellen véd, a betanult előzetes tudás ellen nem. Publikált célszámon a vak-protokoll ezért **„fegyelmezett retrodikciót"** tanúsít, nem jóslatot; a „jóslat" cím kizárólag a valóban ismeretlen kimenetű célokat illeti (P1.1, P2.3, P4.4, P4.5). Ellenszer a szabálykönyvben: minden numerikus szabad választás (felosztás, extrapolációs alak, konvergencia-kritérium) célszám-független indoklással, előre rögzítve; kötelező érzékenységi vizsgálat — a választások perturbálása nem tolhatja a számot a cél felé.
+- *Kimenet:* öt új próbafejezet a II. részben; a [C függelék](appendix/C-benchmarks_hu.md) bővítése.
+
+### 2. szakasz — Zárás (import-nullázás és tételesítés)
+
+**P2.1 — A helyiség-zárás: a helyek egyenrangúsága tétel vagy negyedik import.**
+- *Kérdés:* levezethető-e a helyek egyenrangúsága az 5. törvény hely-kiterjesztéseként (a [II/11](II-proofs/II-11-locality-readout/proof_hu.md) átnevezés-próbájának irányán), nulla új importtal — és élesíthető-e a kiválasztási törvény (a fok-rezonanciás kivételek megértése)?
+- *Siker:* csomag-módszeres levezetés kizárólag mag-premisszákból; import-delta 0; a II/12 regressziója zöld (a vákuum-parkoló zárása tételből következik). A mag státusza „jelölt" → „tétel".
+- *Bukás-ág:* ha be nem jelentett feltevés kell, a jelölt — az [I/1](I-language/I-01-concept_hu.md)-ben előre bejelentett módon — **negyedik importtá válik.** Ez is lezárás: az importszám nő, de a kettős állású elem eltűnik. Kettős állású elem a magban nem maradhat.
+
+**P2.2 — A kötés-szerződés tétellé: a hidrogénmolekula-próba.** *(kimondottan párhuzamos ág a P1.5 1. céljával, a szakasz-kapu alól kivéve)*
+- *Kérdés:* kiadja-e a [II/8](II-proofs/II-08-exclusion-vs-repulsion/proof_hu.md) mechanizmusa (két szomszédos gödör, ellenkező előjel) a [II/1](II-proofs/II-01-pair-bond/proof_hu.md) szerep-tiltó szerződését úgy, hogy a csatolás erőssége levezetett szám?
+- *Siker, két lépcsőben — a fizikailag reális kalibrációval:* **(a) a law→theorem konverzió** — a szerep-tiltó szerződés alakja ÉS a csatolás nagyságrendje kijön a mechanizmusból, kimondott, laza tűréssel (5–10%, a szabálykönyvben előre): ezzel a nyelv első bevizsgált szerződése axiómából tétellé lép; **(b) az eV-pontos réteg, külön és opcionálisan** — csak akkor, ha teljes kételektronos számolás fut, reális tűréssel (≥ 0,005 eV), és a pontossági padló kimondva: a negyedik tizedes szintjén (~0,1 meV) már relativisztikus és adiabatikus korrekciók élnek, amelyeket a nyelv (P3.6, H6) hatókörön kívülre zár — e szint alá a siker-kritérium elvből nem mehet. Kétutas számolás, vak-protokoll mindkét lépcsőn.
+- *Bukás-ág:* ha a két kódút egyezik, de az (a) lépcső száma tűrésen kívül: a szerződés axióma marad, a bukás csomagban rögzítve. A tűrés utólagos tágítása tilos; a (b) lépcső elmaradása nem bukás, hanem kimondott hatókör-határ.
+
+**P2.3 — A hordozó-tétel, a tükör-hordozó-térkép és a 12-es koordináció jóslata.**
+- *Kérdés:* levezethető-e, hogy miért a tükör választ (a [III/1, 7.](III-frontier/III-01-candidate-laws_hu.md) tételesítése), és kiadja-e a térkép, mely koordináción mely fok a legalacsonyabb tükör-jegyű szövés?
+- *Siker, két lépcsőben:* (a) a hordozó-tétel mag-premisszákból, amely paraméter nélkül visszaadja mindhárom mért koordináció (6, 8, 10) tetejét; (b) **előre regisztrált jóslat a 12-es koordinációra** — a tető-hordozó neve és a lépcső kihagyott fokai. A jóslat regisztrálása e mérföldkő dolga; az ellenőrző verseny maga 10⁵-nél nagyobb rendszert kíván (a honos fok hatodrendű szövése), ezért az a P4.6 kampányában fut, a skálázott gépezettel — a jóslat addig „regisztrált, ítéletre vár" státuszú. Ráadás-cél, ha a térkép kiadja: a dominancia-hézag ~fele-mintájának előre kimondott alakja.
+- *Bukás-ág:* ha a térkép a három ismert koordináció bármelyikét nem adja vissza — a levezetés bukik. Ha a térkép áll, de a 12-es jóslat bukik — a tető-törvény predikciós törvényként megbukott, mért leletté fokozandó le. P1.1 + P2.3 együttes bukása a teljes kiterjedés-program értelmezését nyitja újra.
+- *Ez a program első, teljes értékű belső predikciója: a fizikának erre nincs publikált eredménye.*
+
+**P2.4 — Az 1/r zárás-kísérlete.**
+- *Kérdés:* levezethető-e a vonzásalak a nyelven belülről — a kiterjedés-program három-eredményéből és a helyiség-nézetből, a győztes tér-szövés hosszútávú (Green-függvény-szerű) alakjaként — kör nélkül?
+- *Siker, három rétegben:* (a) a mag gráfja gépileg igazolja, hogy a II/13–II/16 sehol nem támaszkodik az 1/r-importra (a kör kizárva — ellenőrizendő, nem feltételezendő); (b) a levezetett hosszútávú alak 1/r a rögzített korrekciós korláton belül; (c) a II/4 regressziója zöld (a négy tizedes változatlan).
+- *Bukás-ág:* ha az alak csak aszimptotikusan 1/r és a korrekciók a hidrogén skáláján rontanak, VAGY a gráf kört talál: az 1/r **végleges importtá** nyilvánítandó, kimondott hatókörrel („a vonzásalak a nyelv bemenete a gyökér-program lezárásáig"). A fél-eredmény is rögzítendő: milyen kitevőt ad a nyelv magától.
+- *Ez a program legnehezebb zárás-kísérlete — a 2. vád ezen áll vagy bukik véglegesen.*
+
+**P2.5 — A peremadat-átminősítés: az elektron-típusdeklarációk.**
+- *Kérdés:* szétválasztható-e gépileg, hogy a nyelv a típus-lehetőségteret vezeti le (két osztály + a származtatott típusok nyitása), a „melyik osztály az elektron" pedig peremadat — a világ példány-adata, nem a nyelv adóssága?
+- *Siker:* gépi ellenőrzés igazolja, hogy egyetlen tétel sem használja a kizárólagosság **indokát**, csak az **értékét** — a deklaráció kezdőfeltételként viselkedik. Hatókör-mondat a magban: a spin–statisztika a relativisztikus szerkezetből jön, amely a nyelv hatókörén kívül áll.
+- *Bukás-ág:* ha bármely levezetés az okra támaszkodik, az átminősítés érvénytelen — a deklaráció import marad, és a [III/2, 4.](III-frontier/III-02-open-questions_hu.md) (nyelven belüli út a kizáráshoz) kötelező ággá lép elő.
+- *Kimondva:* ez az az import, amelyről gyanítható, hogy sosem lesz nyelven belül levezethető — a becsületes lezárás itt nem a levezetés erőltetése, hanem a peremadattá minősítés, géppel ellenőrzött feltételekkel.
+
+**P2.6 — Ekvivalencia vagy eltérési pont: a formális státusz.**
+- *Kérdés:* az öt törvény bizonyítottan ekvivalens-e a standard QM egy pontosan körülhatárolt szegmensével, vagy van legalább egy számolható eltérési pont?
+- *Siker, bármelyik ágon:* (a) formális megfeleltetési tétel — az öt törvény + importok pontosan a véges dimenziós, rácsos QM-et adják; ekkor a nyelv értéke kimondottan a levezetési út és az import-könyvelés: becsületes, védhető pozíció; VAGY (b) egy megnevezett eltérési pont, számolható próbával és mérhető következménnyel — a maximális tudományos tét.
+- *Bukás-ág:* ha két iterációban egyik ág sem zárul, az „elmélet" és „zárt" szavak használata felfüggesztendő; a státusz „formálisan tisztázatlan jelölt-keret", és ezt a címlap mondja ki.
+
+**P2.7 — A kontinuum-tétel.**
+- *Kérdés:* bizonyítható-e tételként, hogy a rácsgépezet létrája a felosztás finomításával rögzített rendben (hᵖ, p néven nevezve) tart a folytonos értékhez?
+- *Siker:* bizonyított hibakorlát a B függelékben + gépi konvergencia-jegyzőkönyv: a II/3 és II/4 legalább 4 finomítási lépésén a mért rend a bizonyítottól 5%-nál kevesebbel tér el. A II/4 négy tizedese ettől kezdve tételes hibakorláttal áll, nem tapasztalatival — visszamenőleg is felértékelve.
+- *Bukás-ág:* ha a vonzó szerződés szingularitása miatt a rend romlik és nem kezelhető: hatókör-határ kimondva — mely szerződésalakokra tételes a kontinuum, melyekre tapasztalati.
+
+### 3. szakasz — Folyamat-modellezés (hatókör-bővítés; a P3.4 és a P2.7 bármikor párhuzamosan indítható)
+
+**P3.1 — A hatókör sebessége (fénykúp-próba).**
+- *Kérdés:* az állapot hirtelen átírása (a fizika quench-nek hívja) után a hatás véges sebességű frontban terjed-e, és a front sebessége a szerződés-ütemekből számolható-e?
+- *Siker:* a gépezet időfejlesztett front-sebessége egyezik a zárt alakú maximális csoportsebességgel 1%-on belül (≥12 példányos lánc); a fronton kívüli jel exponenciálisan nyomott, kétutasan; valóság-ellenőrzés: **Jurcevic és társai 2014** mért fénykúp-terjedése fogott ionokon (spin-rendszer — a meglévő típusokkal fut) a publikált hibán belül. A Cheneau és társai 2012 Bose–Hubbard-mérés másodlagos cél, csak az osztozó deklaráció (P3.5) után — a függőség kimondva, hogy be nem jelentett import ne csússzon be.
+- *Bukás-ág:* ha a kimondáshoz új fogalmat kell kölcsönözni, vagy a front nem válik el a zajtól — bukás-próbaként rögzítve, a hiányzó fogalom néven nevezve.
+- *Új fogalom-jelölt:* a „hatókör-sebesség" — csak a próba átmenése után kap nevet az I. részben.
+
+**P3.2 — A tanú üteme (nyitott rendszer).**
+- *Kérdés:* a [II/10](II-proofs/II-10-internal-witness/proof_hu.md) tanú-szabályának időbeli alakja kiadja-e a mért dekoherencia-rátákat szabad paraméter nélkül?
+- *Siker:* a tanú-ütem egyenlet (a Lindblad-megfelelő) a teljes állapottér egzakt időfejlesztéséből határátmenetként adódik, kétutasan; a Brune és társai 1996 mérte dekoherencia-ráták a szétválasztás négyzetes skálázásával a publikált mérési hibán belül konzisztensek (a cikk kevés ponton a konzisztenciát mutatta, illesztett kitevő-hibasávot nem publikált — a kritérium ehhez van kalibrálva); legalább egy publikált qubit T₂/T₁ arány visszaadva.
+- *Bukás-ág:* ha a tanú-ütem csak a Lindblad-alak átcímkézése (az import-számla „nem segít" ítélete), bukás-próbaként rögzítendő a II/12 mintájára.
+- *Ez a nyelv legpiacképesebb darabja: minden kvantumtechnológiai zajmodell erre a fogalomra épül.*
+
+**P3.3 — A meleg létra (véges hőmérséklet).**
+- *Kérdés:* ha a hőmérséklet a tanú-csere üteme (nem új import), az ütem-létra betöltési súlyaiból kijön-e a mért termikus viselkedés?
+- *Siker:* (a) a Schottky-púp zárt alakban; (b) a döntő cél: a kétkiterjedésű Ising-átmenet, T_c/J = 2/ln(1+√2) = 2,2692 négy tizedesre, rögzített végesméret-szabálykönyvvel; (c) a hőmérséklet az import-számlán „levezetett" vagy pontosan egy néven nevezett új tétel.
+- *Bukás-ág:* ha a termikus súlyok nem vezethetők le a tanú-cserearányból, hanem be kell hozni őket — az azonnal import, és a mérföldkő „lyukas" ítélettel zárul.
+- *Sorrend-kényszer:* P3.2 után — hőmérsékletet tanú nélkül bevezetni kényszer-import volna.
+
+**P3.4 — A származtatott típus (toric code).** *(nulla import-kockázat, bármikor indítható)*
+- *Kérdés:* kimondható-e a „mintázatból lett objektum" ([III/2, 7.](III-frontier/III-02-open-questions_hu.md)): a toric code hibamintázatai önálló példányként viselkednek-e, saját típusosztállyal, amely se nem kizáró, se nem osztozó?
+- *Siker, négy egzakt számmal:* alapállapoti elfajulás tóruszon = 4; a származtatott példány létrehozási ára egzakt; az e- és m-példány körbevezetési fázisa = −1 (a kétosztályos tételen kívüli, harmadik viselkedés); a topologikus tanú-jegy γ = ln 2 a nézet-számításból. Mind kétutasan, a meglévő 4. eszközzel.
+- *Bukás-ág:* ha a származtatott példányra az 5. törvény (átnevezés-próba) megbukik, a „származtatott típus" nem típus — és ezt kell kimondani.
+- *Két front egy mérföldkövön:* lezárja a III/2, 7.-et ÉS megnyitja a gyökér-programot (ha a csatolást mintázatok hordozzák, a kiválasztás kérdése itt válik támadhatóvá).
+
+**P3.5 — Az osztozó osztály első próbája (BEC).**
+- *Kérdés:* az osztozó deklaráció mellett (előre bejelentett import-tétel) sok példány közös legalsó ütemre gyűlése kiadja-e a mért kondenzátum-görbét?
+- *Siker:* N₀/N = 1 − (T/T_c)³ a nyelv levezetésében; Ensher és társai 1996 mért görbéje és T_c-eltolódása a publikált hibán belül; az import-számlán pontosan egy új tétel (az osztozó deklaráció — a bejelentett deklaráció itt nem számít be nem jelentett importnak, ez a kivétel kimondva). Vak-kiegészítő cél a széffel: a kondenzációs küszöb ζ(3)-as együtthatója — ez ide tartozik, nem az 1. szakaszba, mert hőmérséklet-fogalom (P3.3) nélkül számolhatatlan.
+- *Bukás-ág:* ha a mért egyezéshez kölcsönhatási korrekció kell, a próba „ideális-gáz határig áll" ítélettel szűkítendő, nem szépítendő.
+
+**P3.6 — A határ-próba (kimondott bukás-próba).**
+- *Kérdés:* előre bejelentett bukás-próba — a hidrogén finomszerkezete (a 2P-felhasadás, 10 969 MHz) a meglévő importokkal elérhetetlen; a cél a hiány pontos lokalizálása, nem az egyezés.
+- *Siker = a pontos bukás:* (a) a számolás reprodukálhatóan NEM adja ki a felhasadást; (b) a hiányzó fogalom néven nevezve a III. részbe kerül (a példány belső forgása és a hatókör-sebesség csatolása — a relativisztikus küszöb); (c) elkészül a **hatókör-tábla** (III-03): soronként relativitás / változó példányszám / gravitáció — melyik törvénnyel ütközik, mi volna a belépő import.
+- *Fordított bukás-ág:* ha a próba szabálykönyv-módosítás nélkül mégis kiadja a felhasadást, az nem bukás, hanem felfedezés — külön csomagban rögzítendő.
+- *Ez a program legolcsóbb, legmaradandóbb terméke: minden bíráló első kérdésére („és a relativitás?") előre kész, számolt válasz.*
+
+### 4. szakasz — Skálázás és első-kimondás
+
+**P4.1 — A nézet-gépezet: tenzorháló bevizsgálása.**
+- *Kérdés:* a felület-törvényből ([II/11](II-proofs/II-11-locality-readout/proof_hu.md)) natívan indokolt MPS-gépezet visszaadja-e a megoldott próbák egzakt számait, tanúsítható levágási hibával?
+- *Siker:* a 12 objektumos Kagome-érték és a 12-es kör kötésára 10⁻¹⁰-en belül; a II/3 létra és a II/9 sáv-döntés reprodukálva; minden futás pecsétet ad (eldobott súly + kötésméret-extrapoláció); 100 objektumos konvergált, tanúsított futás. Az ötödik eszköz a B függelékben, hatókör-nyilatkozattal.
+- *Kulcs-elv:* a felület-törvény a gépezet **tételi indoka** — kevés elmélet-nyelv tudja a saját numerikájának létjogosultságát tételből indokolni. Minden ténylegesen kölcsönzött elem tételesen könyvelendő.
+- *Bukás-ág:* ha a bevizsgálás nem könyvelhető fogalmat igényel, a gépezet nem natív és nem vehető fel.
+
+**P4.2 — A tanítás-gépezet: neurális tanú.**
+- *Kérdés:* az [I/5](I-language/I-05-contract_hu.md) tanítás-fogalmának szó szerinti gépesítése (variációs tanítás a súlyvektor-téren) visszaadja-e a II/5 és II/8 rögzített számait, majd fut-e 10³ objektumon?
+- *Siker:* a frusztráció-maradék és a csúcsszerkezet (2, 6, 12; 4, 9) tűrésen belül; 10³ objektumon konvergált futás; pecsét = a becslő szórása + két független magvú tanítás egyezése (a kétutas szabály tanítás-alakja). A hatodik eszköz a B függelékben.
+- *Bukás-ág:* ha két független magvú tanítás a tűrésen kívül tér el, a gépezet nem pecsételhető.
+
+**P4.3 — A pecsét-kalkulus.**
+- *Kérdés:* megadható-e egyetlen fokozat-rend és számszerű pecsét-erő úgy, hogy a II/16 rögtönzött alakjai a rendszer speciális eseteiként állnak elő?
+- *Siker:* kimondott fokozat-rend (teljes kétutas > ritka alak > mintavételes pecsét > szórás-pecsét), számszerű lefedettség-definícióval; a II/16 pecsétjei (5,3·10⁻¹⁴; 5,1·10⁻¹⁴; 9,4·10⁻¹⁶) a könyvtárból újraszámolva egyeznek; ettől kezdve minden futás kötelezően pecsét-mezőt hordoz, és a kapu-ellenőr pecsét nélküli ítéletet nem enged át.
+- *Bukás-ág:* ha a II/16 pecsétjei nem állnak elő a rendszerből, a kalkulus rossz absztrakció — újratervezendő, mielőtt a 10⁵-ös kampány ráépül.
+
+**P4.4 — Melyik folyadék? (külső jóslat #1).**
+- *Kérdés:* réses vagy réstelen a Kagome-folyadék — és ha réses, mekkora a rés kötésegységben? *(A szakma évtizede vitatja; konszenzus nincs — a [III/2, 3.](III-frontier/III-02-open-questions_hu.md) maga mondja ki: itt már nem visszaszámolni kell, hanem elsőként kimondani.)*
+- *Siker, két rétegben.* Gépi réteg: 100+ objektumos rendszeren, kötésenként 0,003-nál finomabb felbontással (a legjobb szilárd jelölt előnye) ítélet születik; **kötelező elem az előre rögzített végesméret-extrapolációs szabálykönyv legalább három méret-lépcsőn, és a hibasávba az extrapolációs bizonytalanság is beleszámít** — a kérdést a szakma nagy numerikával egy évtizede nem tudta eldönteni, a nehézség a méret-extrapoláció, nem a nyers felbontás; a méret-plafon a publikált élvonalhoz mérve rögzítendő. Ha a sáv elválasztja a réses és réstelen választ, az állásfoglalás időbélyeges, nyilvános regisztrációt kap (repó-release + jegyzet) — ez önmagában mérföldkő-siker: „regisztrált külső jóslat". Valóság-réteg (felfüggesztett ítélet): a később születő konszenzus a sávon belül esik — a bukás-feltétel előre a regiszterben.
+- *Bukás-ág:* „eldöntetlen a plafonon" — érvényes, publikálható, határidővel kikényszerített lezárás, és **előre kimondva ez a legvalószínűbb kimenet**: a mérföldkő így is teljesíti a dolgát (tanúsított hibasáv egy nyitott kérdésen); ha a hibasáv átfedi mindkét választ, jóslat nem regisztrálható.
+- *Függ:* P4.1 (gépezet), P1.5 (a nyelv vak-hitelessége nélkül a külső jóslatnak nincs súlya).
+
+**P4.5 — A hálózatos Bell-jóslat (külső jóslat #2).**
+- *Kérdés:* mond-e a nyelv számot egy még nem mért hálózat-topológia sértési korlátjára?
+- *Siker:* egy előre rögzített, kísérlettel le nem fedett elrendezésre a teljes-súlyú és a valós-súlyú korlát külön-külön, hibasávval; a két korlát elválik (különben a jóslat üres); időbélyeges regisztráció + egyoldalas, fizikus-nyelvű jóslat-lap (mit mérjen, mit várunk, mikor buktunk) — kész recept egy kísérletező csoportnak.
+- *Bukás-ág:* egyszeri, regiszterben rögzített csere engedélyezett a tartalék külső jóslatra (a dominancia-hézag külsővé érlelt alakja, vagy a herbertsmithite egy mérhető jellemzője). Második csere nincs: akkor a program ítélete „a nyelv retrodikcióra képes, predikcióra még nem" — és ez így kerül a repóba.
+
+**P4.6 — A 10⁵-ös kampány** *(a H4 feltétel hordozója).*
+- *Kérdés:* elérnek-e a bevizsgált gépezetek tanúsított futással a 10⁵ objektumos skálára — és mit mondanak ott?
+- *Siker:* legalább két tanúsított 10⁵⁺ futás pecséttel (fokozat + erő a P4.3 kalkulusából): (a) a **12-es koordináció ellenőrző versenye** — a P2.3-ban regisztrált tető-jóslat ítélete itt születik meg; (b) legalább egy további nagy hálóverseny vagy nagy frusztrált rendszer a tükör-hordozó-térkép kiterjesztésére. Minden futás gépi állapot-mentéssel zárul (későbbi ingyen-leolvasásokhoz); a kis egzakt esetekkel való átfedésben a gépezetek egyezését pecsét rögzíti.
+- *Bukás-ág:* ha a pecsét-erő a rögzített küszöb alá esik, a pont „nem tanúsított" jelölést kap és a térképen lyukként jelenik meg — lyukas térkép publikálható, tanúsítatlan pont állításként soha. Ha a 12-es jóslat itt bukik, a P2.3 bukás-ága lép életbe.
+- *Függ:* P2.3 (a regisztrált jóslat), P4.1–P4.3 (gépezetek és pecsét-kalkulus).
+
+**P4.7 — Az ember nélküli kampány és a zárási audit** *(a program záróköve).*
+- *Kérdés, két fél:* (a) végigvihető-e egy teljesen új próba (jelölt: a [III/2, 6.](III-frontier/III-02-open-questions_hu.md) lavina-kérdése 10³ objektumon) úgy, hogy ember csak a végső kapunál nyúl hozzá? (b) kiadja-e a mag egyetlen futásban a teljes elszámolást?
+- *Siker:* (a) a próba teljes csomag-nyomvonallal lezárul (áll/bukik/részleges — mindhárom érvényes), emberi érintés ≤ 1, reprodukciós futás tiszta környezetben zöld; (b) az audit minden mag-csomópontot pontosan egy kategóriába sorol, minden tételhez körmentes utat mutat, minden próbát változatlan ítélettel ellenőriz, és az importszám ≤ 1 kimondott hatókörrel (vagy 0). A kimenet a **zárt-elmélet tanúsítvány**, emberi és gépi alakban.
+- *Bukás-ág:* ha az audit megmagyarázatlan függést talál, a „zárt" szó nem használható — a cím „záruló nyelv", és a hiánylista a következő programciklus bemenete.
+
+---
+
+## 5. Iránymutatások a végrehajtó agenteknek
+
+1. **Csomag-módszer kivétel nélkül.** Szabálykönyv, tűrés, célszám és bukás-kritérium a számolás előtt, hash-lenyomattal rögzítve; kapu-szabály; utólagos tűrés-tágítás vagy szabálymódosítás = a futás automatikusan érvénytelen. Szabálykönyv-módosítás csak új, külön bejelentett próbában.
+2. **Célszám-zár.** Minden új próba célszáma sózott hash-ben áll a széfben; a levezetés-lezáró commitnak meg kell előznie a széf-nyitót; amelyik próbán a zár nem igazolható, az retrodikciónak minősül, és az index így jelöli. Retrodikció és jóslat szigorúan külön könyvelendő: ami a regisztráció pillanatában publikált, az visszaszámolás, bármilyen pontos. A zár korlátja kimondva: a végrehajtó AI-agent betanult előzetes tudása ellen a széf nem véd — publikált célszámon ezért kötelező minden numerikus szabad választás célszám-független, előre rögzített indoklása és az érzékenységi vizsgálat (a választások perturbálása nem tolhatja a számot a cél felé); a „jóslat" cím csak valóban ismeretlen kimenetű célt illet.
+3. **Pecsét nélkül nincs ítélet.** Minden szám kétutasan (ahol a mezőny nagy: a pecsét-kalkulus következő fokozatán, számmal jelentett lefedettséggel); minden futás kimenete hordozza a pecsét fokozatát és erejét; a kapu-ellenőr pecsét nélküli vagy küszöb alatti eredményt nem enged át. Az ítélet futtatható szkriptből jön — az agent szövege nem ítélet, csak jegyzőkönyv.
+4. **Import-fegyelem, hármas nyilvántartással.** IMPORT (a világról szóló kölcsön — adósság) / KONVENCIÓ (a próba saját szabálya — kimondandó, de nem adósság) / PEREMADAT (a világ példány-adata — kezdőfeltétel-rangú). Összemosás tilos; minden csomag záró sora az import-delta; tétel csak delta ≤ 0 és zöld regresszió mellett fogadható el; kettős állású elem határidős döntési kötelezettség alá esik.
+5. **Körmentesség gépi kényszer.** A mag függőségi gráfját minden csomag-elfogadás után az ellenőrző futtatja; kör = azonnali elutasítás. Kiemelten él a P2.4-re (kiterjedés-eredmény ↔ 1/r).
+6. **A bukás rögzített eredmény.** Minden bukás-ág kimenete néven nevezett negatív tétel vagy hatókör-mondat (a II/12 a minta). Az agent a bukás-kritérium teljesülése után nem „próbálkozik tovább" — lezár, jelent, továbblép. „Eldöntetlen a plafonon" érvényes, határidővel kikényszerített ítélet. A kihagyott és bukott célpontok naplója ugyanolyan nyilvános, mint a sikereseké.
+7. **Előléptetési szabály.** Jelölt → tétel csak a „levezetett" gépi kritériumával (P0.1); új törvény tételesítéséhez kötelező legalább egy előre regisztrált jóslat egy még ki nem számolt rendszerre — a visszaszámolás önmagában nem elég. Prior-art keresés (P1.2 protokollja) minden új tétel kihirdetése előtt, álló szabályként.
+8. **Méret-fegyelem.** Minden dinamikus/termikus/verseny-állítás legalább két rendszerméreten (a PKG-14-5 mintájára); kulcstételek három egymást követő méret-lépcsőn, előre regisztrált extrapolációs szabállyal; ami csak kis méreten áll, az „kis darabon igazolt" címkét kap. Méret-lépcső a gépezeteknél: 100 → 10³ → 10⁵, fokot ugrani tilos — minden fok átfed a pad legnagyobb egzakt esetével.
+9. **Eszköz-bevizsgálási rend.** Új gépezet előbb egy már megoldott próba rögzített számait adja vissza a padon; csak zöld után léphet új terepre. A gépezet feltevései könyvelendők (import / tételi indok / konvenció) — a gépezet nem csempészhet be világ-állítást. A gépezet mérete nem bizonyító erő: ami csak mintavételes pecséttel áll, az „mért", nem „tétel".
+10. **Új fogalom csak a levezetése után kap nevet az I. részben** (az I/1 hármas szabálya, kivétel nélkül): a „hatókör-sebesség", a „tanú-ütem", a „hőmérséklet mint cserearány" és a „származtatott típus" addig a III. rész jelöltje, amíg a saját próbája át nem megy.
+11. **Gépi állapot-mentés és reprodukció.** Minden verseny és nagy futás mentett állapottal zárul (a PKG-16-5 mintája: a mentett állapot később ingyen-leolvasásokat ad); minden próba elfogadás előtt tiszta környezetben reprodukálandó (az `environment-check` mintájára). Ami nem reprodukálódik, az nincs — a szabály a csomag-módszer bevezetésétől (II/13) él; a korábbi próbákra a 15. pont áll. Tárolási konvenció (a repó ma semmilyen állapotfájlt nem követ — ezt a P0.4 rögzíti): az állapotfájl helye, formátuma és méret-plafonja a szabálykönyv része; ami a git-en kívül marad, annak a rögzített szkriptből való újragenerálhatósága a reprodukciós futás ellenőrzött eleme.
+12. **Üres jóslat tilalma.** Csak az a szám jóslat, amely eltérő kimeneteket választ szét; ha a hibasáv az összes versengő választ átfedi, a sor nem kerülhet a regiszterbe. Külső jóslat csak időbélyeges, nyilvános rögzítés után vethető össze későbbi méréssel.
+13. **Hatókör-őszinteség.** Amíg a méret-létra (8. pont) le nem zárul egy állításon, kötelező mellé a méret-hatókör („N objektumig igazolt"); amíg a P2.6 le nem zárul, kifelé szóló szövegben az „elmélet" helyett „nyelv" vagy „jelölt-keret" használandó.
+14. **Terminológia és kétnyelvűség.** Az agentek a repó saját szavait használják (próba, szerződés, ütem-létra, nézet, tanú, tükör-jegy, import-számla); új szó csak a mag definíció-tárán keresztül; minden fejezet hu/en párban, `pair_status` karbantartva. Az emberi érintések száma csomagonként naplózandó — a csökkenő görbe maga is jelentendő eredmény. Felmentés, kimondva: a 10. és a 14. szabály a nyelv (I. rész) fizikai fogalmaira vonatkozik; a program saját módszertani műszavai (célszám-széf, jóslat-regiszter, peremadat, pecsét-kalkulus) nem fizikai fogalmak — kötelező bejegyzést a P0.1 definíció-tárában kapnak, de próba-átmenés nem előfeltételük.
+15. **Szabályrend előtti próbák.** A II/1–II/12 a csomag-módszer előtt készült: ítéletük érvényes, bizonyítékuk viszont nem szabályrend szerinti. Rájuk hivatkozni szabad, de az a mérföldkő, amelyik a számukat premisszaként használja, előbb megismételteti az adott próbát a mai szabályrend szerint, új sorszámon. Az ismétlés kimenete önálló ítélet: ha eltér a korábbitól, az új szám lép életbe, és a rá épülő állítások átvizsgálása a mérföldkő része.
+
+---
+
+## 6. A végső cél
+
+**A program célállapota (a „high-end" tanúsítvány).** Egyetlen mondatban: *egy rendszer megadása — objektumok és szerződések felsorolása — elegendő a viselkedése kiszámolásához, és a nyelv erről szóló minden állítása vagy géppel ellenőrzött levezetési nyomvonalú tétel, vagy kimondott konvenció, vagy kimondott peremadat.* Számon kérhető alakban: a hat H-feltétel (2. szakasz) mindegyike gépi audittal áll — zárt könyvelés importszám ≤ 1-gyel (kimondott hatókörrel) vagy 0-val; tisztázott formális státusz; legalább egy igazolt (vagy becsületesen, számmal megbukott) külső jóslat; bevizsgált skálázó gépezetek 10⁵-ig; folyamat-modellezés mért célszámokon; és a hatókör-térkép. Ha a program bármely bukás-ágba fut, a végállapot ugyanilyen pontos: a repó kimondja, hogy a nyelv számolt szótár, és pontosan meddig ér — ez is lezárás, nem kudarc.
+
+**A horizont (a program után nyíló kapu): a gyökér-program.** A II/12 óta minden mezőny-lelet ugyanoda mutat: a kiválasztás — miért olyan a világ szerződés-szerkezete, amilyen — ott dőlhet el, ahol a szerződések maguk születnek, vagyis ahol a csatolást a példányok mintázatai hordozzák ([III/2, 7–8.](III-frontier/III-02-open-questions_hu.md)). A P3.4 (származtatott típus) nyitja meg a fogalmat, a P2.3 térképe adja hozzá az adatot, a P2.4 kimenete a tétet („a vonzás alakja adja a hármat kívülről; a tükör és a sűrűség belülről; a kettő találkozása a gyökér-program dolga"). A gyökér-program — benne a „miért három kiterjedés" kérdés végső alakjával — nem e program mérföldköve: e program azt éri el, hogy a kérdés spekulációból adatvezérelt, tételekkel körülbástyázott kutatási iránnyá váljon.
+
+---
+
+## 7. Mire lesz jó, ha elérjük
+
+**Tudományos többlet.**
+- Az első igazolt vak találat visszamenőleg is felértékeli mind a 16 meglévő próbát: ami eddig „hasonlít-gyűjteménynek" volt leírható, az onnantól egy prediktív nyelv kalibrációs szakasza.
+- Az import-levezetések (helyiség, kötés-szerződés, esetleg 1/r) a nyelv első valódi többlete a standard felett: amit a kvantummechanika **posztulál**, azt a nyelv **levezeti** — ez már nem átcímkézés.
+- A Kagome-állásfoglalás és a hálózatos Bell-jóslat valódi tudományos tét: az egyik egy évtizedes nyitott kérdést dönt el számmal, a másik kész kísérleti recept egy mérőcsoportnak. A tükör-hordozó-térkép és a 12-es koordináció jóslata pedig olyan terepen bizonyít, amelyet a fizika még nem is térképezett fel.
+- Az ekvivalencia-kérdés (P2.6) bármelyik ágán nyerő: vagy egy bizonyítottan hű, taníthatóbb axiomatizálást kapunk import-könyveléssel, vagy egy kísérletileg tesztelhető eltérési pontot — az utóbbi a maximális tét.
+
+**Gyakorlati haszon.**
+- A tanú-ütem (P3.2) minden kvantumtechnológiai zajmodell alapfogalma: ha a levezetés áll, a nyelv a qubit-dekoherencia natív leíró nyelve — a kvantumszámítás-mérnökség felé ez a közvetlen kapu.
+- A skálázó gépezetek (tenzorháló, neurális tanú, pecsét-kalkulus) auditálható numerikus eszköztárrá érnek, amely a repón kívüli kondenzált anyag problémákra is bevethető.
+- A hatókör-térkép (P3.6) után minden bíráló első kérdésére előre kész, számolt válasz van — a nyelv határa nem gyengeség, hanem kimondott eredmény.
+
+**Módszertani export — talán a legmaradandóbb.**
+- A célszám-széf, a jóslat-regiszter, a pecsét-kalkulus és az agent-protokoll együtt egy publikálható minta: **gépileg ellenőrzött, előre regisztrált, célpont-válogatás-álló elméletépítés AI-agentekkel** — a csomag-módszer természetes betetőzése. Ez a repón túl is érték: bármely AI-vezérelt kutatási program átveheti.
+- A regressziós pad a meglévő tudást örökös, gépileg őrzött vagyonná teszi: a nyelv nem tud csendben megromlani — minden bővítés a teljes múlt ellenében vizsgázik.
+- És a bukás-ágak is hasznot hoznak: egy becsületesen lezárt irány („az 1/r nem levezethető — végleges import") megspórolja az összes ráépülő munkát, a bukás-könyvelés kultúrája pedig — a II/12-től a zárási auditig — önmagában is minta arra, hogyan kell elméletet úgy építeni, hogy az megölhetetlen legyen: nem azért, mert nem lehet megtámadni, hanem mert minden támadáshoz fájlban fekvő, gépileg ellenőrzött válasz tartozik.
+
+**Pedagógiai haszon.** Ha a formális státusz az ekvivalencia-ágon zárul, a nyelv a kvantummechanika taníthatóbb, programozói fogalmakra épülő, axiomatikusan könyvelt bejárata — a belépési küszöb csökkentése mérhető, önálló érték.
+
+---
+
+*A program mérföldkövei csomag-módszerrel futnak; ez a fájl a mérföldkövek szabálykönyveinek szabálykönyve. Módosítása a repó rendje szerint történik: a lefutott mérföldkövek szakasza nem írható át, bővítés a szakasz végére kerül.*
 </file>
 
 <file path="shared\environment-check.py">
@@ -6099,238 +6186,4 @@ for i in tail:
 print("  ", dict(sorted(split.items(), key=lambda x: -x[1])[:5]))
 last8 = [name_of(int(bid[NH-1-m])) for m in range(1, 9)]
 print("   winners of the last 8 fillings (the full end): %s" % last8)
-</file>
-
-<file path="shared\II-17-contract-origin\PKG-17-2-verify.py">
-"""
-PKG-17-2 — VERIFICATION PART (before the loop)
-Package document: PKG-17-1-rulebook_hu.md / _en.md, section 6 (B3 precondition)
-+ section 11, A3/A7
-
-This file does NOT contain the loop. It only checks that the machinery gives
-the same numbers as the chapters that have already run:
-  - II/1  : the closed form of the bond contract (instance level)
-  - II/5  : triangle — 15/8 at instance level, 3/2 jointly, fourfold degeneracy
-  - II/11 : full-network control — 45/66, degeneracy 132, closeness spread 1e-16
-  - II/11 : the 12-ring — 0.3011, closenesses 0.444 / 0.123 / 0.066 / 0.045 / 0.037
-  - PKG-17-1 T1 : the flat state is a fixed point — except for F5, where it is
-    EMPTY (the zero test)
-"""
-
-import numpy as np
-from itertools import combinations
-
-LN2 = np.log(2.0)
-
-
-# ---------- NEW: building the contract from the form of the language ----------
-
-def pair_cost_operator(n, i, j):
-    """NEW method. The operator of the bond contract on a pair, directly from the
-       form of I/8: L = a^2 + d^2 + 1/2 (b+c)^2 on the weights
-       (0,0),(0,1),(1,0),(1,1). The first computation route."""
-    dim = 1 << n
-    M = np.zeros((dim, dim))
-    bi, bj = 1 << (n - 1 - i), 1 << (n - 1 - j)
-    for s in range(dim):
-        vi, vj = (s & bi) != 0, (s & bj) != 0
-        if vi == vj:
-            M[s, s] += 1.0                    # a^2 and d^2
-        else:
-            M[s, s] += 0.5                    # 1/2 b^2, 1/2 c^2
-            M[s, s ^ bi ^ bj] += 0.5          # the cross term: b*c
-    return M
-
-
-def pair_cost_operator_spin(n, i, j):
-    """NEW method. The same by a second, independent route: in the form 3/4 + S_i.S_j.
-       The first element of the two-route rule (PKG-17-1, A7)."""
-    dim = 1 << n
-    M = np.zeros((dim, dim))
-    bi, bj = 1 << (n - 1 - i), 1 << (n - 1 - j)
-    for s in range(dim):
-        vi, vj = (s & bi) != 0, (s & bj) != 0
-        M[s, s] += 0.75 + (0.25 if vi == vj else -0.25)
-        if vi != vj:
-            M[s, s ^ bi ^ bj] += 0.5
-    return M
-
-
-def hamiltonian(n, weights):
-    """NEW method. The full cost operator from a given content vector.
-       weights: {(i,j): w} — only the nonzero contents."""
-    dim = 1 << n
-    H = np.zeros((dim, dim))
-    for (i, j), w in weights.items():
-        if w != 0.0:
-            H += w * pair_cost_operator(n, i, j)
-    return H
-
-
-# ---------- NEW: ground state in magnetization blocks ----------
-
-def ground_space(n, H, tol=1e-9):
-    """NEW method. The subspace of smallest cost, computed block by block.
-       Returns: (minimum, list of state vectors in the full space)."""
-    dim = 1 << n
-    popc = np.array([bin(s).count("1") for s in range(dim)])
-    best, vecs = np.inf, []
-    for m in range(n + 1):
-        idx = np.where(popc == m)[0]
-        if idx.size == 0:
-            continue
-        w, v = np.linalg.eigh(H[np.ix_(idx, idx)])
-        if w[0] < best - tol:
-            best, vecs = w[0], []
-        if w[0] < best + tol:
-            for k in np.where(w < best + tol)[0]:
-                full = np.zeros(dim)
-                full[idx] = v[:, k]
-                vecs.append(full)
-    return best, vecs
-
-
-# ---------- NEW: the closeness measure (II/11) ----------
-
-def reduced(vecs, n, sites):
-    """NEW method. Partial state from the even mixture of the zero-cost subspace
-       (the control method of II/11: an exact projector when degenerate)."""
-    k = len(sites)
-    rest = [a for a in range(n) if a not in sites]
-    d = 1 << k
-    rho = np.zeros((d, d))
-    for v in vecs:
-        A = np.moveaxis(v.reshape([2] * n), sites + rest, range(n))
-        A = A.reshape(d, -1)
-        rho += A @ A.T
-    return rho / len(vecs)
-
-
-def entropy(rho):
-    """NEW method. Von Neumann entropy, natural based (the 0.69 = ln2 mark of II/11)."""
-    w = np.linalg.eigvalsh(rho)
-    w = w[w > 1e-13]
-    return float(-(w * np.log(w)).sum())
-
-
-def proximity_map(n, vecs):
-    """NEW method. Pairwise closeness: how much more the joint view knows."""
-    s1 = [entropy(reduced(vecs, n, [a])) for a in range(n)]
-    return {(i, j): s1[i] + s1[j] - entropy(reduced(vecs, n, [i, j]))
-            for i, j in combinations(range(n), 2)}
-
-
-# ---------- NEW: the family of the generating rule (PKG-17-1, section 4) ----------
-
-FAMILY = {
-    "F1": lambda x: x,
-    "F2": lambda x: x ** 2,
-    "F3": lambda x: np.sqrt(x),
-    "F4": lambda x: x / (1.0 + x),
-    "F5": lambda x: np.maximum(0.0, x - x.mean()),
-    "F6": lambda x: x,                       # the halfway step lives in the loop, not here
-}
-
-
-def normalise(w, mode, n_pairs):
-    """NEW method. Two normalization forms (N1: sum = pair count; N2: largest = 1).
-       Returns None if the normalization is meaningless — which is itself a finding."""
-    if mode == "N1":
-        s = w.sum()
-        return None if s <= 1e-14 else w * (n_pairs / s)
-    m = w.max()
-    return None if m <= 1e-14 else w / m
-
-
-# ---------- NEW: the verification checks ----------
-
-def check(name, got, want, tol):
-    ok = abs(got - want) <= tol
-    print(f"  [{'OK ' if ok else 'FAIL'}] {name}: {got:.10g}  (expected {want:.10g})")
-    return ok
-
-
-def main():
-    ok = True
-    print("\n=== 0. Two-route seal: two independent constructions of the contract ===")
-    d = max(np.abs(pair_cost_operator(4, 0, 2) - pair_cost_operator_spin(4, 0, 2)).max(),
-            np.abs(pair_cost_operator(3, 1, 2) - pair_cost_operator_spin(3, 1, 2)).max())
-    ok &= check("deviation between the two routes", d, 0.0, 1e-14)
-
-    print("\n=== 1. II/1 — the closed form at instance level ===")
-    worst = 0.0
-    for t1, t2 in [(0.3, 1.1), (0.0, 0.7), (2.0, 2.0), (0.5, -1.3)]:
-        v = np.kron([np.cos(t1), np.sin(t1)], [np.cos(t2), np.sin(t2)])
-        got = v @ pair_cost_operator(2, 0, 1) @ v
-        worst = max(worst, abs(got - (0.5 + 0.5 * np.cos(t1 - t2) ** 2)))
-    ok &= check("largest deviation from L = 1/2 + 1/2 cos^2(d)", worst, 0.0, 1e-13)
-
-    print("\n=== 2. II/5 — the triangle ===")
-    n = 3
-    H = hamiltonian(n, {(i, j): 1.0 for i, j in combinations(range(n), 2)})
-    e, vs = ground_space(n, H)
-    ok &= check("jointly owned minimum", e, 1.5, 1e-10)
-    ok &= check("degeneracy", len(vs), 4, 0)
-    th = 2 * np.pi / 3
-    v = np.kron(np.kron([1, 0], [np.cos(th), np.sin(th)]),
-                [np.cos(2 * th), np.sin(2 * th)])
-    ok &= check("best instance-level arrangement (15/8)", v @ H @ v, 1.875, 1e-12)
-
-    print("\n=== 3. II/11 control — twelve objects, all 66 pairs ===")
-    n = 12
-    pairs = list(combinations(range(n), 2))
-    H = hamiltonian(n, {p: 1.0 for p in pairs})
-    e, vs = ground_space(n, H)
-    ok &= check("bond price (exactly 45/66)", e / 66, 45 / 66, 1e-10)
-    ok &= check("degeneracy / trace of the projector", len(vs), 132, 0)
-    I = np.array(list(proximity_map(n, vs).values()))
-    ok &= check("closeness on every pair", I.mean(), 0.012, 5e-4)
-    ok &= check("spread of the closeness", I.std(), 0.0, 1e-14)
-
-    print("\n=== 4. II/11 — the 12-ring ===")
-    ring = {(i, (i + 1) % n) if i < (i + 1) % n else ((i + 1) % n, i): 1.0
-            for i in range(n)}
-    e, vs = ground_space(n, hamiltonian(n, ring))
-    ok &= check("bond price", e / 12, 0.3011, 5e-4)
-    P = proximity_map(n, vs)
-    dist = {}
-    for (i, j), val in P.items():
-        dist.setdefault(min((j - i) % n, (i - j) % n), []).append(val)
-    want = [0.444, 0.123, 0.066, 0.045, 0.037]
-    for r in range(1, 6):
-        ok &= check(f"closeness r={r}", float(np.mean(dist[r])), want[r - 1], 5e-4)
-    print(f"   (r=6, antipodal: {np.mean(dist[6]):.4f} — a note, no reference value)")
-    ball = [1 + 2 * r for r in range(6)]
-    print(f"   ball on the ring: {ball} — +2 per step, one extension")
-
-    print("\n=== 5. ZERO TEST (PKG-17-1, T1): does the flat state stay in place ===")
-    n = 12
-    pairs = list(combinations(range(n), 2))
-    w0 = np.ones(len(pairs))
-    _, vs = ground_space(n, hamiltonian(n, dict(zip(pairs, w0))))
-    Iv = np.array([proximity_map(n, vs)[p] for p in pairs])
-    for fname, f in FAMILY.items():
-        # PKG-17-1 T1: from the flat start F5 goes to EMPTY in one round, the rest are fixed points
-        expect = "EMPTY" if fname == "F5" else "FIX"
-        for mode in ("N1", "N2"):
-            w1 = normalise(f(Iv), mode, len(pairs))
-            if w1 is None:
-                got, detail = "EMPTY", "every content is exactly zero — the network has ceased"
-            else:
-                drift = np.abs(w1 - normalise(w0, mode, len(pairs))).max()
-                got = "FIX" if drift < 1e-12 else "MOVED"
-                detail = f"drift {drift:.3e}"
-            good = got == expect
-            print(f"  [{'OK ' if good else 'FAIL'}] {fname}/{mode}: {got} "
-                  f"(expected {expect}) — {detail}")
-            ok &= good
-
-    print("\n" + "=" * 62)
-    print("THE GATE: " + ("CLEAN — the rulebook can be frozen."
-                          if ok else "NOT CLEAN — the rulebook must be corrected before freezing."))
-    print("=" * 62 + "\n")
-
-
-if __name__ == "__main__":
-    main()
 </file>

@@ -18,11 +18,13 @@
 :root{
   --bg:#eef0f2; --surface:#fff; --ink:#1c2126; --muted:#5b666f;
   --line:#d7dbdf; --steel:#6b7780; --pill:#e7eaed;
+  --band:#e3e7ea;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme=light]){
     --bg:#14171a; --surface:#1b1f23; --ink:#e7ebee; --muted:#98a3ab;
     --line:#2b3137; --steel:#93a0a9; --pill:#242a2f;
+    --band:#191d21;
   }
 }
 *{box-sizing:border-box}
@@ -53,13 +55,25 @@ h1{font-size:clamp(2.1rem,6vw,3.2rem);font-weight:600;letter-spacing:-0.03em;mar
 }
 .langbar button[aria-pressed=true]{background:var(--surface);color:var(--ink);border-color:var(--steel)}
 
+/* ---------- full-width intro band ---------- */
+.intro{background:var(--band);border-bottom:1px solid var(--line);
+  padding:2.6rem 0 2.4rem;margin:0 0 .5rem}
+.intro h2{margin:0 0 1.05rem;font-size:1.32rem;font-weight:600;letter-spacing:-0.02em}
+.intro p{margin:0 0 .95rem;font-size:1rem;line-height:1.72;color:var(--muted)}
+.intro p:last-of-type{margin-bottom:0}
+.intro strong{color:var(--ink)}
+.intro .mail{display:inline-block;margin-top:.5rem;font-size:.95rem;font-weight:600;
+  color:var(--ink);text-decoration:none;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:-0.01em}
+.intro .mail:hover{color:var(--steel)}
+
 /* ---------- sections ---------- */
-main{padding:1rem 0 5rem}
-section.lang{display:none}
-section.lang.on{display:block}
-.no-js section.lang{display:block}
+main{padding:1.5rem 0 5rem}
+.lang{display:none}
+.lang.on{display:block}
+.no-js .lang{display:block}
 h2{font-size:1.5rem;font-weight:600;letter-spacing:-0.02em;margin:3rem 0 .9rem}
-h2:first-of-type{margin-top:1.5rem}
+main h2:first-of-type{margin-top:1.5rem}
 p{margin:0 0 1rem}
 .lede{font-size:1.12rem}
 .muted{color:var(--muted)}
@@ -126,19 +140,6 @@ td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums}
   :root:not([data-theme=light]) .uc .ico{opacity:.17}
 }
 
-/* ---------- personal note ---------- */
-.note{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--steel);
-  border-radius:0 14px 14px 0;padding:1.35rem 1.5rem;margin:1.5rem 0 2.25rem;
-  font-size:.94rem;font-style:italic;line-height:1.7;color:var(--muted)}
-.note h2{margin:0 0 .7rem;font-size:1.12rem;font-style:italic;color:var(--ink)}
-.note strong,.note em{color:var(--ink)}
-.note em{font-style:normal}
-.note p:last-of-type{margin-bottom:0}
-.note code{font-style:normal;font-size:.88em}
-.note .mail{display:inline-block;margin-top:.35rem;font-size:.95rem;font-weight:600;
-  font-style:normal;color:var(--ink);
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:-0.01em}
-
 footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);font-size:.9rem}
 footer p{margin:.3rem 0}
 </style>
@@ -169,8 +170,6 @@ footer p{margin:.3rem 0}
 </svg>
 
 <div class="wrap">
-
-
 <header>
   <img src="media/OOP_Logo.jpg" alt="">
   <h1>OOP Physics Language</h1>
@@ -182,11 +181,100 @@ footer p{margin:.3rem 0}
     <button id="btn-hu" aria-pressed="false">Magyar</button>
   </div>
 </header>
+</div>
 
+<!-- ==================== FULL-WIDTH INTRO BAND ==================== -->
+<div class="intro">
+  <div class="wrap">
+
+    <div class="lang on" data-lang="en" lang="en">
+      <h2>What is this?</h2>
+      <p>I am not a physicist — I work in AI development. This repository is not about me
+      knowing quantum physics; I don't. What I want to find out is whether
+      <strong>an AI agent can do research on its own</strong>: work out what the next
+      question should be, carry the derivation through, compute the result, and state the
+      verdict even when the verdict is failure.</p>
+
+      <p>It needed a testing ground hard enough to mean something. I wanted an
+      object-oriented descriptive language capable of modelling real physical processes —
+      deliberately an ambitious task. It makes a good test because you cannot slip through
+      it on memorised answers, and because there is a hard yardstick on it: the measured
+      numbers of quantum physics either come back out of the computation or they don't.
+      No negotiating.</p>
+
+      <p>The whole thing stands or falls on whether the agent keeps to the order I set for
+      it. The rulebook is fixed <strong>before</strong> any computation. The derivation
+      proceeds in individually approved packages. Every borrowed assumption has to be
+      written down. Failures stay in too, with the verdict spelled out — nothing gets
+      deleted.</p>
+
+      <p>The most delicate point is verification: if the same agent both researches and
+      passes judgement on its own work, then "16 out of 16 stands" means nothing. So
+      <strong>the results are reviewed by models from other vendors</strong>, independently
+      of each other — and wherever possible I insist that the check be
+      <strong>runnable Python code</strong>, not a written argument. The machine computes;
+      it does not persuade. Everything in the repository was written by AI: the language,
+      the proofs, the verification code as well. My part is setting the direction,
+      sharpening the question, and the final call on whether a result really holds.</p>
+
+      <p><strong>It is still running.</strong> This page shows where it stands: what the
+      agent has arrived at so far, what the language knows, and what it does not.</p>
+
+      <p><strong>I am looking for physicists.</strong> If something genuinely new ever
+      comes out of this — and I hope it will :) — it needs a human to validate it, not just
+      a machine. If you feel like taking a look, or just have a comment, all help is
+      welcome.</p>
+
+      <p><a class="mail" href="mailto:ivan.honis@ndot.io">ivan.honis@ndot.io</a></p>
+    </div>
+
+    <div class="lang" data-lang="hu" lang="hu">
+      <h2>Mi ez az egész?</h2>
+      <p>Nem fizikus vagyok, hanem AI-fejlesztő. Ez a repó nem attól szól, hogy értek a
+      kvantumfizikához — nem értek hozzá. Arra vagyok kíváncsi, hogy <strong>egy AI-ügynök
+      képes-e magától kutatni</strong>: kitalálni, mi legyen a következő kérdés, végigvinni
+      a levezetést, kiszámolni az eredményt, és kimondani az ítéletet akkor is, ha az
+      bukás.</p>
+
+      <p>Kellett hozzá egy terep, ami elég nehéz. Egy objektumorientált leírónyelvet
+      akartam, amivel valós fizikai folyamatok modellezhetők — ez szándékosan merész
+      feladat. Azért jó próba, mert nem lehet betanult válaszokkal átcsúszni rajta, és mert
+      van rajta kemény mérce: a kvantumfizika mért számai vagy visszajönnek a számolásból,
+      vagy nem. Nincs alku.</p>
+
+      <p>A dolog úgy áll vagy bukik, hogy az ügynök betartja-e a rendet, amit rászabtam. A
+      szabálykönyv minden számolás <strong>előtt</strong> rögzül. A levezetés egyenként
+      jóváhagyott csomagokban halad. Minden kölcsönvett feltevést fel kell írni. A bukás is
+      bent marad, kiírt ítélettel — nem törlünk.</p>
+
+      <p>A legkényesebb pont az ellenőrzés: ha ugyanaz az ügynök kutat és ítélkezik a saját
+      munkája fölött, akkor a „16-ból 16 áll" semmit sem jelent. Ezért <strong>az
+      eredményeket más gyártók más modelljei nézik át</strong>, egymástól függetlenül — és
+      ahol csak lehet, ragaszkodom ahhoz, hogy az ellenőrzés <strong>futtatható
+      Python-kód</strong> legyen, ne szöveges érvelés. A gép számol, nem meggyőz. A repóban
+      mindent az AI írt: a nyelvet, a próbákat, az ellenőrző kódot is. Az én dolgom az irány
+      kijelölése, a kérdés élesítése, és a végső döntés arról, hogy egy eredmény tényleg
+      megáll-e.</p>
+
+      <p><strong>Most is fut.</strong> Ez az oldal azt mutatja, hol tart: mire jutott eddig
+      az ügynök, mit tud a nyelv, és mit nem.</p>
+
+      <p><strong>Fizikusokat keresek.</strong> Ha egyszer születik itt olyan eredmény, ami
+      érdemben új — és remélem, lesz ilyen :) —, azt embernek is validálnia kell, nem csak
+      gépnek. Ha van kedved ránézni, vagy csak van egy megjegyzésed, minden segítség
+      jöhet.</p>
+
+      <p><a class="mail" href="mailto:ivan.honis@ndot.io">ivan.honis@ndot.io</a></p>
+    </div>
+
+  </div>
+</div>
+
+<div class="wrap">
 <main>
 
 <!-- ==================== ENGLISH ==================== -->
-<section class="lang on" id="en" lang="en">
+<section class="lang on" data-lang="en" id="en" lang="en">
 
   <p class="lede">This is a descriptive language that models the physical world with
   object-oriented patterns — <strong>not as metaphor</strong>. Every pattern is sharpened
@@ -194,7 +282,7 @@ footer p{margin:.3rem 0}
   quantum-physics results.</p>
 
   <div class="grid">
-    <div><b>17</b><span>proofs, one file each</span></div>
+    <div><b>16</b><span>proofs, one file each</span></div>
     <div><b>5</b><span>laws, each with its proof</span></div>
     <div><b>3</b><span>imported items, in total</span></div>
     <div><b>2</b><span>languages, mirrored file by file</span></div>
@@ -204,39 +292,6 @@ footer p{margin:.3rem 0}
     <a class="primary" href="https://github.com/ivanhonis/oop-physics-language">Repository on GitHub</a>
     <a href="https://github.com/ivanhonis/oop-physics-language/blob/master/en/00-introduction_en.md">Start reading</a>
     <a href="https://github.com/ivanhonis/oop-physics-language/blob/master/en/II-proofs/II-00-index_en.md">Index of the proofs</a>
-  </div>
-
-  <div class="note">
-  <h2>A personal note</h2>
-  <p>I am not a physicist — I work in AI development. What I contributed to this work is
-  not the physics but the <strong>method</strong>: the fixed order in which a claim may
-  enter the language at all — the rulebook fixed <em>before</em> the computation,
-  package-by-package approval, the import ledger, and the rule that a failure stays in the
-  repository with its verdict written out.</p>
-
-  <p>That order has a side effect I did not plan for. Because the procedure is fairly
-  strictly fixed, today's advanced language models <strong>can follow it on their
-  own</strong>: they pick up the thread, fix the rulebook in advance, form packages, and
-  carry out the computation. For machine verification their built-in Python runner is
-  usually enough; where more capacity is needed, that can be agreed on, and the
-  verification code can be written and run locally.</p>
-
-  <p>The human's part in this is not the derivation. It is <strong>setting the
-  direction</strong>, sharpening the question, and deciding whether a result really holds.</p>
-
-  <p><strong>If you would like to try it:</strong> give the complete language dump —
-  <code>dist/dump_hu.md</code> or <code>dist/dump_en.md</code> — to an advanced model
-  (Claude Fable 5, for instance), pick a topic, and start a conversation. The dump is built
-  so that it is enough on its own to continue from: the headers, the import ledgers and the
-  package trail together say where the work stands and what the next step is.</p>
-
-
-  <p>I am <strong>glad to share it with anyone</strong> — professional physicist
-  and enthusiastic amateur alike. Criticism especially is welcome: if you find an error
-  somewhere, or know a sharper test, that is worth more to me than agreement. Advice,
-  questions and refutations are all equally welcome.</p>
-
-  <p><a class="mail" href="mailto:ivan.honis@ndot.io">ivan.honis@ndot.io</a></p>
   </div>
 
   <h2>The method, and its yardstick</h2>
@@ -326,7 +381,6 @@ footer p{margin:.3rem 0}
       <tr><td>II/14</td><td>A complete staircase: sparsely the line, in the middle the plane, from half filling onwards space.</td><td><span class="pill">yes</span></td></tr>
       <tr><td>II/15</td><td>At coordination eight the staircase climbs to four — but at the top it turns back: the densest region belongs to space.</td><td><span class="pill">partial</span></td></tr>
       <tr><td>II/16</td><td>The staircase skips three; the top is taken by the native five — the birth of the unified top law.</td><td><span class="pill">partial</span></td></tr>
-      <tr><td>II/17</td><td>If the contract is generated by the state of the instances: does the flat network return, does it crumble into pairs, or something between?</td><td><span class="pill">running</span></td></tr>
     </tbody>
   </table>
   </div>
@@ -341,6 +395,11 @@ footer p{margin:.3rem 0}
   <p>The research is conducted in Hungarian (<code>hu/</code>); the English mirror
   (<code>en/</code>) lives on the same paths, file by file. Terminology for translations
   is fixed in the dictionary chapter.</p>
+  <p><strong>If you would like to try it:</strong> give the complete language dump —
+  <code>dist/dump_hu.md</code> or <code>dist/dump_en.md</code> — to an advanced model,
+  pick a topic, and start a conversation. The dump is built so that it is enough on its own
+  to continue from: the headers, the import ledgers and the package trail together say
+  where the work stands and what the next step is.</p>
 
   <h2>Running the computations</h2>
   <p>The code is language-independent and lives under <code>shared/</code>. Install the
@@ -357,14 +416,14 @@ footer p{margin:.3rem 0}
 </section>
 
 <!-- ==================== MAGYAR ==================== -->
-<section class="lang" id="hu" lang="hu">
+<section class="lang" data-lang="hu" id="hu" lang="hu">
 
   <p class="lede">Ez egy leírónyelv, amely a fizikai világot objektumorientált mintákkal
   írja le — <strong>nem metaforaként</strong>. Minden mintát addig pontosítunk, amíg
   számolható állítást ad, és azt a kvantumfizika mért eredményein ellenőrizzük.</p>
 
   <div class="grid">
-    <div><b>17</b><span>próba, egyenként egy fájl</span></div>
+    <div><b>16</b><span>próba, egyenként egy fájl</span></div>
     <div><b>5</b><span>törvény, mind a bizonyító próbájával</span></div>
     <div><b>3</b><span>importált tétel, összesen</span></div>
     <div><b>2</b><span>nyelv, fájlonkénti tükörrel</span></div>
@@ -374,40 +433,6 @@ footer p{margin:.3rem 0}
     <a class="primary" href="https://github.com/ivanhonis/oop-physics-language">A repó a GitHubon</a>
     <a href="https://github.com/ivanhonis/oop-physics-language/blob/master/hu/00-introduction_hu.md">Olvasás indítása</a>
     <a href="https://github.com/ivanhonis/oop-physics-language/blob/master/hu/II-proofs/II-00-index_hu.md">A próbák indexe</a>
-  </div>
-
-  <div class="note">
-  <h2>Egy személyes megjegyzés</h2>
-  <p>Nem fizikus vagyok, hanem AI-fejlesztő. Amit ehhez a munkához hozzátettem, az nem a
-  fizika, hanem a <strong>módszertan</strong>: az a rögzített rend, ahogyan egy állítás
-  egyáltalán bekerülhet a nyelvbe — a szabálykönyv a számolás <em>előtt</em>, a
-  csomagonkénti jóváhagyás, az import-számla, és az, hogy a bukás is bent marad, kiírt
-  ítélettel.</p>
-
-  <p>Ennek a rendnek van egy mellékhatása, amit magam sem terveztem előre. Mivel a menet
-  elég szigorúan rögzített, a mai fejlett nyelvi modellek <strong>maguktól tudják
-  követni</strong>: felveszik a fonalat, előre rögzítik a szabálykönyvet, csomagokat
-  képeznek, és elvégzik a számolást. A gépi ellenőrzéshez az esetek többségében a belső
-  Python-futtatójuk is elegendő; ahol nagyobb kapacitás kell, arról meg lehet állapodni, és
-  az ellenőrző kódot helyben megírva, lokálisan is le lehet futtatni.</p>
-
-  <p>Az ember dolga ilyenkor nem a levezetés. Az <strong>irány kijelölése</strong>, a kérdés
-  élesítése, és annak eldöntése, hogy egy eredmény tényleg megáll-e.</p>
-
-  <p><strong>Ha ki szeretnéd próbálni:</strong> add be a teljes nyelvi dumpot —
-  <code>dist/dump_hu.md</code> vagy <code>dist/dump_en.md</code> — egy fejlett modellnek
-  (például Claude Fable 5), jelölj ki egy témát, és kezdj el beszélgetni. A dump
-  szándékosan úgy készül, hogy önmagában elég legyen a folytatáshoz: a fejlécek, az
-  import-számlák és a csomag-nyomvonal együtt megmondják, hol tart a munka és mi a
-  következő lépés.</p>
-
-
-  <p><strong>Örömmel megosztom bárkivel</strong> — hivatásos fizikussal és
-  lelkes amatőrrel egyaránt. A kritikát külön várom: ha valahol hibát találsz, vagy tudsz
-  egy élesebb próbát, az többet ér nekem, mint az egyetértés. Tanácsot, kérdést, cáfolatot
-  egyformán szívesen fogadok.</p>
-
-  <p><a class="mail" href="mailto:ivan.honis@ndot.io">ivan.honis@ndot.io</a></p>
   </div>
 
   <h2>A módszer és a mérce</h2>
@@ -496,7 +521,6 @@ footer p{margin:.3rem 0}
       <tr><td>II/14</td><td>Teljes lépcső: ritkán vonal, közepén sík, fél-töltéstől tér.</td><td><span class="pill">igen</span></td></tr>
       <tr><td>II/15</td><td>Nyolcas koordináción a lépcső felmegy négyig — de a tetején visszafordul: a legsűrűbb tartomány a téré.</td><td><span class="pill">részleges</span></td></tr>
       <tr><td>II/16</td><td>A lépcső kihagyja a hármat; a tetőt a honos öt viszi — az egyesített tető-törvény születése.</td><td><span class="pill">részleges</span></td></tr>
-      <tr><td>II/17</td><td>Ha a szerződést a példányok állapota generálja: visszatér a lapos háló, elomlik párokba, vagy marad köztes?</td><td><span class="pill">fut</span></td></tr>
     </tbody>
   </table>
   </div>
@@ -511,6 +535,11 @@ footer p{margin:.3rem 0}
   <p>A kutatás magyarul folyik (<code>hu/</code>); az angol tükör (<code>en/</code>)
   ugyanazokon az útvonalakon él, fájlonként. A fordítások terminológia-forrása a
   szótár-fejezet.</p>
+  <p><strong>Ha ki szeretnéd próbálni:</strong> add be a teljes nyelvi dumpot —
+  <code>dist/dump_hu.md</code> vagy <code>dist/dump_en.md</code> — egy fejlett modellnek,
+  jelölj ki egy témát, és kezdj el beszélgetni. A dump szándékosan úgy készül, hogy
+  önmagában elég legyen a folytatáshoz: a fejlécek, az import-számlák és a
+  csomag-nyomvonal együtt megmondják, hol tart a munka és mi a következő lépés.</p>
 
   <h2>A számolások futtatása</h2>
   <p>A kód nyelvfüggetlen, a <code>shared/</code> alatt él. Telepítsd az egyetlen
@@ -538,11 +567,13 @@ footer p{margin:.3rem 0}
 <script>
 document.body.classList.remove('no-js');
 (function(){
-  var en=document.getElementById('en'), hu=document.getElementById('hu');
   var bEn=document.getElementById('btn-en'), bHu=document.getElementById('btn-hu');
+  var blocks=document.querySelectorAll('.lang[data-lang]');
   function show(l){
     var isHu = l==='hu';
-    hu.classList.toggle('on',isHu);  en.classList.toggle('on',!isHu);
+    for(var i=0;i<blocks.length;i++){
+      blocks[i].classList.toggle('on', blocks[i].getAttribute('data-lang')===l);
+    }
     bHu.setAttribute('aria-pressed',isHu); bEn.setAttribute('aria-pressed',!isHu);
     document.documentElement.lang = l;
     try{ localStorage.setItem('oopl-lang',l); }catch(e){}

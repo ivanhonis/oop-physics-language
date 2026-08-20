@@ -3,14 +3,20 @@ id: II-00
 type: index
 lang: hu
 pair: II-00-index_en.md
-pair_status: in-sync
-doc_version: "1.4"
+pair_status: needs-update
+doc_version: "1.5"
 status: ervenyes
 ---
 
 # II. rész — A próbák (index)
 
 Minden fejezet azonos rendben halad: **a kérdés — a rendszer és a szerződés — a számolás — az eredmény — ellenőrzés a valóságon — import-számla — mit igazolt a nyelvből.** A fejezetszámozás bővítésálló: új próba mindig a sor végére kerül. Ez a fájl csak navigáció; az igazság forrása a próbafájl.
+
+**A szabályrend két nemzedéke.** A szabálykönyv munka közben alakult ki: a csomag-módszer a II/13-tól él, előtte a próbák szabadabb rendben készültek. Az ellenőrzések a korábbi tizenkét próbán is megtörténtek, de nem a mai szabályrend szerint — előre rögzített szabálykönyv, kapu-szabály, pecsét —, ezért a repóban nem állnak futtatható, újraszámolható alakban. Ez nem az ítéletüket kérdőjelezi meg, hanem a bizonyítékuk rangját mondja ki: a II/13-tól szabályrend szerinti a bizonyítás, előtte szabályrend előtti.
+
+**Mikor kell pótolni.** Szabályrend előtti próba eredményére új állítás nem építhető. Ha egy tétel vagy mérföldkő egy korábbi próbára támaszkodik, annak a próbának a szabályrend szerinti megismétlése új próbaként, a sor végén, saját számmal fut le. A meglévő fejezet nem íródik át és nem számozódik át.
+
+**Ha az új szám mást ad.** Az új, pecsételt szám a mérvadó; a korábbi érték szabályrend előtti leletté minősül. A csere feltétele a rá épülő állítások átvizsgálása — a régi számot hordozó törvény-, tétel- és szerződés-hivatkozások mind ellenőrzendők, mielőtt a fejezet ítélete módosul. Ha egy tétel az új számmal nem áll, az bukás-eredmény, a II/12 mintájára rögzítve.
 
 | Próba | Egy mondatban | Ítélet | Import |
 |---|---|---|---|
@@ -30,6 +36,3 @@ Minden fejezet azonos rendben halad: **a kérdés — a rendszer és a szerződ�
 | [II/14 — A kiterjedés-lépcső](II-14-dimension-staircase/proof_hu.md) | Teljes lépcső: ritkán vonal, közepén sík, fél-töltéstől tér; a sík–tér határt a tükör-jegy dönti; az előny vékony. | igen; a kiolvasási korlát méret-műtermékként igazolva (PKG-14-5) | nulla |
 | [II/15 — A negyedik fok](II-15-dimension-fourth-rung/proof_hu.md) | Nyolcas koordináción a lépcső felmegy négyig — a negyedik foké a legnagyobb sáv, benne a fél-töltés —, de a tetején visszafordul: a legsűrűbb tartomány a téré. | részleges — a negyedik fok áll, a tető a háromé | nulla |
 | [II/16 — Tízes koordináció](II-16-coordination-ten/proof_hu.md) | A lépcső kihagyja a hármat; a tetőt az egyetlen tükör-jegyű fő jelölt, a honos öt viszi — az egyesített tető-törvény születése. | részleges — két néven nevezett lelettel; a tető-törvény két lábon áll | a kiválasztási szabály (kimondott konvenció) |
-| [II/17 — A szerződés eredete](II-17-contract-origin/II-17-HANDOVER_hu.md) | **Fut.** Ha a szerződés tartalmát nem kívülről adjuk, hanem a példányok kész állapota generálja: visszatér-e a lapos háló, elomlik-e párokba, vagy marad köztes? | folyamatban — a szabálykönyv fagyasztva, a hurok még nem futott | a generáló szabály (kimondott konvenció) |
-
-> **Futó próba.** A II/17 még nem zárult le, ezért nincs `proof_hu.md`-je; a sor az átadó jegyzetre mutat, amely összefoglalja, hol tart és mi a következő lépés.

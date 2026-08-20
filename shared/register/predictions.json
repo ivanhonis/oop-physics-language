@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "leiras": "Joslat-regiszter (P0.3). Minden bejegyzes egy elore rogzitett, meg le nem olvasott allitas: a joslat-mondat a nyelv fogalmaibol, a siker- es bukas-feltetelek szammal, a forras, es a pecset. A pecset a tartalom SHA-256 lenyomata; a seal.py ellenorzi, hogy a bejegyzes a regisztralas ota nem valtozott.",
+    "miert": "A repo 16 probaja mind ismert szamot adott vissza. A joslat-regiszter az elso olyan eszkoz, amellyel egy allitas UGY zarul le, hogy a valasz a lezaraskor senkinek nincs a birtokaban.",
+    "allapotok": {
+      "regisztralt": "rogzitve, meg nem futott",
+      "itelet-varasra": "a futas elindult, az itelet nincs kimondva",
+      "beallt": "a siker-feltetelek allnak",
+      "bukott": "valamelyik bukas-feltetel teljesult -- rogzitett bukas, nem torlendo"
+    },
+    "kotelezo_szabaly": "A siker- es bukas-feltetel a futas UTAN nem modosithato. A pecset ezt teszi ellenorizhetove; az ido-horgony a commit, amelyben a bejegyzes eloszor megjelenik."
+  },
+  "joslatok": [
+    {
+      "id": "JOS-01",
+      "merfoldko": "P1.1",
+      "datum": "2026-08-20",
+      "commit": null,
+      "allapot": "regisztralt",
+      "kerdes": "Nyolcas koordinacion a teljes mezony tetejet tukor-jegyu vonal-tag viszi-e, ahogy a teto-torveny allitja -- es melyik?",
+      "joslat": "A rogzitett 20736 helyes, nyolcas koordinaciju rendszeren a teljes mezony (503 indulo) teli veget a tukor-jegyu vonal-csalad tagjai viszik, es koztuk a legtobb toltest a (1, 3, 5, 7) bekotes nyeri.",
+      "megnevezett_gyoztes": [
+        1,
+        3,
+        5,
+        7
+      ],
+      "levezetes": [
+        "(i) A teto-torveny hordozo-fele (III/1, 7-8.): a tetot tukor-jegyu tag viszi. Mert, kivetel nelkul, hatos es tizes koordinacion.",
+        "(ii) A tukor-jegy a vonal-csaladon csupa-paratlan lepest jelent: a korkoros halo akkor paros, ha minden lepese paratlan (a helyszam, 20736, paros).",
+        "(iii) A torveny 'legalacsonyabb kiterjedesu' kitetele a vonalra mutat -- a vonal-csalad minden tagja egy kiterjedesu, a fo negyes tobbi tagja magasabb.",
+        "(iv) A torveny egyenlo kiterjedesen NEM dont -- ez a szovegenek kimondott hezagja. Dontetlen-torokent a repo sajat kivalasztasi szabalyat (KON-02) alkalmazzuk: legkisebb ossz-lepesnegyzet. A 12-es lepes-plafon alatti 15 csupa-paratlan negyes kozul az (1, 3, 5, 7) a minimum (1+9+25+49 = 84).",
+        "(v) Precedens: tizes koordinacion a teljes mezony tetejet a (1, 3, 5, 7, 9) vitte -- ugyanez a szerkezet eggyel magasabb fokon (PKG-16-5)."
+      ],
+      "ablak": {
+        "leiras": "A teli veg 2000 toltese: N = 18737 .. 20736.",
+        "indok": "Pontosan akkora abszolut ablak, mint amekkoran a PKG-16-5 tizes koordinacion leolvasta (a teli veg 2000 toltese) -- igy a ket eredmeny kozvetlenul osszevetheto.",
+        "masodlagos": "Robusztussagi jegyzetkent a felso 1% (208 toltes) kulon is jelentendo; ez nem itelet-feltetel."
+      },
+      "siker_felteteI": [
+        {
+          "kod": "S1",
+          "allitas": "Az ablak 2000 toltesebol legalabb 1900-at tukor-jegyu (csupa-paratlan lepesu) indulo nyer.",
+          "kuszob": 1900
+        },
+        {
+          "kod": "S2",
+          "allitas": "Az ablakban a legtobb toltest nyero indulo pontosan a (1, 3, 5, 7).",
+          "kuszob": null
+        }
+      ],
+      "siker": "S1 ES S2 -- ekkor a joslat beallt.",
+      "bukas_felteteI": [
+        {
+          "kod": "B1",
+          "allitas": "Ha S1 bukik: a teto-torveny mert fele a TELJES mezonyon nyolcason megbukott. Kovetkezmeny: a torveny a fo mezonyre szukitendo, a III/1, 8. atirando, es a mert fele haromból egyen all."
+        },
+        {
+          "kod": "B2",
+          "allitas": "Ha S1 all, de S2 bukik: a hordozo-fele all, a dontetlen-toro rossz. Kovetkezmeny: a torveny kiegeszitendo az eles kivalasztassal (III/1, 8.c -- a tukor-hordozo-terkep)."
+        },
+        {
+          "kod": "B3",
+          "allitas": "Ha az ablakot holtverseny uralja (a toltesek tobb mint fele holtversenyes): az itelet reszleges, a holtversenyes toltesek szama jelentendo, es a jegyzokonyv dontetlen-szabalya utolag nem valtoztathato."
+        }
+      ],
+      "ismert_feszultseg": "A PKG-15-3 szerint a fo negyes a teljes mezonyben PONTOSAN 2 toltesen nyer szigoruan, es a futas nem nevezi meg, melyik ketton. Ha ez a ket toltes a teli vegre esik, az S1-et (1900/2000) meg nem donti el, de a legfelso toltes akkor nem vonal-tage. A jegyzokonyv ezt kulon sorban jelenti -- elore kimondva, hogy utolag ne lehessen ertelmezni.",
+      "vegrehajtas": "A PKG-15-2 mentett letra-gyorsitotarabol (shared/II-15-dimension-fourth-rung/letrak_gepi/) a verseny ujrafuttathato -- a verseny maga reszosszeg-szamolas, a kesz letrakbol olcso. A leolvasas ugyanaz, amit a PKG-16-5 tizesen elvegzett. Kimenet: PKG-15-8 csomag.",
+      "kornyezeti_felteteI": "Hosszu-lebegos ut kotelezo (H3-helyesbites). A jelenlegi Windows-gepen az np.longdouble a float64 alneve, ezert a futas ITT NEM ervenyes. A joslat pont ezert vak: a regisztralas napjan a valasz senkinek nincs a birtokaban.",
+      "forras": [
+        "hu/III-frontier/III-01-candidate-laws_hu.md",
+        "hu/II-proofs/II-15-dimension-fourth-rung/PKG-15-3-race_hu.md",
+        "hu/II-proofs/II-16-coordination-ten/PKG-16-5-transfer_hu.md",
+        "hu/PROGRAM_hu.md"
+      ],
+      "pecset": "4332b12717f2c30ba6f4443727598ffb0adb9ea481313925d928c5c06429e5be"
+    }
+  ]
+}

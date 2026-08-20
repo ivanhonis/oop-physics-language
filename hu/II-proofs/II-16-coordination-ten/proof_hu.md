@@ -13,7 +13,7 @@ packages: [PKG-16-1, PKG-16-2, PKG-16-3, PKG-16-4, PKG-16-5]
 
 # II/16. Tízes koordináció — az ítélet: részleges („a lépcső kihagyja a hármat; a tető a honosé")
 
-**Egy mondatban.** Tízes koordináción a lépcső vonal–sík–négykiterjedés–ötkiterjedés sorrendben áll — a hármat kihagyja —, a tetőt pedig az egyetlen tükör-jegyű fő jelölt, az ötkiterjedésű honos viszi; a három próba (II/14, II/15, II/16) együtt új törvényt ad: **a tetőt a mezőny legalacsonyabb kiterjedésű tükör-jegyű tagja viszi** — a korábbi „tető-hármas" olvasat ennek árnyéka volt.
+**Egy mondatban.** Tízes koordináción a lépcső vonal–sík–négykiterjedés–ötkiterjedés sorrendben áll — a hármat kihagyja —, a tetőt pedig az egyetlen tükör-jegyű fő jelölt, az ötkiterjedésű honos viszi; a három próba (II/14, II/15, II/16) együtt új törvényt ad: **a tetőt a teljes mezőny legalacsonyabb kiterjedésű tükör-jegyű tagja viszi** — a korábbi „tető-hármas" olvasat ennek árnyéka volt.
 
 ## A kérdés és a rendszer
 
@@ -29,7 +29,7 @@ A hurok a honos győztesen zárul ([PKG-16-4](PKG-16-4-readout_hu.md)): az N = 1
 
 ## A tétel-átvitel — a törvény két lába
 
-A [lyuk-tükör tétel](../II-15-dimension-fourth-rung/PKG-15-5-hole-mirror_hu.md) szövege változatlanul érvényes; a páros készleten ([PKG-16-5](PKG-16-5-transfer_hu.md)) a tanúsított tető-szakaszokon **tételként a ritka sorrend tükre él: vonal < tér < négykiterjedés < ötkiterjedés** — és a teljes mezőny utolsó 2000 töltéséből 1999-et valóban a páros vonal-tag, az (1, 3, 5, 7, 9) nyeri. Az egyesített tető-törvény ([III/1, 8.](../../III-frontier/III-01-candidate-laws_hu.md)) így két lábon áll: a „tükör-jegyűek uralják a tetőt" fele mért, három koordináción kivétel nélkül; a „közülük a legalacsonyabb" fele tétel.
+A [lyuk-tükör tétel](../II-15-dimension-fourth-rung/PKG-15-5-hole-mirror_hu.md) szövege változatlanul érvényes; a páros készleten ([PKG-16-5](PKG-16-5-transfer_hu.md)) a tanúsított tető-szakaszokon **tételként a ritka sorrend tükre él: vonal < tér < négykiterjedés < ötkiterjedés** — és a teljes mezőny utolsó 2000 töltéséből 1999-et valóban a páros vonal-tag, az (1, 3, 5, 7, 9) nyeri. Az egyesített tető-törvény ([III/1, 8.](../../III-frontier/III-01-candidate-laws_hu.md)) így két lábon áll: a „közülük a legalacsonyabb" fele tétel; a „tükör-jegyűek uralják a tetőt" fele mért — a hatókörével együtt: **a fő mezőnyön mindhárom koordináción kivétel nélkül, a teljes mezőnyön háromból kettőn.** A teljes mezőnyre e próba nézte meg először és eddig utoljára a tetőt (a fenti 1999/2000-es lelet); hatoson a [II/14](../II-14-dimension-staircase/proof_hu.md) teli végét szintén tükör-jegyű vonalak viszik, a nyolcas koordináció teljes-mezőny-teteje viszont **nincs megnézve** — a [PKG-15-3](../II-15-dimension-fourth-rung/PKG-15-3-race_hu.md) csak annyit rögzít, hogy ott a fő négyes egyetlen töltést sem nyer szigorúan.
 
 ## A mezőny-lelet
 
@@ -41,8 +41,8 @@ A négyelemű kétutas forma redundanciája élesben vizsgázott: a maradék-pr�
 
 ## Mit igazolt, és mit nem
 
-Igazolta: az ötödik fok létezik és győztese belülről is öt; a tükör-uralom harmadik, kivétel nélküli megerősítését; és az egyesített tető-törvényt a két lábával. Amit nem: a „miért három" kérdés ezzel **végleg alakot váltott** — a hatos és nyolcas koordináción a legalacsonyabb tükör-hordozó *történetesen* a három; hogy miért a tükör választ (a hordozó-fele levezetése), miért maradt ki a három e koordináción, és miért ott ül a világ sűrűsége, ahol — nyitott. A kiválasztási szabály kimondott konvenció; az 1/r-vonzás-import érintetlen.
+Igazolta: az ötödik fok létezik és győztese belülről is öt; a tükör-uralom harmadik, kivétel nélküli megerősítését a fő mezőnyön; az egyesített tető-törvényt a két lábával; és — elsőként a három próba közül — a tető leolvasását a **teljes** mezőnyön is. Amit nem: a „miért három" kérdés ezzel **végleg alakot váltott** — a hatos és nyolcas koordináción a legalacsonyabb tükör-hordozó *történetesen* a három; hogy miért a tükör választ (a hordozó-fele levezetése), miért maradt ki a három e koordináción, és miért ott ül a világ sűrűsége, ahol — nyitott. Nyitva maradt a törvény mért felének harmadik támpontja is: a nyolcas koordináció teljes-mezőny-teteje ([III/2, 8.](../../III-frontier/III-02-open-questions_hu.md)). A kiválasztási szabály kimondott konvenció; az 1/r-vonzás-import érintetlen.
 
 ## Bővítési irány
 
-Három út: **a tükör-hordozó-térkép** — mely koordinációkon mely fok a legalacsonyabb tükör-jegyű szövés (kombinatorikus, próbán kívül is levezethető); **a hordozó-kérdés** — a III/1, 7. tételesítése: miért a tükör választ; és **a gyökér-programnak átadott pontos kérdés** ([III/2, 7–8.](../../III-frontier/III-02-open-questions_hu.md)): miért olyan a világ szerződés-szerkezete, hogy a legalacsonyabb tükör-hordozója a három.
+Négy út: **a nyolcas koordináció teljes-mezőny-teteje** — a mért fél hiányzó harmadik támpontja; új próba nem kell hozzá, ugyanaz a leolvasás a [PKG-15-3](../II-15-dimension-fourth-rung/PKG-15-3-race_hu.md) mentett verseny-állapotából, amit itt a [PKG-16-5](PKG-16-5-transfer_hu.md) elvégzett; **a tükör-hordozó-térkép** — mely koordinációkon mely fok a legalacsonyabb tükör-jegyű szövés (kombinatorikus, próbán kívül is levezethető); **a hordozó-kérdés** — a III/1, 7. tételesítése: miért a tükör választ; és **a gyökér-programnak átadott pontos kérdés** ([III/2, 7–8.](../../III-frontier/III-02-open-questions_hu.md)): miért olyan a világ szerződés-szerkezete, hogy a legalacsonyabb tükör-hordozója a három.
