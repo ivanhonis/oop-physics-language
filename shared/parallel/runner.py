@@ -39,6 +39,7 @@
 
 import hashlib
 import importlib
+import importlib.util
 import os
 import pickle
 import sys
@@ -85,8 +86,27 @@ Eredmeny = namedtuple("Eredmeny",
                       "ertekek hibak ido gyorsitotarbol futott magok rendproba")
 
 
+def _modul_ujjlenyomat(fuggveny_nev):
+    """The worker module's source, fingerprinted.
+
+    Without this the cache keys on (function name, arguments) alone -- so editing
+    the worker and re-running silently returns the OLD numbers. That is the worst
+    kind of cache bug, because everything looks like it ran. Hashing the source
+    file means a changed worker is simply a cache miss."""
+    modul_nev = fuggveny_nev.partition(":")[0]
+    try:
+        spec = importlib.util.find_spec(modul_nev)
+        if spec and spec.origin:
+            adat = Path(spec.origin).read_bytes()
+            return hashlib.sha256(adat).hexdigest()[:12]
+    except Exception:
+        pass
+    return "ismeretlen"
+
+
 def _kulcs(feladat):
-    nyers = repr((feladat.fuggveny, sorted(feladat.argumentumok.items()))).encode("utf-8")
+    nyers = repr((feladat.fuggveny, _modul_ujjlenyomat(feladat.fuggveny),
+                  sorted(feladat.argumentumok.items()))).encode("utf-8")
     return hashlib.sha256(nyers).hexdigest()[:24]
 
 
@@ -273,10 +293,21 @@ def futtat(feladatok, magok=MAX_MAG, gyorsitotar=ALAP_GYORSITOTAR,
         minta_db = min(int(rendproba), len(feladatok))
         lepes = max(1, len(feladatok) // minta_db)
         minta = [feladatok[i] for i in range(0, len(feladatok), lepes)][:minta_db]
+        # The re-run has to happen in a WORKER, not here. The children run with
+        # their BLAS pools pinned to one thread; this parent imported numpy
+        # before those variables were set, so it still threads. Re-running in
+        # the parent therefore compares one-threaded arithmetic against
+        # many-threaded arithmetic, and the last bits differ for reasons that
+        # have nothing to do with scheduling. Running the sample through a pool
+        # of one keeps the comparison bitwise -- which is the point -- while
+        # testing what it is meant to test: does the ORDER change the result.
         elteres = []
-        for f in minta:
-            _, ertek, hiba = _vegrehajt(
-                (f.azonosito, f.fuggveny, f.argumentumok, gyoker))
+        with ProcessPoolExecutor(max_workers=1) as ellenorzo:
+            valaszok = [ellenorzo.submit(
+                _vegrehajt, (f.azonosito, f.fuggveny, f.argumentumok, gyoker))
+                for f in minta]
+            eredmenyek = [v.result() for v in valaszok]
+        for f, (_, ertek, hiba) in zip(minta, eredmenyek):
             if hiba is not None or f.azonosito not in ertekek:
                 elteres.append(f.azonosito)
             elif not _azonos(ertek, ertekek[f.azonosito]):

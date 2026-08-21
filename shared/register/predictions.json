@@ -172,8 +172,8 @@
       "id": "JOS-03",
       "merfoldko": "II/17 -- a szerzodes eredete",
       "datum": "2026-08-21",
-      "commit": null,
-      "allapot": "regisztralt",
+      "commit": "eb629eed8bb395298b8a3b8823d5bac072c09d02",
+      "allapot": "bukott",
       "kerdes": "A PKG-17-1 hurka (tartalom -> allapot -> kozelseg -> uj tartalom) hova fut: stabil marad a lapos fixpont, elomlik parositasba, kiurul, vagy marad valami koztes?",
       "joslat": "RESZLEGES itelet lesz: a hat csaladtag NEM ad egyseges iteletet az I1 indulobol. Konkretan: az EROSITO visszacsatolasu F2 (x^2) es a TOMPITO F3 (gyok x) KULONBOZO itelet-osztalyba fut. Es legalabb az egyik tag (F1 vagy F2) PAR-ba fut az I1-bol.",
       "megnevezett_gyoztes": "reszleges (a csaladtagok szetvalnak)",
@@ -224,7 +224,18 @@
         "hu/II-proofs/II-17-contract-origin/II-17-HANDOVER_hu.md",
         "hu/EXTENSION_hu.md"
       ],
-      "pecset": "01535a4adc8f50b8866e5b0e40b098876a18bbaf728116e37fded9ff49234bc6"
+      "pecset": "01535a4adc8f50b8866e5b0e40b098876a18bbaf728116e37fded9ff49234bc6",
+      "eredmeny": {
+        "datum": "2026-08-21",
+        "csomag": "shared/II-17-contract-origin/PKG-17-2-loop.py",
+        "futas": "48/48 hiba nelkul, rendproba 3/3 bitre azonos, 203 s nyolc magon",
+        "S1": "BUKIK -- a hat csaladtag EGYSEGES: az I1 indulobol mind PAR (mindket normalason)",
+        "S2": "BUKIK -- az F2 (erosito) es az F3 (tompito) UGYANABBA az osztalyba fut (PAR)",
+        "masodlagos": "ALL -- az F1 es F2 valoban PAR-ba fut az I1-bol, de ez a joslat lenyeget nem menti",
+        "itelet": "A JOS-03 MEGBUKOTT, mindket fo felteteleben. Az ervelesem (iv) pontja -- hogy az ellentetes elojelu visszacsatolas kulonbozo iteletet ad -- TEVES volt: a tompitas lassitja az osszeomlast, de nem allitja meg.",
+        "amit_a_bukas_er": "Ez a program szempontjabol JOBB, mint ha beallt volna. Ha a csaladtagok szetvaltak volna, az eredmeny a generalo szabaly alakjan mult volna -- 'az import egy szinttel beljebb koltozott'. Igy viszont az osszeomlas ROBUSZTUS: hat kulonbozo generalo szabalyon es ket normalason ugyanaz. Tehat szerkezeti teny a nyelvrol, nem konvencio-mutermek.",
+        "kapcsolodo_lelet": "Az F3 (tompito) negy futasa 200 koron belul NEM allt meg -- koztuk az F3/N2/I1. A tartalma ott is teljesen koncentralt (top6 = 1,0000), tehat az IRANY egyertelmu, de a megallas nem. A szabalykonyv 7. szakasza a meg nem allo futasra 'nem all ossze itelet'-et mond, a PAR osztalyt viszont nem koti megallashoz -- ez kettertelmuseg, es a besorolo a tartalom-kriteriumot hasznalta. Kimondva, nem elsimitva."
+      }
     }
   ]
 }
