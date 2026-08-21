@@ -49,7 +49,10 @@ SZAMNEVEK = {"nulla": 0, "egy": 1, "ketto": 2, "kettő": 2, "ket": 2, "két": 2,
 
 # The register only owes an entry for a proof whose header declares something.
 # A bare "nulla" means the chapter took on nothing of its own.
-TRIVIALIS_IMPORT = ("nulla",)
+# "nincs" and "nulla" are the same declaration in two words; treating only one
+# of them as empty flagged a clean file. Synonyms belong here, nothing else --
+# a phrase that says "nulla uj tetel (X-szel)" is NOT empty and must stay covered.
+TRIVIALIS_IMPORT = ("nulla", "nincs")
 
 
 class Jelentes:

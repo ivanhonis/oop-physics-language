@@ -47,6 +47,8 @@ A [II/14 — kiterjedés-lépcső](../II-proofs/II-14-dimension-staircase/proof_
 
 - **[PKG-15-11 — a lyuk-létra](../II-proofs/II-15-dimension-fourth-rung/PKG-15-11-hole-ladder_hu.md):** a teli-vég tétel egyetlen becslése azonosságra cserélve; hozadéka a lyuk-létra (minden induló második, azonos összsúlyú létrája), a tükör-jegy létra-azonosság alakja, és a tanúsított szakaszok élesítése (a régi becslés 4500–9000 töltést adott fel).
 
+- **[PKG-15-12 — a konvenciók hatóköre](../II-proofs/II-15-dimension-fourth-rung/PKG-15-12-convention-scope_hu.md):** a két maradék konvenció megmérve; hozadéka, hogy a teli-vég és a lyuk-létra tétel **minden fokszám-reguláris hálón áll** (nem-Cayley hálókon is igazolva), a versenyszabály viszont a nyom-döntetlen előfeltétele — és a harmadik holtverseny-hiba nyomán a tűréses győztes-halmaz szabálya.
+
 ## II/16 — Tízes koordináció: a tető törvénye
 
 - **[PKG-16-1 — szabálykönyv](../II-proofs/II-16-coordination-ten/PKG-16-1-rulebook_hu.md):** a kiválasztási szabály (kimondott konvenció), a négyfokú ítélet a néven nevezett visszafordulás-esettel, a kétutas szabály négyelemű ritka alakja; hozadéka a párosság-lelet (a tükör-jegy egyedül a honosé) és a döntő-kísérletté élesített tető-kérdés.

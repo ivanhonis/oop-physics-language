@@ -167,6 +167,64 @@
         ],
         "tanulsag": "Harmadik regisztracios tanulsag: a siker- es bukas-felteteleket a pecsetelés elott ELLENORIZNI kell teljesithetosegre a mar bizonyitott tetelek ellen. A JOS-01 a holtverseny-szabalyt nem rogzitette; a JOS-02 rogzitette, de olyan kuszobot irt elo, amit egy sajat tetel kizar. A kovetkezo bejegyzes elott mindket ellenorzes kotelezo."
       }
+    },
+    {
+      "id": "JOS-03",
+      "merfoldko": "II/17 -- a szerzodes eredete",
+      "datum": "2026-08-21",
+      "commit": null,
+      "allapot": "regisztralt",
+      "kerdes": "A PKG-17-1 hurka (tartalom -> allapot -> kozelseg -> uj tartalom) hova fut: stabil marad a lapos fixpont, elomlik parositasba, kiurul, vagy marad valami koztes?",
+      "joslat": "RESZLEGES itelet lesz: a hat csaladtag NEM ad egyseges iteletet az I1 indulobol. Konkretan: az EROSITO visszacsatolasu F2 (x^2) es a TOMPITO F3 (gyok x) KULONBOZO itelet-osztalyba fut. Es legalabb az egyik tag (F1 vagy F2) PAR-ba fut az I1-bol.",
+      "megnevezett_gyoztes": "reszleges (a csaladtagok szetvalnak)",
+      "levezetes": [
+        "(i) A hurok ket ellentetes erot tartalmaz (a szabalykonyv T5 pontja): a generalas ONEROSITO -- a kozelebbi par erosebb szerzodest kap, attol meg kozelebb kerul --, a frusztracio ellene hat.",
+        "(ii) A parositas FIXPONT: ha a tartalom hat diszjunkt paron ul, az allapot hat fuggetlen szingulett; a paron beluli kozelseg maximalis, a parok kozotti nulla (szorzatallapot), tehat f(I) ugyanoda teszi a tartalmat. Es a par-sarok egyben a koltseg-minimum is (II/12).",
+        "(iii) A lapos allapot szinten fixpont (T1), de a kerdes a STABILITASA. Az onerosites pozitiv visszacsatolas: barmely kis aszimmetriat felnagyit.",
+        "(iv) EZERT fugg a csaladtag alakjatol: az F2 (x^2) a kulonbsegeket ERoSITI, tehat a lapos pontrol elfut; az F3 (gyok x) OSSZENYOMJA oket, tehat a lapos pontot stabilizalhatja. Ket ellentetes elojelu visszacsatolas nem adhat ugyanazt az iteletet.",
+        "(v) Ha ez all, akkor a szabalykonyv 9. szakaszanak sajat szava szerint 'az import nem szukult, csak egy szinttel beljebb koltozott' -- a generalo szabaly alakja hordozza az eredmenyt."
+      ],
+      "amit_nem_joslok": "Az F5 (kuszobos) kimenetele NEM joslat: a szabalykonyv T1 pontja levezeti, es a PKG-17-2-verify le is meri, hogy a LAPOS pontbol az F5 egyetlen korben URES-be visz. Ezt a JOS-01/JOS-02 masodik tanulsaga szerint kizarom a felteteleim kozul -- mar bizonyitott tenyre nem lehet josolni.",
+      "siker_felteteI": [
+        {
+          "kod": "S1",
+          "allitas": "Az itelet RESZLEGES: a hat csaladtag nem ad egyseges itelet-osztalyt az I1 indulobol.",
+          "kuszob": null
+        },
+        {
+          "kod": "S2",
+          "allitas": "Az F2 (x^2) es az F3 (gyok x) KULONBOZO itelet-osztalyba fut az I1-bol, azonos normalas mellett.",
+          "kuszob": null
+        }
+      ],
+      "siker": "S1 ES S2 -- ekkor a joslat beallt.",
+      "bukas_felteteI": [
+        {
+          "kod": "B1",
+          "allitas": "Ha mind a hat csaladtag UGYANAZT az itelet-osztalyt adja az I1-bol: a joslatom megbukott, es az eredmeny ERoSEBB, mint vartam -- a generalo szabaly alakja nem hordozza az iteletet. Ez a program szempontjabol a JO kimenet."
+        },
+        {
+          "kod": "B2",
+          "allitas": "Ha a KOZTES osztaly mind a hat tagon es mindket normalason megjelenik: a lemma ALL a szabalykonyv sajat itelet-szabalya szerint, es a joslatom megbukott. Ez a legjobb lehetseges kimenet -- a tavolsag magatol beall."
+        },
+        {
+          "kod": "B3",
+          "allitas": "Ha az F2 es az F3 UGYANOTT kot ki: az S2 bukott. A visszacsatolas elojele nem donti el a kimenetet -- ez onmagaban lelet, mert a (iv) ervem ellen szol."
+        },
+        {
+          "kod": "B4",
+          "allitas": "Ha a hurok 200 koron belul nem all meg: nincs itelet, a korbe-ugralas a periodussal jelentendo. A joslatom ilyenkor NEM all es NEM bukik -- ertelmezhetetlen."
+        }
+      ],
+      "holtverseny_szabaly": "Nem holtverseny-fuggo a joslat, de az OSZTALYOZAS hatarai a szabalykonyv 7. szakaszabol jonnek, valtozatlanul: URES elsobbseget elvez; LAPOS = a tartalmak szorasa a kiindulasi zaj alatt; PAR = legfeljebb 6 par hordozza a tartalom >=95%-at; KOZTES = egyik sem, es megallt a turesen belul. Ezeket a hataroket a futas utan NEM modositom.",
+      "ismert_feszultseg": "A PKG-17-1 SZANDEKOSAN nem tett joslatot ('Jóslat tudatosan nincs'), mert a szerzoje a kimenetelt nem tartotta sejthetonek. Ez a bejegyzes NEM modositja a fagyasztott szabalykonyvet es nem erinti annak itelet-szabalyat: kulon, sajat elorejelzes, amelyert a felelosseg az azt tevoe. Ha bebukik, az is rogzitett eredmeny.",
+      "vegrehajtas": "PKG-17-2-loop.py: 48 futas (6 csaladtag x 2 normalas x 4 indulo), 200 kor, mag 1166. Elofeltetel: a PKG-17-2-verify.py kapuja tiszta (ujrafuttatva 2026-08-21-en, tiszta).",
+      "forras": [
+        "hu/II-proofs/II-17-contract-origin/PKG-17-1-rulebook_hu.md",
+        "hu/II-proofs/II-17-contract-origin/II-17-HANDOVER_hu.md",
+        "hu/EXTENSION_hu.md"
+      ],
+      "pecset": "01535a4adc8f50b8866e5b0e40b098876a18bbaf728116e37fded9ff49234bc6"
     }
   ]
 }

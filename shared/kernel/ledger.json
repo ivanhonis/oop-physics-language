@@ -160,9 +160,11 @@
       "allapot": "aktiv",
       "torlesztes": "P1.3",
       "erzekenyseg": {
-        "allapot": "nincs-merve",
-        "meres": [],
-        "megjegyzes": "A P1.3 keri: legalabb 3 elore regisztralt varians (mas koltsegvetes-normalas) mellett valtozatlan-e a teto-gyoztes mindharom koordinacion."
+        "allapot": "merve",
+        "meres": [
+          "PKG-15-12"
+        ],
+        "megjegyzes": "TEHERHORDO, DE ELVI. Az azonos koltsegvetes az, amitol minden indulo nyomosszege azonos (nyom-dontetlen), es ezen all a teljes teli-veg apparatus. Merve: ket kulonbozo koltsegvetesu indulot (d=6 es d=3, n=20) osszeeresztve a nyomosszeg 120 kontra 60, a teli toltesen az arkulonbseg pontosan a nyomkulonbseg (60), es a teli-vegi kriterium 2/19 toltesen teved, mig azonos koltsegvetesen 0/19-en. AZ ERTELMEZES: a konvencio megvaltoztatasa nem elmozditja az eredmenyt, hanem MEGSZUNTETI az osszehasonlithatosagot -- ezert nem onkenyes."
       },
       "forras": [
         "hu/I-language/I-01-concept_hu.md",
@@ -206,11 +208,13 @@
         "II-16"
       ],
       "allapot": "aktiv",
-      "torlesztes": "P0.1",
+      "torlesztes": "P1.3",
       "erzekenyseg": {
-        "allapot": "nincs-merve",
-        "meres": [],
-        "megjegyzes": "Nem-szoves halok nem indultak egyik versenyen sem; a konvencio hatasa igy nincs megmerve."
+        "allapot": "merve",
+        "meres": [
+          "PKG-15-12"
+        ],
+        "megjegyzes": "A TETELEKRE NEZVE NULLA. A teli-veg es a lyuk-letra tetel sehol nem hasznalja a szoves-szerkezetet: eleg a d-regularitas. Igazolva hat halon, koztuk ket NEM-Cayley csucstranzitiv grafon (Petersen 3-reg n=10; Desargues 3-reg n=20) -- a nyom, a plafon-tetel es a lyuk-letra azonossag mindenutt all (1e-14 alatt), es a teli-vegi kriterium azonos koltsegvetesu mezonyon mind a 19 toltesen ugyanazt a gyoztes-halmazt adja. HATOKOR, KIMONDVA: a konvencio a MEZONYT szukiti (ki indulhat), es EZ a hatas megmeretlen marad -- nem-szoves indulo egyik lefutott versenyen sem indult."
       },
       "forras": [
         "hu/II-proofs/II-13-dimension-race/PKG-13-1-rulebook_hu.md",
@@ -408,6 +412,29 @@
       "forras": [
         "hu/II-proofs/II-16-coordination-ten/PKG-16-1-rulebook_hu.md"
       ]
+    },
+    {
+      "id": "KON-05",
+      "rang": "konvencio",
+      "nev": "generalo szabaly (a szerzodes tartalmanak forrasa)",
+      "leiras": "A hatodik torveny (jelolt, lasd hu/EXTENSION_hu.md) szerint a szerzodes tartalmat a peldanyok kesz allapota generalja: w_ij = f(I_ij), ahol I a II/11 paronkenti kozelseg-meroszama. Az f a kimondott konvencio. A PKG-17-1 hat csaladtagot rogzit (x; x^2; gyok x; x/(1+x); max(0, x - atlag); felutas lassitott x) es ket normalast (N1: a tartalmak osszege 66 egyseg; N2: a legnagyobb tartalom 1).",
+      "bevezette": "PKG-17-1",
+      "hasznaljak": [
+        "PKG-17-1",
+        "II-17-handover"
+      ],
+      "allapot": "aktiv",
+      "torlesztes": null,
+      "erzekenyseg": {
+        "allapot": "nincs-merve",
+        "meres": [],
+        "megjegyzes": "A PKG-17-1 SZERKEZETILEG merni fogja: hat csaladtag es ket, egymassal nem rokon normalas fut, es az itelet CSAK a kettojuk egyezesen all. Ha a fixpont erosen f-fuggo, akkor a kezi beallitast csak athelyeztuk, nem szuntettuk meg -- ez a hatodik torveny masodik bukas-aga (EXTENSION, 7. szakasz)."
+      },
+      "forras": [
+        "hu/EXTENSION_hu.md",
+        "hu/II-proofs/II-17-contract-origin/PKG-17-1-rulebook_hu.md"
+      ],
+      "megjegyzes": "EZ AZ ELEM A HATODIK TORVENY ARA, kimondva. Ma a szerzodeshalot kezzel adjuk (binom(n,2) szam, vagy egy kezzel felsorolt jelolt-lista); a torvennyel EGYETLEN szabaly marad. Nagysagrendi csokkenes -- de csokkenes, nem nullazas."
     }
   ]
 }
